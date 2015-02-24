@@ -8,5 +8,10 @@
         }
     ],
     "license": "MIT",
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+    "require": {
+    },
+    "require-dev": {
+        "fabpot/php-cs-fixer": "~1.5"
+    }
 }
