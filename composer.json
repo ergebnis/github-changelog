@@ -1,0 +1,12 @@
+{
+    "name": "localheinz/changelog-generator",
+    "description": "A script that generates a changelog based on specified references.",
+    "authors": [
+        {
+            "name": "Andreas Möller",
+            "email": "am@localheinz.com"
+        }
+    ],
+    "license": "MIT",
+    "minimum-stability": "stable"
+}
