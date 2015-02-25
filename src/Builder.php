@@ -7,9 +7,9 @@ use BadMethodCallException;
 class Builder
 {
     /**
-     * @var Repository\Commit
+     * @var Repository\PullRequest
      */
-    private $commitRepository;
+    private $pullRequestRepository;
 
     /**
      * @var string
@@ -32,11 +32,11 @@ class Builder
     private $end;
 
     /**
-     * @param Repository\Commit $commitRepository
+     * @param Repository\PullRequest $pullRequestRepository
      */
-    public function __construct(Repository\Commit $commitRepository)
+    public function __construct(Repository\PullRequest $pullRequestRepository)
     {
-        $this->commitRepository = $commitRepository;
+        $this->pullRequestRepository = $pullRequestRepository;
     }
 
     /**
@@ -100,13 +100,11 @@ class Builder
             throw new BadMethodCallException('Start reference needs to be specified');
         }
 
-        $this->commitRepository->commits(
+        return $this->pullRequestRepository->pullRequests(
             $this->user,
             $this->repository,
             $this->start,
             $this->end
         );
-
-        return [];
     }
 }
