@@ -82,14 +82,30 @@ class BuilderTest extends PHPUnit_Framework_TestCase
 
     public function testPullRequestsReturnsEmptyArrayIfNoCommitsHaveBeenFoundBetweenStartAndEnd()
     {
+        $user = 'foo';
+        $repository = 'bar';
+        $start = 'ad77125';
+
         $commitRepository = $this->getMockBuilder(ChangeLog\Repository\Commit::class)->getMock();
+
+        $commitRepository
+            ->expects($this->once())
+            ->method('commits')
+            ->with(
+                $this->equalTo($user),
+                $this->equalTo($repository),
+                $this->equalTo($start),
+                $this->equalTo(null)
+            )
+            ->willReturn([])
+        ;
 
         $builder = new ChangeLog\Builder($commitRepository);
 
         $builder
-            ->user('foo')
-            ->repository('bar')
-            ->start('ad77125')
+            ->user($user)
+            ->repository($repository)
+            ->start($start)
         ;
 
         $this->assertSame([], $builder->pullRequests());
@@ -97,15 +113,32 @@ class BuilderTest extends PHPUnit_Framework_TestCase
 
     public function testPullRequestsReturnsEmptyArrayIfNoCommitsHaveBeenFoundBetweenStartAndHead()
     {
+        $user = 'foo';
+        $repository = 'bar';
+        $start = 'ad77125';
+        $end = '7fc1c4f';
+
         $commitRepository = $this->getMockBuilder(ChangeLog\Repository\Commit::class)->getMock();
+
+        $commitRepository
+            ->expects($this->once())
+            ->method('commits')
+            ->with(
+                $this->equalTo($user),
+                $this->equalTo($repository),
+                $this->equalTo($start),
+                $this->equalTo($end)
+            )
+            ->willReturn([])
+        ;
 
         $builder = new ChangeLog\Builder($commitRepository);
 
         $builder
-            ->user('foo')
-            ->repository('bar')
-            ->start('ad77125')
-            ->end('7fc1c4f')
+            ->user($user)
+            ->repository($repository)
+            ->start($start)
+            ->end($end)
         ;
 
         $this->assertSame([], $builder->pullRequests());

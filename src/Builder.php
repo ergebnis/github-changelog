@@ -100,6 +100,13 @@ class Builder
             throw new BadMethodCallException('Start reference needs to be specified');
         }
 
+        $this->commitRepository->commits(
+            $this->user,
+            $this->repository,
+            $this->start,
+            $this->end
+        );
+
         return [];
     }
 }
