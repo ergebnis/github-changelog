@@ -12,7 +12,7 @@
     syntaxCheck="true"
 >
     <testsuite name="Localheinz\ChangeLog">
-        <directory>test</directory>
+        <directory>tests</directory>
     </testsuite>
     <filter>
         <whitelist addUncoveredFilesFromWhitelist="true">
