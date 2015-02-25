@@ -12,5 +12,10 @@
     "require-dev": {
         "fabpot/php-cs-fixer": "~1.5",
         "phpunit/phpunit": "~4.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Localheinz\\ChangeLog\\": "src"
+        }
     }
 }
