@@ -18,3 +18,4 @@ install:
 
 script:
   - vendor/bin/php-cs-fixer fix --config-file=./.php_cs --dry-run --diff -v
+  - vendor/bin/phpunit
