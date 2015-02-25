@@ -62,23 +62,23 @@ class Builder
     }
 
     /**
-     * @param string $reference
+     * @param string $start
      * @return self
      */
-    public function start($reference)
+    public function start($start)
     {
-        $this->start = $reference;
+        $this->start = $start;
 
         return $this;
     }
 
     /**
-     * @param string $reference
+     * @param string $end
      * @return self
      */
-    public function end($reference)
+    public function end($end)
     {
-        $this->end = $reference;
+        $this->end = $end;
 
         return $this;
     }
