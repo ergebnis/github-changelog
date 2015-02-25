@@ -12,6 +12,7 @@ class BuilderTest extends PHPUnit_Framework_TestCase
         $builder = new ChangeLog\Builder();
 
         $this->assertSame($builder, $builder->user('foo'));
+        $this->assertSame($builder, $builder->repository('bar'));
     }
 
     /**
@@ -34,6 +35,22 @@ class BuilderTest extends PHPUnit_Framework_TestCase
         $builder = new ChangeLog\Builder();
 
         $builder->user('foo');
+
+        $builder->fromPullRequests();
+    }
+
+    /**
+     * @expectedException \BadMethodCallException
+     * @expectedExceptionMessage Start reference needs to be specified
+     */
+    public function testFromPullRequestsThrowsBadMethodCallExceptionIfStartReferenceHasNotBeenSet()
+    {
+        $builder = new ChangeLog\Builder();
+
+        $builder
+            ->user('foo')
+            ->repository('bar')
+        ;
 
         $builder->fromPullRequests();
     }

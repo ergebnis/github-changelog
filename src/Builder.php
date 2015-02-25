@@ -17,12 +17,28 @@ class Builder
     private $repository;
 
     /**
+     * @var string
+     */
+    private $startReference;
+
+    /**
      * @param string $user
      * @return self
      */
     public function user($user)
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @param string $repository
+     * @return self
+     */
+    public function repository($repository)
+    {
+        $this->repository = $repository;
 
         return $this;
     }
@@ -35,6 +51,10 @@ class Builder
 
         if (null === $this->repository) {
             throw new BadMethodCallException('Repository needs to be specified');
+        }
+
+        if (null === $this->startReference) {
+            throw new BadMethodCallException('Start reference needs to be specified');
         }
     }
 }
