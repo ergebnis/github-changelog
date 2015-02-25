@@ -19,7 +19,7 @@ class Builder
     /**
      * @var string
      */
-    private $startReference;
+    private $start;
 
     /**
      * @param string $user
@@ -43,6 +43,17 @@ class Builder
         return $this;
     }
 
+    /**
+     * @param string $reference
+     * @return self
+     */
+    public function start($reference)
+    {
+        $this->start = $reference;
+
+        return $this;
+    }
+
     public function fromPullRequests()
     {
         if (null === $this->user) {
@@ -53,7 +64,7 @@ class Builder
             throw new BadMethodCallException('Repository needs to be specified');
         }
 
-        if (null === $this->startReference) {
+        if (null === $this->start) {
             throw new BadMethodCallException('Start reference needs to be specified');
         }
     }

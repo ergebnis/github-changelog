@@ -54,4 +54,17 @@ class BuilderTest extends PHPUnit_Framework_TestCase
 
         $builder->fromPullRequests();
     }
+
+    public function testFromPullRequestsDoesNotThrowBadMethodCallExceptionIfEndReferenceHasNotBeenSet()
+    {
+        $builder = new ChangeLog\Builder();
+
+        $builder
+            ->user('foo')
+            ->repository('bar')
+            ->start('ad77125')
+        ;
+
+        $builder->fromPullRequests();
+    }
 }
