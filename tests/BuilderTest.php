@@ -9,7 +9,9 @@ class BuilderTest extends PHPUnit_Framework_TestCase
 {
     public function testFluentInterface()
     {
-        $builder = new ChangeLog\Builder();
+        $commitRepository = $this->getMockBuilder(ChangeLog\Repository\Commit::class)->getMock();
+
+        $builder = new ChangeLog\Builder($commitRepository);
 
         $this->assertSame($builder, $builder->user('foo'));
         $this->assertSame($builder, $builder->repository('bar'));
@@ -23,7 +25,9 @@ class BuilderTest extends PHPUnit_Framework_TestCase
      */
     public function testPullRequestsThrowsBadMethodCallExceptionIfUserHasNotBeenSet()
     {
-        $builder = new ChangeLog\Builder();
+        $commitRepository = $this->getMockBuilder(ChangeLog\Repository\Commit::class)->getMock();
+
+        $builder = new ChangeLog\Builder($commitRepository);
 
         $builder->pullRequests();
     }
@@ -34,7 +38,9 @@ class BuilderTest extends PHPUnit_Framework_TestCase
      */
     public function testPullRequestsThrowsBadMethodCallExceptionIfRepositoryHasNotBeenSet()
     {
-        $builder = new ChangeLog\Builder();
+        $commitRepository = $this->getMockBuilder(ChangeLog\Repository\Commit::class)->getMock();
+
+        $builder = new ChangeLog\Builder($commitRepository);
 
         $builder->user('foo');
 
@@ -47,7 +53,9 @@ class BuilderTest extends PHPUnit_Framework_TestCase
      */
     public function testPullRequestsThrowsBadMethodCallExceptionIfStartReferenceHasNotBeenSet()
     {
-        $builder = new ChangeLog\Builder();
+        $commitRepository = $this->getMockBuilder(ChangeLog\Repository\Commit::class)->getMock();
+
+        $builder = new ChangeLog\Builder($commitRepository);
 
         $builder
             ->user('foo')
@@ -59,7 +67,9 @@ class BuilderTest extends PHPUnit_Framework_TestCase
 
     public function testPullRequestsDoesNotThrowBadMethodCallExceptionIfEndReferenceHasNotBeenSet()
     {
-        $builder = new ChangeLog\Builder();
+        $commitRepository = $this->getMockBuilder(ChangeLog\Repository\Commit::class)->getMock();
+
+        $builder = new ChangeLog\Builder($commitRepository);
 
         $builder
             ->user('foo')
@@ -72,7 +82,9 @@ class BuilderTest extends PHPUnit_Framework_TestCase
 
     public function testPullRequestsReturnsEmptyArrayIfNoCommitsHaveBeenFoundBetweenStartAndEnd()
     {
-        $builder = new ChangeLog\Builder();
+        $commitRepository = $this->getMockBuilder(ChangeLog\Repository\Commit::class)->getMock();
+
+        $builder = new ChangeLog\Builder($commitRepository);
 
         $builder
             ->user('foo')
@@ -85,7 +97,9 @@ class BuilderTest extends PHPUnit_Framework_TestCase
 
     public function testPullRequestsReturnsEmptyArrayIfNoCommitsHaveBeenFoundBetweenStartAndHead()
     {
-        $builder = new ChangeLog\Builder();
+        $commitRepository = $this->getMockBuilder(ChangeLog\Repository\Commit::class)->getMock();
+
+        $builder = new ChangeLog\Builder($commitRepository);
 
         $builder
             ->user('foo')

@@ -7,6 +7,11 @@ use BadMethodCallException;
 class Builder
 {
     /**
+     * @var Repository\Commit
+     */
+    private $commitRepository;
+
+    /**
      * @var string
      */
     private $user;
@@ -25,6 +30,14 @@ class Builder
      * @var string
      */
     private $end;
+
+    /**
+     * @param Repository\Commit $commitRepository
+     */
+    public function __construct(Repository\Commit $commitRepository)
+    {
+        $this->commitRepository = $commitRepository;
+    }
 
     /**
      * @param string $user
