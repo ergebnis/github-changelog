@@ -19,31 +19,31 @@ class BuilderTest extends PHPUnit_Framework_TestCase
      * @expectedException \BadMethodCallException
      * @expectedExceptionMessage User needs to be specified
      */
-    public function testFromPullRequestsThrowsBadMethodCallExceptionIfUserHasNotBeenSet()
+    public function testPullRequestsThrowsBadMethodCallExceptionIfUserHasNotBeenSet()
     {
         $builder = new ChangeLog\Builder();
 
-        $builder->fromPullRequests();
+        $builder->pullRequests();
     }
 
     /**
      * @expectedException \BadMethodCallException
      * @expectedExceptionMessage Repository needs to be specified
      */
-    public function testFromPullRequestsThrowsBadMethodCallExceptionIfRepositoryHasNotBeenSet()
+    public function testPullRequestsThrowsBadMethodCallExceptionIfRepositoryHasNotBeenSet()
     {
         $builder = new ChangeLog\Builder();
 
         $builder->user('foo');
 
-        $builder->fromPullRequests();
+        $builder->pullRequests();
     }
 
     /**
      * @expectedException \BadMethodCallException
      * @expectedExceptionMessage Start reference needs to be specified
      */
-    public function testFromPullRequestsThrowsBadMethodCallExceptionIfStartReferenceHasNotBeenSet()
+    public function testPullRequestsThrowsBadMethodCallExceptionIfStartReferenceHasNotBeenSet()
     {
         $builder = new ChangeLog\Builder();
 
@@ -52,23 +52,10 @@ class BuilderTest extends PHPUnit_Framework_TestCase
             ->repository('bar')
         ;
 
-        $builder->fromPullRequests();
+        $builder->pullRequests();
     }
 
-    public function testFromPullRequestsDoesNotThrowBadMethodCallExceptionIfEndReferenceHasNotBeenSet()
-    {
-        $builder = new ChangeLog\Builder();
-
-        $builder
-            ->user('foo')
-            ->repository('bar')
-            ->start('ad77125')
-        ;
-
-        $builder->fromPullRequests();
-    }
-
-    public function testFromPullRequestsReturnsEmptyArrayIfNoCommitsHaveBeenFoundBetweenStartAndEnd()
+    public function testPullRequestsDoesNotThrowBadMethodCallExceptionIfEndReferenceHasNotBeenSet()
     {
         $builder = new ChangeLog\Builder();
 
@@ -78,10 +65,23 @@ class BuilderTest extends PHPUnit_Framework_TestCase
             ->start('ad77125')
         ;
 
-        $this->assertSame([], $builder->fromPullRequests());
+        $builder->pullRequests();
     }
 
-    public function testFromPullRequestsReturnsEmptyArrayIfNoCommitsHaveBeenFoundBetweenStartAndHead()
+    public function testPullRequestsReturnsEmptyArrayIfNoCommitsHaveBeenFoundBetweenStartAndEnd()
+    {
+        $builder = new ChangeLog\Builder();
+
+        $builder
+            ->user('foo')
+            ->repository('bar')
+            ->start('ad77125')
+        ;
+
+        $this->assertSame([], $builder->pullRequests());
+    }
+
+    public function testPullRequestsReturnsEmptyArrayIfNoCommitsHaveBeenFoundBetweenStartAndHead()
     {
         $builder = new ChangeLog\Builder();
 
@@ -92,6 +92,6 @@ class BuilderTest extends PHPUnit_Framework_TestCase
             ->end('7fc1c4f')
         ;
 
-        $this->assertSame([], $builder->fromPullRequests());
+        $this->assertSame([], $builder->pullRequests());
     }
 }

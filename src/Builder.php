@@ -73,7 +73,7 @@ class Builder
     /**
      * @return array
      */
-    public function fromPullRequests()
+    public function pullRequests()
     {
         if (null === $this->user) {
             throw new BadMethodCallException('User needs to be specified');
