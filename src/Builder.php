@@ -18,10 +18,13 @@ class Builder
 
     /**
      * @param string $user
+     * @return self
      */
     public function user($user)
     {
         $this->user = $user;
+
+        return $this;
     }
 
     public function fromPullRequests()
