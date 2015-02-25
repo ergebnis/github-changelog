@@ -15,9 +15,9 @@ class CommitTest extends PHPUnit_Framework_TestCase
 
         $end = $start;
 
-        $repository = new Repository\Commit();
+        $commitRepository = new Repository\Commit();
 
-        $commits = $repository->commits(
+        $commits = $commitRepository->commits(
             $user,
             $repository,
             $start,
