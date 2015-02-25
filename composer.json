@@ -1,6 +1,6 @@
 {
-    "name": "localheinz/changelog-generator",
-    "description": "A script that generates a changelog based on specified references.",
+    "name": "localheinz/change-log",
+    "description": "A script that generates a change log based on specified references.",
     "authors": [
         {
             "name": "Andreas Möller",
