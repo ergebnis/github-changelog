@@ -17,4 +17,17 @@ class BuilderTest extends PHPUnit_Framework_TestCase
 
         $builder->fromPullRequests();
     }
+
+    /**
+     * @expectedException \BadMethodCallException
+     * @expectedExceptionMessage Repository needs to be specified
+     */
+    public function testFromPullRequestsThrowsBadMethodCallExceptionIfRepositoryHasNotBeenSet()
+    {
+        $builder = new ChangeLog\Builder();
+
+        $builder->user('foo');
+
+        $builder->fromPullRequests();
+    }
 }
