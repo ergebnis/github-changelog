@@ -22,6 +22,11 @@ class Builder
     private $start;
 
     /**
+     * @var string
+     */
+    private $end;
+
+    /**
      * @param string $user
      * @return self
      */
@@ -54,6 +59,20 @@ class Builder
         return $this;
     }
 
+    /**
+     * @param string $reference
+     * @return self
+     */
+    public function end($reference)
+    {
+        $this->end = $reference;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
     public function fromPullRequests()
     {
         if (null === $this->user) {
@@ -67,5 +86,7 @@ class Builder
         if (null === $this->start) {
             throw new BadMethodCallException('Start reference needs to be specified');
         }
+
+        return [];
     }
 }
