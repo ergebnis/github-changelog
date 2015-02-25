@@ -13,6 +13,8 @@ class BuilderTest extends PHPUnit_Framework_TestCase
 
         $this->assertSame($builder, $builder->user('foo'));
         $this->assertSame($builder, $builder->repository('bar'));
+        $this->assertSame($builder, $builder->start('ad77125'));
+        $this->assertSame($builder, $builder->end('7fc1c4f'));
     }
 
     /**
