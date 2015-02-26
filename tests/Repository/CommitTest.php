@@ -2,14 +2,38 @@
 
 namespace Localheinz\ChangeLog\Test\Repository;
 
+use Faker;
 use Github\Api;
 use Localheinz\ChangeLog\Entity;
 use Localheinz\ChangeLog\Repository;
 use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
+use stdClass;
 
 class CommitTest extends PHPUnit_Framework_TestCase
 {
+    /**
+     * @var string
+     */
+    private $responseCommitTemplate;
+
+    /**
+     * @var Faker\Generator
+     */
+    private $faker;
+
+    protected function setUp()
+    {
+        $this->faker = Faker\Factory::create('en_US');
+        $this->faker->seed(9000);
+    }
+
+    protected function tearDown()
+    {
+        unset($this->responseCommitTemplate);
+        unset($this->faker);
+    }
+
     public function testCommitReturnsCommitEntityWithShaAndMessageOnSuccess()
     {
         $userName = 'foo';
@@ -18,8 +42,13 @@ class CommitTest extends PHPUnit_Framework_TestCase
 
         $commitApi = $this->commitApi();
 
+        $expectedCommit = $this->commitData();
+
         $response = json_decode(
-            $this->response('commit.json'),
+            $this->responseCommit(
+                $expectedCommit->sha,
+                $expectedCommit->message
+            ),
             true
         );
 
@@ -44,8 +73,8 @@ class CommitTest extends PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf(Entity\Commit::class, $commit);
 
-        $this->assertSame('6dcb09b5b57875f334f61aebed695e2e4193db5e', $commit->sha());
-        $this->assertSame('Fix all the bugs', $commit->message());
+        $this->assertSame($expectedCommit->sha, $commit->sha());
+        $this->assertSame($expectedCommit->message, $commit->message());
     }
 
     public function testCommitReturnsNullOnFailure()
@@ -176,10 +205,25 @@ class CommitTest extends PHPUnit_Framework_TestCase
 
         $commitApi = $this->commitApi();
 
-        $response = json_decode(
-            $this->response('commits.json'),
-            true
-        );
+        $expectedCommits = [];
+        for ($i = 0; $i < 15; $i++) {
+            array_push($expectedCommits, $this->commitData());
+        }
+
+        $body = array_reduce($expectedCommits, function ($carry, $expectedCommit) {
+            if ('' !== $carry) {
+                $carry .= ',';
+            }
+
+            return $carry . $this->responseCommit(
+                $expectedCommit->sha,
+                $expectedCommit->message
+            );
+        }, '');
+
+        $body = '[' . $body . ']';
+
+        $response = json_decode($body, true);
 
         $commitApi
             ->expects($this->once())
@@ -203,24 +247,54 @@ class CommitTest extends PHPUnit_Framework_TestCase
             $endSha
         );
 
-        $this->assertCount(count($response), $commits);
+        $this->assertCount(count($expectedCommits), $commits);
 
         foreach ($commits as $commit) {
+            $expectedCommit = array_shift($expectedCommits);
+
             $this->assertInstanceOf(Entity\Commit::class, $commit);
+            $this->assertSame($expectedCommit->sha, $commit->sha());
+            $this->assertSame($expectedCommit->message, $commit->message());
         }
     }
 
     /**
-     * @param string $name
+     * @return stdClass
+     */
+    private function commitData()
+    {
+        $data = new stdClass();
+
+        $data->sha = $this->faker->unique()->sha1;
+        $data->message = $this->faker->unique()->sentence();
+
+        return $data;
+    }
+
+    /**
+     * @param string $sha
+     * @param string $message
      * @return string
      */
-    private function response($name)
+    private function responseCommit($sha, $message)
     {
-        return file_get_contents(sprintf(
-            '%s/_response/%s',
-            __DIR__,
-            $name
-        ));
+        return sprintf(
+            $this->responseCommitTemplate(),
+            $sha,
+            $message
+        );
+    }
+
+    /**
+     * @return string
+     */
+    private function responseCommitTemplate()
+    {
+        if (null === $this->responseCommitTemplate) {
+            $this->responseCommitTemplate = file_get_contents(__DIR__ . '/_response/commit.json');
+        }
+
+        return $this->responseCommitTemplate;
     }
 
     /**

@@ -49,7 +49,7 @@ class Commit
      * @param string $repository
      * @param string $startSha
      * @param string $endSha
-     * @return array
+     * @return Entity\Commit[]
      */
     public function commits($userName, $repository, $startSha, $endSha)
     {
@@ -65,8 +65,8 @@ class Commit
 
         foreach ($response as $data) {
             $commit = new Entity\Commit(
-                'foo',
-                'bar'
+                $data['sha'],
+                $data['commit']['message']
             );
 
             array_push($commits, $commit);
