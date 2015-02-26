@@ -13,11 +13,6 @@ use stdClass;
 class CommitTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @var string
-     */
-    private $responseCommitTemplate;
-
-    /**
      * @var Faker\Generator
      */
     private $faker;
@@ -30,8 +25,8 @@ class CommitTest extends PHPUnit_Framework_TestCase
 
     protected function tearDown()
     {
-        unset($this->responseCommitTemplate);
         unset($this->faker);
+        unset($this->commitTemplate);
     }
 
     public function testCommitReturnsCommitEntityWithShaAndMessageOnSuccess()
@@ -44,14 +39,6 @@ class CommitTest extends PHPUnit_Framework_TestCase
 
         $expectedCommit = $this->commitData();
 
-        $response = json_decode(
-            $this->responseCommit(
-                $expectedCommit->sha,
-                $expectedCommit->message
-            ),
-            true
-        );
-
         $commitApi
             ->expects($this->once())
             ->method('show')
@@ -60,7 +47,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($repository),
                 $this->equalTo($sha)
             )
-            ->willReturn($response)
+            ->willReturn($this->responseCommit($expectedCommit))
         ;
 
         $commitRepository = new Repository\Commit($commitApi);
@@ -210,20 +197,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
             array_push($expectedCommits, $this->commitData());
         }
 
-        $body = array_reduce($expectedCommits, function ($carry, $expectedCommit) {
-            if ('' !== $carry) {
-                $carry .= ',';
-            }
-
-            return $carry . $this->responseCommit(
-                $expectedCommit->sha,
-                $expectedCommit->message
-            );
-        }, '');
-
-        $body = '[' . $body . ']';
-
-        $response = json_decode($body, true);
+        $response = $this->responseCommits($expectedCommits);
 
         $commitApi
             ->expects($this->once())
@@ -259,42 +233,53 @@ class CommitTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @param string $sha
+     * @param string $message
      * @return stdClass
      */
-    private function commitData()
+    private function commitData($sha = null, $message = null)
     {
         $data = new stdClass();
 
-        $data->sha = $this->faker->unique()->sha1;
-        $data->message = $this->faker->unique()->sentence();
+        $data->sha = $sha ?: $this->faker->unique()->sha1;
+        $data->message = $message ?: $this->faker->unique()->sentence();
 
         return $data;
     }
 
     /**
-     * @param string $sha
-     * @param string $message
-     * @return string
+     * @param stdClass $commit
+     * @return array
      */
-    private function responseCommit($sha, $message)
+    private function responseCommit(stdClass $commit)
     {
-        return sprintf(
-            $this->responseCommitTemplate(),
-            $sha,
-            $message
+        $commitTemplate = file_get_contents(__DIR__ . '/_response/commit.json');
+
+        $body = sprintf(
+            $commitTemplate,
+            $commit->sha,
+            $commit->message
+        );
+
+        return json_decode(
+            $body,
+            true
         );
     }
 
     /**
-     * @return string
+     * @param array $commits
+     * @return array
      */
-    private function responseCommitTemplate()
+    private function responseCommits(array $commits)
     {
-        if (null === $this->responseCommitTemplate) {
-            $this->responseCommitTemplate = file_get_contents(__DIR__ . '/_response/commit.json');
-        }
+        $response = [];
 
-        return $this->responseCommitTemplate;
+        array_walk($commits, function ($commit) use (&$response) {
+            array_push($response, $this->responseCommit($commit));
+        });
+
+        return $response;
     }
 
     /**
