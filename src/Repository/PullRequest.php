@@ -18,24 +18,24 @@ class PullRequest
     }
 
     /**
-     * @param string $user
+     * @param string $userName
      * @param string $repository
-     * @param string $start
-     * @param string $end
+     * @param string $startSha
+     * @param string $endSha
      * @return array
      */
-    public function pullRequests($user, $repository, $start, $end)
+    public function pullRequests($userName, $repository, $startSha, $endSha)
     {
         $this->commitRepository->commit(
-            $user,
+            $userName,
             $repository,
-            $start
+            $startSha
         );
 
         $this->commitRepository->commit(
-            $user,
+            $userName,
             $repository,
-            $end
+            $endSha
         );
 
         return [];

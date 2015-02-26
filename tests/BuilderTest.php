@@ -12,10 +12,10 @@ class BuilderTest extends PHPUnit_Framework_TestCase
     {
         $builder = new ChangeLog\Builder($this->pullRequestRepository());
 
-        $this->assertSame($builder, $builder->user('foo'));
+        $this->assertSame($builder, $builder->userName('foo'));
         $this->assertSame($builder, $builder->repository('bar'));
-        $this->assertSame($builder, $builder->start('ad77125'));
-        $this->assertSame($builder, $builder->end('7fc1c4f'));
+        $this->assertSame($builder, $builder->startSha('ad77125'));
+        $this->assertSame($builder, $builder->endSha('7fc1c4f'));
     }
 
     /**
@@ -37,7 +37,7 @@ class BuilderTest extends PHPUnit_Framework_TestCase
     {
         $builder = new ChangeLog\Builder($this->pullRequestRepository());
 
-        $builder->user('foo');
+        $builder->userName('foo');
 
         $builder->pullRequests();
     }
@@ -51,7 +51,7 @@ class BuilderTest extends PHPUnit_Framework_TestCase
         $builder = new ChangeLog\Builder($this->pullRequestRepository());
 
         $builder
-            ->user('foo')
+            ->userName('foo')
             ->repository('bar')
         ;
 
@@ -67,9 +67,9 @@ class BuilderTest extends PHPUnit_Framework_TestCase
         $builder = new ChangeLog\Builder($this->pullRequestRepository());
 
         $builder
-            ->user('foo')
+            ->userName('foo')
             ->repository('bar')
-            ->start('ad77125')
+            ->startSha('ad77125')
         ;
 
         $builder->pullRequests();
@@ -101,10 +101,10 @@ class BuilderTest extends PHPUnit_Framework_TestCase
         $builder = new ChangeLog\Builder($pullRequestRepository);
 
         $builder
-            ->user($user)
+            ->userName($user)
             ->repository($repository)
-            ->start($start)
-            ->end($end)
+            ->startSha($start)
+            ->endSha($end)
         ;
 
         $this->assertSame($pullRequests, $builder->pullRequests());

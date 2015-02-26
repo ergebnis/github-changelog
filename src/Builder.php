@@ -14,7 +14,7 @@ class Builder
     /**
      * @var string
      */
-    private $user;
+    private $userName;
 
     /**
      * @var string
@@ -24,12 +24,12 @@ class Builder
     /**
      * @var string
      */
-    private $start;
+    private $startSha;
 
     /**
      * @var string
      */
-    private $end;
+    private $endSha;
 
     /**
      * @param Repository\PullRequest $pullRequestRepository
@@ -43,9 +43,9 @@ class Builder
      * @param string $user
      * @return self
      */
-    public function user($user)
+    public function userName($user)
     {
-        $this->user = $user;
+        $this->userName = $user;
 
         return $this;
     }
@@ -62,23 +62,23 @@ class Builder
     }
 
     /**
-     * @param string $start
+     * @param string $startSha
      * @return self
      */
-    public function start($start)
+    public function startSha($startSha)
     {
-        $this->start = $start;
+        $this->startSha = $startSha;
 
         return $this;
     }
 
     /**
-     * @param string $end
+     * @param string $endSha
      * @return self
      */
-    public function end($end)
+    public function endSha($endSha)
     {
-        $this->end = $end;
+        $this->endSha = $endSha;
 
         return $this;
     }
@@ -88,7 +88,7 @@ class Builder
      */
     public function pullRequests()
     {
-        if (null === $this->user) {
+        if (null === $this->userName) {
             throw new BadMethodCallException('User needs to be specified');
         }
 
@@ -96,19 +96,19 @@ class Builder
             throw new BadMethodCallException('Repository needs to be specified');
         }
 
-        if (null === $this->start) {
+        if (null === $this->startSha) {
             throw new BadMethodCallException('Start reference needs to be specified');
         }
 
-        if (null === $this->end) {
+        if (null === $this->endSha) {
             throw new BadMethodCallException('End reference needs to be specified');
         }
 
         return $this->pullRequestRepository->pullRequests(
-            $this->user,
+            $this->userName,
             $this->repository,
-            $this->start,
-            $this->end
+            $this->startSha,
+            $this->endSha
         );
     }
 }

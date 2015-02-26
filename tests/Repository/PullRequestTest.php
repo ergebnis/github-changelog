@@ -10,19 +10,18 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
 {
     public function testPullRequestsReturnsEmptyArrayWhenStartAndEndAreTheSame()
     {
-        $user = 'foo';
+        $userName = 'foo';
         $repository = 'bar';
-        $start = 'ad77125';
-
-        $end = $start;
+        $startSha = 'ad77125';
+        $endSha = $startSha;
 
         $pullRequestRepository = new Repository\PullRequest($this->commitRepository());
 
         $pullRequests = $pullRequestRepository->pullRequests(
-            $user,
+            $userName,
             $repository,
-            $start,
-            $end
+            $startSha,
+            $endSha
         );
 
         $this->assertSame([], $pullRequests);
@@ -30,10 +29,10 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
 
     public function testPullRequestsAttemptsToFindStartAndEndCommit()
     {
-        $user = 'foo';
+        $userName = 'foo';
         $repository = 'bar';
-        $start = 'ad77125';
-        $end = '7fc1c4f';
+        $startSha = 'ad77125';
+        $endSha = '7fc1c4f';
 
         $commitRepository = $this->commitRepository();
 
@@ -41,9 +40,9 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             ->expects($this->at(0))
             ->method('commit')
             ->with(
-                $this->equalTo($user),
+                $this->equalTo($userName),
                 $this->equalTo($repository),
-                $this->equalTo($start)
+                $this->equalTo($startSha)
             )
         ;
 
@@ -51,19 +50,19 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             ->expects($this->at(1))
             ->method('commit')
             ->with(
-                $this->equalTo($user),
+                $this->equalTo($userName),
                 $this->equalTo($repository),
-                $this->equalTo($end)
+                $this->equalTo($endSha)
             )
         ;
 
         $pullRequestRepository = new Repository\PullRequest($commitRepository);
 
         $pullRequestRepository->pullRequests(
-            $user,
+            $userName,
             $repository,
-            $start,
-            $end
+            $startSha,
+            $endSha
         );
     }
 

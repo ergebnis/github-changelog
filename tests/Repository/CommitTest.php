@@ -12,9 +12,9 @@ class CommitTest extends PHPUnit_Framework_TestCase
 {
     public function testCommitReturnsCommitEntityWithShaAndMessageOnSuccess()
     {
-        $user = 'foo';
+        $userName = 'foo';
         $repository = 'bar';
-        $reference = 'ad77125';
+        $sha = 'ad77125';
 
         $commitApi = $this->commitApi();
 
@@ -27,9 +27,9 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('show')
             ->with(
-                $this->equalTo($user),
+                $this->equalTo($userName),
                 $this->equalTo($repository),
-                $this->equalTo($reference)
+                $this->equalTo($sha)
             )
             ->willReturn($response)
         ;
@@ -37,9 +37,9 @@ class CommitTest extends PHPUnit_Framework_TestCase
         $commitRepository = new Repository\Commit($commitApi);
 
         $commit = $commitRepository->commit(
-            $user,
+            $userName,
             $repository,
-            $reference
+            $sha
         );
 
         $this->assertInstanceOf(Entity\Commit::class, $commit);
@@ -50,9 +50,9 @@ class CommitTest extends PHPUnit_Framework_TestCase
 
     public function testCommitReturnsNullOnFailure()
     {
-        $user = 'foo';
+        $userName = 'foo';
         $repository = 'bar';
-        $reference = 'ad77125';
+        $sha = 'ad77125';
 
         $commitApi = $this->commitApi();
 
@@ -62,9 +62,9 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('show')
             ->with(
-                $this->equalTo($user),
+                $this->equalTo($userName),
                 $this->equalTo($repository),
-                $this->equalTo($reference)
+                $this->equalTo($sha)
             )
             ->willReturn($response)
         ;
@@ -72,9 +72,9 @@ class CommitTest extends PHPUnit_Framework_TestCase
         $commitRepository = new Repository\Commit($commitApi);
 
         $commit = $commitRepository->commit(
-            $user,
+            $userName,
             $repository,
-            $reference
+            $sha
         );
 
         $this->assertNull($commit);
@@ -82,19 +82,19 @@ class CommitTest extends PHPUnit_Framework_TestCase
 
     public function testCommitsReturnsEmptyArrayWhenStartAndEndAreTheSame()
     {
-        $user = 'foo';
+        $userName = 'foo';
         $repository = 'bar';
-        $start = 'ad77125';
+        $startSha = 'ad77125';
 
-        $end = $start;
+        $endSha = $startSha;
 
         $commitRepository = new Repository\Commit($this->commitApi());
 
         $commits = $commitRepository->commits(
-            $user,
+            $userName,
             $repository,
-            $start,
-            $end
+            $startSha,
+            $endSha
         );
 
         $this->assertSame([], $commits);
