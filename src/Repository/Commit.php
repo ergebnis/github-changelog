@@ -21,17 +21,17 @@ class Commit
     }
 
     /**
-     * @param string $user
+     * @param string $userName
      * @param string $repository
-     * @param string $end
+     * @param string $sha
      * @return Entity\Commit|null
      */
-    public function commit($user, $repository, $end)
+    public function commit($userName, $repository, $sha)
     {
         $response = $this->commitApi->show(
-            $user,
+            $userName,
             $repository,
-            $end
+            $sha
         );
 
         if (!is_array($response)) {
