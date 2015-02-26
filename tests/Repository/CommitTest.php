@@ -10,7 +10,7 @@ use PHPUnit_Framework_TestCase;
 
 class CommitTest extends PHPUnit_Framework_TestCase
 {
-    public function testCommitReturnsCommitEntityWithShaAndMessage()
+    public function testCommitReturnsCommitEntityWithShaAndMessageOnSuccess()
     {
         $user = 'foo';
         $repository = 'bar';
@@ -46,6 +46,38 @@ class CommitTest extends PHPUnit_Framework_TestCase
 
         $this->assertSame('6dcb09b5b57875f334f61aebed695e2e4193db5e', $commit->sha());
         $this->assertSame('Fix all the bugs', $commit->message());
+    }
+
+    public function testCommitReturnsNullOnFailure()
+    {
+        $user = 'foo';
+        $repository = 'bar';
+        $reference = 'ad77125';
+
+        $commitApi = $this->commitApi();
+
+        $response = 'failure';
+
+        $commitApi
+            ->expects($this->once())
+            ->method('show')
+            ->with(
+                $this->equalTo($user),
+                $this->equalTo($repository),
+                $this->equalTo($reference)
+            )
+            ->willReturn($response)
+        ;
+
+        $commitRepository = new Repository\Commit($commitApi);
+
+        $commit = $commitRepository->commit(
+            $user,
+            $repository,
+            $reference
+        );
+
+        $this->assertNull($commit);
     }
 
     public function testCommitsReturnsEmptyArrayWhenStartAndEndAreTheSame()

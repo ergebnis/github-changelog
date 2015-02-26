@@ -24,11 +24,19 @@ class Commit
      * @param string $user
      * @param string $repository
      * @param string $end
-     * @return Entity\Commit;
+     * @return Entity\Commit|null
      */
     public function commit($user, $repository, $end)
     {
-        $response = $this->commitApi->show($user, $repository, $end);
+        $response = $this->commitApi->show(
+            $user,
+            $repository,
+            $end
+        );
+
+        if (!is_array($response)) {
+            return null;
+        }
 
         return new Entity\Commit(
             $response['sha'],
