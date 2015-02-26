@@ -183,19 +183,21 @@ class CommitTest extends PHPUnit_Framework_TestCase
     {
         $userName = 'foo';
         $repository = 'bar';
+        $startSha = 'ad77125';
+        $endSha = '7fc1c4f';
 
         $commitApi = $this->commitApi();
 
         $expectedCommits = [];
 
-        $startCommit = $this->commitData();
+        $startCommit = $this->commitData($startSha);
         array_push($expectedCommits, $startCommit);
 
         for ($i = 0; $i < 5; $i++) {
             array_push($expectedCommits, $this->commitData());
         }
 
-        $endCommit = $this->commitData();
+        $endCommit = $this->commitData($endSha);
         array_push($expectedCommits, $endCommit);
 
         $commitApi
@@ -205,7 +207,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($userName),
                 $this->equalTo($repository),
                 $this->equalTo([
-                    'sha' => $startCommit->sha,
+                    'sha' => $startSha,
                 ])
             )
             ->willReturn($this->responseFromCommits($expectedCommits))
@@ -216,8 +218,8 @@ class CommitTest extends PHPUnit_Framework_TestCase
         $commits = $commitRepository->commits(
             $userName,
             $repository,
-            $startCommit->sha,
-            $endCommit->sha
+            $startSha,
+            $endSha
         );
 
         $this->assertCount(count($expectedCommits) - 1, $commits);
