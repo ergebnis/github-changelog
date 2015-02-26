@@ -240,6 +240,97 @@ class CommitTest extends PHPUnit_Framework_TestCase
         }
     }
 
+    public function testCommitsRequeriesIfEndIsNotContainedInFirstBatch()
+    {
+        $userName = 'foo';
+        $repository = 'bar';
+        $startSha = 'ad77125';
+        $endSha = '7fc1c4f';
+
+        $commitApi = $this->commitApi();
+
+        $firstBatch = [];
+        for ($i = 0; $i < 50; $i++) {
+            array_push($firstBatch, $this->commitData());
+        }
+
+        $lastCommitFromFirstBatch = end($firstBatch);
+        reset($firstBatch);
+
+        $secondBatch = [
+            $lastCommitFromFirstBatch,
+        ];
+
+        for ($i = 0; $i < 50; $i++) {
+            array_push($secondBatch, $this->commitData());
+        }
+
+        $expectedCommits = array_merge(
+            array_slice(
+                $firstBatch,
+                1
+            ),
+            array_slice(
+                $secondBatch,
+                1,
+                10
+            )
+        );
+
+        $startCommit = reset($firstBatch);
+        $startCommit->sha = $startSha;
+
+        $endCommit = end($expectedCommits);
+        $endCommit->sha = $endSha;
+
+        reset($expectedCommits);
+
+        $commitApi
+            ->expects($this->at(0))
+            ->method('all')
+            ->with(
+                $this->equalTo($userName),
+                $this->equalTo($repository),
+                $this->equalTo([
+                    'sha' => $startSha,
+                ])
+            )
+            ->willReturn($this->responseFromCommits($firstBatch))
+        ;
+
+        $commitApi
+            ->expects($this->at(1))
+            ->method('all')
+            ->with(
+                $this->equalTo($userName),
+                $this->equalTo($repository),
+                $this->equalTo([
+                    'sha' => $lastCommitFromFirstBatch->sha,
+                ])
+            )
+            ->willReturn($this->responseFromCommits($secondBatch))
+        ;
+
+        $commitRepository = new Repository\Commit($commitApi);
+
+        $commits = $commitRepository->commits(
+            $userName,
+            $repository,
+            $startSha,
+            $endSha
+        );
+
+        $this->assertCount(count($expectedCommits), $commits);
+
+        foreach ($commits as $commit) {
+            $expectedCommit = array_shift($expectedCommits);
+
+            $this->assertInstanceOf(Entity\Commit::class, $commit);
+            $this->assertSame($expectedCommit->sha, $commit->sha());
+            $this->assertSame($expectedCommit->message, $commit->message());
+        }
+    }
+
     /**
      * @param string $sha
      * @param string $message

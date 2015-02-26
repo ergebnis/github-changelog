@@ -63,10 +63,12 @@ class Commit
 
         $commits = [];
 
-        do {
+        $currentStartSha = $startSha;
+
+        while (count($response)) {
             $data = array_shift($response);
 
-            if ($data['sha'] === $startSha) {
+            if ($data['sha'] === $currentStartSha) {
                 continue;
             }
 
@@ -76,7 +78,19 @@ class Commit
             );
 
             array_push($commits, $commit);
-        } while ($data['sha'] !== $endSha);
+
+            if ($data['sha'] === $endSha) {
+                break;
+            }
+
+            if (!count($response)) {
+                $currentStartSha = $data['sha'];
+
+                $response = $this->commitApi->all($userName, $repository, [
+                    'sha' => $currentStartSha,
+                ]);
+            }
+        }
 
         return $commits;
     }
