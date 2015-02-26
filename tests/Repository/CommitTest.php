@@ -72,8 +72,6 @@ class CommitTest extends PHPUnit_Framework_TestCase
 
         $commitApi = $this->commitApi();
 
-        $response = 'failure';
-
         $commitApi
             ->expects($this->once())
             ->method('show')
@@ -82,7 +80,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($repository),
                 $this->equalTo($sha)
             )
-            ->willReturn($response)
+            ->willReturn('failure')
         ;
 
         $commitRepository = new Repository\Commit($commitApi);
@@ -156,8 +154,6 @@ class CommitTest extends PHPUnit_Framework_TestCase
 
         $commitApi = $this->commitApi();
 
-        $response = 'failure';
-
         $commitApi
             ->expects($this->once())
             ->method('all')
@@ -168,7 +164,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
                     'sha' => $startSha,
                 ])
             )
-            ->willReturn($response)
+            ->willReturn('failure')
         ;
 
         $commitRepository = new Repository\Commit($commitApi);
@@ -197,8 +193,6 @@ class CommitTest extends PHPUnit_Framework_TestCase
             array_push($expectedCommits, $this->commitData());
         }
 
-        $response = $this->responseFromCommits($expectedCommits);
-
         $commitApi
             ->expects($this->once())
             ->method('all')
@@ -209,7 +203,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
                     'sha' => $startSha,
                 ])
             )
-            ->willReturn($response)
+            ->willReturn($this->responseFromCommits($expectedCommits))
         ;
 
         $commitRepository = new Repository\Commit($commitApi);
@@ -251,8 +245,6 @@ class CommitTest extends PHPUnit_Framework_TestCase
         $endCommit = $this->commitData();
         array_push($expectedCommits, $endCommit);
 
-        $response = $this->responseFromCommits($expectedCommits);
-
         $commitApi
             ->expects($this->once())
             ->method('all')
@@ -263,7 +255,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
                     'sha' => $startCommit->sha,
                 ])
             )
-            ->willReturn($response)
+            ->willReturn($this->responseFromCommits($expectedCommits))
         ;
 
         $commitRepository = new Repository\Commit($commitApi);
