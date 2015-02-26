@@ -2,6 +2,8 @@
 
 namespace Localheinz\ChangeLog\Repository;
 
+use Guzzle\Common\Exception\BadMethodCallException;
+
 class PullRequest
 {
     /**
@@ -26,17 +28,29 @@ class PullRequest
      */
     public function pullRequests($userName, $repository, $startSha, $endSha)
     {
-        $this->commitRepository->commit(
+        if ($startSha === $endSha) {
+            return [];
+        }
+
+        $startCommit = $this->commitRepository->commit(
             $userName,
             $repository,
             $startSha
         );
 
-        $this->commitRepository->commit(
+        if (null === $startCommit) {
+            throw new BadMethodCallException('Could not find start commit');
+        }
+
+        $endCommit = $this->commitRepository->commit(
             $userName,
             $repository,
             $endSha
         );
+
+        if (null === $endCommit) {
+            throw new BadMethodCallException('Could not find end commit');
+        }
 
         return [];
     }
