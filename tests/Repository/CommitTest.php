@@ -47,7 +47,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($repository),
                 $this->equalTo($sha)
             )
-            ->willReturn($this->responseCommit($expectedCommit))
+            ->willReturn($this->responseFromCommit($expectedCommit))
         ;
 
         $commitRepository = new Repository\Commit($commitApi);
@@ -197,7 +197,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
             array_push($expectedCommits, $this->commitData());
         }
 
-        $response = $this->responseCommits($expectedCommits);
+        $response = $this->responseFromCommits($expectedCommits);
 
         $commitApi
             ->expects($this->once())
@@ -251,7 +251,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
         $endCommit = $this->commitData();
         array_push($expectedCommits, $endCommit);
 
-        $response = $this->responseCommits($expectedCommits);
+        $response = $this->responseFromCommits($expectedCommits);
 
         $commitApi
             ->expects($this->once())
@@ -307,7 +307,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
      * @param stdClass $commit
      * @return array
      */
-    private function responseCommit(stdClass $commit)
+    private function responseFromCommit(stdClass $commit)
     {
         $commitTemplate = file_get_contents(__DIR__ . '/_response/commit.json');
 
@@ -327,12 +327,12 @@ class CommitTest extends PHPUnit_Framework_TestCase
      * @param array $commits
      * @return array
      */
-    private function responseCommits(array $commits)
+    private function responseFromCommits(array $commits)
     {
         $response = [];
 
         array_walk($commits, function ($commit) use (&$response) {
-            array_push($response, $this->responseCommit($commit));
+            array_push($response, $this->responseFromCommit($commit));
         });
 
         return $response;
