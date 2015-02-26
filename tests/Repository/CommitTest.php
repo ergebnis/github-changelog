@@ -179,53 +179,6 @@ class CommitTest extends PHPUnit_Framework_TestCase
         $this->assertSame([], $commits);
     }
 
-    public function testCommitsReturnsArrayOfCommitEntities()
-    {
-        $userName = 'foo';
-        $repository = 'bar';
-        $startSha = 'ad77125';
-        $endSha = '7fc1c4f';
-
-        $commitApi = $this->commitApi();
-
-        $expectedCommits = [];
-        for ($i = 0; $i < 15; $i++) {
-            array_push($expectedCommits, $this->commitData());
-        }
-
-        $commitApi
-            ->expects($this->once())
-            ->method('all')
-            ->with(
-                $this->equalTo($userName),
-                $this->equalTo($repository),
-                $this->equalTo([
-                    'sha' => $startSha,
-                ])
-            )
-            ->willReturn($this->responseFromCommits($expectedCommits))
-        ;
-
-        $commitRepository = new Repository\Commit($commitApi);
-
-        $commits = $commitRepository->commits(
-            $userName,
-            $repository,
-            $startSha,
-            $endSha
-        );
-
-        $this->assertCount(count($expectedCommits), $commits);
-
-        foreach ($commits as $commit) {
-            $expectedCommit = array_shift($expectedCommits);
-
-            $this->assertInstanceOf(Entity\Commit::class, $commit);
-            $this->assertSame($expectedCommit->sha, $commit->sha());
-            $this->assertSame($expectedCommit->message, $commit->message());
-        }
-    }
-
     public function testCommitsReturnsArrayOfCommitsFromStartToEndExcludingStart()
     {
         $userName = 'foo';
