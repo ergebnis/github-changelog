@@ -17,5 +17,8 @@
         "psr-4": {
             "Localheinz\\ChangeLog\\": "src"
         }
+    },
+    "require": {
+        "knplabs/github-api": "^1.4.4"
     }
 }
