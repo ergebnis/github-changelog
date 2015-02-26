@@ -188,17 +188,24 @@ class CommitTest extends PHPUnit_Framework_TestCase
 
         $commitApi = $this->commitApi();
 
-        $expectedCommits = [];
-
-        $startCommit = $this->commitData($startSha);
-        array_push($expectedCommits, $startCommit);
-
-        for ($i = 0; $i < 5; $i++) {
-            array_push($expectedCommits, $this->commitData());
+        $commitsReturnedByGitHubApi = [];
+        for ($i = 0; $i < 50; $i++) {
+            array_push($commitsReturnedByGitHubApi, $this->commitData());
         }
 
-        $endCommit = $this->commitData($endSha);
-        array_push($expectedCommits, $endCommit);
+        $expectedCommits = array_slice(
+            $commitsReturnedByGitHubApi,
+            1,
+            12
+        );
+
+        $startCommit = reset($commitsReturnedByGitHubApi);
+        $startCommit->sha = $startSha;
+
+        $endCommit = end($expectedCommits);
+        $endCommit->sha = $endSha;
+
+        reset($expectedCommits);
 
         $commitApi
             ->expects($this->once())
@@ -210,7 +217,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
                     'sha' => $startSha,
                 ])
             )
-            ->willReturn($this->responseFromCommits($expectedCommits))
+            ->willReturn($this->responseFromCommits($commitsReturnedByGitHubApi))
         ;
 
         $commitRepository = new Repository\Commit($commitApi);
@@ -222,9 +229,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
             $endSha
         );
 
-        $this->assertCount(count($expectedCommits) - 1, $commits);
-
-        array_shift($expectedCommits);
+        $this->assertCount(count($expectedCommits), $commits);
 
         foreach ($commits as $commit) {
             $expectedCommit = array_shift($expectedCommits);

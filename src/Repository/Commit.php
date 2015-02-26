@@ -63,7 +63,9 @@ class Commit
 
         $commits = [];
 
-        foreach ($response as $data) {
+        do {
+            $data = array_shift($response);
+
             if ($data['sha'] === $startSha) {
                 continue;
             }
@@ -74,7 +76,7 @@ class Commit
             );
 
             array_push($commits, $commit);
-        }
+        } while ($data['sha'] !== $endSha);
 
         return $commits;
     }
