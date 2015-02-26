@@ -100,6 +100,37 @@ class CommitTest extends PHPUnit_Framework_TestCase
         $this->assertSame([], $commits);
     }
 
+    public function testCommitsDelegatesToCommitApi()
+    {
+        $userName = 'foo';
+        $repository = 'bar';
+        $startSha = 'ad77125';
+        $endSha = '7fc1c4f';
+
+        $commitApi = $this->commitApi();
+
+        $commitApi
+            ->expects($this->once())
+            ->method('all')
+            ->with(
+                $this->equalTo($userName),
+                $this->equalTo($repository),
+                $this->equalTo([
+                    'sha' => $startSha,
+                ])
+            )
+        ;
+
+        $commitRepository = new Repository\Commit($commitApi);
+
+        $commitRepository->commits(
+            $userName,
+            $repository,
+            $startSha,
+            $endSha
+        );
+    }
+
     /**
      * @param string $name
      * @return string

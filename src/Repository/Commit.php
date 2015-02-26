@@ -45,14 +45,18 @@ class Commit
     }
 
     /**
-     * @param string $user
+     * @param string $userName
      * @param string $repository
-     * @param string $start
-     * @param string $end
+     * @param string $startSha
+     * @param string $endSha
      * @return array
      */
-    public function commits($user, $repository, $start, $end)
+    public function commits($userName, $repository, $startSha, $endSha)
     {
+        $this->commitApi->all($userName, $repository, [
+            'sha' => $startSha,
+        ]);
+
         return [];
     }
 }
