@@ -3,6 +3,7 @@
 namespace Localheinz\ChangeLog\Test\Repository;
 
 use Localheinz\ChangeLog\Repository;
+use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
 
 class PullRequestTest extends PHPUnit_Framework_TestCase
@@ -15,9 +16,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
 
         $end = $start;
 
-        $commitRepository = $this->getMockBuilder(Repository\Commit::class)->getMock();
-
-        $pullRequestRepository = new Repository\PullRequest($commitRepository);
+        $pullRequestRepository = new Repository\PullRequest($this->commitRepository());
 
         $pullRequests = $pullRequestRepository->pullRequests(
             $user,
@@ -36,7 +35,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
         $start = 'ad77125';
         $end = '7fc1c4f';
 
-        $commitRepository = $this->getMockBuilder(Repository\Commit::class)->getMock();
+        $commitRepository = $this->commitRepository();
 
         $commitRepository
             ->expects($this->at(0))
@@ -66,5 +65,16 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             $start,
             $end
         );
+    }
+
+    /**
+     * @return PHPUnit_Framework_MockObject_MockObject
+     */
+    private function commitRepository()
+    {
+        return $this->getMockBuilder(Repository\Commit::class)
+            ->disableOriginalConstructor()
+            ->getMock()
+        ;
     }
 }
