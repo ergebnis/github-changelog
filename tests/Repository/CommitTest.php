@@ -19,7 +19,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
         $commitApi = $this->commitApi();
 
         $response = json_decode(
-            $this->asset('commit.json'),
+            $this->response('commit.json'),
             true
         );
 
@@ -104,10 +104,10 @@ class CommitTest extends PHPUnit_Framework_TestCase
      * @param string $name
      * @return string
      */
-    private function asset($name)
+    private function response($name)
     {
         return file_get_contents(sprintf(
-            '%s/_asset/%s',
+            '%s/_response/%s',
             __DIR__,
             $name
         ));
