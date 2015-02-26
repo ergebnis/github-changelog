@@ -53,10 +53,25 @@ class Commit
      */
     public function commits($userName, $repository, $startSha, $endSha)
     {
-        $this->commitApi->all($userName, $repository, [
+        $response = $this->commitApi->all($userName, $repository, [
             'sha' => $startSha,
         ]);
 
-        return [];
+        if (!is_array($response)) {
+            return [];
+        }
+
+        $commits = [];
+
+        foreach ($response as $data) {
+            $commit = new Entity\Commit(
+                'foo',
+                'bar'
+            );
+
+            array_push($commits, $commit);
+        }
+
+        return $commits;
     }
 }
