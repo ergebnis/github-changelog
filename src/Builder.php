@@ -100,6 +100,10 @@ class Builder
             throw new BadMethodCallException('Start reference needs to be specified');
         }
 
+        if (null === $this->end) {
+            throw new BadMethodCallException('End reference needs to be specified');
+        }
+
         return $this->pullRequestRepository->pullRequests(
             $this->user,
             $this->repository,

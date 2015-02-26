@@ -65,7 +65,11 @@ class BuilderTest extends PHPUnit_Framework_TestCase
         $builder->pullRequests();
     }
 
-    public function testPullRequestsDoesNotThrowBadMethodCallExceptionIfEndReferenceHasNotBeenSet()
+    /**
+     * @expectedException \BadMethodCallException
+     * @expectedExceptionMessage End reference needs to be specified
+     */
+    public function testPullRequestsThrowsBadMethodCallExceptionIfEndReferenceHasNotBeenSet()
     {
         $pullRequestRepository = $this->getMockBuilder(ChangeLog\Repository\PullRequest::class)->getMock();
 
