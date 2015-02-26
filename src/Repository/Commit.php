@@ -64,6 +64,10 @@ class Commit
         $commits = [];
 
         foreach ($response as $data) {
+            if ($data['sha'] === $startSha) {
+                continue;
+            }
+
             $commit = new Entity\Commit(
                 $data['sha'],
                 $data['commit']['message']

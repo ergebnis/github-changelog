@@ -232,6 +232,62 @@ class CommitTest extends PHPUnit_Framework_TestCase
         }
     }
 
+    public function testCommitsReturnsArrayOfCommitsFromStartToEndExcludingStart()
+    {
+        $userName = 'foo';
+        $repository = 'bar';
+
+        $commitApi = $this->commitApi();
+
+        $expectedCommits = [];
+
+        $startCommit = $this->commitData();
+        array_push($expectedCommits, $startCommit);
+
+        for ($i = 0; $i < 5; $i++) {
+            array_push($expectedCommits, $this->commitData());
+        }
+
+        $endCommit = $this->commitData();
+        array_push($expectedCommits, $endCommit);
+
+        $response = $this->responseCommits($expectedCommits);
+
+        $commitApi
+            ->expects($this->once())
+            ->method('all')
+            ->with(
+                $this->equalTo($userName),
+                $this->equalTo($repository),
+                $this->equalTo([
+                    'sha' => $startCommit->sha,
+                ])
+            )
+            ->willReturn($response)
+        ;
+
+        $commitRepository = new Repository\Commit($commitApi);
+
+        $commits = $commitRepository->commits(
+            $userName,
+            $repository,
+            $startCommit->sha,
+            $endCommit->sha
+        );
+
+        $this->assertCount(count($expectedCommits) - 1, $commits);
+
+        array_shift($expectedCommits);
+
+        foreach ($commits as $commit) {
+            $expectedCommit = array_shift($expectedCommits);
+
+            $this->assertInstanceOf(Entity\Commit::class, $commit);
+            $this->assertSame($expectedCommit->sha, $commit->sha());
+            $this->assertSame($expectedCommit->message, $commit->message());
+        }
+    }
+
     /**
      * @param string $sha
      * @param string $message
