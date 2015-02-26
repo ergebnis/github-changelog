@@ -148,6 +148,65 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    public function testPullRequestsAttemptsToFetchAllCommitsBetweenStartAndEndCommit()
+    {
+        $userName = 'foo';
+        $repository = 'bar';
+        $startSha = 'ad77125';
+        $endSha = '7fc1c4f';
+
+        $fullStartSha = 'ad77125216e2dfe7b91794ff814c5ba73ece4c1d';
+        $fullEndSha = '7fc1c4f0a291f20998985ca3f774de273845dbb4';
+
+        $commitRepository = $this->commitRepository();
+
+        $startCommit = $this->commit($fullStartSha);
+
+        $commitRepository
+            ->expects($this->at(0))
+            ->method('commit')
+            ->with(
+                $this->equalTo($userName),
+                $this->equalTo($repository),
+                $this->equalTo($startSha)
+            )
+            ->willReturn($startCommit)
+        ;
+
+        $endCommit = $this->commit($fullEndSha);
+
+        $commitRepository
+            ->expects($this->at(1))
+            ->method('commit')
+            ->with(
+                $this->equalTo($userName),
+                $this->equalTo($repository),
+                $this->equalTo($endSha)
+            )
+            ->willReturn($endCommit)
+        ;
+
+        $commitRepository
+            ->expects($this->once())
+            ->method('commits')
+            ->with(
+                $this->equalTo($userName),
+                $this->equalTo($repository),
+                $this->equalTo($fullStartSha),
+                $this->equalTo($fullEndSha)
+            )
+        ;
+
+        $pullRequestRepository = new Repository\PullRequest($commitRepository);
+
+        $pullRequestRepository->pullRequests(
+            $userName,
+            $repository,
+            $startSha,
+            $endSha
+        );
+    }
+
     /**
      * @return PHPUnit_Framework_MockObject_MockObject
      */
@@ -162,11 +221,19 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
     /**
      * @return PHPUnit_Framework_MockObject_MockObject
      */
-    private function commit()
+    private function commit($sha = null)
     {
-        return $this->getMockBuilder(Entity\Commit::class)
+        $commit = $this->getMockBuilder(Entity\Commit::class)
             ->disableOriginalConstructor()
             ->getMock()
         ;
+
+        $commit
+            ->expects($this->any())
+            ->method('sha')
+            ->willReturn($sha)
+        ;
+
+        return $commit;
     }
 }

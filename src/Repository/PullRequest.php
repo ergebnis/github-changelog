@@ -52,6 +52,13 @@ class PullRequest
             throw new BadMethodCallException('Could not find end commit');
         }
 
+        $this->commitRepository->commits(
+            $userName,
+            $repository,
+            $startCommit->sha(),
+            $endCommit->sha()
+        );
+
         return [];
     }
 }
