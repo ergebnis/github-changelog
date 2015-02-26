@@ -3,15 +3,14 @@
 namespace Localheinz\ChangeLog\Test\GitHub;
 
 use Localheinz\ChangeLog;
+use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
 
 class BuilderTest extends PHPUnit_Framework_TestCase
 {
     public function testFluentInterface()
     {
-        $pullRequestRepository = $this->getMockBuilder(ChangeLog\Repository\PullRequest::class)->getMock();
-
-        $builder = new ChangeLog\Builder($pullRequestRepository);
+        $builder = new ChangeLog\Builder($this->pullRequestRepository());
 
         $this->assertSame($builder, $builder->user('foo'));
         $this->assertSame($builder, $builder->repository('bar'));
@@ -25,9 +24,7 @@ class BuilderTest extends PHPUnit_Framework_TestCase
      */
     public function testPullRequestsThrowsBadMethodCallExceptionIfUserHasNotBeenSet()
     {
-        $pullRequestRepository = $this->getMockBuilder(ChangeLog\Repository\PullRequest::class)->getMock();
-
-        $builder = new ChangeLog\Builder($pullRequestRepository);
+        $builder = new ChangeLog\Builder($this->pullRequestRepository());
 
         $builder->pullRequests();
     }
@@ -38,9 +35,7 @@ class BuilderTest extends PHPUnit_Framework_TestCase
      */
     public function testPullRequestsThrowsBadMethodCallExceptionIfRepositoryHasNotBeenSet()
     {
-        $pullRequestRepository = $this->getMockBuilder(ChangeLog\Repository\PullRequest::class)->getMock();
-
-        $builder = new ChangeLog\Builder($pullRequestRepository);
+        $builder = new ChangeLog\Builder($this->pullRequestRepository());
 
         $builder->user('foo');
 
@@ -53,9 +48,7 @@ class BuilderTest extends PHPUnit_Framework_TestCase
      */
     public function testPullRequestsThrowsBadMethodCallExceptionIfStartReferenceHasNotBeenSet()
     {
-        $pullRequestRepository = $this->getMockBuilder(ChangeLog\Repository\PullRequest::class)->getMock();
-
-        $builder = new ChangeLog\Builder($pullRequestRepository);
+        $builder = new ChangeLog\Builder($this->pullRequestRepository());
 
         $builder
             ->user('foo')
@@ -71,9 +64,7 @@ class BuilderTest extends PHPUnit_Framework_TestCase
      */
     public function testPullRequestsThrowsBadMethodCallExceptionIfEndReferenceHasNotBeenSet()
     {
-        $pullRequestRepository = $this->getMockBuilder(ChangeLog\Repository\PullRequest::class)->getMock();
-
-        $builder = new ChangeLog\Builder($pullRequestRepository);
+        $builder = new ChangeLog\Builder($this->pullRequestRepository());
 
         $builder
             ->user('foo')
@@ -91,9 +82,9 @@ class BuilderTest extends PHPUnit_Framework_TestCase
         $start = 'ad77125';
         $end = '7fc1c4f';
 
-        $pullRequests = 'baz';
+        $pullRequestRepository = $this->pullRequestRepository();
 
-        $pullRequestRepository = $this->getMockBuilder(ChangeLog\Repository\PullRequest::class)->getMock();
+        $pullRequests = 'baz';
 
         $pullRequestRepository
             ->expects($this->once())
@@ -117,5 +108,16 @@ class BuilderTest extends PHPUnit_Framework_TestCase
         ;
 
         $this->assertSame($pullRequests, $builder->pullRequests());
+    }
+
+    /**
+     * @return PHPUnit_Framework_MockObject_MockObject
+     */
+    private function pullRequestRepository()
+    {
+        return $this->getMockBuilder(ChangeLog\Repository\PullRequest::class)
+            ->disableOriginalConstructor()
+            ->getMock()
+        ;
     }
 }
