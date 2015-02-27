@@ -134,6 +134,10 @@ class Builder
                 $id
             );
 
+            if (null === $pullRequest) {
+                return;
+            }
+
             array_push($pullRequests, $pullRequest);
         });
 

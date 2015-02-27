@@ -234,6 +234,67 @@ class BuilderTest extends PHPUnit_Framework_TestCase
         $this->assertSame([$pullRequest], $builder->pullRequests());
     }
 
+    public function testPullRequestsHandlesMergeCommitWherePullRequestWasNotFound()
+    {
+        $userName = 'foo';
+        $repository = 'bar';
+        $startSha = 'ad77125';
+        $endSha = '7fc1c4f';
+
+        $commitService = $this->commitService();
+
+        $id = 9000;
+
+        $mergeCommit = $this->commit(
+            null,
+            sprintf(
+                'Merge pull request #%s from localheinz/fix/directory',
+                $id
+            )
+        );
+
+        $commitService
+            ->expects($this->once())
+            ->method('range')
+            ->with(
+                $this->equalTo($userName),
+                $this->equalTo($repository),
+                $this->equalTo($startSha),
+                $this->equalTo($endSha)
+            )
+            ->willReturn([
+                $mergeCommit,
+            ])
+        ;
+
+        $pullRequestRepository = $this->pullRequestRepository();
+
+        $pullRequestRepository
+            ->expects($this->once())
+            ->method('show')
+            ->with(
+                $this->equalTo($userName),
+                $this->equalTo($repository),
+                $this->equalTo($id)
+            )
+            ->willReturn(null)
+        ;
+
+        $builder = new ChangeLog\Builder(
+            $commitService,
+            $pullRequestRepository
+        );
+
+        $builder
+            ->userName($userName)
+            ->repository($repository)
+            ->startSha($startSha)
+            ->endSha($endSha)
+        ;
+
+        $this->assertSame([], $builder->pullRequests());
+    }
+
     /**
      * @return PHPUnit_Framework_MockObject_MockObject
      */
