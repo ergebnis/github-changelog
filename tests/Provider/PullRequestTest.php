@@ -23,7 +23,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf(Provider\ItemProvider::class, $provider);
     }
 
-    public function testPullRequestsReturnsEmptyArrayIfNoCommitsWereFound()
+    public function testItemsReturnsEmptyArrayIfNoCommitsWereFound()
     {
         $vendor = 'foo';
         $package = 'bar';
@@ -59,7 +59,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
         $this->assertSame([], $pullRequests);
     }
 
-    public function testPullRequestsReturnsEmptyArrayIfNoMergeCommitsWereFound()
+    public function testItemsReturnsEmptyArrayIfNoMergeCommitsWereFound()
     {
         $vendor = 'foo';
         $package = 'bar';
@@ -95,7 +95,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
         $this->assertSame([], $pullRequests);
     }
 
-    public function testPullRequestsFetchesPullRequestIfMergeCommitWasFound()
+    public function testItemsFetchesPullRequestIfMergeCommitWasFound()
     {
         $vendor = 'foo';
         $package = 'bar';
@@ -159,7 +159,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
         $this->assertSame([$pullRequest], $pullRequests);
     }
 
-    public function testPullRequestsHandlesMergeCommitWherePullRequestWasNotFound()
+    public function testItemsHandlesMergeCommitWherePullRequestWasNotFound()
     {
         $vendor = 'foo';
         $package = 'bar';
