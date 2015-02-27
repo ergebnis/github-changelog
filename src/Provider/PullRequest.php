@@ -1,11 +1,11 @@
 <?php
 
-namespace Localheinz\ChangeLog\Service;
+namespace Localheinz\ChangeLog\Provider;
 
 use Localheinz\ChangeLog\Entity;
 use Localheinz\ChangeLog\Repository;
 
-class PullRequest
+class PullRequest implements ItemProvider
 {
     /**
      * @var Commit
@@ -28,24 +28,24 @@ class PullRequest
     }
 
     /**
-     * @param string $userName
-     * @param string $repository
-     * @param string $startSha
-     * @param string $endSha
+     * @param string $vendor
+     * @param string $package
+     * @param string $startReference
+     * @param string $endReference
      * @return Entity\PullRequest[] array
      */
-    public function pullRequests($userName, $repository, $startSha, $endSha)
+    public function items($vendor, $package, $startReference, $endReference)
     {
-        $commits = $this->commitService->range(
-            $userName,
-            $repository,
-            $startSha,
-            $endSha
+        $commits = $this->commitService->items(
+            $vendor,
+            $package,
+            $startReference,
+            $endReference
         );
 
         $pullRequests = [];
 
-        array_walk($commits, function (Entity\Commit $commit) use (&$pullRequests, $userName, $repository) {
+        array_walk($commits, function (Entity\Commit $commit) use (&$pullRequests, $vendor, $package) {
 
             if (0 === preg_match('/^Merge pull request #(?P<id>\d+)/', $commit->message(), $matches)) {
                 return;
@@ -54,8 +54,8 @@ class PullRequest
             $id = $matches['id'];
 
             $pullRequest = $this->pullRequestRepository->show(
-                $userName,
-                $repository,
+                $vendor,
+                $package,
                 $id
             );
 

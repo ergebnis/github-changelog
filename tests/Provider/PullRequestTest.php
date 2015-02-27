@@ -1,10 +1,10 @@
 <?php
 
-namespace Localheinz\ChangeLog\Test\Service;
+namespace Localheinz\ChangeLog\Test\Provider;
 
 use Localheinz\ChangeLog\Entity;
+use Localheinz\ChangeLog\Provider;
 use Localheinz\ChangeLog\Repository;
-use Localheinz\ChangeLog\Service;
 use Localheinz\ChangeLog\Test\Util\DataProviderTrait;
 use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
@@ -13,37 +13,47 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
 {
     use DataProviderTrait;
 
+    public function testImplementsProvidesItemsInterface()
+    {
+        $provider = new Provider\PullRequest(
+            $this->commitProvider(),
+            $this->pullRequestRepository()
+        );
+
+        $this->assertInstanceOf(Provider\ItemProvider::class, $provider);
+    }
+
     public function testPullRequestsReturnsEmptyArrayIfNoCommitsWereFound()
     {
-        $userName = 'foo';
-        $repository = 'bar';
-        $startSha = 'ad77125';
-        $endSha = '7fc1c4f';
+        $vendor = 'foo';
+        $package = 'bar';
+        $startReference = 'ad77125';
+        $endReference = '7fc1c4f';
 
-        $commitService = $this->commitService();
+        $commitProvider = $this->commitProvider();
 
-        $commitService
+        $commitProvider
             ->expects($this->once())
-            ->method('range')
+            ->method('items')
             ->with(
-                $this->equalTo($userName),
-                $this->equalTo($repository),
-                $this->equalTo($startSha),
-                $this->equalTo($endSha)
+                $this->equalTo($vendor),
+                $this->equalTo($package),
+                $this->equalTo($startReference),
+                $this->equalTo($endReference)
             )
             ->willReturn([])
         ;
 
-        $pullRequestService = new Service\PullRequest(
-            $commitService,
+        $provider = new Provider\PullRequest(
+            $commitProvider,
             $this->pullRequestRepository()
         );
 
-        $pullRequests = $pullRequestService->pullRequests(
-            $userName,
-            $repository,
-            $startSha,
-            $endSha
+        $pullRequests = $provider->items(
+            $vendor,
+            $package,
+            $startReference,
+            $endReference
         );
 
         $this->assertSame([], $pullRequests);
@@ -51,35 +61,35 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
 
     public function testPullRequestsReturnsEmptyArrayIfNoMergeCommitsWereFound()
     {
-        $userName = 'foo';
-        $repository = 'bar';
-        $startSha = 'ad77125';
-        $endSha = '7fc1c4f';
+        $vendor = 'foo';
+        $package = 'bar';
+        $startReference = 'ad77125';
+        $endReference = '7fc1c4f';
 
-        $commitService = $this->commitService();
+        $commitProvider = $this->commitProvider();
 
-        $commitService
+        $commitProvider
             ->expects($this->once())
-            ->method('range')
+            ->method('items')
             ->with(
-                $this->equalTo($userName),
-                $this->equalTo($repository),
-                $this->equalTo($startSha),
-                $this->equalTo($endSha)
+                $this->equalTo($vendor),
+                $this->equalTo($package),
+                $this->equalTo($startReference),
+                $this->equalTo($endReference)
             )
             ->willReturn($this->commits(20))
         ;
 
-        $pullRequestService = new Service\PullRequest(
-            $commitService,
+        $provider = new Provider\PullRequest(
+            $commitProvider,
             $this->pullRequestRepository()
         );
 
-        $pullRequests = $pullRequestService->pullRequests(
-            $userName,
-            $repository,
-            $startSha,
-            $endSha
+        $pullRequests = $provider->items(
+            $vendor,
+            $package,
+            $startReference,
+            $endReference
         );
 
         $this->assertSame([], $pullRequests);
@@ -87,12 +97,12 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
 
     public function testPullRequestsFetchesPullRequestIfMergeCommitWasFound()
     {
-        $userName = 'foo';
-        $repository = 'bar';
-        $startSha = 'ad77125';
-        $endSha = '7fc1c4f';
+        $vendor = 'foo';
+        $package = 'bar';
+        $startReference = 'ad77125';
+        $endReference = '7fc1c4f';
 
-        $commitService = $this->commitService();
+        $commitProvider = $this->commitProvider();
 
         $pullRequest = new Entity\PullRequest(
             9000,
@@ -107,14 +117,14 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             )
         );
 
-        $commitService
+        $commitProvider
             ->expects($this->once())
-            ->method('range')
+            ->method('items')
             ->with(
-                $this->equalTo($userName),
-                $this->equalTo($repository),
-                $this->equalTo($startSha),
-                $this->equalTo($endSha)
+                $this->equalTo($vendor),
+                $this->equalTo($package),
+                $this->equalTo($startReference),
+                $this->equalTo($endReference)
             )
             ->willReturn([
                 $mergeCommit,
@@ -127,23 +137,23 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('show')
             ->with(
-                $this->equalTo($userName),
-                $this->equalTo($repository),
+                $this->equalTo($vendor),
+                $this->equalTo($package),
                 $this->equalTo($pullRequest->id())
             )
             ->willReturn($pullRequest)
         ;
 
-        $pullRequestService = new Service\PullRequest(
-            $commitService,
+        $provider = new Provider\PullRequest(
+            $commitProvider,
             $pullRequestRepository
         );
 
-        $pullRequests = $pullRequestService->pullRequests(
-            $userName,
-            $repository,
-            $startSha,
-            $endSha
+        $pullRequests = $provider->items(
+            $vendor,
+            $package,
+            $startReference,
+            $endReference
         );
 
         $this->assertSame([$pullRequest], $pullRequests);
@@ -151,12 +161,12 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
 
     public function testPullRequestsHandlesMergeCommitWherePullRequestWasNotFound()
     {
-        $userName = 'foo';
-        $repository = 'bar';
-        $startSha = 'ad77125';
-        $endSha = '7fc1c4f';
+        $vendor = 'foo';
+        $package = 'bar';
+        $startReference = 'ad77125';
+        $endReference = '7fc1c4f';
 
-        $commitService = $this->commitService();
+        $commitProvider = $this->commitProvider();
 
         $id = 9000;
 
@@ -168,14 +178,14 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             )
         );
 
-        $commitService
+        $commitProvider
             ->expects($this->once())
-            ->method('range')
+            ->method('items')
             ->with(
-                $this->equalTo($userName),
-                $this->equalTo($repository),
-                $this->equalTo($startSha),
-                $this->equalTo($endSha)
+                $this->equalTo($vendor),
+                $this->equalTo($package),
+                $this->equalTo($startReference),
+                $this->equalTo($endReference)
             )
             ->willReturn([
                 $mergeCommit,
@@ -188,23 +198,23 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('show')
             ->with(
-                $this->equalTo($userName),
-                $this->equalTo($repository),
+                $this->equalTo($vendor),
+                $this->equalTo($package),
                 $this->equalTo($id)
             )
             ->willReturn(null)
         ;
 
-        $pullRequestService = new Service\PullRequest(
-            $commitService,
+        $provider = new Provider\PullRequest(
+            $commitProvider,
             $pullRequestRepository
         );
 
-        $pullRequests = $pullRequestService->pullRequests(
-            $userName,
-            $repository,
-            $startSha,
-            $endSha
+        $pullRequests = $provider->items(
+            $vendor,
+            $package,
+            $startReference,
+            $endReference
         );
 
         $this->assertSame([], $pullRequests);
@@ -213,9 +223,9 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
     /**
      * @return PHPUnit_Framework_MockObject_MockObject
      */
-    private function commitService()
+    private function commitProvider()
     {
-        return $this->getMockBuilder(Service\Commit::class)
+        return $this->getMockBuilder(Provider\Commit::class)
             ->disableOriginalConstructor()
             ->getMock()
         ;

@@ -17,8 +17,8 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
 
     public function testShowReturnsPullRequestEntityWithIdAndTitleOnSuccess()
     {
-        $userName = 'foo';
-        $repository = 'bar';
+        $vendor = 'foo';
+        $package = 'bar';
         $id = '9000';
 
         $api = $this->pullRequestApi();
@@ -29,8 +29,8 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('show')
             ->with(
-                $this->equalTo($userName),
-                $this->equalTo($repository),
+                $this->equalTo($vendor),
+                $this->equalTo($package),
                 $this->equalTo($id)
             )
             ->willReturn($this->responseFromPullRequest($expected))
@@ -39,8 +39,8 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
         $pullRequestRepository = new Repository\PullRequest($api);
 
         $pullRequest = $pullRequestRepository->show(
-            $userName,
-            $repository,
+            $vendor,
+            $package,
             $id
         );
 
@@ -52,8 +52,8 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
 
     public function testShowReturnsNullOnFailure()
     {
-        $userName = 'foo';
-        $repository = 'bar';
+        $vendor = 'foo';
+        $package = 'bar';
         $id = '9000';
 
         $api = $this->pullRequestApi();
@@ -62,8 +62,8 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('show')
             ->with(
-                $this->equalTo($userName),
-                $this->equalTo($repository),
+                $this->equalTo($vendor),
+                $this->equalTo($package),
                 $this->equalTo($id)
             )
             ->willReturn('snafu')
@@ -72,8 +72,8 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
         $pullRequestRepository = new Repository\PullRequest($api);
 
         $pullRequest = $pullRequestRepository->show(
-            $userName,
-            $repository,
+            $vendor,
+            $package,
             $id
         );
 

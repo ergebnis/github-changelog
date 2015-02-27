@@ -1,11 +1,11 @@
 <?php
 
-namespace Localheinz\ChangeLog\Service;
+namespace Localheinz\ChangeLog\Provider;
 
 use Localheinz\ChangeLog\Entity;
 use Localheinz\ChangeLog\Repository;
 
-class Commit
+class Commit implements ItemProvider
 {
     /**
      * @var Repository\Commit
@@ -18,21 +18,21 @@ class Commit
     }
 
     /**
-     * @param string $userName
-     * @param string $repository
+     * @param string $vendor
+     * @param string $package
      * @param string $startReference
      * @param string $endReference
      * @return Entity\Commit[]
      */
-    public function range($userName, $repository, $startReference, $endReference)
+    public function items($vendor, $package, $startReference, $endReference)
     {
         if ($startReference === $endReference) {
             return [];
         }
 
         $start = $this->repository->show(
-            $userName,
-            $repository,
+            $vendor,
+            $package,
             $startReference
         );
 
@@ -41,8 +41,8 @@ class Commit
         }
 
         $end = $this->repository->show(
-            $userName,
-            $repository,
+            $vendor,
+            $package,
             $endReference
         );
 
@@ -50,7 +50,7 @@ class Commit
             return [];
         }
 
-        $commits = $this->repository->all($userName, $repository, [
+        $commits = $this->repository->all($vendor, $package, [
             'sha' => $start->sha(),
         ]);
 
@@ -79,7 +79,7 @@ class Commit
             if (!count($commits)) {
                 $currentStart = $commit;
 
-                $commits = $this->repository->all($userName, $repository, [
+                $commits = $this->repository->all($vendor, $package, [
                     'sha' => $currentStart->sha(),
                 ]);
             }

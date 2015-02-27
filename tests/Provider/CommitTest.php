@@ -1,9 +1,9 @@
 <?php
 
-namespace Localheinz\ChangeLog\Test\Service;
+namespace Localheinz\ChangeLog\Test\Provider;
 
+use Localheinz\ChangeLog\Provider;
 use Localheinz\ChangeLog\Repository;
-use Localheinz\ChangeLog\Service;
 use Localheinz\ChangeLog\Test\Util\DataProviderTrait;
 use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
@@ -12,13 +12,19 @@ class CommitTest extends PHPUnit_Framework_TestCase
 {
     use DataProviderTrait;
 
-    public function testRangeDoesNotFetchCommitsIfStartAndEndReferencesAreTheSame()
+    public function testImplementsProvidesItemsInterface()
     {
-        $userName = 'foo';
-        $repository = 'bar';
-        $startSha = 'ad77125';
+        $provider = new Provider\Commit($this->commitRepository());
 
-        $endSha = $startSha;
+        $this->assertInstanceOf(Provider\ItemProvider::class, $provider);
+    }
+
+    public function testItemsDoesNotFetchCommitsIfStartAndEndReferencesAreTheSame()
+    {
+        $vendor = 'foo';
+        $package = 'bar';
+        $startReference = 'ad77125';
+        $endReference = $startReference;
 
         $commitRepository = $this->commitRepository();
 
@@ -27,24 +33,24 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->method($this->anything())
         ;
 
-        $service = new Service\Commit($commitRepository);
+        $provider = new Provider\Commit($commitRepository);
 
-        $commits = $service->range(
-            $userName,
-            $repository,
-            $startSha,
-            $endSha
+        $commits = $provider->items(
+            $vendor,
+            $package,
+            $startReference,
+            $endReference
         );
 
         $this->assertSame([], $commits);
     }
 
-    public function testRangeDoesNotFetchCommitsIfStartCommitCouldNotBeFound()
+    public function testItemsDoesNotFetchCommitsIfStartCommitCouldNotBeFound()
     {
-        $userName = 'foo';
-        $repository = 'bar';
-        $startSha = 'ad77125';
-        $endSha = '7fc1c4f';
+        $vendor = 'foo';
+        $package = 'bar';
+        $startReference = 'ad77125';
+        $endReference = '7fc1c4f';
 
         $commitRepository = $this->commitRepository();
 
@@ -52,9 +58,9 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->expects($this->at(0))
             ->method('show')
             ->with(
-                $this->equalTo($userName),
-                $this->equalTo($repository),
-                $this->equalTo($startSha)
+                $this->equalTo($vendor),
+                $this->equalTo($package),
+                $this->equalTo($startReference)
             )
             ->willReturn(null)
         ;
@@ -64,24 +70,24 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->method('all')
         ;
 
-        $service = new Service\Commit($commitRepository);
+        $provider = new Provider\Commit($commitRepository);
 
-        $commits = $service->range(
-            $userName,
-            $repository,
-            $startSha,
-            $endSha
+        $commits = $provider->items(
+            $vendor,
+            $package,
+            $startReference,
+            $endReference
         );
 
         $this->assertSame([], $commits);
     }
 
-    public function testRangeDoesNotFetchCommitsIfEndCommitCouldNotBeFound()
+    public function testItemsDoesNotFetchCommitsIfEndCommitCouldNotBeFound()
     {
-        $userName = 'foo';
-        $repository = 'bar';
-        $startSha = 'ad77125';
-        $endSha = '7fc1c4f';
+        $vendor = 'foo';
+        $package = 'bar';
+        $startReference = 'ad77125';
+        $endReference = '7fc1c4f';
 
         $commitRepository = $this->commitRepository();
 
@@ -89,9 +95,9 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->expects($this->at(0))
             ->method('show')
             ->with(
-                $this->equalTo($userName),
-                $this->equalTo($repository),
-                $this->equalTo($startSha)
+                $this->equalTo($vendor),
+                $this->equalTo($package),
+                $this->equalTo($startReference)
             )
             ->willReturn($this->commit())
         ;
@@ -100,9 +106,9 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->expects($this->at(1))
             ->method('show')
             ->with(
-                $this->equalTo($userName),
-                $this->equalTo($repository),
-                $this->equalTo($endSha)
+                $this->equalTo($vendor),
+                $this->equalTo($package),
+                $this->equalTo($endReference)
             )
             ->willReturn(null)
         ;
@@ -112,24 +118,24 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->method('all')
         ;
 
-        $service = new Service\Commit($commitRepository);
+        $provider = new Provider\Commit($commitRepository);
 
-        $commits = $service->range(
-            $userName,
-            $repository,
-            $startSha,
-            $endSha
+        $commits = $provider->items(
+            $vendor,
+            $package,
+            $startReference,
+            $endReference
         );
 
         $this->assertSame([], $commits);
     }
 
-    public function testRangeFetchesCommitsUsingShaFromStartCommit()
+    public function testItemsFetchesCommitsUsingShaFromStartCommit()
     {
-        $userName = 'foo';
-        $repository = 'bar';
-        $startSha = 'ad77125';
-        $endSha = '7fc1c4f';
+        $vendor = 'foo';
+        $package = 'bar';
+        $startReference = 'ad77125';
+        $endReference = '7fc1c4f';
 
         $commitRepository = $this->commitRepository();
 
@@ -139,9 +145,9 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->expects($this->at(0))
             ->method('show')
             ->with(
-                $this->equalTo($userName),
-                $this->equalTo($repository),
-                $this->equalTo($startSha)
+                $this->equalTo($vendor),
+                $this->equalTo($package),
+                $this->equalTo($startReference)
             )
             ->willReturn($startCommit)
         ;
@@ -150,9 +156,9 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->expects($this->at(1))
             ->method('show')
             ->with(
-                $this->equalTo($userName),
-                $this->equalTo($repository),
-                $this->equalTo($endSha)
+                $this->equalTo($vendor),
+                $this->equalTo($package),
+                $this->equalTo($endReference)
             )
             ->willReturn($this->commit())
         ;
@@ -160,27 +166,27 @@ class CommitTest extends PHPUnit_Framework_TestCase
         $commitRepository
             ->expects($this->once())
             ->method('all')
-            ->with($this->equalTo($userName), $this->equalTo($repository), $this->equalTo([
+            ->with($this->equalTo($vendor), $this->equalTo($package), $this->equalTo([
                 'sha' => $startCommit->sha(),
             ]))
         ;
 
-        $service = new Service\Commit($commitRepository);
+        $provider = new Provider\Commit($commitRepository);
 
-        $service->range(
-            $userName,
-            $repository,
-            $startSha,
-            $endSha
+        $provider->items(
+            $vendor,
+            $package,
+            $startReference,
+            $endReference
         );
     }
 
-    public function testRangeReturnsArrayOfCommitsFromStartToEndExcludingStart()
+    public function testItemsReturnsArrayOfCommitsFromStartToEndExcludingStart()
     {
-        $userName = 'foo';
-        $repository = 'bar';
-        $startSha = 'ad77125';
-        $endSha = '7fc1c4f';
+        $vendor = 'foo';
+        $package = 'bar';
+        $startReference = 'ad77125';
+        $endReference = '7fc1c4f';
 
         $commitRepository = $this->commitRepository();
 
@@ -190,9 +196,9 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->expects($this->at(0))
             ->method('show')
             ->with(
-                $this->equalTo($userName),
-                $this->equalTo($repository),
-                $this->equalTo($startSha)
+                $this->equalTo($vendor),
+                $this->equalTo($package),
+                $this->equalTo($startReference)
             )
             ->willReturn($startCommit)
         ;
@@ -203,9 +209,9 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->expects($this->at(1))
             ->method('show')
             ->with(
-                $this->equalTo($userName),
-                $this->equalTo($repository),
-                $this->equalTo($endSha)
+                $this->equalTo($vendor),
+                $this->equalTo($package),
+                $this->equalTo($endReference)
             )
             ->willReturn($endCommit)
         ;
@@ -234,8 +240,8 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('all')
             ->with(
-                $this->equalTo($userName),
-                $this->equalTo($repository),
+                $this->equalTo($vendor),
+                $this->equalTo($package),
                 $this->equalTo([
                     'sha' => $startCommit->sha(),
                 ])
@@ -243,13 +249,13 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->willReturn($allCommits)
         ;
 
-        $service = new Service\Commit($commitRepository);
+        $provider = new Provider\Commit($commitRepository);
 
-        $commits = $service->range(
-            $userName,
-            $repository,
-            $startSha,
-            $endSha
+        $commits = $provider->items(
+            $vendor,
+            $package,
+            $startReference,
+            $endReference
         );
 
         $this->assertCount(count($expectedCommits), $commits);
@@ -260,12 +266,12 @@ class CommitTest extends PHPUnit_Framework_TestCase
         }
     }
 
-    public function testRangeFetchesMoreCommitsIfEndIsNotContainedInFirstBatch()
+    public function testItemsFetchesMoreCommitsIfEndIsNotContainedInFirstBatch()
     {
-        $userName = 'foo';
-        $repository = 'bar';
-        $startSha = 'ad77125';
-        $endSha = '7fc1c4f';
+        $vendor = 'foo';
+        $package = 'bar';
+        $startReference = 'ad77125';
+        $endReference = '7fc1c4f';
 
         $commitRepository = $this->commitRepository();
 
@@ -275,9 +281,9 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->expects($this->at(0))
             ->method('show')
             ->with(
-                $this->equalTo($userName),
-                $this->equalTo($repository),
-                $this->equalTo($startSha)
+                $this->equalTo($vendor),
+                $this->equalTo($package),
+                $this->equalTo($startReference)
             )
             ->willReturn($startCommit)
         ;
@@ -288,9 +294,9 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->expects($this->at(1))
             ->method('show')
             ->with(
-                $this->equalTo($userName),
-                $this->equalTo($repository),
-                $this->equalTo($endSha)
+                $this->equalTo($vendor),
+                $this->equalTo($package),
+                $this->equalTo($endReference)
             )
             ->willReturn($endCommit)
         ;
@@ -326,8 +332,8 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->expects($this->at(2))
             ->method('all')
             ->with(
-                $this->equalTo($userName),
-                $this->equalTo($repository),
+                $this->equalTo($vendor),
+                $this->equalTo($package),
                 $this->equalTo([
                     'sha' => $startCommit->sha(),
                 ])
@@ -339,8 +345,8 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->expects($this->at(3))
             ->method('all')
             ->with(
-                $this->equalTo($userName),
-                $this->equalTo($repository),
+                $this->equalTo($vendor),
+                $this->equalTo($package),
                 $this->equalTo([
                     'sha' => $lastCommitFromFirstBatch->sha(),
                 ])
@@ -348,13 +354,13 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->willReturn($secondBatch)
         ;
 
-        $service = new Service\Commit($commitRepository);
+        $provider = new Provider\Commit($commitRepository);
 
-        $commits = $service->range(
-            $userName,
-            $repository,
-            $startSha,
-            $endSha
+        $commits = $provider->items(
+            $vendor,
+            $package,
+            $startReference,
+            $endReference
         );
 
         $this->assertCount(count($expectedCommits), $commits);
