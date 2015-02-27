@@ -290,7 +290,7 @@ class CommitsTest extends PHPUnit_Framework_TestCase
         }
     }
 
-    public function testRangeRequeriesIfEndIsNotContainedInFirstBatch()
+    public function testRangeReQueriesIfEndIsNotContainedInFirstBatch()
     {
         $userName = 'foo';
         $repository = 'bar';
