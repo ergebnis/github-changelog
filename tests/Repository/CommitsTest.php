@@ -29,7 +29,7 @@ class CommitsTest extends PHPUnit_Framework_TestCase
         unset($this->commitTemplate);
     }
 
-    public function testCommitReturnsCommitEntityWithShaAndMessageOnSuccess()
+    public function testShowReturnsCommitEntityWithShaAndMessageOnSuccess()
     {
         $userName = 'foo';
         $repository = 'bar';
@@ -64,7 +64,7 @@ class CommitsTest extends PHPUnit_Framework_TestCase
         $this->assertSame($expectedCommit->message, $commit->message());
     }
 
-    public function testCommitReturnsNullOnFailure()
+    public function testShowReturnsNullOnFailure()
     {
         $userName = 'foo';
         $repository = 'bar';
