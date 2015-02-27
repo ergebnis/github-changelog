@@ -1,6 +1,6 @@
 <?php
 
-namespace Localheinz\ChangeLog\Test;
+namespace Localheinz\ChangeLog\Test\Service;
 
 use Localheinz\ChangeLog;
 use Localheinz\ChangeLog\Entity;
@@ -8,91 +8,9 @@ use Localheinz\ChangeLog\Test\Util\FakerTrait;
 use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
 
-class BuilderTest extends PHPUnit_Framework_TestCase
+class PullRequestTest extends PHPUnit_Framework_TestCase
 {
     use FakerTrait;
-
-    public function testFluentInterface()
-    {
-        $builder = new ChangeLog\Builder(
-            $this->commitService(),
-            $this->pullRequestRepository()
-        );
-
-        $this->assertSame($builder, $builder->userName('foo'));
-        $this->assertSame($builder, $builder->repository('bar'));
-        $this->assertSame($builder, $builder->startSha('ad77125'));
-        $this->assertSame($builder, $builder->endSha('7fc1c4f'));
-    }
-
-    /**
-     * @expectedException \BadMethodCallException
-     * @expectedExceptionMessage User needs to be specified
-     */
-    public function testPullRequestsThrowsBadMethodCallExceptionIfUserHasNotBeenSet()
-    {
-        $builder = new ChangeLog\Builder(
-            $this->commitService(),
-            $this->pullRequestRepository()
-        );
-
-        $builder->pullRequests();
-    }
-
-    /**
-     * @expectedException \BadMethodCallException
-     * @expectedExceptionMessage Repository needs to be specified
-     */
-    public function testPullRequestsThrowsBadMethodCallExceptionIfRepositoryHasNotBeenSet()
-    {
-        $builder = new ChangeLog\Builder(
-            $this->commitService(),
-            $this->pullRequestRepository()
-        );
-
-        $builder->userName('foo');
-
-        $builder->pullRequests();
-    }
-
-    /**
-     * @expectedException \BadMethodCallException
-     * @expectedExceptionMessage Start reference needs to be specified
-     */
-    public function testPullRequestsThrowsBadMethodCallExceptionIfStartReferenceHasNotBeenSet()
-    {
-        $builder = new ChangeLog\Builder(
-            $this->commitService(),
-            $this->pullRequestRepository()
-        );
-
-        $builder
-            ->userName('foo')
-            ->repository('bar')
-        ;
-
-        $builder->pullRequests();
-    }
-
-    /**
-     * @expectedException \BadMethodCallException
-     * @expectedExceptionMessage End reference needs to be specified
-     */
-    public function testPullRequestsThrowsBadMethodCallExceptionIfEndReferenceHasNotBeenSet()
-    {
-        $builder = new ChangeLog\Builder(
-            $this->commitService(),
-            $this->pullRequestRepository()
-        );
-
-        $builder
-            ->userName('foo')
-            ->repository('bar')
-            ->startSha('ad77125')
-        ;
-
-        $builder->pullRequests();
-    }
 
     public function testPullRequestsReturnsEmptyArrayIfNoCommitsWereFound()
     {
@@ -115,19 +33,19 @@ class BuilderTest extends PHPUnit_Framework_TestCase
             ->willReturn([])
         ;
 
-        $builder = new ChangeLog\Builder(
+        $builder = new ChangeLog\Service\PullRequest(
             $commitService,
             $this->pullRequestRepository()
         );
 
-        $builder
-            ->userName($userName)
-            ->repository($repository)
-            ->startSha($startSha)
-            ->endSha($endSha)
-        ;
+        $pullRequests = $builder->pullRequests(
+            $userName,
+            $repository,
+            $startSha,
+            $endSha
+        );
 
-        $this->assertSame([], $builder->pullRequests());
+        $this->assertSame([], $pullRequests);
     }
 
     public function testPullRequestsReturnsEmptyArrayIfNoMergeCommitsWereFound()
@@ -155,19 +73,19 @@ class BuilderTest extends PHPUnit_Framework_TestCase
             ->willReturn($commits)
         ;
 
-        $builder = new ChangeLog\Builder(
+        $builder = new ChangeLog\Service\PullRequest(
             $commitService,
             $this->pullRequestRepository()
         );
 
-        $builder
-            ->userName($userName)
-            ->repository($repository)
-            ->startSha($startSha)
-            ->endSha($endSha)
-        ;
+        $pullRequests = $builder->pullRequests(
+            $userName,
+            $repository,
+            $startSha,
+            $endSha
+        );
 
-        $this->assertSame([], $builder->pullRequests());
+        $this->assertSame([], $pullRequests);
     }
 
     public function testPullRequestsFetchesPullRequestIfMergeCommitWasFound()
@@ -219,19 +137,19 @@ class BuilderTest extends PHPUnit_Framework_TestCase
             ->willReturn($pullRequest)
         ;
 
-        $builder = new ChangeLog\Builder(
+        $builder = new ChangeLog\Service\PullRequest(
             $commitService,
             $pullRequestRepository
         );
 
-        $builder
-            ->userName($userName)
-            ->repository($repository)
-            ->startSha($startSha)
-            ->endSha($endSha)
-        ;
+        $pullRequests = $builder->pullRequests(
+            $userName,
+            $repository,
+            $startSha,
+            $endSha
+        );
 
-        $this->assertSame([$pullRequest], $builder->pullRequests());
+        $this->assertSame([$pullRequest], $pullRequests);
     }
 
     public function testPullRequestsHandlesMergeCommitWherePullRequestWasNotFound()
@@ -280,19 +198,19 @@ class BuilderTest extends PHPUnit_Framework_TestCase
             ->willReturn(null)
         ;
 
-        $builder = new ChangeLog\Builder(
+        $builder = new ChangeLog\Service\PullRequest(
             $commitService,
             $pullRequestRepository
         );
 
-        $builder
-            ->userName($userName)
-            ->repository($repository)
-            ->startSha($startSha)
-            ->endSha($endSha)
-        ;
+        $pullRequests = $builder->pullRequests(
+            $userName,
+            $repository,
+            $startSha,
+            $endSha
+        );
 
-        $this->assertSame([], $builder->pullRequests());
+        $this->assertSame([], $pullRequests);
     }
 
     /**
