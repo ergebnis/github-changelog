@@ -10,7 +10,7 @@ class PullRequest implements ItemProvider
     /**
      * @var Commit
      */
-    private $commitService;
+    private $commitProvider;
 
     /**
      * @var Repository\PullRequest
@@ -18,12 +18,12 @@ class PullRequest implements ItemProvider
     private $pullRequestRepository;
 
     /**
-     * @param Commit $commitService
+     * @param Commit $commitProvider
      * @param Repository\PullRequest $pullRequestRepository
      */
-    public function __construct(Commit $commitService, Repository\PullRequest $pullRequestRepository)
+    public function __construct(Commit $commitProvider, Repository\PullRequest $pullRequestRepository)
     {
-        $this->commitService = $commitService;
+        $this->commitProvider = $commitProvider;
         $this->pullRequestRepository = $pullRequestRepository;
     }
 
@@ -36,7 +36,7 @@ class PullRequest implements ItemProvider
      */
     public function items($vendor, $package, $startReference, $endReference)
     {
-        $commits = $this->commitService->items(
+        $commits = $this->commitProvider->items(
             $vendor,
             $package,
             $startReference,
