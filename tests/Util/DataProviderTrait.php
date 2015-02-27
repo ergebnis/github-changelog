@@ -49,19 +49,10 @@ trait DataProviderTrait
     {
         $commits = [];
 
-        $this->addCommits($commits, $count);
-
-        return $commits;
-    }
-
-    /**
-     * @param Entity\Commit[] $commits
-     * @param int $count
-     */
-    private function addCommits(&$commits, $count)
-    {
         for ($i = 0; $i < $count; $i++) {
             array_push($commits, $this->commit());
         }
+
+        return $commits;
     }
 }
