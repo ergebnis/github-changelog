@@ -5,7 +5,7 @@ namespace Localheinz\ChangeLog\Repository;
 use Github\Api;
 use Localheinz\ChangeLog\Entity;
 
-class Commit
+class Commits
 {
     /**
      * @var Api\Repository\Commits
@@ -26,7 +26,7 @@ class Commit
      * @param string $sha
      * @return Entity\Commit|null
      */
-    public function commit($userName, $repository, $sha)
+    public function show($userName, $repository, $sha)
     {
         $response = $this->commitApi->show(
             $userName,

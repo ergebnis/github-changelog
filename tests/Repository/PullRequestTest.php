@@ -39,7 +39,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
 
         $commitRepository
             ->expects($this->at(0))
-            ->method('commit')
+            ->method('show')
             ->with(
                 $this->equalTo($userName),
                 $this->equalTo($repository),
@@ -50,7 +50,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
 
         $commitRepository
             ->expects($this->at(1))
-            ->method('commit')
+            ->method('show')
             ->with(
                 $this->equalTo($userName),
                 $this->equalTo($repository),
@@ -84,7 +84,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
 
         $commitRepository
             ->expects($this->at(0))
-            ->method('commit')
+            ->method('show')
             ->with(
                 $this->equalTo($userName),
                 $this->equalTo($repository),
@@ -118,7 +118,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
 
         $commitRepository
             ->expects($this->at(0))
-            ->method('commit')
+            ->method('show')
             ->with(
                 $this->equalTo($userName),
                 $this->equalTo($repository),
@@ -129,7 +129,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
 
         $commitRepository
             ->expects($this->at(1))
-            ->method('commit')
+            ->method('show')
             ->with(
                 $this->equalTo($userName),
                 $this->equalTo($repository),
@@ -164,7 +164,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
 
         $commitRepository
             ->expects($this->at(0))
-            ->method('commit')
+            ->method('show')
             ->with(
                 $this->equalTo($userName),
                 $this->equalTo($repository),
@@ -177,7 +177,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
 
         $commitRepository
             ->expects($this->at(1))
-            ->method('commit')
+            ->method('show')
             ->with(
                 $this->equalTo($userName),
                 $this->equalTo($repository),
@@ -212,7 +212,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
      */
     private function commitRepository()
     {
-        return $this->getMockBuilder(Repository\Commit::class)
+        return $this->getMockBuilder(Repository\Commits::class)
             ->disableOriginalConstructor()
             ->getMock()
         ;

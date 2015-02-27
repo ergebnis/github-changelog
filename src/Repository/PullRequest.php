@@ -7,14 +7,14 @@ use Guzzle\Common\Exception\BadMethodCallException;
 class PullRequest
 {
     /**
-     * @var Commit
+     * @var Commits
      */
     private $commitRepository;
 
     /**
-     * @param Commit $commitRepository
+     * @param Commits $commitRepository
      */
-    public function __construct(Commit $commitRepository)
+    public function __construct(Commits $commitRepository)
     {
         $this->commitRepository = $commitRepository;
     }
@@ -32,7 +32,7 @@ class PullRequest
             return [];
         }
 
-        $startCommit = $this->commitRepository->commit(
+        $startCommit = $this->commitRepository->show(
             $userName,
             $repository,
             $startSha
@@ -42,7 +42,7 @@ class PullRequest
             throw new BadMethodCallException('Could not find start commit');
         }
 
-        $endCommit = $this->commitRepository->commit(
+        $endCommit = $this->commitRepository->show(
             $userName,
             $repository,
             $endSha

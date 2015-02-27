@@ -10,7 +10,7 @@ use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
 use stdClass;
 
-class CommitTest extends PHPUnit_Framework_TestCase
+class CommitsTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @var Faker\Generator
@@ -50,9 +50,9 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->willReturn($this->responseFromCommit($expectedCommit))
         ;
 
-        $commitRepository = new Repository\Commit($commitApi);
+        $commitRepository = new Repository\Commits($commitApi);
 
-        $commit = $commitRepository->commit(
+        $commit = $commitRepository->show(
             $userName,
             $repository,
             $sha
@@ -83,9 +83,9 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->willReturn('failure')
         ;
 
-        $commitRepository = new Repository\Commit($commitApi);
+        $commitRepository = new Repository\Commits($commitApi);
 
-        $commit = $commitRepository->commit(
+        $commit = $commitRepository->show(
             $userName,
             $repository,
             $sha
@@ -109,7 +109,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->method($this->anything())
         ;
 
-        $commitRepository = new Repository\Commit($this->commitApi());
+        $commitRepository = new Repository\Commits($this->commitApi());
 
         $commits = $commitRepository->commits(
             $userName,
@@ -142,7 +142,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
             )
         ;
 
-        $commitRepository = new Repository\Commit($commitApi);
+        $commitRepository = new Repository\Commits($commitApi);
 
         $commitRepository->commits(
             $userName,
@@ -174,7 +174,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->willReturn('failure')
         ;
 
-        $commitRepository = new Repository\Commit($commitApi);
+        $commitRepository = new Repository\Commits($commitApi);
 
         $commits = $commitRepository->commits(
             $userName,
@@ -227,7 +227,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->willReturn($this->responseFromCommits($commitsReturnedByGitHubApi))
         ;
 
-        $commitRepository = new Repository\Commit($commitApi);
+        $commitRepository = new Repository\Commits($commitApi);
 
         $commits = $commitRepository->commits(
             $userName,
@@ -318,7 +318,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->willReturn($this->responseFromCommits($secondBatch))
         ;
 
-        $commitRepository = new Repository\Commit($commitApi);
+        $commitRepository = new Repository\Commits($commitApi);
 
         $commits = $commitRepository->commits(
             $userName,
