@@ -10,7 +10,7 @@ class BuilderTest extends PHPUnit_Framework_TestCase
 {
     public function testFluentInterface()
     {
-        $builder = new ChangeLog\Builder($this->pullRequestRepository());
+        $builder = new ChangeLog\Builder($this->commitRepository());
 
         $this->assertSame($builder, $builder->userName('foo'));
         $this->assertSame($builder, $builder->repository('bar'));
@@ -24,7 +24,7 @@ class BuilderTest extends PHPUnit_Framework_TestCase
      */
     public function testPullRequestsThrowsBadMethodCallExceptionIfUserHasNotBeenSet()
     {
-        $builder = new ChangeLog\Builder($this->pullRequestRepository());
+        $builder = new ChangeLog\Builder($this->commitRepository());
 
         $builder->pullRequests();
     }
@@ -35,7 +35,7 @@ class BuilderTest extends PHPUnit_Framework_TestCase
      */
     public function testPullRequestsThrowsBadMethodCallExceptionIfRepositoryHasNotBeenSet()
     {
-        $builder = new ChangeLog\Builder($this->pullRequestRepository());
+        $builder = new ChangeLog\Builder($this->commitRepository());
 
         $builder->userName('foo');
 
@@ -48,7 +48,7 @@ class BuilderTest extends PHPUnit_Framework_TestCase
      */
     public function testPullRequestsThrowsBadMethodCallExceptionIfStartReferenceHasNotBeenSet()
     {
-        $builder = new ChangeLog\Builder($this->pullRequestRepository());
+        $builder = new ChangeLog\Builder($this->commitRepository());
 
         $builder
             ->userName('foo')
@@ -64,7 +64,7 @@ class BuilderTest extends PHPUnit_Framework_TestCase
      */
     public function testPullRequestsThrowsBadMethodCallExceptionIfEndReferenceHasNotBeenSet()
     {
-        $builder = new ChangeLog\Builder($this->pullRequestRepository());
+        $builder = new ChangeLog\Builder($this->commitRepository());
 
         $builder
             ->userName('foo')
@@ -75,47 +75,12 @@ class BuilderTest extends PHPUnit_Framework_TestCase
         $builder->pullRequests();
     }
 
-    public function testPullRequestsDelegatesToPullRequestRepository()
-    {
-        $user = 'foo';
-        $repository = 'bar';
-        $start = 'ad77125';
-        $end = '7fc1c4f';
-
-        $pullRequestRepository = $this->pullRequestRepository();
-
-        $pullRequests = 'baz';
-
-        $pullRequestRepository
-            ->expects($this->once())
-            ->method('pullRequests')
-            ->with(
-                $this->equalTo($user),
-                $this->equalTo($repository),
-                $this->equalTo($start),
-                $this->equalTo($end)
-            )
-            ->willReturn($pullRequests)
-        ;
-
-        $builder = new ChangeLog\Builder($pullRequestRepository);
-
-        $builder
-            ->userName($user)
-            ->repository($repository)
-            ->startSha($start)
-            ->endSha($end)
-        ;
-
-        $this->assertSame($pullRequests, $builder->pullRequests());
-    }
-
     /**
      * @return PHPUnit_Framework_MockObject_MockObject
      */
-    private function pullRequestRepository()
+    private function commitRepository()
     {
-        return $this->getMockBuilder(ChangeLog\Repository\PullRequest::class)
+        return $this->getMockBuilder(ChangeLog\Repository\Commits::class)
             ->disableOriginalConstructor()
             ->getMock()
         ;

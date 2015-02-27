@@ -7,9 +7,9 @@ use BadMethodCallException;
 class Builder
 {
     /**
-     * @var Repository\PullRequest
+     * @var Repository\Commits
      */
-    private $pullRequestRepository;
+    private $commitRepository;
 
     /**
      * @var string
@@ -32,11 +32,11 @@ class Builder
     private $endSha;
 
     /**
-     * @param Repository\PullRequest $pullRequestRepository
+     * @param Repository\Commits $commitRepository
      */
-    public function __construct(Repository\PullRequest $pullRequestRepository)
+    public function __construct(Repository\Commits $commitRepository)
     {
-        $this->pullRequestRepository = $pullRequestRepository;
+        $this->commitRepository = $commitRepository;
     }
 
     /**
@@ -103,12 +103,5 @@ class Builder
         if (null === $this->endSha) {
             throw new BadMethodCallException('End reference needs to be specified');
         }
-
-        return $this->pullRequestRepository->pullRequests(
-            $this->userName,
-            $this->repository,
-            $this->startSha,
-            $this->endSha
-        );
     }
 }
