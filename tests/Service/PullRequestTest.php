@@ -234,15 +234,4 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             ->getMock()
         ;
     }
-
-    /**
-     * @param Entity\Commit[] $commits
-     * @param int $count
-     */
-    private function addCommits(&$commits, $count)
-    {
-        for ($i = 0; $i < $count; $i++) {
-            array_push($commits, $this->commit());
-        }
-    }
 }

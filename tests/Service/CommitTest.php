@@ -2,7 +2,6 @@
 
 namespace Localheinz\ChangeLog\Test\Service;
 
-use Localheinz\ChangeLog\Entity;
 use Localheinz\ChangeLog\Repository;
 use Localheinz\ChangeLog\Service;
 use Localheinz\ChangeLog\Test\Util\DataProviderTrait;
@@ -378,16 +377,5 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock()
         ;
-    }
-
-    /**
-     * @param Entity\Commit[] $commits
-     * @param int $count
-     */
-    private function addCommits(&$commits, $count)
-    {
-        for ($i = 0; $i < $count; $i++) {
-            array_push($commits, $this->commit());
-        }
     }
 }
