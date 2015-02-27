@@ -1,6 +1,6 @@
 <?php
 
-namespace Localheinz\ChangeLog\Test\GitHub;
+namespace Localheinz\ChangeLog\Test;
 
 use Localheinz\ChangeLog;
 use Localheinz\ChangeLog\Entity;
