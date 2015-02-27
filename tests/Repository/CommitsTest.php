@@ -94,6 +94,49 @@ class CommitsTest extends PHPUnit_Framework_TestCase
         $this->assertNull($commit);
     }
 
+    public function testAllReturnsArrayOfCommitEntities()
+    {
+        $userName = 'foo';
+        $repository = 'bar';
+        $sha = 'ad77125';
+
+        $commitApi = $this->commitApi();
+
+        $expectedCommits = [];
+        for ($i = 0; $i < 15; $i++) {
+            array_push($expectedCommits, $this->commitData());
+        }
+
+        $commitApi
+            ->expects($this->once())
+            ->method('all')
+            ->with(
+                $this->equalTo($userName),
+                $this->equalTo($repository),
+                $this->equalTo([
+                    'sha' => $sha,
+                ])
+            )
+            ->willReturn($this->responseFromCommits($expectedCommits))
+        ;
+
+        $commitRepository = new Repository\Commits($commitApi);
+
+        $commits = $commitRepository->all($userName, $repository, [
+            'sha' => $sha,
+        ]);
+
+        $this->assertCount(count($expectedCommits), $commits);
+
+        foreach ($commits as $commit) {
+            $expectedCommit = array_shift($expectedCommits);
+
+            $this->assertInstanceOf(Entity\Commit::class, $commit);
+            $this->assertSame($expectedCommit->sha, $commit->sha());
+            $this->assertSame($expectedCommit->message, $commit->message());
+        }
+    }
+
     public function testCommitsDoesNotQueryGitHubApiWhenStartAndEndReferencesAreTheSame()
     {
         $userName = 'foo';
