@@ -53,6 +53,10 @@ class Commit
      */
     public function commits($userName, $repository, $startSha, $endSha)
     {
+        if ($startSha === $endSha) {
+            return [];
+        }
+
         $response = $this->commitApi->all($userName, $repository, [
             'sha' => $startSha,
         ]);

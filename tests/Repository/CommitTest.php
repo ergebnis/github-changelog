@@ -94,13 +94,20 @@ class CommitTest extends PHPUnit_Framework_TestCase
         $this->assertNull($commit);
     }
 
-    public function testCommitsReturnsEmptyArrayWhenStartAndEndAreTheSame()
+    public function testCommitsDoesNotQueryGitHubApiWhenStartAndEndReferencesAreTheSame()
     {
         $userName = 'foo';
         $repository = 'bar';
         $startSha = 'ad77125';
 
         $endSha = $startSha;
+
+        $commitApi = $this->commitApi();
+
+        $commitApi
+            ->expects($this->never())
+            ->method($this->anything())
+        ;
 
         $commitRepository = new Repository\Commit($this->commitApi());
 
