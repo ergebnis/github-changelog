@@ -354,10 +354,16 @@ class CommitTest extends PHPUnit_Framework_TestCase
     {
         $commitTemplate = file_get_contents(__DIR__ . '/_response/commit.json');
 
-        $body = sprintf(
-            $commitTemplate,
-            $commit->sha,
-            $commit->message
+        $body = str_replace(
+            [
+                '%sha%',
+                '%message%',
+            ],
+            [
+                $commit->sha,
+                $commit->message,
+            ],
+            $commitTemplate
         );
 
         return json_decode(
