@@ -5,13 +5,13 @@ namespace Localheinz\ChangeLog\Test\Service;
 use Localheinz\ChangeLog\Entity;
 use Localheinz\ChangeLog\Repository;
 use Localheinz\ChangeLog\Service;
-use Localheinz\ChangeLog\Test\Util\FakerTrait;
+use Localheinz\ChangeLog\Test\Util\DataProviderTrait;
 use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
 
 class CommitTest extends PHPUnit_Framework_TestCase
 {
-    use FakerTrait;
+    use DataProviderTrait;
 
     public function testRangeDoesNotFetchCommitsIfStartAndEndReferencesAreTheSame()
     {

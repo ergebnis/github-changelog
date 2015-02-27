@@ -4,13 +4,13 @@ namespace Localheinz\ChangeLog\Test\Service;
 
 use Localheinz\ChangeLog;
 use Localheinz\ChangeLog\Entity;
-use Localheinz\ChangeLog\Test\Util\FakerTrait;
+use Localheinz\ChangeLog\Test\Util\DataProviderTrait;
 use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
 
 class PullRequestTest extends PHPUnit_Framework_TestCase
 {
-    use FakerTrait;
+    use DataProviderTrait;
 
     public function testPullRequestsReturnsEmptyArrayIfNoCommitsWereFound()
     {

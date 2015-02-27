@@ -5,7 +5,7 @@ namespace Localheinz\ChangeLog\Test\Util;
 use Faker;
 use Localheinz\ChangeLog\Entity;
 
-trait FakerTrait
+trait DataProviderTrait
 {
     /**
      * @var Faker\Generator

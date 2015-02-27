@@ -6,14 +6,14 @@ use Faker;
 use Github\Api;
 use Localheinz\ChangeLog\Entity;
 use Localheinz\ChangeLog\Repository;
-use Localheinz\ChangeLog\Test\Util\FakerTrait;
+use Localheinz\ChangeLog\Test\Util\DataProviderTrait;
 use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
 use stdClass;
 
 class CommitTest extends PHPUnit_Framework_TestCase
 {
-    use FakerTrait;
+    use DataProviderTrait;
 
     public function testShowReturnsCommitEntityWithShaAndMessageOnSuccess()
     {
