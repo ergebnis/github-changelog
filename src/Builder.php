@@ -103,5 +103,14 @@ class Builder
         if (null === $this->endSha) {
             throw new BadMethodCallException('End reference needs to be specified');
         }
+
+        $this->commitService->range(
+            $this->userName,
+            $this->repository,
+            $this->startSha,
+            $this->endSha
+        );
+
+        return [];
     }
 }

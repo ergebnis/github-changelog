@@ -75,6 +75,39 @@ class BuilderTest extends PHPUnit_Framework_TestCase
         $builder->pullRequests();
     }
 
+    public function testPullRequestsReturnsEmptyArrayIfNoCommitsWereFound()
+    {
+        $userName = 'foo';
+        $repository = 'bar';
+        $startSha = 'ad77125';
+        $endSha = '7fc1c4f';
+
+        $commitService = $this->commitService();
+
+        $commitService
+            ->expects($this->once())
+            ->method('range')
+            ->with(
+                $this->equalTo($userName),
+                $this->equalTo($repository),
+                $this->equalTo($startSha),
+                $this->equalTo($endSha)
+            )
+            ->willReturn([])
+        ;
+
+        $builder = new ChangeLog\Builder($commitService);
+
+        $builder
+            ->userName($userName)
+            ->repository($repository)
+            ->startSha($startSha)
+            ->endSha($endSha)
+        ;
+
+        $this->assertSame([], $builder->pullRequests());
+    }
+
     /**
      * @return PHPUnit_Framework_MockObject_MockObject
      */
