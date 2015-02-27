@@ -80,6 +80,36 @@ class CommitTest extends PHPUnit_Framework_TestCase
         $this->assertNull($commit);
     }
 
+    public function testAllReturnsEmptyArrayOnFailure()
+    {
+        $userName = 'foo';
+        $repository = 'bar';
+        $sha = 'ad77125';
+
+        $commitApi = $this->commitApi();
+
+        $commitApi
+            ->expects($this->once())
+            ->method('all')
+            ->with(
+                $this->equalTo($userName),
+                $this->equalTo($repository),
+                $this->equalTo([
+                    'sha' => $sha,
+                ])
+            )
+            ->willReturn('snafu')
+        ;
+
+        $commitRepository = new Repository\Commit($commitApi);
+
+        $commits = $commitRepository->all($userName, $repository, [
+            'sha' => $sha,
+        ]);
+
+        $this->assertSame([], $commits);
+    }
+
     public function testAllReturnsArrayOfCommitEntities()
     {
         $userName = 'foo';
