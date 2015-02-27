@@ -18,26 +18,6 @@ class PullRequest
     private $pullRequestRepository;
 
     /**
-     * @var string
-     */
-    private $userName;
-
-    /**
-     * @var string
-     */
-    private $repository;
-
-    /**
-     * @var string
-     */
-    private $startSha;
-
-    /**
-     * @var string
-     */
-    private $endSha;
-
-    /**
      * @param Commit $commitService
      * @param Repository\PullRequest $pullRequestRepository
      */
