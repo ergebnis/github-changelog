@@ -134,7 +134,7 @@ class BuilderTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($startSha),
                 $this->equalTo($endSha)
             )
-            ->willReturn([])
+            ->willReturn($commits)
         ;
 
         $builder = new ChangeLog\Builder($commitService);
