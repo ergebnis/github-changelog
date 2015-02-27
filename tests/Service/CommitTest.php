@@ -374,7 +374,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
      */
     private function commitRepository()
     {
-        return $this->getMockBuilder(Repository\Commits::class)
+        return $this->getMockBuilder(Repository\Commit::class)
             ->disableOriginalConstructor()
             ->getMock()
         ;

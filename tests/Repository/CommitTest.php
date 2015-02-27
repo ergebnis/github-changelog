@@ -11,7 +11,7 @@ use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
 use stdClass;
 
-class CommitsTest extends PHPUnit_Framework_TestCase
+class CommitTest extends PHPUnit_Framework_TestCase
 {
     use FakerTrait;
 
@@ -36,7 +36,7 @@ class CommitsTest extends PHPUnit_Framework_TestCase
             ->willReturn($this->responseFromCommit($expectedCommit))
         ;
 
-        $commitRepository = new Repository\Commits($commitApi);
+        $commitRepository = new Repository\Commit($commitApi);
 
         $commit = $commitRepository->show(
             $userName,
@@ -69,7 +69,7 @@ class CommitsTest extends PHPUnit_Framework_TestCase
             ->willReturn('failure')
         ;
 
-        $commitRepository = new Repository\Commits($commitApi);
+        $commitRepository = new Repository\Commit($commitApi);
 
         $commit = $commitRepository->show(
             $userName,
@@ -106,7 +106,7 @@ class CommitsTest extends PHPUnit_Framework_TestCase
             ->willReturn($this->responseFromCommits($expectedCommits))
         ;
 
-        $commitRepository = new Repository\Commits($commitApi);
+        $commitRepository = new Repository\Commit($commitApi);
 
         $commits = $commitRepository->all($userName, $repository, [
             'sha' => $sha,

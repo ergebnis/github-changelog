@@ -8,11 +8,11 @@ use Localheinz\ChangeLog\Repository;
 class Commit
 {
     /**
-     * @var Repository\Commits
+     * @var Repository\Commit
      */
     private $repository;
 
-    public function __construct(Repository\Commits $repository)
+    public function __construct(Repository\Commit $repository)
     {
         $this->repository = $repository;
     }

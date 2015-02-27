@@ -5,7 +5,7 @@ namespace Localheinz\ChangeLog\Repository;
 use Github\Api;
 use Localheinz\ChangeLog\Entity;
 
-class Commits
+class Commit
 {
     /**
      * @var Api\Repository\Commits
