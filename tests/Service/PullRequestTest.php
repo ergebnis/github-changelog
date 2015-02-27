@@ -236,22 +236,6 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param string $sha
-     * @param string $message
-     * @return Entity\Commit
-     */
-    private function commit($sha = null, $message = null)
-    {
-        $sha = $sha ?: $this->faker()->unique()->sha1;
-        $message = $message ?: $this->faker()->unique()->sentence();
-
-        return new Entity\Commit(
-            $sha,
-            $message
-        );
-    }
-
-    /**
      * @param Entity\Commit[] $commits
      * @param int $count
      */
