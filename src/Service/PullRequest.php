@@ -2,7 +2,6 @@
 
 namespace Localheinz\ChangeLog\Service;
 
-use BadMethodCallException;
 use Localheinz\ChangeLog\Entity;
 use Localheinz\ChangeLog\Repository;
 
@@ -93,36 +92,24 @@ class PullRequest
     }
 
     /**
-     * @return array
+     * @param string $userName
+     * @param string $repository
+     * @param string $startSha
+     * @param string $endSha
+     * @return Entity\PullRequest[] array
      */
-    public function pullRequests()
+    public function pullRequests($userName, $repository, $startSha, $endSha)
     {
-        if (null === $this->userName) {
-            throw new BadMethodCallException('User needs to be specified');
-        }
-
-        if (null === $this->repository) {
-            throw new BadMethodCallException('Repository needs to be specified');
-        }
-
-        if (null === $this->startSha) {
-            throw new BadMethodCallException('Start reference needs to be specified');
-        }
-
-        if (null === $this->endSha) {
-            throw new BadMethodCallException('End reference needs to be specified');
-        }
-
         $commits = $this->commitService->range(
-            $this->userName,
-            $this->repository,
-            $this->startSha,
-            $this->endSha
+            $userName,
+            $repository,
+            $startSha,
+            $endSha
         );
 
         $pullRequests = [];
 
-        array_walk($commits, function (Entity\Commit $commit) use (&$pullRequests) {
+        array_walk($commits, function (Entity\Commit $commit) use (&$pullRequests, $userName, $repository) {
 
             if (0 === preg_match('/^Merge pull request #(?P<id>\d+)/', $commit->message(), $matches)) {
                 return;
@@ -131,8 +118,8 @@ class PullRequest
             $id = $matches['id'];
 
             $pullRequest = $this->pullRequestRepository->show(
-                $this->userName,
-                $this->repository,
+                $userName,
+                $repository,
                 $id
             );
 
