@@ -21,16 +21,16 @@ class Commit
     }
 
     /**
-     * @param string $userName
-     * @param string $repository
+     * @param string $vendor
+     * @param string $package
      * @param string $sha
      * @return Entity\Commit|null
      */
-    public function show($userName, $repository, $sha)
+    public function show($vendor, $package, $sha)
     {
         $response = $this->commitApi->show(
-            $userName,
-            $repository,
+            $vendor,
+            $package,
             $sha
         );
 
@@ -45,16 +45,16 @@ class Commit
     }
 
     /**
-     * @param string $userName
-     * @param string $repository
+     * @param string $vendor
+     * @param string $package
      * @param array $params
      * @return Entity\Commit[]
      */
-    public function all($userName, $repository, array $params = [])
+    public function all($vendor, $package, array $params = [])
     {
         $response = $this->commitApi->all(
-            $userName,
-            $repository,
+            $vendor,
+            $package,
             $params
         );
 

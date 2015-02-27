@@ -17,8 +17,8 @@ class CommitTest extends PHPUnit_Framework_TestCase
 
     public function testShowReturnsCommitEntityWithShaAndMessageOnSuccess()
     {
-        $userName = 'foo';
-        $repository = 'bar';
+        $vendor = 'foo';
+        $package = 'bar';
         $sha = 'ad77125';
 
         $api = $this->commitApi();
@@ -29,8 +29,8 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('show')
             ->with(
-                $this->equalTo($userName),
-                $this->equalTo($repository),
+                $this->equalTo($vendor),
+                $this->equalTo($package),
                 $this->equalTo($sha)
             )
             ->willReturn($this->responseFromCommit($expected))
@@ -39,8 +39,8 @@ class CommitTest extends PHPUnit_Framework_TestCase
         $commitRepository = new Repository\Commit($api);
 
         $commit = $commitRepository->show(
-            $userName,
-            $repository,
+            $vendor,
+            $package,
             $sha
         );
 
@@ -52,8 +52,8 @@ class CommitTest extends PHPUnit_Framework_TestCase
 
     public function testShowReturnsNullOnFailure()
     {
-        $userName = 'foo';
-        $repository = 'bar';
+        $vendor = 'foo';
+        $package = 'bar';
         $sha = 'ad77125';
 
         $api = $this->commitApi();
@@ -62,8 +62,8 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('show')
             ->with(
-                $this->equalTo($userName),
-                $this->equalTo($repository),
+                $this->equalTo($vendor),
+                $this->equalTo($package),
                 $this->equalTo($sha)
             )
             ->willReturn('failure')
@@ -72,8 +72,8 @@ class CommitTest extends PHPUnit_Framework_TestCase
         $commitRepository = new Repository\Commit($api);
 
         $commit = $commitRepository->show(
-            $userName,
-            $repository,
+            $vendor,
+            $package,
             $sha
         );
 
@@ -82,8 +82,8 @@ class CommitTest extends PHPUnit_Framework_TestCase
 
     public function testAllReturnsEmptyArrayOnFailure()
     {
-        $userName = 'foo';
-        $repository = 'bar';
+        $vendor = 'foo';
+        $package = 'bar';
         $sha = 'ad77125';
 
         $api = $this->commitApi();
@@ -92,8 +92,8 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('all')
             ->with(
-                $this->equalTo($userName),
-                $this->equalTo($repository),
+                $this->equalTo($vendor),
+                $this->equalTo($package),
                 $this->equalTo([
                     'sha' => $sha,
                 ])
@@ -103,7 +103,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
 
         $commitRepository = new Repository\Commit($api);
 
-        $commits = $commitRepository->all($userName, $repository, [
+        $commits = $commitRepository->all($vendor, $package, [
             'sha' => $sha,
         ]);
 
@@ -112,8 +112,8 @@ class CommitTest extends PHPUnit_Framework_TestCase
 
     public function testAllReturnsArrayOfCommitEntities()
     {
-        $userName = 'foo';
-        $repository = 'bar';
+        $vendor = 'foo';
+        $package = 'bar';
         $sha = 'ad77125';
 
         $api = $this->commitApi();
@@ -127,8 +127,8 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('all')
             ->with(
-                $this->equalTo($userName),
-                $this->equalTo($repository),
+                $this->equalTo($vendor),
+                $this->equalTo($package),
                 $this->equalTo([
                     'sha' => $sha,
                 ])
@@ -138,7 +138,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
 
         $commitRepository = new Repository\Commit($api);
 
-        $commits = $commitRepository->all($userName, $repository, [
+        $commits = $commitRepository->all($vendor, $package, [
             'sha' => $sha,
         ]);
 

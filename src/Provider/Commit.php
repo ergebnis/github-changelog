@@ -18,21 +18,21 @@ class Commit implements ItemProvider
     }
 
     /**
-     * @param string $userName
-     * @param string $repository
+     * @param string $vendor
+     * @param string $package
      * @param string $startReference
      * @param string $endReference
      * @return Entity\Commit[]
      */
-    public function items($userName, $repository, $startReference, $endReference)
+    public function items($vendor, $package, $startReference, $endReference)
     {
         if ($startReference === $endReference) {
             return [];
         }
 
         $start = $this->repository->show(
-            $userName,
-            $repository,
+            $vendor,
+            $package,
             $startReference
         );
 
@@ -41,8 +41,8 @@ class Commit implements ItemProvider
         }
 
         $end = $this->repository->show(
-            $userName,
-            $repository,
+            $vendor,
+            $package,
             $endReference
         );
 
@@ -50,7 +50,7 @@ class Commit implements ItemProvider
             return [];
         }
 
-        $commits = $this->repository->all($userName, $repository, [
+        $commits = $this->repository->all($vendor, $package, [
             'sha' => $start->sha(),
         ]);
 
@@ -79,7 +79,7 @@ class Commit implements ItemProvider
             if (!count($commits)) {
                 $currentStart = $commit;
 
-                $commits = $this->repository->all($userName, $repository, [
+                $commits = $this->repository->all($vendor, $package, [
                     'sha' => $currentStart->sha(),
                 ]);
             }

@@ -21,16 +21,16 @@ class PullRequest
     }
 
     /**
-     * @param string $userName
-     * @param string $repository
+     * @param string $vendor
+     * @param string $package
      * @param string $id
      * @return Entity\PullRequest|null
      */
-    public function show($userName, $repository, $id)
+    public function show($vendor, $package, $id)
     {
         $response = $this->api->show(
-            $userName,
-            $repository,
+            $vendor,
+            $package,
             $id
         );
 
