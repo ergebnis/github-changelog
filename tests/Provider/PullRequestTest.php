@@ -25,10 +25,10 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
 
     public function testPullRequestsReturnsEmptyArrayIfNoCommitsWereFound()
     {
-        $userName = 'foo';
-        $repository = 'bar';
-        $startSha = 'ad77125';
-        $endSha = '7fc1c4f';
+        $vendor = 'foo';
+        $package = 'bar';
+        $startReference = 'ad77125';
+        $endReference = '7fc1c4f';
 
         $commitProvider = $this->commitProvider();
 
@@ -36,10 +36,10 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('items')
             ->with(
-                $this->equalTo($userName),
-                $this->equalTo($repository),
-                $this->equalTo($startSha),
-                $this->equalTo($endSha)
+                $this->equalTo($vendor),
+                $this->equalTo($package),
+                $this->equalTo($startReference),
+                $this->equalTo($endReference)
             )
             ->willReturn([])
         ;
@@ -50,10 +50,10 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
         );
 
         $pullRequests = $provider->items(
-            $userName,
-            $repository,
-            $startSha,
-            $endSha
+            $vendor,
+            $package,
+            $startReference,
+            $endReference
         );
 
         $this->assertSame([], $pullRequests);
@@ -61,10 +61,10 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
 
     public function testPullRequestsReturnsEmptyArrayIfNoMergeCommitsWereFound()
     {
-        $userName = 'foo';
-        $repository = 'bar';
-        $startSha = 'ad77125';
-        $endSha = '7fc1c4f';
+        $vendor = 'foo';
+        $package = 'bar';
+        $startReference = 'ad77125';
+        $endReference = '7fc1c4f';
 
         $commitProvider = $this->commitProvider();
 
@@ -72,10 +72,10 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('items')
             ->with(
-                $this->equalTo($userName),
-                $this->equalTo($repository),
-                $this->equalTo($startSha),
-                $this->equalTo($endSha)
+                $this->equalTo($vendor),
+                $this->equalTo($package),
+                $this->equalTo($startReference),
+                $this->equalTo($endReference)
             )
             ->willReturn($this->commits(20))
         ;
@@ -86,10 +86,10 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
         );
 
         $pullRequests = $provider->items(
-            $userName,
-            $repository,
-            $startSha,
-            $endSha
+            $vendor,
+            $package,
+            $startReference,
+            $endReference
         );
 
         $this->assertSame([], $pullRequests);
@@ -97,10 +97,10 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
 
     public function testPullRequestsFetchesPullRequestIfMergeCommitWasFound()
     {
-        $userName = 'foo';
-        $repository = 'bar';
-        $startSha = 'ad77125';
-        $endSha = '7fc1c4f';
+        $vendor = 'foo';
+        $package = 'bar';
+        $startReference = 'ad77125';
+        $endReference = '7fc1c4f';
 
         $commitProvider = $this->commitProvider();
 
@@ -121,10 +121,10 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('items')
             ->with(
-                $this->equalTo($userName),
-                $this->equalTo($repository),
-                $this->equalTo($startSha),
-                $this->equalTo($endSha)
+                $this->equalTo($vendor),
+                $this->equalTo($package),
+                $this->equalTo($startReference),
+                $this->equalTo($endReference)
             )
             ->willReturn([
                 $mergeCommit,
@@ -137,8 +137,8 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('show')
             ->with(
-                $this->equalTo($userName),
-                $this->equalTo($repository),
+                $this->equalTo($vendor),
+                $this->equalTo($package),
                 $this->equalTo($pullRequest->id())
             )
             ->willReturn($pullRequest)
@@ -150,10 +150,10 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
         );
 
         $pullRequests = $provider->items(
-            $userName,
-            $repository,
-            $startSha,
-            $endSha
+            $vendor,
+            $package,
+            $startReference,
+            $endReference
         );
 
         $this->assertSame([$pullRequest], $pullRequests);
@@ -161,10 +161,10 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
 
     public function testPullRequestsHandlesMergeCommitWherePullRequestWasNotFound()
     {
-        $userName = 'foo';
-        $repository = 'bar';
-        $startSha = 'ad77125';
-        $endSha = '7fc1c4f';
+        $vendor = 'foo';
+        $package = 'bar';
+        $startReference = 'ad77125';
+        $endReference = '7fc1c4f';
 
         $commitProvider = $this->commitProvider();
 
@@ -182,10 +182,10 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('items')
             ->with(
-                $this->equalTo($userName),
-                $this->equalTo($repository),
-                $this->equalTo($startSha),
-                $this->equalTo($endSha)
+                $this->equalTo($vendor),
+                $this->equalTo($package),
+                $this->equalTo($startReference),
+                $this->equalTo($endReference)
             )
             ->willReturn([
                 $mergeCommit,
@@ -198,8 +198,8 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('show')
             ->with(
-                $this->equalTo($userName),
-                $this->equalTo($repository),
+                $this->equalTo($vendor),
+                $this->equalTo($package),
                 $this->equalTo($id)
             )
             ->willReturn(null)
@@ -211,10 +211,10 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
         );
 
         $pullRequests = $provider->items(
-            $userName,
-            $repository,
-            $startSha,
-            $endSha
+            $vendor,
+            $package,
+            $startReference,
+            $endReference
         );
 
         $this->assertSame([], $pullRequests);

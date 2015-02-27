@@ -28,24 +28,24 @@ class PullRequest implements ItemProvider
     }
 
     /**
-     * @param string $userName
-     * @param string $repository
-     * @param string $startSha
-     * @param string $endSha
+     * @param string $vendor
+     * @param string $package
+     * @param string $startReference
+     * @param string $endReference
      * @return Entity\PullRequest[] array
      */
-    public function items($userName, $repository, $startSha, $endSha)
+    public function items($vendor, $package, $startReference, $endReference)
     {
         $commits = $this->commitService->items(
-            $userName,
-            $repository,
-            $startSha,
-            $endSha
+            $vendor,
+            $package,
+            $startReference,
+            $endReference
         );
 
         $pullRequests = [];
 
-        array_walk($commits, function (Entity\Commit $commit) use (&$pullRequests, $userName, $repository) {
+        array_walk($commits, function (Entity\Commit $commit) use (&$pullRequests, $vendor, $package) {
 
             if (0 === preg_match('/^Merge pull request #(?P<id>\d+)/', $commit->message(), $matches)) {
                 return;
@@ -54,8 +54,8 @@ class PullRequest implements ItemProvider
             $id = $matches['id'];
 
             $pullRequest = $this->pullRequestRepository->show(
-                $userName,
-                $repository,
+                $vendor,
+                $package,
                 $id
             );
 
