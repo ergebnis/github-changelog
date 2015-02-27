@@ -1,6 +1,6 @@
 <?php
 
-namespace Localheinz\ChangeLog\Test;
+namespace Localheinz\ChangeLog\Test\Service;
 
 use Localheinz\ChangeLog;
 use Localheinz\ChangeLog\Entity;
@@ -8,13 +8,13 @@ use Localheinz\ChangeLog\Test\Util\FakerTrait;
 use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
 
-class BuilderTest extends PHPUnit_Framework_TestCase
+class PullRequestTest extends PHPUnit_Framework_TestCase
 {
     use FakerTrait;
 
     public function testFluentInterface()
     {
-        $builder = new ChangeLog\Builder(
+        $builder = new ChangeLog\Service\PullRequest(
             $this->commitService(),
             $this->pullRequestRepository()
         );
@@ -31,7 +31,7 @@ class BuilderTest extends PHPUnit_Framework_TestCase
      */
     public function testPullRequestsThrowsBadMethodCallExceptionIfUserHasNotBeenSet()
     {
-        $builder = new ChangeLog\Builder(
+        $builder = new ChangeLog\Service\PullRequest(
             $this->commitService(),
             $this->pullRequestRepository()
         );
@@ -45,7 +45,7 @@ class BuilderTest extends PHPUnit_Framework_TestCase
      */
     public function testPullRequestsThrowsBadMethodCallExceptionIfRepositoryHasNotBeenSet()
     {
-        $builder = new ChangeLog\Builder(
+        $builder = new ChangeLog\Service\PullRequest(
             $this->commitService(),
             $this->pullRequestRepository()
         );
@@ -61,7 +61,7 @@ class BuilderTest extends PHPUnit_Framework_TestCase
      */
     public function testPullRequestsThrowsBadMethodCallExceptionIfStartReferenceHasNotBeenSet()
     {
-        $builder = new ChangeLog\Builder(
+        $builder = new ChangeLog\Service\PullRequest(
             $this->commitService(),
             $this->pullRequestRepository()
         );
@@ -80,7 +80,7 @@ class BuilderTest extends PHPUnit_Framework_TestCase
      */
     public function testPullRequestsThrowsBadMethodCallExceptionIfEndReferenceHasNotBeenSet()
     {
-        $builder = new ChangeLog\Builder(
+        $builder = new ChangeLog\Service\PullRequest(
             $this->commitService(),
             $this->pullRequestRepository()
         );
@@ -115,7 +115,7 @@ class BuilderTest extends PHPUnit_Framework_TestCase
             ->willReturn([])
         ;
 
-        $builder = new ChangeLog\Builder(
+        $builder = new ChangeLog\Service\PullRequest(
             $commitService,
             $this->pullRequestRepository()
         );
@@ -155,7 +155,7 @@ class BuilderTest extends PHPUnit_Framework_TestCase
             ->willReturn($commits)
         ;
 
-        $builder = new ChangeLog\Builder(
+        $builder = new ChangeLog\Service\PullRequest(
             $commitService,
             $this->pullRequestRepository()
         );
@@ -219,7 +219,7 @@ class BuilderTest extends PHPUnit_Framework_TestCase
             ->willReturn($pullRequest)
         ;
 
-        $builder = new ChangeLog\Builder(
+        $builder = new ChangeLog\Service\PullRequest(
             $commitService,
             $pullRequestRepository
         );
@@ -280,7 +280,7 @@ class BuilderTest extends PHPUnit_Framework_TestCase
             ->willReturn(null)
         ;
 
-        $builder = new ChangeLog\Builder(
+        $builder = new ChangeLog\Service\PullRequest(
             $commitService,
             $pullRequestRepository
         );

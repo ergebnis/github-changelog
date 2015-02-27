@@ -1,13 +1,15 @@
 <?php
 
-namespace Localheinz\ChangeLog;
+namespace Localheinz\ChangeLog\Service;
 
 use BadMethodCallException;
+use Localheinz\ChangeLog\Entity;
+use Localheinz\ChangeLog\Repository;
 
-class Builder
+class PullRequest
 {
     /**
-     * @var Service\Commit
+     * @var Commit
      */
     private $commitService;
 
@@ -37,10 +39,10 @@ class Builder
     private $endSha;
 
     /**
-     * @param Service\Commit $commitService
+     * @param Commit $commitService
      * @param Repository\PullRequest $pullRequestRepository
      */
-    public function __construct(Service\Commit $commitService, Repository\PullRequest $pullRequestRepository)
+    public function __construct(Commit $commitService, Repository\PullRequest $pullRequestRepository)
     {
         $this->commitService = $commitService;
         $this->pullRequestRepository = $pullRequestRepository;
