@@ -2,8 +2,9 @@
 
 namespace Localheinz\ChangeLog\Test\Service;
 
-use Localheinz\ChangeLog;
 use Localheinz\ChangeLog\Entity;
+use Localheinz\ChangeLog\Repository;
+use Localheinz\ChangeLog\Service;
 use Localheinz\ChangeLog\Test\Util\DataProviderTrait;
 use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
@@ -33,12 +34,12 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             ->willReturn([])
         ;
 
-        $builder = new ChangeLog\Service\PullRequest(
+        $pullRequestService = new Service\PullRequest(
             $commitService,
             $this->pullRequestRepository()
         );
 
-        $pullRequests = $builder->pullRequests(
+        $pullRequests = $pullRequestService->pullRequests(
             $userName,
             $repository,
             $startSha,
@@ -69,12 +70,12 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             ->willReturn($this->commits(20))
         ;
 
-        $builder = new ChangeLog\Service\PullRequest(
+        $pullRequestService = new Service\PullRequest(
             $commitService,
             $this->pullRequestRepository()
         );
 
-        $pullRequests = $builder->pullRequests(
+        $pullRequests = $pullRequestService->pullRequests(
             $userName,
             $repository,
             $startSha,
@@ -133,12 +134,12 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             ->willReturn($pullRequest)
         ;
 
-        $builder = new ChangeLog\Service\PullRequest(
+        $pullRequestService = new Service\PullRequest(
             $commitService,
             $pullRequestRepository
         );
 
-        $pullRequests = $builder->pullRequests(
+        $pullRequests = $pullRequestService->pullRequests(
             $userName,
             $repository,
             $startSha,
@@ -194,12 +195,12 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             ->willReturn(null)
         ;
 
-        $builder = new ChangeLog\Service\PullRequest(
+        $pullRequestService = new Service\PullRequest(
             $commitService,
             $pullRequestRepository
         );
 
-        $pullRequests = $builder->pullRequests(
+        $pullRequests = $pullRequestService->pullRequests(
             $userName,
             $repository,
             $startSha,
@@ -214,7 +215,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
      */
     private function commitService()
     {
-        return $this->getMockBuilder(ChangeLog\Service\Commit::class)
+        return $this->getMockBuilder(Service\Commit::class)
             ->disableOriginalConstructor()
             ->getMock()
         ;
@@ -225,7 +226,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
      */
     private function pullRequestRepository()
     {
-        return $this->getMockBuilder(ChangeLog\Repository\PullRequest::class)
+        return $this->getMockBuilder(Repository\PullRequest::class)
             ->disableOriginalConstructor()
             ->getMock()
         ;
