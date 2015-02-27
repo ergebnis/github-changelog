@@ -2,16 +2,15 @@
 
 namespace Localheinz\ChangeLog\Test\Service;
 
-use Localheinz\ChangeLog\Entity;
 use Localheinz\ChangeLog\Repository;
 use Localheinz\ChangeLog\Service;
-use Localheinz\ChangeLog\Test\Util\FakerTrait;
+use Localheinz\ChangeLog\Test\Util\DataProviderTrait;
 use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
 
 class CommitTest extends PHPUnit_Framework_TestCase
 {
-    use FakerTrait;
+    use DataProviderTrait;
 
     public function testRangeDoesNotFetchCommitsIfStartAndEndReferencesAreTheSame()
     {
@@ -214,15 +213,16 @@ class CommitTest extends PHPUnit_Framework_TestCase
         $countBetween = 13;
         $countAfter = 17;
 
-        $allCommits = [
-            $startCommit,
-        ];
-
-        $this->addCommits($allCommits, $countBetween);
-
-        array_push($allCommits, $endCommit);
-
-        $this->addCommits($allCommits, $countAfter);
+        $allCommits = array_merge(
+            [
+                $startCommit,
+            ],
+            $this->commits($countBetween),
+            [
+                $endCommit,
+            ],
+            $this->commits($countAfter)
+        );
 
         $expectedCommits = array_slice(
             $allCommits,
@@ -295,22 +295,21 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->willReturn($endCommit)
         ;
 
-        $firstBatch = [
-            $startCommit,
-        ];
-
-        $this->addCommits($firstBatch, 50);
+        $firstBatch = array_merge(
+            [
+                $startCommit,
+            ],
+            $this->commits(50)
+        );
 
         $lastCommitFromFirstBatch = end($firstBatch);
-        reset($firstBatch);
 
-        $secondBatch = [
-            $lastCommitFromFirstBatch,
-        ];
-
-        $this->addCommits($secondBatch, 20);
-
-        array_push($secondBatch, $endCommit);
+        $secondBatch = array_merge(
+            [
+                $lastCommitFromFirstBatch,
+            ],
+            $this->commits(20)
+        );
 
         $expectedCommits = array_merge(
             array_slice(
@@ -322,8 +321,6 @@ class CommitTest extends PHPUnit_Framework_TestCase
                 1
             )
         );
-
-        reset($expectedCommits);
 
         $commitRepository
             ->expects($this->at(2))
@@ -378,32 +375,5 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock()
         ;
-    }
-
-    /**
-     * @param string $sha
-     * @param string $message
-     * @return Entity\Commit
-     */
-    private function commit($sha = null, $message = null)
-    {
-        $sha = $sha ?: $this->faker()->unique()->sha1;
-        $message = $message ?: $this->faker()->unique()->sentence();
-
-        return new Entity\Commit(
-            $sha,
-            $message
-        );
-    }
-
-    /**
-     * @param Entity\Commit[] $commits
-     * @param int $count
-     */
-    private function addCommits(&$commits, $count)
-    {
-        for ($i = 0; $i < $count; $i++) {
-            array_push($commits, $this->commit());
-        }
     }
 }

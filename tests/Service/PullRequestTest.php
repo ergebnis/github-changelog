@@ -4,13 +4,13 @@ namespace Localheinz\ChangeLog\Test\Service;
 
 use Localheinz\ChangeLog;
 use Localheinz\ChangeLog\Entity;
-use Localheinz\ChangeLog\Test\Util\FakerTrait;
+use Localheinz\ChangeLog\Test\Util\DataProviderTrait;
 use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
 
 class PullRequestTest extends PHPUnit_Framework_TestCase
 {
-    use FakerTrait;
+    use DataProviderTrait;
 
     public function testPullRequestsReturnsEmptyArrayIfNoCommitsWereFound()
     {
@@ -57,10 +57,6 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
 
         $commitService = $this->commitService();
 
-        $commits = [];
-
-        $this->addCommits($commits, 20);
-
         $commitService
             ->expects($this->once())
             ->method('range')
@@ -70,7 +66,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($startSha),
                 $this->equalTo($endSha)
             )
-            ->willReturn($commits)
+            ->willReturn($this->commits(20))
         ;
 
         $builder = new ChangeLog\Service\PullRequest(
@@ -233,32 +229,5 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock()
         ;
-    }
-
-    /**
-     * @param string $sha
-     * @param string $message
-     * @return Entity\Commit
-     */
-    private function commit($sha = null, $message = null)
-    {
-        $sha = $sha ?: $this->faker()->unique()->sha1;
-        $message = $message ?: $this->faker()->unique()->sentence();
-
-        return new Entity\Commit(
-            $sha,
-            $message
-        );
-    }
-
-    /**
-     * @param Entity\Commit[] $commits
-     * @param int $count
-     */
-    private function addCommits(&$commits, $count)
-    {
-        for ($i = 0; $i < $count; $i++) {
-            array_push($commits, $this->commit());
-        }
     }
 }
