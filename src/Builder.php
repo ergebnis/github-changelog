@@ -7,9 +7,9 @@ use BadMethodCallException;
 class Builder
 {
     /**
-     * @var Repository\Commits
+     * @var Service\Commit
      */
-    private $commitRepository;
+    private $commitService;
 
     /**
      * @var string
@@ -32,11 +32,11 @@ class Builder
     private $endSha;
 
     /**
-     * @param Repository\Commits $commitRepository
+     * @param Service\Commit $commitService
      */
-    public function __construct(Repository\Commits $commitRepository)
+    public function __construct(Service\Commit $commitService)
     {
-        $this->commitRepository = $commitRepository;
+        $this->commitService = $commitService;
     }
 
     /**

@@ -10,7 +10,7 @@ class BuilderTest extends PHPUnit_Framework_TestCase
 {
     public function testFluentInterface()
     {
-        $builder = new ChangeLog\Builder($this->commitRepository());
+        $builder = new ChangeLog\Builder($this->commitService());
 
         $this->assertSame($builder, $builder->userName('foo'));
         $this->assertSame($builder, $builder->repository('bar'));
@@ -24,7 +24,7 @@ class BuilderTest extends PHPUnit_Framework_TestCase
      */
     public function testPullRequestsThrowsBadMethodCallExceptionIfUserHasNotBeenSet()
     {
-        $builder = new ChangeLog\Builder($this->commitRepository());
+        $builder = new ChangeLog\Builder($this->commitService());
 
         $builder->pullRequests();
     }
@@ -35,7 +35,7 @@ class BuilderTest extends PHPUnit_Framework_TestCase
      */
     public function testPullRequestsThrowsBadMethodCallExceptionIfRepositoryHasNotBeenSet()
     {
-        $builder = new ChangeLog\Builder($this->commitRepository());
+        $builder = new ChangeLog\Builder($this->commitService());
 
         $builder->userName('foo');
 
@@ -48,7 +48,7 @@ class BuilderTest extends PHPUnit_Framework_TestCase
      */
     public function testPullRequestsThrowsBadMethodCallExceptionIfStartReferenceHasNotBeenSet()
     {
-        $builder = new ChangeLog\Builder($this->commitRepository());
+        $builder = new ChangeLog\Builder($this->commitService());
 
         $builder
             ->userName('foo')
@@ -64,7 +64,7 @@ class BuilderTest extends PHPUnit_Framework_TestCase
      */
     public function testPullRequestsThrowsBadMethodCallExceptionIfEndReferenceHasNotBeenSet()
     {
-        $builder = new ChangeLog\Builder($this->commitRepository());
+        $builder = new ChangeLog\Builder($this->commitService());
 
         $builder
             ->userName('foo')
@@ -78,9 +78,9 @@ class BuilderTest extends PHPUnit_Framework_TestCase
     /**
      * @return PHPUnit_Framework_MockObject_MockObject
      */
-    private function commitRepository()
+    private function commitService()
     {
-        return $this->getMockBuilder(ChangeLog\Repository\Commits::class)
+        return $this->getMockBuilder(ChangeLog\Service\Commit::class)
             ->disableOriginalConstructor()
             ->getMock()
         ;
