@@ -9,6 +9,9 @@
     ],
     "license": "MIT",
     "minimum-stability": "stable",
+    "require": {
+        "knplabs/github-api": "^1.4.4"
+    },
     "require-dev": {
         "fabpot/php-cs-fixer": "~1.5",
         "fzaninotto/faker": "^1.4.0",
@@ -23,8 +26,5 @@
         "psr-4": {
             "Localheinz\\ChangeLog\\Test\\": "tests"
         }
-    },
-    "require": {
-        "knplabs/github-api": "^1.4.4"
     }
 }
