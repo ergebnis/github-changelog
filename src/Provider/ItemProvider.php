@@ -1,8 +1,8 @@
 <?php
 
-namespace Localheinz\ChangeLog\Service;
+namespace Localheinz\ChangeLog\Provider;
 
-interface ProvidesItems
+interface ItemProvider
 {
     /**
      * @param string $userName

@@ -1,10 +1,10 @@
 <?php
 
-namespace Localheinz\ChangeLog\Test\Service;
+namespace Localheinz\ChangeLog\Test\Provider;
 
 use Localheinz\ChangeLog\Entity;
+use Localheinz\ChangeLog\Provider;
 use Localheinz\ChangeLog\Repository;
-use Localheinz\ChangeLog\Service;
 use Localheinz\ChangeLog\Test\Util\DataProviderTrait;
 use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
@@ -15,12 +15,12 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
 
     public function testImplementsProvidesItemsInterface()
     {
-        $service = new Service\PullRequest(
-            $this->commitService(),
+        $provider = new Provider\PullRequest(
+            $this->commitProvider(),
             $this->pullRequestRepository()
         );
 
-        $this->assertInstanceOf(Service\ProvidesItems::class, $service);
+        $this->assertInstanceOf(Provider\ItemProvider::class, $provider);
     }
 
     public function testPullRequestsReturnsEmptyArrayIfNoCommitsWereFound()
@@ -30,9 +30,9 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
         $startSha = 'ad77125';
         $endSha = '7fc1c4f';
 
-        $commitService = $this->commitService();
+        $commitProvider = $this->commitProvider();
 
-        $commitService
+        $commitProvider
             ->expects($this->once())
             ->method('items')
             ->with(
@@ -44,12 +44,12 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             ->willReturn([])
         ;
 
-        $pullRequestService = new Service\PullRequest(
-            $commitService,
+        $provider = new Provider\PullRequest(
+            $commitProvider,
             $this->pullRequestRepository()
         );
 
-        $pullRequests = $pullRequestService->items(
+        $pullRequests = $provider->items(
             $userName,
             $repository,
             $startSha,
@@ -66,9 +66,9 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
         $startSha = 'ad77125';
         $endSha = '7fc1c4f';
 
-        $commitService = $this->commitService();
+        $commitProvider = $this->commitProvider();
 
-        $commitService
+        $commitProvider
             ->expects($this->once())
             ->method('items')
             ->with(
@@ -80,12 +80,12 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             ->willReturn($this->commits(20))
         ;
 
-        $pullRequestService = new Service\PullRequest(
-            $commitService,
+        $provider = new Provider\PullRequest(
+            $commitProvider,
             $this->pullRequestRepository()
         );
 
-        $pullRequests = $pullRequestService->items(
+        $pullRequests = $provider->items(
             $userName,
             $repository,
             $startSha,
@@ -102,7 +102,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
         $startSha = 'ad77125';
         $endSha = '7fc1c4f';
 
-        $commitService = $this->commitService();
+        $commitProvider = $this->commitProvider();
 
         $pullRequest = new Entity\PullRequest(
             9000,
@@ -117,7 +117,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             )
         );
 
-        $commitService
+        $commitProvider
             ->expects($this->once())
             ->method('items')
             ->with(
@@ -144,12 +144,12 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             ->willReturn($pullRequest)
         ;
 
-        $pullRequestService = new Service\PullRequest(
-            $commitService,
+        $provider = new Provider\PullRequest(
+            $commitProvider,
             $pullRequestRepository
         );
 
-        $pullRequests = $pullRequestService->items(
+        $pullRequests = $provider->items(
             $userName,
             $repository,
             $startSha,
@@ -166,7 +166,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
         $startSha = 'ad77125';
         $endSha = '7fc1c4f';
 
-        $commitService = $this->commitService();
+        $commitProvider = $this->commitProvider();
 
         $id = 9000;
 
@@ -178,7 +178,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             )
         );
 
-        $commitService
+        $commitProvider
             ->expects($this->once())
             ->method('items')
             ->with(
@@ -205,12 +205,12 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             ->willReturn(null)
         ;
 
-        $pullRequestService = new Service\PullRequest(
-            $commitService,
+        $provider = new Provider\PullRequest(
+            $commitProvider,
             $pullRequestRepository
         );
 
-        $pullRequests = $pullRequestService->items(
+        $pullRequests = $provider->items(
             $userName,
             $repository,
             $startSha,
@@ -223,9 +223,9 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
     /**
      * @return PHPUnit_Framework_MockObject_MockObject
      */
-    private function commitService()
+    private function commitProvider()
     {
-        return $this->getMockBuilder(Service\Commit::class)
+        return $this->getMockBuilder(Provider\Commit::class)
             ->disableOriginalConstructor()
             ->getMock()
         ;

@@ -1,9 +1,9 @@
 <?php
 
-namespace Localheinz\ChangeLog\Test\Service;
+namespace Localheinz\ChangeLog\Test\Provider;
 
+use Localheinz\ChangeLog\Provider;
 use Localheinz\ChangeLog\Repository;
-use Localheinz\ChangeLog\Service;
 use Localheinz\ChangeLog\Test\Util\DataProviderTrait;
 use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
@@ -14,9 +14,9 @@ class CommitTest extends PHPUnit_Framework_TestCase
 
     public function testImplementsProvidesItemsInterface()
     {
-        $service = new Service\Commit($this->commitRepository());
+        $provider = new Provider\Commit($this->commitRepository());
 
-        $this->assertInstanceOf(Service\ProvidesItems::class, $service);
+        $this->assertInstanceOf(Provider\ItemProvider::class, $provider);
     }
 
     public function testItemsDoesNotFetchCommitsIfStartAndEndReferencesAreTheSame()
@@ -34,9 +34,9 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->method($this->anything())
         ;
 
-        $service = new Service\Commit($commitRepository);
+        $provider = new Provider\Commit($commitRepository);
 
-        $commits = $service->items(
+        $commits = $provider->items(
             $userName,
             $repository,
             $startSha,
@@ -71,9 +71,9 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->method('all')
         ;
 
-        $service = new Service\Commit($commitRepository);
+        $provider = new Provider\Commit($commitRepository);
 
-        $commits = $service->items(
+        $commits = $provider->items(
             $userName,
             $repository,
             $startSha,
@@ -119,9 +119,9 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->method('all')
         ;
 
-        $service = new Service\Commit($commitRepository);
+        $provider = new Provider\Commit($commitRepository);
 
-        $commits = $service->items(
+        $commits = $provider->items(
             $userName,
             $repository,
             $startSha,
@@ -172,9 +172,9 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ]))
         ;
 
-        $service = new Service\Commit($commitRepository);
+        $provider = new Provider\Commit($commitRepository);
 
-        $service->items(
+        $provider->items(
             $userName,
             $repository,
             $startSha,
@@ -250,9 +250,9 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->willReturn($allCommits)
         ;
 
-        $service = new Service\Commit($commitRepository);
+        $provider = new Provider\Commit($commitRepository);
 
-        $commits = $service->items(
+        $commits = $provider->items(
             $userName,
             $repository,
             $startSha,
@@ -355,9 +355,9 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->willReturn($secondBatch)
         ;
 
-        $service = new Service\Commit($commitRepository);
+        $provider = new Provider\Commit($commitRepository);
 
-        $commits = $service->items(
+        $commits = $provider->items(
             $userName,
             $repository,
             $startSha,

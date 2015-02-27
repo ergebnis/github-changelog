@@ -1,11 +1,11 @@
 <?php
 
-namespace Localheinz\ChangeLog\Service;
+namespace Localheinz\ChangeLog\Provider;
 
 use Localheinz\ChangeLog\Entity;
 use Localheinz\ChangeLog\Repository;
 
-class Commit implements ProvidesItems
+class Commit implements ItemProvider
 {
     /**
      * @var Repository\Commit
