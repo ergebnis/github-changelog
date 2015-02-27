@@ -89,45 +89,41 @@ class Commits
             return [];
         }
 
-        $response = $this->commitApi->all($userName, $repository, [
+        $commits = $this->all($userName, $repository, [
             'sha' => $startSha,
         ]);
 
-        if (!is_array($response)) {
+        if (!is_array($commits)) {
             return [];
         }
 
-        $commits = [];
+        $range = [];
 
         $currentStartSha = $startSha;
 
-        while (count($response)) {
-            $data = array_shift($response);
+        while (count($commits)) {
+            /* @var Entity\Commit $commit */
+            $commit = array_shift($commits);
 
-            if ($data['sha'] === $currentStartSha) {
+            if ($commit->sha() === $currentStartSha) {
                 continue;
             }
 
-            $commit = new Entity\Commit(
-                $data['sha'],
-                $data['commit']['message']
-            );
+            array_push($range, $commit);
 
-            array_push($commits, $commit);
-
-            if ($data['sha'] === $endSha) {
+            if ($commit->sha() === $endSha) {
                 break;
             }
 
-            if (!count($response)) {
-                $currentStartSha = $data['sha'];
+            if (!count($commits)) {
+                $currentStartSha = $commit->sha();
 
-                $response = $this->commitApi->all($userName, $repository, [
+                $commits = $this->all($userName, $repository, [
                     'sha' => $currentStartSha,
                 ]);
             }
         }
 
-        return $commits;
+        return $range;
     }
 }
