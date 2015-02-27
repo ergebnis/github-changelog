@@ -5,7 +5,7 @@ namespace Localheinz\ChangeLog\Service;
 use Localheinz\ChangeLog\Entity;
 use Localheinz\ChangeLog\Repository;
 
-class PullRequest
+class PullRequest implements ProvidesItems
 {
     /**
      * @var Commit
@@ -34,9 +34,9 @@ class PullRequest
      * @param string $endSha
      * @return Entity\PullRequest[] array
      */
-    public function pullRequests($userName, $repository, $startSha, $endSha)
+    public function items($userName, $repository, $startSha, $endSha)
     {
-        $commits = $this->commitService->range(
+        $commits = $this->commitService->items(
             $userName,
             $repository,
             $startSha,
