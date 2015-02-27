@@ -42,6 +42,19 @@ trait DataProviderTrait
     }
 
     /**
+     * @param int $count
+     * @return Entity\Commit[] array
+     */
+    private function commits($count)
+    {
+        $commits = [];
+
+        $this->addCommits($commits, $count);
+
+        return $commits;
+    }
+
+    /**
      * @param Entity\Commit[] $commits
      * @param int $count
      */

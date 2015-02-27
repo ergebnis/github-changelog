@@ -57,10 +57,6 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
 
         $commitService = $this->commitService();
 
-        $commits = [];
-
-        $this->addCommits($commits, 20);
-
         $commitService
             ->expects($this->once())
             ->method('range')
@@ -70,7 +66,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($startSha),
                 $this->equalTo($endSha)
             )
-            ->willReturn($commits)
+            ->willReturn($this->commits(20))
         ;
 
         $builder = new ChangeLog\Service\PullRequest(

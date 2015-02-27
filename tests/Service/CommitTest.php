@@ -213,15 +213,16 @@ class CommitTest extends PHPUnit_Framework_TestCase
         $countBetween = 13;
         $countAfter = 17;
 
-        $allCommits = [
-            $startCommit,
-        ];
-
-        $this->addCommits($allCommits, $countBetween);
-
-        array_push($allCommits, $endCommit);
-
-        $this->addCommits($allCommits, $countAfter);
+        $allCommits = array_merge(
+            [
+                $startCommit,
+            ],
+            $this->commits($countBetween),
+            [
+                $endCommit,
+            ],
+            $this->commits($countAfter)
+        );
 
         $expectedCommits = array_slice(
             $allCommits,
@@ -294,22 +295,21 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->willReturn($endCommit)
         ;
 
-        $firstBatch = [
-            $startCommit,
-        ];
-
-        $this->addCommits($firstBatch, 50);
+        $firstBatch = array_merge(
+            [
+                $startCommit,
+            ],
+            $this->commits(50)
+        );
 
         $lastCommitFromFirstBatch = end($firstBatch);
-        reset($firstBatch);
 
-        $secondBatch = [
-            $lastCommitFromFirstBatch,
-        ];
-
-        $this->addCommits($secondBatch, 20);
-
-        array_push($secondBatch, $endCommit);
+        $secondBatch = array_merge(
+            [
+                $lastCommitFromFirstBatch,
+            ],
+            $this->commits(20)
+        );
 
         $expectedCommits = array_merge(
             array_slice(
@@ -321,8 +321,6 @@ class CommitTest extends PHPUnit_Framework_TestCase
                 1
             )
         );
-
-        reset($expectedCommits);
 
         $commitRepository
             ->expects($this->at(2))
