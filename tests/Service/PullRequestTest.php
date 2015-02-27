@@ -13,6 +13,16 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
 {
     use DataProviderTrait;
 
+    public function testImplementsProvidesItemsInterface()
+    {
+        $service = new Service\PullRequest(
+            $this->commitService(),
+            $this->pullRequestRepository()
+        );
+
+        $this->assertInstanceOf(Service\ProvidesItems::class, $service);
+    }
+
     public function testPullRequestsReturnsEmptyArrayIfNoCommitsWereFound()
     {
         $userName = 'foo';
@@ -24,7 +34,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
 
         $commitService
             ->expects($this->once())
-            ->method('range')
+            ->method('items')
             ->with(
                 $this->equalTo($userName),
                 $this->equalTo($repository),
@@ -39,7 +49,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             $this->pullRequestRepository()
         );
 
-        $pullRequests = $pullRequestService->pullRequests(
+        $pullRequests = $pullRequestService->items(
             $userName,
             $repository,
             $startSha,
@@ -60,7 +70,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
 
         $commitService
             ->expects($this->once())
-            ->method('range')
+            ->method('items')
             ->with(
                 $this->equalTo($userName),
                 $this->equalTo($repository),
@@ -75,7 +85,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             $this->pullRequestRepository()
         );
 
-        $pullRequests = $pullRequestService->pullRequests(
+        $pullRequests = $pullRequestService->items(
             $userName,
             $repository,
             $startSha,
@@ -109,7 +119,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
 
         $commitService
             ->expects($this->once())
-            ->method('range')
+            ->method('items')
             ->with(
                 $this->equalTo($userName),
                 $this->equalTo($repository),
@@ -139,7 +149,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             $pullRequestRepository
         );
 
-        $pullRequests = $pullRequestService->pullRequests(
+        $pullRequests = $pullRequestService->items(
             $userName,
             $repository,
             $startSha,
@@ -170,7 +180,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
 
         $commitService
             ->expects($this->once())
-            ->method('range')
+            ->method('items')
             ->with(
                 $this->equalTo($userName),
                 $this->equalTo($repository),
@@ -200,7 +210,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             $pullRequestRepository
         );
 
-        $pullRequests = $pullRequestService->pullRequests(
+        $pullRequests = $pullRequestService->items(
             $userName,
             $repository,
             $startSha,

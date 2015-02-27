@@ -12,7 +12,14 @@ class CommitTest extends PHPUnit_Framework_TestCase
 {
     use DataProviderTrait;
 
-    public function testRangeDoesNotFetchCommitsIfStartAndEndReferencesAreTheSame()
+    public function testImplementsProvidesItemsInterface()
+    {
+        $service = new Service\Commit($this->commitRepository());
+
+        $this->assertInstanceOf(Service\ProvidesItems::class, $service);
+    }
+
+    public function testItemsDoesNotFetchCommitsIfStartAndEndReferencesAreTheSame()
     {
         $userName = 'foo';
         $repository = 'bar';
@@ -29,7 +36,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
 
         $service = new Service\Commit($commitRepository);
 
-        $commits = $service->range(
+        $commits = $service->items(
             $userName,
             $repository,
             $startSha,
@@ -39,7 +46,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
         $this->assertSame([], $commits);
     }
 
-    public function testRangeDoesNotFetchCommitsIfStartCommitCouldNotBeFound()
+    public function testItemsDoesNotFetchCommitsIfStartCommitCouldNotBeFound()
     {
         $userName = 'foo';
         $repository = 'bar';
@@ -66,7 +73,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
 
         $service = new Service\Commit($commitRepository);
 
-        $commits = $service->range(
+        $commits = $service->items(
             $userName,
             $repository,
             $startSha,
@@ -76,7 +83,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
         $this->assertSame([], $commits);
     }
 
-    public function testRangeDoesNotFetchCommitsIfEndCommitCouldNotBeFound()
+    public function testItemsDoesNotFetchCommitsIfEndCommitCouldNotBeFound()
     {
         $userName = 'foo';
         $repository = 'bar';
@@ -114,7 +121,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
 
         $service = new Service\Commit($commitRepository);
 
-        $commits = $service->range(
+        $commits = $service->items(
             $userName,
             $repository,
             $startSha,
@@ -124,7 +131,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
         $this->assertSame([], $commits);
     }
 
-    public function testRangeFetchesCommitsUsingShaFromStartCommit()
+    public function testItemsFetchesCommitsUsingShaFromStartCommit()
     {
         $userName = 'foo';
         $repository = 'bar';
@@ -167,7 +174,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
 
         $service = new Service\Commit($commitRepository);
 
-        $service->range(
+        $service->items(
             $userName,
             $repository,
             $startSha,
@@ -175,7 +182,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testRangeReturnsArrayOfCommitsFromStartToEndExcludingStart()
+    public function testItemsReturnsArrayOfCommitsFromStartToEndExcludingStart()
     {
         $userName = 'foo';
         $repository = 'bar';
@@ -245,7 +252,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
 
         $service = new Service\Commit($commitRepository);
 
-        $commits = $service->range(
+        $commits = $service->items(
             $userName,
             $repository,
             $startSha,
@@ -260,7 +267,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
         }
     }
 
-    public function testRangeFetchesMoreCommitsIfEndIsNotContainedInFirstBatch()
+    public function testItemsFetchesMoreCommitsIfEndIsNotContainedInFirstBatch()
     {
         $userName = 'foo';
         $repository = 'bar';
@@ -350,7 +357,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
 
         $service = new Service\Commit($commitRepository);
 
-        $commits = $service->range(
+        $commits = $service->items(
             $userName,
             $repository,
             $startSha,

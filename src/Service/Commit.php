@@ -5,7 +5,7 @@ namespace Localheinz\ChangeLog\Service;
 use Localheinz\ChangeLog\Entity;
 use Localheinz\ChangeLog\Repository;
 
-class Commit
+class Commit implements ProvidesItems
 {
     /**
      * @var Repository\Commit
@@ -24,7 +24,7 @@ class Commit
      * @param string $endReference
      * @return Entity\Commit[]
      */
-    public function range($userName, $repository, $startReference, $endReference)
+    public function items($userName, $repository, $startReference, $endReference)
     {
         if ($startReference === $endReference) {
             return [];
