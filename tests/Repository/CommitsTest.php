@@ -164,6 +164,47 @@ class CommitsTest extends PHPUnit_Framework_TestCase
         $this->assertSame([], $commits);
     }
 
+    public function testRangeAttemptsToDetermineStartAndEndCommitFromReferences()
+    {
+        $userName = 'foo';
+        $repository = 'bar';
+        $startSha = 'ad77125';
+        $endSha = '7fc1c4f';
+
+        $commitApi = $this->commitApi();
+
+        $commitApi
+            ->expects($this->at(0))
+            ->method('show')
+            ->with(
+                $this->equalTo($userName),
+                $this->equalTo($repository),
+                $this->equalTo($startSha)
+            )
+            ->willReturn($this->responseFromCommit($this->commitData()))
+        ;
+
+        $commitApi
+            ->expects($this->at(1))
+            ->method('show')
+            ->with(
+                $this->equalTo($userName),
+                $this->equalTo($repository),
+                $this->equalTo($endSha)
+            )
+            ->willReturn($this->responseFromCommit($this->commitData()))
+        ;
+
+        $commitRepository = new Repository\Commits($commitApi);
+
+        $commitRepository->range(
+            $userName,
+            $repository,
+            $startSha,
+            $endSha
+        );
+    }
+
     public function testRangeDelegatesToCommitApi()
     {
         $userName = 'foo';
@@ -336,7 +377,7 @@ class CommitsTest extends PHPUnit_Framework_TestCase
         reset($expectedCommits);
 
         $commitApi
-            ->expects($this->at(0))
+            ->expects($this->at(2))
             ->method('all')
             ->with(
                 $this->equalTo($userName),
@@ -349,7 +390,7 @@ class CommitsTest extends PHPUnit_Framework_TestCase
         ;
 
         $commitApi
-            ->expects($this->at(1))
+            ->expects($this->at(3))
             ->method('all')
             ->with(
                 $this->equalTo($userName),

@@ -89,6 +89,18 @@ class Commits
             return [];
         }
 
+        $this->show(
+            $userName,
+            $repository,
+            $startSha
+        );
+
+        $this->show(
+            $userName,
+            $repository,
+            $endSha
+        );
+
         $commits = $this->all($userName, $repository, [
             'sha' => $startSha,
         ]);
