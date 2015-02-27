@@ -11,11 +11,20 @@
     "minimum-stability": "stable",
     "require-dev": {
         "fabpot/php-cs-fixer": "~1.5",
+        "fzaninotto/faker": "^1.4.0",
         "phpunit/phpunit": "~4.5"
     },
     "autoload": {
         "psr-4": {
             "Localheinz\\ChangeLog\\": "src"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Localheinz\\ChangeLog\\Test\\": "tests"
+        }
+    },
+    "require": {
+        "knplabs/github-api": "^1.4.4"
     }
 }
