@@ -12,6 +12,11 @@ class Builder
     private $commitService;
 
     /**
+     * @var Repository\PullRequest
+     */
+    private $pullRequestRepository;
+
+    /**
      * @var string
      */
     private $userName;
@@ -33,10 +38,12 @@ class Builder
 
     /**
      * @param Service\Commit $commitService
+     * @param Repository\PullRequest $pullRequestRepository
      */
-    public function __construct(Service\Commit $commitService)
+    public function __construct(Service\Commit $commitService, Repository\PullRequest $pullRequestRepository)
     {
         $this->commitService = $commitService;
+        $this->pullRequestRepository = $pullRequestRepository;
     }
 
     /**
@@ -104,13 +111,32 @@ class Builder
             throw new BadMethodCallException('End reference needs to be specified');
         }
 
-        $this->commitService->range(
+        $commits = $this->commitService->range(
             $this->userName,
             $this->repository,
             $this->startSha,
             $this->endSha
         );
 
-        return [];
+        $pullRequests = [];
+
+        array_walk($commits, function (Entity\Commit $commit) use (&$pullRequests) {
+
+            if (0 === preg_match('/^Merge pull request #(?P<id>\d+)/', $commit->message(), $matches)) {
+                return;
+            }
+
+            $id = $matches['id'];
+
+            $pullRequest = $this->pullRequestRepository->show(
+                $this->userName,
+                $this->repository,
+                $id
+            );
+
+            array_push($pullRequests, $pullRequest);
+        });
+
+        return $pullRequests;
     }
 }

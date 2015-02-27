@@ -14,7 +14,10 @@ class BuilderTest extends PHPUnit_Framework_TestCase
 
     public function testFluentInterface()
     {
-        $builder = new ChangeLog\Builder($this->commitService());
+        $builder = new ChangeLog\Builder(
+            $this->commitService(),
+            $this->pullRequestRepository()
+        );
 
         $this->assertSame($builder, $builder->userName('foo'));
         $this->assertSame($builder, $builder->repository('bar'));
@@ -28,7 +31,10 @@ class BuilderTest extends PHPUnit_Framework_TestCase
      */
     public function testPullRequestsThrowsBadMethodCallExceptionIfUserHasNotBeenSet()
     {
-        $builder = new ChangeLog\Builder($this->commitService());
+        $builder = new ChangeLog\Builder(
+            $this->commitService(),
+            $this->pullRequestRepository()
+        );
 
         $builder->pullRequests();
     }
@@ -39,7 +45,10 @@ class BuilderTest extends PHPUnit_Framework_TestCase
      */
     public function testPullRequestsThrowsBadMethodCallExceptionIfRepositoryHasNotBeenSet()
     {
-        $builder = new ChangeLog\Builder($this->commitService());
+        $builder = new ChangeLog\Builder(
+            $this->commitService(),
+            $this->pullRequestRepository()
+        );
 
         $builder->userName('foo');
 
@@ -52,7 +61,10 @@ class BuilderTest extends PHPUnit_Framework_TestCase
      */
     public function testPullRequestsThrowsBadMethodCallExceptionIfStartReferenceHasNotBeenSet()
     {
-        $builder = new ChangeLog\Builder($this->commitService());
+        $builder = new ChangeLog\Builder(
+            $this->commitService(),
+            $this->pullRequestRepository()
+        );
 
         $builder
             ->userName('foo')
@@ -68,7 +80,10 @@ class BuilderTest extends PHPUnit_Framework_TestCase
      */
     public function testPullRequestsThrowsBadMethodCallExceptionIfEndReferenceHasNotBeenSet()
     {
-        $builder = new ChangeLog\Builder($this->commitService());
+        $builder = new ChangeLog\Builder(
+            $this->commitService(),
+            $this->pullRequestRepository()
+        );
 
         $builder
             ->userName('foo')
@@ -100,7 +115,10 @@ class BuilderTest extends PHPUnit_Framework_TestCase
             ->willReturn([])
         ;
 
-        $builder = new ChangeLog\Builder($commitService);
+        $builder = new ChangeLog\Builder(
+            $commitService,
+            $this->pullRequestRepository()
+        );
 
         $builder
             ->userName($userName)
@@ -137,7 +155,10 @@ class BuilderTest extends PHPUnit_Framework_TestCase
             ->willReturn($commits)
         ;
 
-        $builder = new ChangeLog\Builder($commitService);
+        $builder = new ChangeLog\Builder(
+            $commitService,
+            $this->pullRequestRepository()
+        );
 
         $builder
             ->userName($userName)
@@ -149,12 +170,87 @@ class BuilderTest extends PHPUnit_Framework_TestCase
         $this->assertSame([], $builder->pullRequests());
     }
 
+    public function testPullRequestsFetchesPullRequestIfMergeCommitWasFound()
+    {
+        $userName = 'foo';
+        $repository = 'bar';
+        $startSha = 'ad77125';
+        $endSha = '7fc1c4f';
+
+        $commitService = $this->commitService();
+
+        $pullRequest = new Entity\PullRequest(
+            9000,
+            'Fix: Directory name'
+        );
+
+        $mergeCommit = $this->commit(
+            null,
+            sprintf(
+                'Merge pull request #%s from localheinz/fix/directory',
+                $pullRequest->id()
+            )
+        );
+
+        $commitService
+            ->expects($this->once())
+            ->method('range')
+            ->with(
+                $this->equalTo($userName),
+                $this->equalTo($repository),
+                $this->equalTo($startSha),
+                $this->equalTo($endSha)
+            )
+            ->willReturn([
+                $mergeCommit,
+            ])
+        ;
+
+        $pullRequestRepository = $this->pullRequestRepository();
+
+        $pullRequestRepository
+            ->expects($this->once())
+            ->method('show')
+            ->with(
+                $this->equalTo($userName),
+                $this->equalTo($repository),
+                $this->equalTo($pullRequest->id())
+            )
+            ->willReturn($pullRequest)
+        ;
+
+        $builder = new ChangeLog\Builder(
+            $commitService,
+            $pullRequestRepository
+        );
+
+        $builder
+            ->userName($userName)
+            ->repository($repository)
+            ->startSha($startSha)
+            ->endSha($endSha)
+        ;
+
+        $this->assertSame([$pullRequest], $builder->pullRequests());
+    }
+
     /**
      * @return PHPUnit_Framework_MockObject_MockObject
      */
     private function commitService()
     {
         return $this->getMockBuilder(ChangeLog\Service\Commit::class)
+            ->disableOriginalConstructor()
+            ->getMock()
+        ;
+    }
+
+    /**
+     * @return PHPUnit_Framework_MockObject_MockObject
+     */
+    private function pullRequestRepository()
+    {
+        return $this->getMockBuilder(ChangeLog\Repository\PullRequest::class)
             ->disableOriginalConstructor()
             ->getMock()
         ;
