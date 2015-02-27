@@ -83,7 +83,7 @@ class Commits
      * @param string $endSha
      * @return Entity\Commit[]
      */
-    public function commits($userName, $repository, $startSha, $endSha)
+    public function range($userName, $repository, $startSha, $endSha)
     {
         if ($startSha === $endSha) {
             return [];

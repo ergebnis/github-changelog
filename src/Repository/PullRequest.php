@@ -52,7 +52,7 @@ class PullRequest
             throw new BadMethodCallException('Could not find end commit');
         }
 
-        $this->commitRepository->commits(
+        $this->commitRepository->range(
             $userName,
             $repository,
             $startCommit->sha(),

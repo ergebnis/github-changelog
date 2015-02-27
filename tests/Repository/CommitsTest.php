@@ -137,7 +137,7 @@ class CommitsTest extends PHPUnit_Framework_TestCase
         }
     }
 
-    public function testCommitsDoesNotQueryGitHubApiWhenStartAndEndReferencesAreTheSame()
+    public function testRangeDoesNotQueryGitHubApiWhenStartAndEndReferencesAreTheSame()
     {
         $userName = 'foo';
         $repository = 'bar';
@@ -154,7 +154,7 @@ class CommitsTest extends PHPUnit_Framework_TestCase
 
         $commitRepository = new Repository\Commits($this->commitApi());
 
-        $commits = $commitRepository->commits(
+        $commits = $commitRepository->range(
             $userName,
             $repository,
             $startSha,
@@ -164,7 +164,7 @@ class CommitsTest extends PHPUnit_Framework_TestCase
         $this->assertSame([], $commits);
     }
 
-    public function testCommitsDelegatesToCommitApi()
+    public function testRangeDelegatesToCommitApi()
     {
         $userName = 'foo';
         $repository = 'bar';
@@ -187,7 +187,7 @@ class CommitsTest extends PHPUnit_Framework_TestCase
 
         $commitRepository = new Repository\Commits($commitApi);
 
-        $commitRepository->commits(
+        $commitRepository->range(
             $userName,
             $repository,
             $startSha,
@@ -195,7 +195,7 @@ class CommitsTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testCommitsReturnsEmptyArrayOnFailure()
+    public function testRangeReturnsEmptyArrayOnFailure()
     {
         $userName = 'foo';
         $repository = 'bar';
@@ -219,7 +219,7 @@ class CommitsTest extends PHPUnit_Framework_TestCase
 
         $commitRepository = new Repository\Commits($commitApi);
 
-        $commits = $commitRepository->commits(
+        $commits = $commitRepository->range(
             $userName,
             $repository,
             $startSha,
@@ -229,7 +229,7 @@ class CommitsTest extends PHPUnit_Framework_TestCase
         $this->assertSame([], $commits);
     }
 
-    public function testCommitsReturnsArrayOfCommitsFromStartToEndExcludingStart()
+    public function testRangeReturnsArrayOfCommitsFromStartToEndExcludingStart()
     {
         $userName = 'foo';
         $repository = 'bar';
@@ -272,7 +272,7 @@ class CommitsTest extends PHPUnit_Framework_TestCase
 
         $commitRepository = new Repository\Commits($commitApi);
 
-        $commits = $commitRepository->commits(
+        $commits = $commitRepository->range(
             $userName,
             $repository,
             $startSha,
@@ -290,7 +290,7 @@ class CommitsTest extends PHPUnit_Framework_TestCase
         }
     }
 
-    public function testCommitsRequeriesIfEndIsNotContainedInFirstBatch()
+    public function testRangeRequeriesIfEndIsNotContainedInFirstBatch()
     {
         $userName = 'foo';
         $repository = 'bar';
@@ -363,7 +363,7 @@ class CommitsTest extends PHPUnit_Framework_TestCase
 
         $commitRepository = new Repository\Commits($commitApi);
 
-        $commits = $commitRepository->commits(
+        $commits = $commitRepository->range(
             $userName,
             $repository,
             $startSha,

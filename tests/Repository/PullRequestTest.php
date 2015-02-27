@@ -188,7 +188,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
 
         $commitRepository
             ->expects($this->once())
-            ->method('commits')
+            ->method('range')
             ->with(
                 $this->equalTo($userName),
                 $this->equalTo($repository),
