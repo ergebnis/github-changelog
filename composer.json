@@ -19,6 +19,11 @@
             "Localheinz\\ChangeLog\\": "src"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Localheinz\\ChangeLog\\Test\\": "tests"
+        }
+    },
     "require": {
         "knplabs/github-api": "^1.4.4"
     }
