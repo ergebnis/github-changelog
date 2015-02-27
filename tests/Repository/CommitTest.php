@@ -21,11 +21,11 @@ class CommitTest extends PHPUnit_Framework_TestCase
         $repository = 'bar';
         $sha = 'ad77125';
 
-        $commitApi = $this->commitApi();
+        $api = $this->commitApi();
 
-        $expectedCommit = $this->commitData();
+        $expected = $this->commitData();
 
-        $commitApi
+        $api
             ->expects($this->once())
             ->method('show')
             ->with(
@@ -33,10 +33,10 @@ class CommitTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($repository),
                 $this->equalTo($sha)
             )
-            ->willReturn($this->responseFromCommit($expectedCommit))
+            ->willReturn($this->responseFromCommit($expected))
         ;
 
-        $commitRepository = new Repository\Commit($commitApi);
+        $commitRepository = new Repository\Commit($api);
 
         $commit = $commitRepository->show(
             $userName,
@@ -46,8 +46,8 @@ class CommitTest extends PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf(Entity\Commit::class, $commit);
 
-        $this->assertSame($expectedCommit->sha, $commit->sha());
-        $this->assertSame($expectedCommit->message, $commit->message());
+        $this->assertSame($expected->sha, $commit->sha());
+        $this->assertSame($expected->message, $commit->message());
     }
 
     public function testShowReturnsNullOnFailure()
@@ -56,9 +56,9 @@ class CommitTest extends PHPUnit_Framework_TestCase
         $repository = 'bar';
         $sha = 'ad77125';
 
-        $commitApi = $this->commitApi();
+        $api = $this->commitApi();
 
-        $commitApi
+        $api
             ->expects($this->once())
             ->method('show')
             ->with(
@@ -69,7 +69,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->willReturn('failure')
         ;
 
-        $commitRepository = new Repository\Commit($commitApi);
+        $commitRepository = new Repository\Commit($api);
 
         $commit = $commitRepository->show(
             $userName,
@@ -86,9 +86,9 @@ class CommitTest extends PHPUnit_Framework_TestCase
         $repository = 'bar';
         $sha = 'ad77125';
 
-        $commitApi = $this->commitApi();
+        $api = $this->commitApi();
 
-        $commitApi
+        $api
             ->expects($this->once())
             ->method('all')
             ->with(
@@ -101,7 +101,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->willReturn('snafu')
         ;
 
-        $commitRepository = new Repository\Commit($commitApi);
+        $commitRepository = new Repository\Commit($api);
 
         $commits = $commitRepository->all($userName, $repository, [
             'sha' => $sha,
@@ -116,14 +116,14 @@ class CommitTest extends PHPUnit_Framework_TestCase
         $repository = 'bar';
         $sha = 'ad77125';
 
-        $commitApi = $this->commitApi();
+        $api = $this->commitApi();
 
         $expectedCommits = [];
         for ($i = 0; $i < 15; $i++) {
             array_push($expectedCommits, $this->commitData());
         }
 
-        $commitApi
+        $api
             ->expects($this->once())
             ->method('all')
             ->with(
@@ -136,7 +136,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->willReturn($this->responseFromCommits($expectedCommits))
         ;
 
-        $commitRepository = new Repository\Commit($commitApi);
+        $commitRepository = new Repository\Commit($api);
 
         $commits = $commitRepository->all($userName, $repository, [
             'sha' => $sha,
