@@ -1,1 +1,1 @@
-# README [![Build Status](https://travis-ci.org/localheinz/change-log.svg?branch=master)](https://travis-ci.org/localheinz/change-log)
+# README [![Build Status](https://travis-ci.org/localheinz/change-log.svg?branch=master)](https://travis-ci.org/localheinz/change-log) [![Dependency Status](https://www.versioneye.com/user/projects/54f078634f31083e1b0004c7/badge.svg?style=flat)](https://www.versioneye.com/user/projects/54f078634f31083e1b0004c7)
