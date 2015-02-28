@@ -9,6 +9,7 @@ use Localheinz\ChangeLog\Repository;
 use Localheinz\ChangeLog\Test\Util\FakerTrait;
 use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
+use stdClass;
 
 class PullRequestTest extends PHPUnit_Framework_TestCase
 {
@@ -19,10 +20,9 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
         $vendor = 'foo';
         $package = 'bar';
 
-        $api = $this->api();
+        $api = $this->pullRequestApi();
 
-        $id = $this->faker()->unique()->randomNumber;
-        $title = $this->faker()->unique()->sentence();
+        $expectedItem = $this->pullRequestItem();
 
         $api
             ->expects($this->once())
@@ -30,12 +30,9 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             ->with(
                 $this->equalTo($vendor),
                 $this->equalTo($package),
-                $this->equalTo($id)
+                $this->equalTo($expectedItem->id)
             )
-            ->willReturn($this->response([
-                'id' => $id,
-                'title' => $title,
-            ]))
+            ->willReturn($this->response($expectedItem))
         ;
 
         $pullRequestRepository = new Repository\PullRequest(
@@ -46,13 +43,13 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
         $pullRequest = $pullRequestRepository->show(
             $vendor,
             $package,
-            $id
+            $expectedItem->id
         );
 
         $this->assertInstanceOf(Entity\PullRequest::class, $pullRequest);
 
-        $this->assertSame($id, $pullRequest->id());
-        $this->assertSame($title, $pullRequest->title());
+        $this->assertSame($expectedItem->id, $pullRequest->id());
+        $this->assertSame($expectedItem->title, $pullRequest->title());
     }
 
     public function testShowReturnsNullOnFailure()
@@ -62,7 +59,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
 
         $id = $this->faker()->unique()->randomNumber;
 
-        $api = $this->api();
+        $api = $this->pullRequestApi();
 
         $api
             ->expects($this->once())
@@ -111,7 +108,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
         ;
 
         $repository = new Repository\PullRequest(
-            $this->api(),
+            $this->pullRequestApi(),
             $commitRepository
         );
 
@@ -154,7 +151,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
         ;
 
         $repository = new Repository\PullRequest(
-            $this->api(),
+            $this->pullRequestApi(),
             $commitRepository
         );
 
@@ -177,14 +174,13 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
 
         $commitRepository = $this->commitRepository();
 
-        $id = 9000;
-        $title = 'Fix: Directory name';
+        $expectedItem = $this->pullRequestItem();
 
         $mergeCommit = new Entity\Commit(
             $this->faker()->unique()->sha1,
             sprintf(
                 'Merge pull request #%s from localheinz/fix/directory',
-                $id
+                $expectedItem->id
             )
         );
 
@@ -202,7 +198,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             ])
         ;
 
-        $api = $this->api();
+        $api = $this->pullRequestApi();
 
         $api
             ->expects($this->once())
@@ -210,12 +206,9 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             ->with(
                 $this->equalTo($vendor),
                 $this->equalTo($package),
-                $this->equalTo($id)
+                $this->equalTo($expectedItem->id)
             )
-            ->willReturn($this->response([
-                'id' => $id,
-                'title' => $title,
-            ]))
+            ->willReturn($this->response($expectedItem))
         ;
 
         $repository = new Repository\PullRequest(
@@ -238,8 +231,8 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf(Entity\PullRequest::class, $pullRequest);
 
         /* @var Entity\PullRequest $pullRequest */
-        $this->assertSame($id, $pullRequest->id());
-        $this->assertSame($title, $pullRequest->title());
+        $this->assertSame($expectedItem->id, $pullRequest->id());
+        $this->assertSame($expectedItem->title, $pullRequest->title());
     }
 
     public function testItemsHandlesMergeCommitWherePullRequestWasNotFound()
@@ -253,8 +246,8 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
 
         $id = 9000;
 
-        $mergeCommit = $this->commit(
-            null,
+        $mergeCommit = new Entity\Commit(
+            'foo',
             sprintf(
                 'Merge pull request #%s from localheinz/fix/directory',
                 $id
@@ -275,7 +268,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             ])
         ;
 
-        $api = $this->api();
+        $api = $this->pullRequestApi();
 
         $api
             ->expects($this->once())
@@ -304,35 +297,9 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param array $data
-     * @return mixed
-     */
-    private function response(array $data = [])
-    {
-        $template = file_get_contents(__DIR__ . '/_response/pull-request.json');
-
-        $body = str_replace(
-            [
-                '%id%',
-                '%title%',
-            ],
-            [
-                $data['id'],
-                $data['title'],
-            ],
-            $template
-        );
-
-        return json_decode(
-            $body,
-            true
-        );
-    }
-
-    /**
      * @return PHPUnit_Framework_MockObject_MockObject
      */
-    private function api()
+    private function pullRequestApi()
     {
         return $this->getMockBuilder(Api\PullRequest::class)
             ->disableOriginalConstructor()
@@ -352,18 +319,41 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param string $sha
-     * @param string $message
-     * @return Entity\Commit
+     * @return stdClass
      */
-    private function commit($sha = null, $message = null)
+    private function pullRequestItem()
     {
-        $sha = $sha ?: $this->faker()->unique()->sha1;
-        $message = $message ?: $this->faker()->unique()->sentence();
+        $item = new stdClass();
 
-        return new Entity\Commit(
-            $sha,
-            $message
+        $item->id = $this->faker()->unique()->randomNumber;
+        $item->title = $this->faker()->unique()->sentence();
+
+        return $item;
+    }
+
+    /**
+     * @param stdClass $item
+     * @return array
+     */
+    private function response(stdClass $item)
+    {
+        $template = file_get_contents(__DIR__ . '/_response/pull-request.json');
+
+        $body = str_replace(
+            [
+                '%id%',
+                '%title%',
+            ],
+            [
+                $item->id,
+                $item->title,
+            ],
+            $template
+        );
+
+        return json_decode(
+            $body,
+            true
         );
     }
 }

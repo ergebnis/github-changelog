@@ -21,9 +21,9 @@ class CommitTest extends PHPUnit_Framework_TestCase
         $package = 'bar';
         $sha = 'ad77125';
 
-        $api = $this->api();
+        $api = $this->commitApi();
 
-        $expected = $this->commit();
+        $expectedItem = $this->commitItem();
 
         $api
             ->expects($this->once())
@@ -33,7 +33,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($package),
                 $this->equalTo($sha)
             )
-            ->willReturn($this->responseFromCommit($expected))
+            ->willReturn($this->response($expectedItem))
         ;
 
         $commitRepository = new Repository\Commit($api);
@@ -46,8 +46,8 @@ class CommitTest extends PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf(Entity\Commit::class, $commit);
 
-        $this->assertSame($expected->sha, $commit->sha());
-        $this->assertSame($expected->message, $commit->message());
+        $this->assertSame($expectedItem->sha, $commit->sha());
+        $this->assertSame($expectedItem->message, $commit->message());
     }
 
     public function testShowReturnsNullOnFailure()
@@ -56,7 +56,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
         $package = 'bar';
         $sha = 'ad77125';
 
-        $api = $this->api();
+        $api = $this->commitApi();
 
         $api
             ->expects($this->once())
@@ -86,7 +86,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
         $package = 'bar';
         $sha = 'ad77125';
 
-        $api = $this->api();
+        $api = $this->commitApi();
 
         $api
             ->expects($this->once())
@@ -116,9 +116,9 @@ class CommitTest extends PHPUnit_Framework_TestCase
         $package = 'bar';
         $sha = 'ad77125';
 
-        $api = $this->api();
+        $api = $this->commitApi();
 
-        $expectedCommits = $this->commits(15);
+        $expectedItems = $this->commitItems(15);
 
         $api
             ->expects($this->once())
@@ -130,7 +130,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
                     'sha' => $sha,
                 ])
             )
-            ->willReturn($this->responseFromCommits($expectedCommits))
+            ->willReturn($this->responseFromItems($expectedItems))
         ;
 
         $repository = new Repository\Commit($api);
@@ -139,18 +139,18 @@ class CommitTest extends PHPUnit_Framework_TestCase
             'sha' => $sha,
         ]);
 
-        $this->assertCount(count($expectedCommits), $commits);
+        $this->assertCount(count($expectedItems), $commits);
 
-        foreach ($commits as $commit) {
-            $expectedCommit = array_shift($expectedCommits);
+        array_walk($commits, function ($commit) use (&$expectedItems) {
+            $expectedItem = array_shift($expectedItems);
 
             $this->assertInstanceOf(Entity\Commit::class, $commit);
-            $this->assertSame($expectedCommit->sha, $commit->sha());
-            $this->assertSame($expectedCommit->message, $commit->message());
-        }
-    }
 
-    /* HELLO */
+            /* @var Entity\Commit $commit */
+            $this->assertSame($expectedItem->sha, $commit->sha());
+            $this->assertSame($expectedItem->message, $commit->message());
+        });
+    }
 
     public function testItemsDoesNotFetchCommitsIfStartAndEndReferencesAreTheSame()
     {
@@ -159,7 +159,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
         $startReference = 'ad77125';
         $endReference = $startReference;
 
-        $api = $this->api();
+        $api = $this->commitApi();
 
         $api
             ->expects($this->never())
@@ -185,7 +185,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
         $startReference = 'ad77125';
         $endReference = '7fc1c4f';
 
-        $api = $this->api();
+        $api = $this->commitApi();
 
         $api
             ->expects($this->at(0))
@@ -222,7 +222,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
         $startReference = 'ad77125';
         $endReference = '7fc1c4f';
 
-        $api = $this->api();
+        $api = $this->commitApi();
 
         $api
             ->expects($this->at(0))
@@ -232,7 +232,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($package),
                 $this->equalTo($startReference)
             )
-            ->willReturn($this->responseFromCommit($this->commit()))
+            ->willReturn($this->response($this->commitItem()))
         ;
 
         $api
@@ -270,9 +270,9 @@ class CommitTest extends PHPUnit_Framework_TestCase
         $startReference = 'ad77125';
         $endReference = '7fc1c4f';
 
-        $api = $this->api();
+        $api = $this->commitApi();
 
-        $startCommit = $this->commit();
+        $startCommit = $this->commitItem();
 
         $api
             ->expects($this->at(0))
@@ -282,10 +282,10 @@ class CommitTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($package),
                 $this->equalTo($startReference)
             )
-            ->willReturn($this->responseFromCommit($startCommit))
+            ->willReturn($this->response($startCommit))
         ;
 
-        $endCommit = $this->commit();
+        $endCommit = $this->commitItem();
 
         $api
             ->expects($this->at(1))
@@ -295,7 +295,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($package),
                 $this->equalTo($endReference)
             )
-            ->willReturn($this->responseFromCommit($endCommit))
+            ->willReturn($this->response($endCommit))
         ;
 
         $api
@@ -327,9 +327,9 @@ class CommitTest extends PHPUnit_Framework_TestCase
         $startReference = 'ad77125';
         $endReference = '7fc1c4f';
 
-        $api = $this->api();
+        $api = $this->commitApi();
 
-        $startCommit = $this->commit();
+        $startCommit = $this->commitItem();
 
         $api
             ->expects($this->at(0))
@@ -339,10 +339,10 @@ class CommitTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($package),
                 $this->equalTo($startReference)
             )
-            ->willReturn($this->responseFromCommit($startCommit))
+            ->willReturn($this->response($startCommit))
         ;
 
-        $endCommit = $this->commit();
+        $endCommit = $this->commitItem();
 
         $api
             ->expects($this->at(1))
@@ -352,25 +352,25 @@ class CommitTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($package),
                 $this->equalTo($endReference)
             )
-            ->willReturn($this->responseFromCommit($endCommit))
+            ->willReturn($this->response($endCommit))
         ;
 
         $countBetween = 13;
         $countAfter = 17;
 
-        $allCommits = array_merge(
+        $allItems = array_merge(
             [
                 $startCommit,
             ],
-            $this->commits($countBetween),
+            $this->commitItems($countBetween),
             [
                 $endCommit,
             ],
-            $this->commits($countAfter)
+            $this->commitItems($countAfter)
         );
 
-        $expectedCommits = array_slice(
-            $allCommits,
+        $expectedItems = array_slice(
+            $allItems,
             1,
             $countBetween + 1
         );
@@ -385,7 +385,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
                     'sha' => $startCommit->sha,
                 ])
             )
-            ->willReturn($this->responseFromCommits($allCommits))
+            ->willReturn($this->responseFromItems($allItems))
         ;
 
         $repository = new Repository\Commit($api);
@@ -397,15 +397,17 @@ class CommitTest extends PHPUnit_Framework_TestCase
             $endReference
         );
 
-        $this->assertCount(count($expectedCommits), $commits);
+        $this->assertCount(count($expectedItems), $commits);
 
-        foreach ($commits as $commit) {
-            $expectedCommit = array_shift($expectedCommits);
+        array_walk($commits, function ($commit) use (&$expectedItems) {
+            $expectedItem = array_shift($expectedItems);
 
             $this->assertInstanceOf(Entity\Commit::class, $commit);
-            $this->assertSame($expectedCommit->sha, $commit->sha());
-            $this->assertSame($expectedCommit->message, $commit->message());
-        }
+
+            /* @var Entity\Commit $commit */
+            $this->assertSame($expectedItem->sha, $commit->sha());
+            $this->assertSame($expectedItem->message, $commit->message());
+        });
     }
 
     public function testItemsFetchesMoreCommitsIfEndIsNotContainedInFirstBatch()
@@ -415,9 +417,9 @@ class CommitTest extends PHPUnit_Framework_TestCase
         $startReference = 'ad77125';
         $endReference = '7fc1c4f';
 
-        $api = $this->api();
+        $api = $this->commitApi();
 
-        $startCommit = $this->commit();
+        $startCommit = $this->commitItem();
 
         $api
             ->expects($this->at(0))
@@ -427,10 +429,10 @@ class CommitTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($package),
                 $this->equalTo($startReference)
             )
-            ->willReturn($this->responseFromCommit($startCommit))
+            ->willReturn($this->response($startCommit))
         ;
 
-        $endCommit = $this->commit();
+        $endCommit = $this->commitItem();
 
         $api
             ->expects($this->at(1))
@@ -440,14 +442,14 @@ class CommitTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($package),
                 $this->equalTo($endReference)
             )
-            ->willReturn($this->responseFromCommit($endCommit))
+            ->willReturn($this->response($endCommit))
         ;
 
         $firstBatch = array_merge(
             [
                 $startCommit,
             ],
-            $this->commits(50)
+            $this->commitItems(50)
         );
 
         $lastCommitFromFirstBatch = end($firstBatch);
@@ -456,10 +458,10 @@ class CommitTest extends PHPUnit_Framework_TestCase
             [
                 $lastCommitFromFirstBatch,
             ],
-            $this->commits(20)
+            $this->commitItems(20)
         );
 
-        $expectedCommits = array_merge(
+        $expectedItems = array_merge(
             array_slice(
                 $firstBatch,
                 1
@@ -480,7 +482,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
                     'sha' => $startCommit->sha,
                 ])
             )
-            ->willReturn($this->responseFromCommits($firstBatch))
+            ->willReturn($this->responseFromItems($firstBatch))
         ;
 
         $api
@@ -493,7 +495,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
                     'sha' => $lastCommitFromFirstBatch->sha,
                 ])
             )
-            ->willReturn($this->responseFromCommits($secondBatch))
+            ->willReturn($this->responseFromItems($secondBatch))
         ;
 
         $repository = new Repository\Commit($api);
@@ -505,16 +507,28 @@ class CommitTest extends PHPUnit_Framework_TestCase
             $endReference
         );
 
-        $this->assertCount(count($expectedCommits), $commits);
+        $this->assertCount(count($expectedItems), $commits);
 
-        foreach ($commits as $commit) {
-            $expectedCommit = array_shift($expectedCommits);
+        array_walk($commits, function ($commit) use (&$expectedItems) {
+            $expectedItem = array_shift($expectedItems);
 
             $this->assertInstanceOf(Entity\Commit::class, $commit);
 
-            $this->assertSame($expectedCommit->sha, $commit->sha());
-            $this->assertSame($expectedCommit->message, $commit->message());
-        }
+            /* @var Entity\Commit $commit */
+            $this->assertSame($expectedItem->sha, $commit->sha());
+            $this->assertSame($expectedItem->message, $commit->message());
+        });
+    }
+
+    /**
+     * @return PHPUnit_Framework_MockObject_MockObject
+     */
+    private function commitApi()
+    {
+        return $this->getMockBuilder(Api\Repository\Commits::class)
+            ->disableOriginalConstructor()
+            ->getMock()
+        ;
     }
 
     /**
@@ -522,7 +536,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
      * @param string $message
      * @return stdClass
      */
-    private function commit($sha = null, $message = null)
+    private function commitItem($sha = null, $message = null)
     {
         $data = new stdClass();
 
@@ -536,24 +550,24 @@ class CommitTest extends PHPUnit_Framework_TestCase
      * @param int $count
      * @return stdClass[]
      */
-    private function commits($count)
+    private function commitItems($count)
     {
-        $commits = [];
+        $items = [];
 
         for ($i = 0; $i < $count; $i++) {
-            array_push($commits, $this->commit());
+            array_push($items, $this->commitItem());
         }
 
-        return $commits;
+        return $items;
     }
 
     /**
-     * @param stdClass $commit
+     * @param stdClass $item
      * @return array
      */
-    private function responseFromCommit(stdClass $commit)
+    private function response(stdClass $item)
     {
-        $commitTemplate = file_get_contents(__DIR__ . '/_response/commit.json');
+        $template = file_get_contents(__DIR__ . '/_response/commit.json');
 
         $body = str_replace(
             [
@@ -561,10 +575,10 @@ class CommitTest extends PHPUnit_Framework_TestCase
                 '%message%',
             ],
             [
-                $commit->sha,
-                $commit->message,
+                $item->sha,
+                $item->message,
             ],
-            $commitTemplate
+            $template
         );
 
         return json_decode(
@@ -577,25 +591,14 @@ class CommitTest extends PHPUnit_Framework_TestCase
      * @param array $commits
      * @return array
      */
-    private function responseFromCommits(array $commits)
+    private function responseFromItems(array $commits)
     {
         $response = [];
 
         array_walk($commits, function ($commit) use (&$response) {
-            array_push($response, $this->responseFromCommit($commit));
+            array_push($response, $this->response($commit));
         });
 
         return $response;
-    }
-
-    /**
-     * @return PHPUnit_Framework_MockObject_MockObject
-     */
-    private function api()
-    {
-        return $this->getMockBuilder(Api\Repository\Commits::class)
-            ->disableOriginalConstructor()
-            ->getMock()
-        ;
     }
 }
