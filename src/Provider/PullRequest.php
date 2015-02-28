@@ -5,12 +5,12 @@ namespace Localheinz\ChangeLog\Provider;
 use Localheinz\ChangeLog\Entity;
 use Localheinz\ChangeLog\Repository;
 
-class PullRequest implements ItemProvider
+class PullRequest
 {
     /**
      * @var Commit
      */
-    private $commitProvider;
+    private $commitRepository;
 
     /**
      * @var Repository\PullRequest
@@ -18,12 +18,12 @@ class PullRequest implements ItemProvider
     private $pullRequestRepository;
 
     /**
-     * @param Commit $commitProvider
+     * @param Repository\Commit $commitRepository
      * @param Repository\PullRequest $pullRequestRepository
      */
-    public function __construct(Commit $commitProvider, Repository\PullRequest $pullRequestRepository)
+    public function __construct(Repository\Commit $commitRepository, Repository\PullRequest $pullRequestRepository)
     {
-        $this->commitProvider = $commitProvider;
+        $this->commitRepository = $commitRepository;
         $this->pullRequestRepository = $pullRequestRepository;
     }
 
@@ -36,7 +36,7 @@ class PullRequest implements ItemProvider
      */
     public function items($vendor, $package, $startReference, $endReference)
     {
-        $commits = $this->commitProvider->items(
+        $commits = $this->commitRepository->items(
             $vendor,
             $package,
             $startReference,
