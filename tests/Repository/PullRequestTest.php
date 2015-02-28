@@ -9,7 +9,6 @@ use Localheinz\ChangeLog\Repository;
 use Localheinz\ChangeLog\Test\Util\FakerTrait;
 use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
-use stdClass;
 
 class PullRequestTest extends PHPUnit_Framework_TestCase
 {
@@ -19,11 +18,11 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
     {
         $vendor = 'foo';
         $package = 'bar';
-        $id = '9000';
 
-        $api = $this->pullRequestApi();
+        $api = $this->api();
 
-        $expected = $this->pullRequestData();
+        $id = $this->faker()->unique()->randomNumber;
+        $title = $this->faker()->unique()->sentence();
 
         $api
             ->expects($this->once())
@@ -33,10 +32,16 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($package),
                 $this->equalTo($id)
             )
-            ->willReturn($this->responseFromPullRequest($expected))
+            ->willReturn($this->response([
+                'id' => $id,
+                'title' => $title,
+            ]))
         ;
 
-        $pullRequestRepository = new Repository\PullRequest($api);
+        $pullRequestRepository = new Repository\PullRequest(
+            $api,
+            $this->commitRepository()
+        );
 
         $pullRequest = $pullRequestRepository->show(
             $vendor,
@@ -46,17 +51,18 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf(Entity\PullRequest::class, $pullRequest);
 
-        $this->assertSame($expected->id, $pullRequest->id());
-        $this->assertSame($expected->title, $pullRequest->title());
+        $this->assertSame($id, $pullRequest->id());
+        $this->assertSame($title, $pullRequest->title());
     }
 
     public function testShowReturnsNullOnFailure()
     {
         $vendor = 'foo';
         $package = 'bar';
-        $id = '9000';
 
-        $api = $this->pullRequestApi();
+        $id = $this->faker()->unique()->randomNumber;
+
+        $api = $this->api();
 
         $api
             ->expects($this->once())
@@ -69,7 +75,10 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             ->willReturn('snafu')
         ;
 
-        $pullRequestRepository = new Repository\PullRequest($api);
+        $pullRequestRepository = new Repository\PullRequest(
+            $api,
+            $this->commitRepository()
+        );
 
         $pullRequest = $pullRequestRepository->show(
             $vendor,
@@ -80,26 +89,225 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
         $this->assertNull($pullRequest);
     }
 
-    /**
-     * @param string $id
-     * @param string $title
-     * @return stdClass
-     */
-    private function pullRequestData($id = null, $title = null)
+    public function testItemsReturnsEmptyArrayIfNoCommitsWereFound()
     {
-        $data = new stdClass();
+        $vendor = 'foo';
+        $package = 'bar';
+        $startReference = 'ad77125';
+        $endReference = '7fc1c4f';
 
-        $data->id = $id ?: $this->faker()->unique()->randomNumber;
-        $data->title = $title ?: $this->faker()->unique()->sentence();
+        $commitRepository = $this->commitRepository();
 
-        return $data;
+        $commitRepository
+            ->expects($this->once())
+            ->method('items')
+            ->with(
+                $this->equalTo($vendor),
+                $this->equalTo($package),
+                $this->equalTo($startReference),
+                $this->equalTo($endReference)
+            )
+            ->willReturn([])
+        ;
+
+        $repository = new Repository\PullRequest(
+            $this->api(),
+            $commitRepository
+        );
+
+        $pullRequests = $repository->items(
+            $vendor,
+            $package,
+            $startReference,
+            $endReference
+        );
+
+        $this->assertSame([], $pullRequests);
+    }
+
+    public function testItemsReturnsEmptyArrayIfNoMergeCommitsWereFound()
+    {
+        $vendor = 'foo';
+        $package = 'bar';
+        $startReference = 'ad77125';
+        $endReference = '7fc1c4f';
+
+        $commitRepository = $this->commitRepository();
+
+        $commit = new Entity\Commit(
+            $this->faker()->unique()->sha1,
+            'I am not a merge commit'
+        );
+
+        $commitRepository
+            ->expects($this->once())
+            ->method('items')
+            ->with(
+                $this->equalTo($vendor),
+                $this->equalTo($package),
+                $this->equalTo($startReference),
+                $this->equalTo($endReference)
+            )
+            ->willReturn([
+                $commit,
+            ])
+        ;
+
+        $repository = new Repository\PullRequest(
+            $this->api(),
+            $commitRepository
+        );
+
+        $pullRequests = $repository->items(
+            $vendor,
+            $package,
+            $startReference,
+            $endReference
+        );
+
+        $this->assertSame([], $pullRequests);
+    }
+
+    public function testItemsFetchesPullRequestIfMergeCommitWasFound()
+    {
+        $vendor = 'foo';
+        $package = 'bar';
+        $startReference = 'ad77125';
+        $endReference = '7fc1c4f';
+
+        $commitRepository = $this->commitRepository();
+
+        $id = 9000;
+        $title = 'Fix: Directory name';
+
+        $mergeCommit = new Entity\Commit(
+            $this->faker()->unique()->sha1,
+            sprintf(
+                'Merge pull request #%s from localheinz/fix/directory',
+                $id
+            )
+        );
+
+        $commitRepository
+            ->expects($this->once())
+            ->method('items')
+            ->with(
+                $this->equalTo($vendor),
+                $this->equalTo($package),
+                $this->equalTo($startReference),
+                $this->equalTo($endReference)
+            )
+            ->willReturn([
+                $mergeCommit,
+            ])
+        ;
+
+        $api = $this->api();
+
+        $api
+            ->expects($this->once())
+            ->method('show')
+            ->with(
+                $this->equalTo($vendor),
+                $this->equalTo($package),
+                $this->equalTo($id)
+            )
+            ->willReturn($this->response([
+                'id' => $id,
+                'title' => $title,
+            ]))
+        ;
+
+        $repository = new Repository\PullRequest(
+            $api,
+            $commitRepository
+        );
+
+        $pullRequests = $repository->items(
+            $vendor,
+            $package,
+            $startReference,
+            $endReference
+        );
+
+        $this->assertInternalType('array', $pullRequests);
+        $this->assertCount(1, $pullRequests);
+
+        $pullRequest = array_shift($pullRequests);
+
+        $this->assertInstanceOf(Entity\PullRequest::class, $pullRequest);
+
+        /* @var Entity\PullRequest $pullRequest */
+        $this->assertSame($id, $pullRequest->id());
+        $this->assertSame($title, $pullRequest->title());
+    }
+
+    public function testItemsHandlesMergeCommitWherePullRequestWasNotFound()
+    {
+        $vendor = 'foo';
+        $package = 'bar';
+        $startReference = 'ad77125';
+        $endReference = '7fc1c4f';
+
+        $commitRepository = $this->commitRepository();
+
+        $id = 9000;
+
+        $mergeCommit = $this->commit(
+            null,
+            sprintf(
+                'Merge pull request #%s from localheinz/fix/directory',
+                $id
+            )
+        );
+
+        $commitRepository
+            ->expects($this->once())
+            ->method('items')
+            ->with(
+                $this->equalTo($vendor),
+                $this->equalTo($package),
+                $this->equalTo($startReference),
+                $this->equalTo($endReference)
+            )
+            ->willReturn([
+                $mergeCommit,
+            ])
+        ;
+
+        $api = $this->api();
+
+        $api
+            ->expects($this->once())
+            ->method('show')
+            ->with(
+                $this->equalTo($vendor),
+                $this->equalTo($package),
+                $this->equalTo($id)
+            )
+            ->willReturn(null)
+        ;
+
+        $repository = new Repository\PullRequest(
+            $api,
+            $commitRepository
+        );
+
+        $pullRequests = $repository->items(
+            $vendor,
+            $package,
+            $startReference,
+            $endReference
+        );
+
+        $this->assertSame([], $pullRequests);
     }
 
     /**
-     * @param stdClass $pullRequest
-     * @return array
+     * @param array $data
+     * @return mixed
      */
-    private function responseFromPullRequest(stdClass $pullRequest)
+    private function response(array $data = [])
     {
         $template = file_get_contents(__DIR__ . '/_response/pull-request.json');
 
@@ -109,8 +317,8 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
                 '%title%',
             ],
             [
-                $pullRequest->id,
-                $pullRequest->title,
+                $data['id'],
+                $data['title'],
             ],
             $template
         );
@@ -124,11 +332,38 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
     /**
      * @return PHPUnit_Framework_MockObject_MockObject
      */
-    private function pullRequestApi()
+    private function api()
     {
         return $this->getMockBuilder(Api\PullRequest::class)
             ->disableOriginalConstructor()
             ->getMock()
         ;
+    }
+
+    /**
+     * @return PHPUnit_Framework_MockObject_MockObject
+     */
+    private function commitRepository()
+    {
+        return $this->getMockBuilder(Repository\Commit::class)
+            ->disableOriginalConstructor()
+            ->getMock()
+        ;
+    }
+
+    /**
+     * @param string $sha
+     * @param string $message
+     * @return Entity\Commit
+     */
+    private function commit($sha = null, $message = null)
+    {
+        $sha = $sha ?: $this->faker()->unique()->sha1;
+        $message = $message ?: $this->faker()->unique()->sentence();
+
+        return new Entity\Commit(
+            $sha,
+            $message
+        );
     }
 }
