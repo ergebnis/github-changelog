@@ -5,7 +5,6 @@ namespace Localheinz\ChangeLog\Test\Repository;
 use Faker;
 use Github\Api;
 use Localheinz\ChangeLog\Entity;
-use Localheinz\ChangeLog\Provider;
 use Localheinz\ChangeLog\Repository;
 use Localheinz\ChangeLog\Test\Util\FakerTrait;
 use PHPUnit_Framework_MockObject_MockObject;
@@ -15,13 +14,6 @@ use stdClass;
 class CommitTest extends PHPUnit_Framework_TestCase
 {
     use FakerTrait;
-
-    public function testImplementsProvidesItemsInterface()
-    {
-        $repository = new Repository\Commit($this->api());
-
-        $this->assertInstanceOf(Provider\ItemProvider::class, $repository);
-    }
 
     public function testShowReturnsCommitEntityWithShaAndMessageOnSuccess()
     {

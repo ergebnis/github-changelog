@@ -13,16 +13,6 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
 {
     use FakerTrait;
 
-    public function testImplementsProvidesItemsInterface()
-    {
-        $provider = new Provider\PullRequest(
-            $this->commitRepository(),
-            $this->pullRequestRepository()
-        );
-
-        $this->assertInstanceOf(Provider\ItemProvider::class, $provider);
-    }
-
     public function testItemsReturnsEmptyArrayIfNoCommitsWereFound()
     {
         $vendor = 'foo';
