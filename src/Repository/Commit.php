@@ -54,7 +54,7 @@ class Commit
         }
 
         $commits = $this->all($vendor, $package, [
-            'sha' => $start->sha(),
+            'sha' => $end->sha(),
         ]);
 
         if (!is_array($commits)) {
@@ -63,27 +63,27 @@ class Commit
 
         $range = [];
 
-        $currentStart = $start;
+        $tail = null;
 
         while (count($commits)) {
             /* @var Entity\Commit $commit */
             $commit = array_shift($commits);
 
-            if ($commit->sha() === $currentStart->sha()) {
+            if ($tail instanceof Entity\Commit && $commit->sha() === $tail->sha()) {
                 continue;
             }
 
-            array_push($range, $commit);
-
-            if ($commit->sha() === $end->sha()) {
+            if ($commit->sha() === $start->sha()) {
                 break;
             }
 
-            if (!count($commits)) {
-                $currentStart = $commit;
+            // API returns items in reverse order!
+            array_unshift($range, $commit);
 
+            if (!count($commits)) {
+                $tail = $commit;
                 $commits = $this->all($vendor, $package, [
-                    'sha' => $currentStart->sha(),
+                    'sha' => $tail->sha(),
                 ]);
             }
         }

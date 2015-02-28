@@ -141,6 +141,9 @@ class CommitTest extends PHPUnit_Framework_TestCase
 
         $this->assertCount(count($expectedItems), $commits);
 
+        // The GitHub API returns commits in reverse order!
+        $commits = array_reverse($commits);
+
         array_walk($commits, function ($commit) use (&$expectedItems) {
             $expectedItem = array_shift($expectedItems);
 
@@ -263,7 +266,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
         $this->assertSame([], $commits);
     }
 
-    public function testItemsFetchesCommitsUsingShaFromStartCommit()
+    public function testItemsFetchesCommitsUsingShaFromEndCommit()
     {
         $vendor = 'foo';
         $package = 'bar';
@@ -305,7 +308,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($vendor),
                 $this->equalTo($package),
                 $this->equalTo([
-                    'sha' => $startCommit->sha,
+                    'sha' => $endCommit->sha,
                 ])
             )
         ;
@@ -330,6 +333,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
         $api = $this->commitApi();
 
         $startCommit = $this->commitItem();
+        $startCommit->sha = 'start';
 
         $api
             ->expects($this->at(0))
@@ -343,6 +347,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
         ;
 
         $endCommit = $this->commitItem();
+        $endCommit->sha = 'end';
 
         $api
             ->expects($this->at(1))
@@ -355,24 +360,24 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->willReturn($this->response($endCommit))
         ;
 
-        $countBetween = 13;
-        $countAfter = 17;
+        $countBetween = 9;
+        $countBefore = 2;
 
-        $allItems = array_merge(
+        $segment = array_merge(
+            $this->commitItems($countBefore),
             [
                 $startCommit,
             ],
             $this->commitItems($countBetween),
             [
                 $endCommit,
-            ],
-            $this->commitItems($countAfter)
+            ]
         );
 
         $expectedItems = array_slice(
-            $allItems,
-            1,
-            $countBetween + 1
+            $segment,
+            $countBefore + 1, // We don't want the first commit
+            $countBetween + 1 // We want the commits in-between and the last commit
         );
 
         $api
@@ -382,10 +387,10 @@ class CommitTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($vendor),
                 $this->equalTo($package),
                 $this->equalTo([
-                    'sha' => $startCommit->sha,
+                    'sha' => $endCommit->sha,
                 ])
             )
-            ->willReturn($this->responseFromItems($allItems))
+            ->willReturn($this->responseFromItems($segment))
         ;
 
         $repository = new Repository\Commit($api);
@@ -420,6 +425,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
         $api = $this->commitApi();
 
         $startCommit = $this->commitItem();
+        $startCommit->sha = 'start';
 
         $api
             ->expects($this->at(0))
@@ -433,6 +439,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
         ;
 
         $endCommit = $this->commitItem();
+        $endCommit->sha = 'end';
 
         $api
             ->expects($this->at(1))
@@ -445,31 +452,38 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->willReturn($this->response($endCommit))
         ;
 
-        $firstBatch = array_merge(
+        $countBetweenFirstSegment = 4;
+        $countBetweenSecondSegment = 5;
+
+        $countBefore = 2;
+
+        $firstSegment = array_merge(
+            $this->commitItems($countBetweenFirstSegment),
+            [
+                $endCommit,
+            ]
+        );
+
+        $firstCommitFromFirstSegment = reset($firstSegment);
+
+        $secondSegment = array_merge(
+            $this->commitItems($countBefore),
             [
                 $startCommit,
             ],
-            $this->commitItems(50)
-        );
-
-        $lastCommitFromFirstBatch = end($firstBatch);
-
-        $secondBatch = array_merge(
+            $this->commitItems($countBetweenSecondSegment),
             [
-                $lastCommitFromFirstBatch,
-            ],
-            $this->commitItems(20)
+                $firstCommitFromFirstSegment,
+            ]
         );
 
         $expectedItems = array_merge(
             array_slice(
-                $firstBatch,
-                1
+                $secondSegment,
+                $countBefore + 1,
+                $countBetweenSecondSegment
             ),
-            array_slice(
-                $secondBatch,
-                1
-            )
+            $firstSegment
         );
 
         $api
@@ -479,10 +493,10 @@ class CommitTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($vendor),
                 $this->equalTo($package),
                 $this->equalTo([
-                    'sha' => $startCommit->sha,
+                    'sha' => $endCommit->sha,
                 ])
             )
-            ->willReturn($this->responseFromItems($firstBatch))
+            ->willReturn($this->responseFromItems($firstSegment))
         ;
 
         $api
@@ -492,10 +506,10 @@ class CommitTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($vendor),
                 $this->equalTo($package),
                 $this->equalTo([
-                    'sha' => $lastCommitFromFirstBatch->sha,
+                    'sha' => $firstCommitFromFirstSegment->sha,
                 ])
             )
-            ->willReturn($this->responseFromItems($secondBatch))
+            ->willReturn($this->responseFromItems($secondSegment))
         ;
 
         $repository = new Repository\Commit($api);
@@ -596,7 +610,8 @@ class CommitTest extends PHPUnit_Framework_TestCase
         $response = [];
 
         array_walk($commits, function ($commit) use (&$response) {
-            array_push($response, $this->response($commit));
+            // The GitHub API returns commits in reverse order!
+            array_unshift($response, $this->response($commit));
         });
 
         return $response;
