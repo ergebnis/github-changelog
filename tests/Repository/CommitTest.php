@@ -126,10 +126,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
 
         $api = $this->api();
 
-        $expectedCommits = [];
-        for ($i = 0; $i < 15; $i++) {
-            array_push($expectedCommits, $this->commit());
-        }
+        $expectedCommits = $this->commits(15);
 
         $api
             ->expects($this->once())
