@@ -4,9 +4,8 @@ namespace Localheinz\ChangeLog\Repository;
 
 use Github\Api;
 use Localheinz\ChangeLog\Entity;
-use Localheinz\ChangeLog\Provider\ItemProvider;
 
-class Commit implements ItemProvider
+class Commit
 {
     /**
      * @var Api\Repository\Commits

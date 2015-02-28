@@ -5,7 +5,7 @@ namespace Localheinz\ChangeLog\Provider;
 use Localheinz\ChangeLog\Entity;
 use Localheinz\ChangeLog\Repository;
 
-class PullRequest implements ItemProvider
+class PullRequest
 {
     /**
      * @var Commit
