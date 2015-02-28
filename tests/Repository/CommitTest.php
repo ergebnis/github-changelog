@@ -293,6 +293,8 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->willReturn($this->responseFromCommit($startCommit))
         ;
 
+        $endCommit = $this->commit();
+
         $api
             ->expects($this->at(1))
             ->method('show')
@@ -301,7 +303,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($package),
                 $this->equalTo($endReference)
             )
-            ->willReturn($this->responseFromCommit($this->commit()))
+            ->willReturn($this->responseFromCommit($endCommit))
         ;
 
         $api
