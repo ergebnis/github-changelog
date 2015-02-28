@@ -6,14 +6,14 @@ use Faker;
 use Github\Api;
 use Localheinz\ChangeLog\Entity;
 use Localheinz\ChangeLog\Repository;
-use Localheinz\ChangeLog\Test\Util\DataProviderTrait;
+use Localheinz\ChangeLog\Test\Util\FakerTrait;
 use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
 use stdClass;
 
 class PullRequestTest extends PHPUnit_Framework_TestCase
 {
-    use DataProviderTrait;
+    use FakerTrait;
 
     public function testShowReturnsPullRequestEntityWithIdAndTitleOnSuccess()
     {

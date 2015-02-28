@@ -5,18 +5,18 @@ namespace Localheinz\ChangeLog\Test\Provider;
 use Localheinz\ChangeLog\Entity;
 use Localheinz\ChangeLog\Provider;
 use Localheinz\ChangeLog\Repository;
-use Localheinz\ChangeLog\Test\Util\DataProviderTrait;
+use Localheinz\ChangeLog\Test\Util\FakerTrait;
 use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
 
 class PullRequestTest extends PHPUnit_Framework_TestCase
 {
-    use DataProviderTrait;
+    use FakerTrait;
 
     public function testImplementsProvidesItemsInterface()
     {
         $provider = new Provider\PullRequest(
-            $this->commitProvider(),
+            $this->commitRepository(),
             $this->pullRequestRepository()
         );
 
@@ -30,7 +30,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
         $startReference = 'ad77125';
         $endReference = '7fc1c4f';
 
-        $commitProvider = $this->commitProvider();
+        $commitProvider = $this->commitRepository();
 
         $commitProvider
             ->expects($this->once())
@@ -66,7 +66,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
         $startReference = 'ad77125';
         $endReference = '7fc1c4f';
 
-        $commitProvider = $this->commitProvider();
+        $commitProvider = $this->commitRepository();
 
         $commitProvider
             ->expects($this->once())
@@ -102,7 +102,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
         $startReference = 'ad77125';
         $endReference = '7fc1c4f';
 
-        $commitProvider = $this->commitProvider();
+        $commitProvider = $this->commitRepository();
 
         $pullRequest = new Entity\PullRequest(
             9000,
@@ -166,7 +166,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
         $startReference = 'ad77125';
         $endReference = '7fc1c4f';
 
-        $commitProvider = $this->commitProvider();
+        $commitProvider = $this->commitRepository();
 
         $id = 9000;
 
@@ -223,9 +223,9 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
     /**
      * @return PHPUnit_Framework_MockObject_MockObject
      */
-    private function commitProvider()
+    private function commitRepository()
     {
-        return $this->getMockBuilder(Provider\Commit::class)
+        return $this->getMockBuilder(Repository\Commit::class)
             ->disableOriginalConstructor()
             ->getMock()
         ;
@@ -240,5 +240,36 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock()
         ;
+    }
+
+    /**
+     * @param string $sha
+     * @param string $message
+     * @return Entity\Commit
+     */
+    private function commit($sha = null, $message = null)
+    {
+        $sha = $sha ?: $this->faker()->unique()->sha1;
+        $message = $message ?: $this->faker()->unique()->sentence();
+
+        return new Entity\Commit(
+            $sha,
+            $message
+        );
+    }
+
+    /**
+     * @param int $count
+     * @return Entity\Commit[] array
+     */
+    private function commits($count)
+    {
+        $commits = [];
+
+        for ($i = 0; $i < $count; $i++) {
+            array_push($commits, $this->commit());
+        }
+
+        return $commits;
     }
 }
