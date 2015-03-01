@@ -14,6 +14,7 @@
         "knplabs/github-api": "^1.4.4"
     },
     "require-dev": {
+        "codeclimate/php-test-reporter": "0.1.*",
         "fabpot/php-cs-fixer": "~1.5",
         "fzaninotto/faker": "^1.4.0",
         "phpunit/phpunit": "~4.5"
