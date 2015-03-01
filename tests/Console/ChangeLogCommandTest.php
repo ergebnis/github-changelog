@@ -161,12 +161,71 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf(HttpClient\CachedHttpClient::class, $client->getHttpClient());
     }
 
+    public function testExecuteAuthenticatesIfTokenOptionIsGiven()
+    {
+        $token = 'foo9000';
+
+        $client = $this->getMockBuilder(Client::class)
+            ->disableOriginalConstructor()
+            ->getMock()
+        ;
+
+        $client
+            ->expects($this->once())
+            ->method('authenticate')
+            ->with(
+                $this->equalTo($token),
+                $this->equalTo(Client::AUTH_HTTP_TOKEN)
+            )
+        ;
+
+        $this->command->setClient($client);
+
+        $this->command->run(
+            $this->getInput(
+                [],
+                [
+                    'token' => $token,
+                ]
+            ),
+            $this->getOutput()
+        );
+    }
+
     /**
+     * @param array $arguments
+     * @param array $options
      * @return Input\InputInterface
      */
-    private function getInput()
+    private function getInput(array $arguments = [], array $options = [])
     {
-        return $this->getMockBuilder(Input\InputInterface::class)->getMock();
+        $input = $this->getMockBuilder(Input\InputInterface::class)->getMock();
+
+        $input
+            ->expects($this->any())
+            ->method('getArgument')
+            ->willReturnCallback(function ($name) use ($arguments) {
+                if (!array_key_exists($name, $arguments)) {
+                    return null;
+                }
+
+                return $arguments[$name];
+            })
+        ;
+
+        $input
+            ->expects($this->any())
+            ->method('getOption')
+            ->willReturnCallback(function ($name) use ($options) {
+                if (!array_key_exists($name, $options)) {
+                    return null;
+                }
+
+                return $options[$name];
+            })
+        ;
+
+        return $input;
     }
 
     /**

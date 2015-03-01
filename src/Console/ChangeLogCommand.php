@@ -63,7 +63,15 @@ class ChangeLogCommand extends Command
      */
     protected function execute(Input\InputInterface $input, Output\OutputInterface $output)
     {
-        $this->client();
+        $client = $this->client();
+
+        $token = $input->getOption('token');
+        if (null !== $token) {
+            $client->authenticate(
+                $token,
+                Client::AUTH_HTTP_TOKEN
+            );
+        }
     }
 
     /**
