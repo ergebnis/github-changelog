@@ -9,6 +9,10 @@ cache:
   directories:
     - $HOME/.composer/cache
 
+addons:
+  code_climate:
+    repo_token: foo
+
 before_install:
   - composer self-update
 
@@ -20,7 +24,7 @@ script:
   - vendor/bin/phpunit --coverage-clover build/logs/clover.xml
 
 after_script:
-  - CODECLIMATE_REPO_TOKEN=foo ./vendor/bin/test-reporter
+  - vendor/bin/test-reporter
 
 notifications:
   email: false
