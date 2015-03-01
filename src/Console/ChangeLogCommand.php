@@ -2,11 +2,25 @@
 
 namespace Localheinz\GitHub\ChangeLog\Console;
 
+use Github\Client;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input;
 
 class ChangeLogCommand extends Command
 {
+    /**
+     * @var Client
+     */
+    private $client;
+
+    /**
+     * @param Client $client
+     */
+    public function setClient(Client $client)
+    {
+        $this->client = $client;
+    }
+
     protected function configure()
     {
         $this

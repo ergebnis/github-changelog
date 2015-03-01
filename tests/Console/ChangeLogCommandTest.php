@@ -2,8 +2,10 @@
 
 namespace Localheinz\GitHub\ChangeLog\Test\Console;
 
+use Github\Client;
 use Localheinz\GitHub\ChangeLog\Console;
 use PHPUnit_Framework_TestCase;
+use ReflectionObject;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -119,5 +121,22 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
                 null,
             ],
         ];
+    }
+
+    public function testCanSetClient()
+    {
+        $client = $this->getMockBuilder(Client::class)
+            ->disableOriginalConstructor()
+            ->getMock()
+        ;
+
+        $this->command->setClient($client);
+
+        $reflectionObject = new ReflectionObject($this->command);
+
+        $property = $reflectionObject->getProperty('client');
+        $property->setAccessible(true);
+
+        $this->assertSame($client, $property->getValue($this->command));
     }
 }
