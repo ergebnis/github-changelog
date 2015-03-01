@@ -11,7 +11,8 @@ cache:
 
 addons:
   code_climate:
-    repo_token: f63d88edcbb927b2f0ebd81d64d04e4713f43e762255e62e7a7873c7c953be1d
+    repo_token:
+      secure: "jknkNfajYYpZfyUJuOlPS/3tXZeLrxcWFET1ZK+tc4UgfY69w4LSG9qrJnLfw0FdG32Rv9xlRkdaGCj7iBKl2p2pPnj0TfZ0a9PbQUA76g0+0ZFqwdYX8dmL1uPrdxp5P0n3Lakk10eJyjP9yX7E99OvSFt1ZCN4t4uIu/LIc0Q="
 
 before_install:
   - composer self-update
