@@ -3,8 +3,7 @@
 namespace Localheinz\GitHub\ChangeLog\Console;
 
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input;
 
 class ChangeLogCommand extends Command
 {
@@ -15,25 +14,30 @@ class ChangeLogCommand extends Command
             ->setDescription('Creates a changelog based on references')
             ->addArgument(
                 'vendor',
-                InputArgument::REQUIRED,
+                Input\InputArgument::REQUIRED,
                 'The name of the vendor, e.g., "localheinz"'
             )
             ->addArgument(
                 'package',
-                InputArgument::REQUIRED,
+                Input\InputArgument::REQUIRED,
                 'The name of the package, e.g. "github-changelog"'
             )
             ->addArgument(
                 'start',
-                InputArgument::REQUIRED,
+                Input\InputArgument::REQUIRED,
                 'The start reference, e.g. "1.0.0"'
             )
             ->addArgument(
                 'end',
-                InputArgument::REQUIRED,
+                Input\InputArgument::REQUIRED,
                 'The end reference, e.g. "1.1.0"'
             )
-            ->addOption('token', 't', InputOption::VALUE_OPTIONAL, 'The GitHub token')
+            ->addOption(
+                'token',
+                't',
+                Input\InputOption::VALUE_OPTIONAL,
+                'The GitHub token'
+            )
         ;
     }
 }
