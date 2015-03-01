@@ -149,8 +149,8 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
         $this->command = new Console\ChangeLogCommand();
 
         $this->command->run(
-            $this->getInput(),
-            $this->getOutput()
+            $this->input(),
+            $this->output()
         );
 
         $reflectionObject = new ReflectionObject($this->command);
@@ -184,13 +184,13 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
         $this->command->setClient($client);
 
         $this->command->run(
-            $this->getInput(
+            $this->input(
                 [],
                 [
                     'token' => $token,
                 ]
             ),
-            $this->getOutput()
+            $this->output()
         );
     }
 
@@ -210,7 +210,7 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
      * @param array $options
      * @return Input\InputInterface
      */
-    private function getInput(array $arguments = [], array $options = [])
+    private function input(array $arguments = [], array $options = [])
     {
         $input = $this->getMockBuilder(Input\InputInterface::class)->getMock();
 
@@ -244,7 +244,7 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
     /**
      * @return Output\OutputInterface
      */
-    private function getOutput()
+    private function output()
     {
         return $this->getMockBuilder(Output\OutputInterface::class)->getMock();
     }
