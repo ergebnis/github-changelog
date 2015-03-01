@@ -4,6 +4,7 @@ namespace Localheinz\GitHub\ChangeLog\Console;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 
 class ChangeLogCommand extends Command
 {
@@ -32,6 +33,7 @@ class ChangeLogCommand extends Command
                 InputArgument::REQUIRED,
                 'The end reference, e.g. "1.1.0"'
             )
+            ->addOption('token', 't', InputOption::VALUE_OPTIONAL, 'The GitHub token')
         ;
     }
 }

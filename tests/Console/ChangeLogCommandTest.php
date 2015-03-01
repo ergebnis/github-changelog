@@ -5,6 +5,7 @@ namespace Localheinz\GitHub\ChangeLog\Test\Console;
 use Localheinz\GitHub\ChangeLog\Console;
 use PHPUnit_Framework_TestCase;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 
 class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
 {
@@ -77,6 +78,45 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
                 'end',
                 true,
                 'The end reference, e.g. "1.1.0"',
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider providerOption
+     *
+     * @param string $name
+     * @param string $shortcut
+     * @param bool $required
+     * @param string $description
+     * @param mixed $default
+     */
+    public function testOption($name, $shortcut, $required, $description, $default)
+    {
+        $this->assertTrue($this->command->getDefinition()->hasOption($name));
+
+        /* @var InputOption $option */
+        $option = $this->command->getDefinition()->getOption($name);
+
+        $this->assertSame($name, $option->getName());
+        $this->assertSame($shortcut, $option->getShortcut());
+        $this->assertSame($required, $option->isValueRequired());
+        $this->assertSame($description, $option->getDescription());
+        $this->assertSame($default, $option->getDefault());
+    }
+
+    /**
+     * @return array
+     */
+    public function providerOption()
+    {
+        return [
+            [
+                'token',
+                't',
+                false,
+                'The GitHub token',
+                null,
             ],
         ];
     }
