@@ -1,5 +1,5 @@
 {
-    "name": "localheinz/change-log",
+    "name": "localheinz/github-changelog",
     "description": "A script that generates a change log based on specified references.",
     "authors": [
         {
@@ -20,12 +20,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Localheinz\\ChangeLog\\": "src"
+            "Localheinz\\GitHub\\ChangeLog\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Localheinz\\ChangeLog\\Test\\": "tests"
+            "Localheinz\\GitHub\\ChangeLog\\Test\\": "tests"
         }
     }
 }
