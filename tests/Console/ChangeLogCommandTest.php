@@ -162,14 +162,11 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return Input\StringInput
+     * @return Input\InputInterface
      */
     private function getInput()
     {
-        return $this->getMockBuilder(Input\StringInput::class)
-            ->disableOriginalConstructor()
-            ->getMock()
-        ;
+        return $this->getMockBuilder(Input\InputInterface::class)->getMock();
     }
 
     /**
