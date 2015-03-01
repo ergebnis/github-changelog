@@ -17,7 +17,10 @@ install:
 
 script:
   - vendor/bin/php-cs-fixer fix --config-file=./.php_cs --dry-run --diff -v
-  - vendor/bin/phpunit
+  - vendor/bin/phpunit --coverage-clover build/logs/clover.xml
+
+after_script:
+  - CODECLIMATE_REPO_TOKEN=foo ./vendor/bin/test-reporter
 
 notifications:
   email: false
