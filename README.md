@@ -3,7 +3,7 @@
 ## Installation
 
 ```
-$ composer require --sort-packages localheinz/change-log
+$ composer require --sort-packages localheinz/github-changelog
 ```
 
 
