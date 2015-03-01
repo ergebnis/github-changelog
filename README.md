@@ -10,8 +10,8 @@ require 'vendor/autoload.php';
 
 use Github\Client;
 use Github\HttpClient\CachedHttpClient;
-use Localheinz\ChangeLog\Entity;
-use Localheinz\ChangeLog\Repository;
+use Localheinz\GitHub\ChangeLog\Entity;
+use Localheinz\GitHub\ChangeLog\Repository;
 
 $client = new Client(new CachedHttpClient());
 $client->authenticate(

@@ -1,9 +1,9 @@
 <?php
 
-namespace Localheinz\ChangeLog\Provider;
+namespace Localheinz\GitHub\ChangeLog\Provider;
 
-use Localheinz\ChangeLog\Entity;
-use Localheinz\ChangeLog\Repository;
+use Localheinz\GitHub\ChangeLog\Entity;
+use Localheinz\GitHub\ChangeLog\Repository;
 
 class PullRequest
 {

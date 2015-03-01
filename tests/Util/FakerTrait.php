@@ -1,6 +1,6 @@
 <?php
 
-namespace Localheinz\ChangeLog\Test\Util;
+namespace Localheinz\GitHub\ChangeLog\Test\Util;
 
 use Faker;
 
