@@ -20,6 +20,13 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->command = new Console\ChangeLogCommand();
+
+        $client = $this->getMockBuilder(Client::class)
+            ->disableOriginalConstructor()
+            ->getMock()
+        ;
+
+        $this->command->setClient($client);
     }
 
     protected function tearDown()
@@ -143,6 +150,8 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
 
     public function testExecuteLazilyCreatesClientWithCachedHttpClient()
     {
+        $this->command = new Console\ChangeLogCommand();
+
         $this->command->run(
             $this->getInput(),
             $this->getOutput()
