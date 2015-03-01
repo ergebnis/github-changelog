@@ -5,6 +5,7 @@ namespace Localheinz\GitHub\ChangeLog\Test\Console;
 use Github\Client;
 use Github\HttpClient;
 use Localheinz\GitHub\ChangeLog\Console;
+use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
 use ReflectionObject;
 use Symfony\Component\Console\Input;
@@ -21,12 +22,7 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
     {
         $this->command = new Console\ChangeLogCommand();
 
-        $client = $this->getMockBuilder(Client::class)
-            ->disableOriginalConstructor()
-            ->getMock()
-        ;
-
-        $this->command->setClient($client);
+        $this->command->setClient($this->client());
     }
 
     protected function tearDown()
@@ -174,10 +170,7 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
     {
         $token = 'foo9000';
 
-        $client = $this->getMockBuilder(Client::class)
-            ->disableOriginalConstructor()
-            ->getMock()
-        ;
+        $client = $this->client();
 
         $client
             ->expects($this->once())
@@ -199,6 +192,17 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
             ),
             $this->getOutput()
         );
+    }
+
+    /**
+     * @return PHPUnit_Framework_MockObject_MockObject|Client
+     */
+    private function client()
+    {
+        return $this->getMockBuilder(Client::class)
+            ->disableOriginalConstructor()
+            ->getMock()
+        ;
     }
 
     /**
