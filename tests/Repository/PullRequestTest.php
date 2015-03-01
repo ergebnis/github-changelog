@@ -1,12 +1,12 @@
 <?php
 
-namespace Localheinz\ChangeLog\Test\Repository;
+namespace Localheinz\GitHub\ChangeLog\Test\Repository;
 
 use Faker;
 use Github\Api;
-use Localheinz\ChangeLog\Entity;
-use Localheinz\ChangeLog\Repository;
-use Localheinz\ChangeLog\Test\Util\FakerTrait;
+use Localheinz\GitHub\ChangeLog\Entity;
+use Localheinz\GitHub\ChangeLog\Repository;
+use Localheinz\GitHub\ChangeLog\Test\Util\FakerTrait;
 use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
 use stdClass;

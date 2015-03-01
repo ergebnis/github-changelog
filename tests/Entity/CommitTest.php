@@ -1,8 +1,8 @@
 <?php
 
-namespace Localheinz\ChangeLog\Test\Entity;
+namespace Localheinz\GitHub\ChangeLog\Test\Entity;
 
-use Localheinz\ChangeLog\Entity;
+use Localheinz\GitHub\ChangeLog\Entity;
 use PHPUnit_Framework_TestCase;
 
 class CommitTest extends PHPUnit_Framework_TestCase

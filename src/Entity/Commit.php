@@ -1,6 +1,6 @@
 <?php
 
-namespace Localheinz\ChangeLog\Entity;
+namespace Localheinz\GitHub\ChangeLog\Entity;
 
 class Commit
 {
