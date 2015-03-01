@@ -8,6 +8,9 @@ class ChangeLogCommand extends Command
 {
     protected function configure()
     {
-        $this->setName('localheinz:changelog');
+        $this
+            ->setName('localheinz:changelog')
+            ->setDescription('Creates a changelog based on references')
+        ;
     }
 }

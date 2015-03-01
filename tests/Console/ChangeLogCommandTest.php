@@ -26,4 +26,9 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame('localheinz:changelog', $this->command->getName());
     }
+
+    public function testDescription()
+    {
+        $this->assertSame('Creates a changelog based on references', $this->command->getDescription());
+    }
 }
