@@ -7,10 +7,8 @@ use Github\HttpClient;
 use Localheinz\GitHub\ChangeLog\Console;
 use PHPUnit_Framework_TestCase;
 use ReflectionObject;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\StringInput;
-use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Input;
+use Symfony\Component\Console\Output;
 
 class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
 {
@@ -50,7 +48,7 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
     {
         $this->assertTrue($this->command->getDefinition()->hasArgument($name));
 
-        /* @var InputArgument $argument */
+        /* @var Input\InputArgument $argument */
         $argument = $this->command->getDefinition()->getArgument($name);
 
         $this->assertSame($name, $argument->getName());
@@ -100,7 +98,7 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
     {
         $this->assertTrue($this->command->getDefinition()->hasOption($name));
 
-        /* @var InputOption $option */
+        /* @var Input\InputOption $option */
         $option = $this->command->getDefinition()->getOption($name);
 
         $this->assertSame($name, $option->getName());
@@ -164,21 +162,21 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return StringInput
+     * @return Input\StringInput
      */
     private function getInput()
     {
-        return $this->getMockBuilder(StringInput::class)
+        return $this->getMockBuilder(Input\StringInput::class)
             ->disableOriginalConstructor()
             ->getMock()
         ;
     }
 
     /**
-     * @return OutputInterface
+     * @return Output\OutputInterface
      */
     private function getOutput()
     {
-        return $this->getMockBuilder(OutputInterface::class)->getMock();
+        return $this->getMockBuilder(Output\OutputInterface::class)->getMock();
     }
 }
