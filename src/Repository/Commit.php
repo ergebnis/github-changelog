@@ -57,10 +57,6 @@ class Commit
             'sha' => $end->sha(),
         ]);
 
-        if (!is_array($commits)) {
-            return [];
-        }
-
         $range = [];
 
         $tail = null;
