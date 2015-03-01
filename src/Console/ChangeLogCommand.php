@@ -3,8 +3,10 @@
 namespace Localheinz\GitHub\ChangeLog\Console;
 
 use Github\Client;
+use Github\HttpClient;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input;
+use Symfony\Component\Console\Output;
 
 class ChangeLogCommand extends Command
 {
@@ -53,5 +55,26 @@ class ChangeLogCommand extends Command
                 'The GitHub token'
             )
         ;
+    }
+
+    /**
+     * @param Input\InputInterface $input
+     * @param Output\OutputInterface $output
+     */
+    protected function execute(Input\InputInterface $input, Output\OutputInterface $output)
+    {
+        $this->client();
+    }
+
+    /**
+     * @return Client
+     */
+    private function client()
+    {
+        if (null === $this->client) {
+            $this->client = new Client(new HttpClient\CachedHttpClient());
+        }
+
+        return $this->client;
     }
 }

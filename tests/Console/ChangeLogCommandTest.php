@@ -3,11 +3,14 @@
 namespace Localheinz\GitHub\ChangeLog\Test\Console;
 
 use Github\Client;
+use Github\HttpClient;
 use Localheinz\GitHub\ChangeLog\Console;
 use PHPUnit_Framework_TestCase;
 use ReflectionObject;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\StringInput;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
 {
@@ -138,5 +141,44 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
         $property->setAccessible(true);
 
         $this->assertSame($client, $property->getValue($this->command));
+    }
+
+    public function testExecuteLazilyCreatesClientWithCachedHttpClient()
+    {
+        $this->command->run(
+            $this->getInput(),
+            $this->getOutput()
+        );
+
+        $reflectionObject = new ReflectionObject($this->command);
+
+        $property = $reflectionObject->getProperty('client');
+        $property->setAccessible(true);
+
+        $client = $property->getValue($this->command);
+
+        $this->assertInstanceOf(Client::class, $client);
+
+        /* @var Client $client */
+        $this->assertInstanceOf(HttpClient\CachedHttpClient::class, $client->getHttpClient());
+    }
+
+    /**
+     * @return StringInput
+     */
+    private function getInput()
+    {
+        return $this->getMockBuilder(StringInput::class)
+            ->disableOriginalConstructor()
+            ->getMock()
+        ;
+    }
+
+    /**
+     * @return OutputInterface
+     */
+    private function getOutput()
+    {
+        return $this->getMockBuilder(OutputInterface::class)->getMock();
     }
 }
