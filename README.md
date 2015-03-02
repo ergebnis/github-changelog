@@ -14,7 +14,7 @@ Create your changelogs anywhere:
 
 ```bash
 $ github-changelog pull-requests localheinz github-changelog 0.1.0 0.1.1
-- Fix: Show PHP version requirement (#21)
+- Fix: Version foo with rebasing and whatnot (#36)
 ```
 
 
@@ -30,7 +30,7 @@ Create your changelog from within in your project:
 
 ```bash
 $ vendor/bin/github-changelog pull-requests localheinz github-changelog 0.1.0 0.1.1
-- Fix: Show PHP version requirement (#21)
+- Fix: Version foo with rebasing and whatnot (#36)
 ```
 
 Or retrieve pull-requests between references in your application, if you need it:
@@ -71,5 +71,5 @@ array_walk($pullRequests, function (Entity\PullRequest $pullRequest) {
     );
 });
 
-// - Fix: Show PHP version requirement (#21)
+// - Fix: Version foo with rebasing and whatnot (#36)
 ```
