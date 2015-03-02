@@ -7,7 +7,7 @@
 Install globally.
 
 ```bash
-$ composer global require localheinz/github-changelog:^0.2
+$ composer global require localheinz/github-changelog:^0.1
 ```
 
 Create your changelogs anywhere:
@@ -23,7 +23,7 @@ $ github-changelog pull-requests localheinz github-changelog 0.1.0 0.1.1
 Install locally (in your project):
 
 ```bash
-$ composer require --sort-packages localheinz/github-changelog:^0.2
+$ composer require --sort-packages localheinz/github-changelog:^0.1
 ```
 
 Create your changelog from within in your project:
