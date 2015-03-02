@@ -30,6 +30,14 @@ class ChangeLogCommand extends Command
         $this->client = $client;
     }
 
+    /**
+     * @param Repository\PullRequest $pullRequestRepository
+     */
+    public function setPullRequestRepository(Repository\PullRequest $pullRequestRepository)
+    {
+        $this->pullRequestRepository = $pullRequestRepository;
+    }
+
     protected function configure()
     {
         $this

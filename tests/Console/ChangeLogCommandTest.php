@@ -24,6 +24,7 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
         $this->command = new Console\ChangeLogCommand();
 
         $this->command->setClient($this->client());
+        $this->command->setPullRequestRepository($this->pullRequestRepository());
     }
 
     protected function tearDown()
@@ -195,6 +196,20 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    public function testCanSetPullRequestRepository()
+    {
+        $pullRequestRepository = $this->pullRequestRepository();
+
+        $this->command->setPullRequestRepository($pullRequestRepository);
+
+        $reflectionObject = new ReflectionObject($this->command);
+
+        $property = $reflectionObject->getProperty('pullRequestRepository');
+        $property->setAccessible(true);
+
+        $this->assertSame($pullRequestRepository, $property->getValue($this->command));
+    }
+
     public function testExecuteLazilyCreatesPullRequestRepository()
     {
         $client = $this->client();
@@ -222,6 +237,17 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
     private function client()
     {
         return $this->getMockBuilder(Client::class)
+            ->disableOriginalConstructor()
+            ->getMock()
+        ;
+    }
+
+    /**
+     * @return PHPUnit_Framework_MockObject_MockObject|Repository\PullRequest
+     */
+    private function pullRequestRepository()
+    {
+        return $this->getMockBuilder(Repository\PullRequest::class)
             ->disableOriginalConstructor()
             ->getMock()
         ;
