@@ -2,6 +2,7 @@
 
 namespace Localheinz\GitHub\ChangeLog\Console;
 
+use Exception;
 use Github\Api;
 use Github\Client;
 use Github\HttpClient;
@@ -97,12 +98,21 @@ class PullRequestCommand extends Command
             );
         }
 
-        $pullRequests = $this->pullRequestRepository()->items(
-            $input->getArgument('vendor'),
-            $input->getArgument('package'),
-            $input->getArgument('start-reference'),
-            $input->getArgument('end-reference')
-        );
+        try {
+            $pullRequests = $this->pullRequestRepository()->items(
+                $input->getArgument('vendor'),
+                $input->getArgument('package'),
+                $input->getArgument('start-reference'),
+                $input->getArgument('end-reference')
+            );
+        } catch (Exception $exception) {
+            $output->writeln(sprintf(
+                '<error>%s</error>',
+                $exception->getMessage()
+            ));
+
+            return 1;
+        }
 
         $template = $input->getOption('template');
 

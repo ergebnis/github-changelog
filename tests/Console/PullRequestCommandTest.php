@@ -2,6 +2,7 @@
 
 namespace Localheinz\GitHub\ChangeLog\Test\Console;
 
+use Exception;
 use Github\Client;
 use Github\HttpClient;
 use Localheinz\GitHub\ChangeLog\Console;
@@ -345,6 +346,44 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
         );
 
         $this->assertSame(0, $exitCode);
+    }
+
+    public function testExecuteHandlesExceptionsThrownWhenFetchingPullRequests()
+    {
+        $exception = new Exception('Wait, this should not happen!');
+        $pullRequestRepository = $this->pullRequestRepository();
+
+        $pullRequestRepository
+            ->expects($this->any())
+            ->method('items')
+            ->willThrowException($exception)
+        ;
+
+        $this->command->setPullRequestRepository($pullRequestRepository);
+
+        $arguments = [
+            'vendor' => 'foo',
+            'package' => 'bar',
+            'start-reference' => 'ad77125',
+            'end-reference' => '7fc1c4f',
+        ];
+
+        $expectedMessages = [
+            sprintf(
+                '<error>%s</error>',
+                $exception->getMessage()
+            ),
+        ];
+
+        $exitCode = $this->command->run(
+            $this->input(
+                $arguments,
+                []
+            ),
+            $this->output($expectedMessages)
+        );
+
+        $this->assertSame(1, $exitCode);
     }
 
     /**
