@@ -5,6 +5,7 @@ namespace Localheinz\GitHub\ChangeLog\Test\Console;
 use Github\Client;
 use Github\HttpClient;
 use Localheinz\GitHub\ChangeLog\Console;
+use Localheinz\GitHub\ChangeLog\Repository;
 use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
 use ReflectionObject;
@@ -192,6 +193,27 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
             ),
             $this->output()
         );
+    }
+
+    public function testExecuteLazilyCreatesPullRequestRepository()
+    {
+        $client = $this->client();
+
+        $this->command->setClient($client);
+
+        $this->command->run(
+            $this->input(),
+            $this->output()
+        );
+
+        $reflectionObject = new ReflectionObject($this->command);
+
+        $property = $reflectionObject->getProperty('pullRequestRepository');
+        $property->setAccessible(true);
+
+        $pullRequestRepository = $property->getValue($this->command);
+
+        $this->assertInstanceOf(Repository\PullRequest::class, $pullRequestRepository);
     }
 
     /**

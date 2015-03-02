@@ -2,8 +2,10 @@
 
 namespace Localheinz\GitHub\ChangeLog\Console;
 
+use Github\Api;
 use Github\Client;
 use Github\HttpClient;
+use Localheinz\GitHub\ChangeLog\Repository;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input;
 use Symfony\Component\Console\Output;
@@ -14,6 +16,11 @@ class ChangeLogCommand extends Command
      * @var Client
      */
     private $client;
+
+    /**
+     * @var Repository\PullRequest
+     */
+    private $pullRequestRepository;
 
     /**
      * @param Client $client
@@ -72,6 +79,8 @@ class ChangeLogCommand extends Command
                 Client::AUTH_HTTP_TOKEN
             );
         }
+
+        $this->pullRequestRepository();
     }
 
     /**
@@ -84,5 +93,25 @@ class ChangeLogCommand extends Command
         }
 
         return $this->client;
+    }
+
+    /**
+     * @return Repository\PullRequest
+     */
+    private function pullRequestRepository()
+    {
+        if (null === $this->pullRequestRepository) {
+            $client = $this->client();
+
+            $pullRequestApi = new Api\PullRequest($client);
+            $commitApi = new Api\Repository\Commits($client);
+
+            $this->pullRequestRepository = new Repository\PullRequest(
+                $pullRequestApi,
+                new Repository\Commit($commitApi)
+            );
+        }
+
+        return $this->pullRequestRepository;
     }
 }
