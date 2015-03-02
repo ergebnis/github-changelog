@@ -1,16 +1,41 @@
 # README [![Build Status](https://travis-ci.org/localheinz/github-changelog.svg?branch=master)](https://travis-ci.org/localheinz/github-changelog) [![Code Climate](https://codeclimate.com/github/localheinz/github-changelog/badges/gpa.svg)](https://codeclimate.com/github/localheinz/github-changelog) [![Test Coverage](https://codeclimate.com/github/localheinz/github-changelog/badges/coverage.svg)](https://codeclimate.com/github/localheinz/github-changelog) [![Dependency Status](https://www.versioneye.com/user/projects/54f078634f31083e1b0004c7/badge.svg?style=flat)](https://www.versioneye.com/user/projects/54f078634f31083e1b0004c7)
 
-## Installation
+## Usage
+
+### Global installation
+
+Install globally.
+
+```
+$ composer global require localheinz/github-changelog
+```
+
+Create your changelogs anywhere:
+
+```
+$ github-changelog pull-requests localheinz github-changelog 0.1.0 0.1.1
+- Fix: Show PHP version requirement (#21)
+```
+
+
+## Local installation
+
+Install locally (in your project):
 
 ```
 $ composer require --sort-packages localheinz/github-changelog
+``
+
+Create your changelog from within in your project:
+
+```
+$ vendor/bin/github-changelog pull-requests localheinz github-changelog 0.1.0 0.1.1
+- Fix: Show PHP version requirement (#21)
 ```
 
+Or retrieve pull-requests between references in your application, if you need it:
 
-## Example
-
-
-```php
+```
 <?php
 
 require 'vendor/autoload.php';
@@ -32,10 +57,10 @@ $repository = new Repository\PullRequest(
 );
 
 $pullRequests = $repository->items(
-    'zendframework',
-    'modules.zendframework.com',
-    '1.1.1',
-    '1.1.2'
+    'localheinz',
+    'github-changelog',
+    '0.1.0',
+    '0.1.1'
 );
 
 array_walk($pullRequests, function (Entity\PullRequest $pullRequest) {
@@ -45,11 +70,6 @@ array_walk($pullRequests, function (Entity\PullRequest $pullRequest) {
         $pullRequest->id()
     );
 });
-```
 
-```
-$ php example.php
-- "Show module on github" target blank (#417)
-- Fix: Return null if nothing was found by Mapper\Module (#418)
-- Fix: Method actually returns unregistered modules (#420)
+// - Fix: Show PHP version requirement (#21)
 ```
