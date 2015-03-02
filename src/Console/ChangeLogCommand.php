@@ -83,6 +83,7 @@ class ChangeLogCommand extends Command
     /**
      * @param Input\InputInterface $input
      * @param Output\OutputInterface $output
+     * @return int
      */
     protected function execute(Input\InputInterface $input, Output\OutputInterface $output)
     {
@@ -120,6 +121,8 @@ class ChangeLogCommand extends Command
 
             $output->writeln($message);
         });
+
+        return 0;
     }
 
     /**
