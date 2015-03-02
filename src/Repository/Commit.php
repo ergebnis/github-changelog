@@ -119,6 +119,10 @@ class Commit
      */
     public function all($vendor, $package, array $params = [])
     {
+        if (!array_key_exists('per_page', $params)) {
+            $params['per_page'] = 250;
+        }
+
         $response = $this->api->all(
             $vendor,
             $package,

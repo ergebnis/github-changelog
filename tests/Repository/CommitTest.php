@@ -94,20 +94,88 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->with(
                 $this->equalTo($vendor),
                 $this->equalTo($package),
-                $this->equalTo([
-                    'sha' => $sha,
-                ])
+                $this->arrayHasKeyAndValue('sha', $sha)
             )
             ->willReturn('snafu')
         ;
 
         $repository = new Repository\Commit($api);
 
-        $commits = $repository->all($vendor, $package, [
-            'sha' => $sha,
-        ]);
+        $commits = $repository->all(
+            $vendor,
+            $package,
+            [
+                'sha' => $sha,
+            ]
+        );
 
         $this->assertSame([], $commits);
+    }
+
+    public function testAllSetsParamsPerPageTo250()
+    {
+        $vendor = 'foo';
+        $package = 'bar';
+        $sha = 'ad77125';
+
+        $api = $this->commitApi();
+
+        $expectedItems = $this->commitItems(15);
+
+        $api
+            ->expects($this->once())
+            ->method('all')
+            ->with(
+                $this->equalTo($vendor),
+                $this->equalTo($package),
+                $this->arrayHasKeyAndValue('per_page', 250)
+            )
+            ->willReturn($this->responseFromItems($expectedItems))
+        ;
+
+        $repository = new Repository\Commit($api);
+
+        $repository->all(
+            $vendor,
+            $package,
+            [
+                'sha' => $sha,
+            ]
+        );
+    }
+
+    public function testAllStillAllowsSettingPerPage()
+    {
+        $vendor = 'foo';
+        $package = 'bar';
+        $sha = 'ad77125';
+        $perPage = 13;
+
+        $api = $this->commitApi();
+
+        $expectedItems = $this->commitItems(15);
+
+        $api
+            ->expects($this->once())
+            ->method('all')
+            ->with(
+                $this->equalTo($vendor),
+                $this->equalTo($package),
+                $this->arrayHasKeyAndValue('per_page', $perPage)
+            )
+            ->willReturn($this->responseFromItems($expectedItems))
+        ;
+
+        $repository = new Repository\Commit($api);
+
+        $repository->all(
+            $vendor,
+            $package,
+            [
+                'sha' => $sha,
+                'per_page' => $perPage,
+            ]
+        );
     }
 
     public function testAllReturnsArrayOfCommitEntities()
@@ -126,18 +194,19 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->with(
                 $this->equalTo($vendor),
                 $this->equalTo($package),
-                $this->equalTo([
-                    'sha' => $sha,
-                ])
+                $this->arrayHasKeyAndValue('sha', $sha)
             )
             ->willReturn($this->responseFromItems($expectedItems))
         ;
 
         $repository = new Repository\Commit($api);
 
-        $commits = $repository->all($vendor, $package, [
-            'sha' => $sha,
-        ]);
+        $commits = $repository->all(
+            $vendor,
+            $package, [
+                'sha' => $sha,
+            ]
+        );
 
         $this->assertCount(count($expectedItems), $commits);
 
@@ -307,9 +376,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->with(
                 $this->equalTo($vendor),
                 $this->equalTo($package),
-                $this->equalTo([
-                    'sha' => $endCommit->sha,
-                ])
+                $this->arrayHasKeyAndValue('sha', $endCommit->sha)
             )
         ;
 
@@ -386,9 +453,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->with(
                 $this->equalTo($vendor),
                 $this->equalTo($package),
-                $this->equalTo([
-                    'sha' => $endCommit->sha,
-                ])
+                $this->arrayHasKeyAndValue('sha', $endCommit->sha)
             )
             ->willReturn($this->responseFromItems($segment))
         ;
@@ -492,9 +557,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->with(
                 $this->equalTo($vendor),
                 $this->equalTo($package),
-                $this->equalTo([
-                    'sha' => $endCommit->sha,
-                ])
+                $this->arrayHasKeyAndValue('sha', $endCommit->sha)
             )
             ->willReturn($this->responseFromItems($firstSegment))
         ;
@@ -505,9 +568,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->with(
                 $this->equalTo($vendor),
                 $this->equalTo($package),
-                $this->equalTo([
-                    'sha' => $firstCommitFromFirstSegment->sha,
-                ])
+                $this->arrayHasKeyAndValue('sha', $firstCommitFromFirstSegment->sha)
             )
             ->willReturn($this->responseFromItems($secondSegment))
         ;
@@ -615,5 +676,24 @@ class CommitTest extends PHPUnit_Framework_TestCase
         });
 
         return $response;
+    }
+
+    /**
+     * @param string $key
+     * @param string $value
+     * @return \PHPUnit_Framework_Constraint_Callback
+     */
+    private function arrayHasKeyAndValue($key, $value)
+    {
+        return $this->callback(function ($array) use ($key, $value) {
+            if (is_array($array)
+                && array_key_exists($key, $array)
+                && $value === $array[$key]
+            ) {
+                return true;
+            }
+
+            return false;
+        });
     }
 }
