@@ -4,7 +4,7 @@
 
 ### Global installation
 
-Install globally.
+Install globally:
 
 ```bash
 $ composer global require localheinz/github-changelog:^0.1
