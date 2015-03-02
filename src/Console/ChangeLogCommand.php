@@ -69,6 +69,13 @@ class ChangeLogCommand extends Command
                 Input\InputOption::VALUE_OPTIONAL,
                 'The GitHub token'
             )
+            ->addOption(
+                'template',
+                't',
+                Input\InputOption::VALUE_OPTIONAL,
+                'The template to use for rendering a pull request',
+                '- %title% (#%id%)'
+            )
         ;
     }
 

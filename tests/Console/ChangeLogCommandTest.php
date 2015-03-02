@@ -126,6 +126,13 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
                 'The GitHub token',
                 null,
             ],
+            [
+                'template',
+                't',
+                false,
+                'The template to use for rendering a pull request',
+                '- %title% (#%id%)',
+            ],
         ];
     }
 
