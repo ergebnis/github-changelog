@@ -88,7 +88,12 @@ class ChangeLogCommand extends Command
             );
         }
 
-        $this->pullRequestRepository();
+        $this->pullRequestRepository()->items(
+            $input->getArgument('vendor'),
+            $input->getArgument('package'),
+            $input->getArgument('start'),
+            $input->getArgument('end')
+        );
     }
 
     /**

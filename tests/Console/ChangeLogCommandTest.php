@@ -231,6 +231,39 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf(Repository\PullRequest::class, $pullRequestRepository);
     }
 
+    public function testExecuteDelegatesToPullRequestRepository()
+    {
+        $vendor = 'foo';
+        $package = 'bar';
+        $startReference = 'ad77125';
+        $endReference = '7fc1c4f';
+
+        $pullRequestRepository = $this->pullRequestRepository();
+
+        $pullRequestRepository
+            ->expects($this->once())
+            ->method('items')
+            ->with(
+                $this->equalTo($vendor),
+                $this->equalTo($package),
+                $this->equalTo($startReference),
+                $this->equalTo($endReference)
+            )
+        ;
+
+        $this->command->setPullRequestRepository($pullRequestRepository);
+
+        $this->command->run(
+            $this->input([
+                'vendor' => $vendor,
+                'package' => $package,
+                'start' => $startReference,
+                'end' => $endReference,
+            ]),
+            $this->output()
+        );
+    }
+
     /**
      * @return PHPUnit_Framework_MockObject_MockObject|Client
      */
