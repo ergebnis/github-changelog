@@ -11,7 +11,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input;
 use Symfony\Component\Console\Output;
 
-class ChangeLogCommand extends Command
+class PullRequestCommand extends Command
 {
     /**
      * @var Client
@@ -42,8 +42,8 @@ class ChangeLogCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('localheinz:changelog')
-            ->setDescription('Creates a changelog based on references')
+            ->setName('pull-request')
+            ->setDescription('Creates a changelog from merged pull requests between references')
             ->addArgument(
                 'vendor',
                 Input\InputArgument::REQUIRED,
