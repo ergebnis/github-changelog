@@ -14,18 +14,18 @@ use ReflectionObject;
 use Symfony\Component\Console\Input;
 use Symfony\Component\Console\Output;
 
-class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
+class PullRequestCommandTest extends PHPUnit_Framework_TestCase
 {
     use FakerTrait;
 
     /**
-     * @var Console\ChangeLogCommand
+     * @var Console\PullRequestCommand
      */
     private $command;
 
     protected function setUp()
     {
-        $this->command = new Console\ChangeLogCommand();
+        $this->command = new Console\PullRequestCommand();
 
         $this->command->setClient($this->client());
 
@@ -48,12 +48,18 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
 
     public function testName()
     {
-        $this->assertSame('localheinz:changelog', $this->command->getName());
+        $this->assertSame(
+            'pull-request',
+            $this->command->getName()
+        );
     }
 
     public function testDescription()
     {
-        $this->assertSame('Creates a changelog based on references', $this->command->getDescription());
+        $this->assertSame(
+            'Creates a changelog from merged pull requests between references',
+            $this->command->getDescription()
+        );
     }
 
     /**
@@ -169,7 +175,7 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
 
     public function testExecuteLazilyCreatesClientWithCachedHttpClient()
     {
-        $this->command = new Console\ChangeLogCommand();
+        $this->command = new Console\PullRequestCommand();
 
         $this->command->run(
             $this->input(),

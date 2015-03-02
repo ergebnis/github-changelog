@@ -28,5 +28,8 @@
         "psr-4": {
             "Localheinz\\GitHub\\ChangeLog\\Test\\": "tests"
         }
-    }
+    },
+    "bin": [
+        "github-changelog"
+    ]
 }
