@@ -5,6 +5,7 @@ namespace Localheinz\GitHub\ChangeLog\Console;
 use Github\Api;
 use Github\Client;
 use Github\HttpClient;
+use Localheinz\GitHub\ChangeLog\Entity;
 use Localheinz\GitHub\ChangeLog\Repository;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input;
@@ -95,12 +96,30 @@ class ChangeLogCommand extends Command
             );
         }
 
-        $this->pullRequestRepository()->items(
+        $pullRequests = $this->pullRequestRepository()->items(
             $input->getArgument('vendor'),
             $input->getArgument('package'),
             $input->getArgument('start-reference'),
             $input->getArgument('end-reference')
         );
+
+        $template = $input->getOption('template');
+
+        array_walk($pullRequests, function (Entity\PullRequest $pullRequest) use ($output, $template) {
+            $message = str_replace(
+                [
+                    '%title%',
+                    '%id%',
+                ],
+                [
+                    $pullRequest->title(),
+                    $pullRequest->id(),
+                ],
+                $template
+            );
+
+            $output->writeln($message);
+        });
     }
 
     /**

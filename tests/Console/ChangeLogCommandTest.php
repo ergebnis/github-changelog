@@ -5,7 +5,9 @@ namespace Localheinz\GitHub\ChangeLog\Test\Console;
 use Github\Client;
 use Github\HttpClient;
 use Localheinz\GitHub\ChangeLog\Console;
+use Localheinz\GitHub\ChangeLog\Entity;
 use Localheinz\GitHub\ChangeLog\Repository;
+use Localheinz\GitHub\ChangeLog\Test\Util\FakerTrait;
 use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
 use ReflectionObject;
@@ -14,6 +16,8 @@ use Symfony\Component\Console\Output;
 
 class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
 {
+    use FakerTrait;
+
     /**
      * @var Console\ChangeLogCommand
      */
@@ -24,7 +28,17 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
         $this->command = new Console\ChangeLogCommand();
 
         $this->command->setClient($this->client());
-        $this->command->setPullRequestRepository($this->pullRequestRepository());
+
+        $pullRequestRepository = $this->pullRequestRepository();
+
+        $pullRequestRepository
+            ->expects($this->any())
+            ->method('items')
+            ->with($this->anything())
+            ->willReturn([])
+        ;
+
+        $this->command->setPullRequestRepository($pullRequestRepository);
     }
 
     protected function tearDown()
@@ -256,6 +270,7 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($startReference),
                 $this->equalTo($endReference)
             )
+            ->willReturn([])
         ;
 
         $this->command->setPullRequestRepository($pullRequestRepository);
@@ -268,6 +283,59 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
                 'end-reference' => $endReference,
             ]),
             $this->output()
+        );
+    }
+
+    public function testExecuteRendersPullRequestsWithTheTemplate()
+    {
+        $pullRequests = $this->pullRequests(5);
+
+        $template = '%title% :: %id%';
+
+        $expectedMessages = [];
+
+        array_walk($pullRequests, function (Entity\PullRequest $pullRequest) use (&$expectedMessages, $template) {
+            $message = str_replace(
+                [
+                    '%title%',
+                    '%id%',
+                ],
+                [
+                    $pullRequest->title(),
+                    $pullRequest->id(),
+                ],
+                $template
+            );
+            array_push($expectedMessages, $message);
+        });
+
+        $pullRequestRepository = $this->pullRequestRepository();
+
+        $pullRequestRepository
+            ->expects($this->any())
+            ->method('items')
+            ->willReturn($pullRequests)
+        ;
+
+        $this->command->setPullRequestRepository($pullRequestRepository);
+
+        $arguments = [
+            'vendor' => 'foo',
+            'package' => 'bar',
+            'start-reference' => 'ad77125',
+            'end-reference' => '7fc1c4f',
+        ];
+
+        $options = [
+            'template' => $template,
+        ];
+
+        $this->command->run(
+            $this->input(
+                $arguments,
+                $options
+            ),
+            $this->output($expectedMessages)
         );
     }
 
@@ -330,10 +398,54 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return Output\OutputInterface
+     * @param array $expectedMessages
+     * @return PHPUnit_Framework_MockObject_MockObject|Output\OutputInterface
      */
-    private function output()
+    private function output(array $expectedMessages = [])
     {
-        return $this->getMockBuilder(Output\OutputInterface::class)->getMock();
+        $output = $this->getMockBuilder(Output\OutputInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock()
+        ;
+
+        $output
+            ->expects($this->exactly(count($expectedMessages)))
+            ->method('writeln')
+            ->willReturnCallback(function ($message) use ($expectedMessages) {
+                static $invocation = 0;
+
+                $this->assertSame($message, $expectedMessages[$invocation]);
+
+                $invocation++;
+            })
+        ;
+
+        return $output;
+    }
+
+    /**
+     * @return Entity\PullRequest
+     */
+    private function pullRequest()
+    {
+        return new Entity\PullRequest(
+            $this->faker()->unique()->randomNumber,
+            $this->faker()->unique()->sentence()
+        );
+    }
+
+    /**
+     * @param int $count
+     * @return Entity\PullRequest[]
+     */
+    private function pullRequests($count)
+    {
+        $pullRequests = [];
+
+        for ($i = 0; $i < $count; $i++) {
+            array_push($pullRequests, $this->pullRequest());
+        }
+
+        return $pullRequests;
     }
 }
