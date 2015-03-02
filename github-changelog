@@ -1,7 +1,17 @@
 #!/usr/bin/env php
 <?php
 
-require __DIR__ . '/vendor/autoload.php';
+$autoloaders = [
+    __DIR__ . '/../../../vendor/autoload.php',
+    __DIR__ . '/vendor/autoload.php',
+];
+
+foreach ($autoloaders as $autoloader) {
+    if (file_exists($autoloader)) {
+        require $autoloader;
+        break;
+    }
+}
 
 use Localheinz\GitHub\ChangeLog;
 use Symfony\Component\Console;
