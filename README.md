@@ -6,13 +6,13 @@
 
 Install globally.
 
-```
+```bash
 $ composer global require localheinz/github-changelog
 ```
 
 Create your changelogs anywhere:
 
-```
+```bash
 $ github-changelog pull-requests localheinz github-changelog 0.1.0 0.1.1
 - Fix: Show PHP version requirement (#21)
 ```
@@ -22,20 +22,20 @@ $ github-changelog pull-requests localheinz github-changelog 0.1.0 0.1.1
 
 Install locally (in your project):
 
-```
+```bash
 $ composer require --sort-packages localheinz/github-changelog
-``
+```
 
 Create your changelog from within in your project:
 
-```
+```bash
 $ vendor/bin/github-changelog pull-requests localheinz github-changelog 0.1.0 0.1.1
 - Fix: Show PHP version requirement (#21)
 ```
 
 Or retrieve pull-requests between references in your application, if you need it:
 
-```
+```php
 <?php
 
 require 'vendor/autoload.php';
