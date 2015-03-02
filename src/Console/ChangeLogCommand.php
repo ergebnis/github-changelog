@@ -54,12 +54,12 @@ class ChangeLogCommand extends Command
                 'The name of the package, e.g. "github-changelog"'
             )
             ->addArgument(
-                'start',
+                'start-reference',
                 Input\InputArgument::REQUIRED,
                 'The start reference, e.g. "1.0.0"'
             )
             ->addArgument(
-                'end',
+                'end-reference',
                 Input\InputArgument::REQUIRED,
                 'The end reference, e.g. "1.1.0"'
             )
@@ -91,8 +91,8 @@ class ChangeLogCommand extends Command
         $this->pullRequestRepository()->items(
             $input->getArgument('vendor'),
             $input->getArgument('package'),
-            $input->getArgument('start'),
-            $input->getArgument('end')
+            $input->getArgument('start-reference'),
+            $input->getArgument('end-reference')
         );
     }
 

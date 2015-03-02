@@ -78,12 +78,12 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
                 'The name of the package, e.g. "github-changelog"',
             ],
             [
-                'start',
+                'start-reference',
                 true,
                 'The start reference, e.g. "1.0.0"',
             ],
             [
-                'end',
+                'end-reference',
                 true,
                 'The end reference, e.g. "1.1.0"',
             ],
@@ -257,8 +257,8 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
             $this->input([
                 'vendor' => $vendor,
                 'package' => $package,
-                'start' => $startReference,
-                'end' => $endReference,
+                'start-reference' => $startReference,
+                'end-reference' => $endReference,
             ]),
             $this->output()
         );
