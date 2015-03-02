@@ -330,13 +330,15 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
             'template' => $template,
         ];
 
-        $this->command->run(
+        $exitCode = $this->command->run(
             $this->input(
                 $arguments,
                 $options
             ),
             $this->output($expectedMessages)
         );
+
+        $this->assertSame(0, $exitCode);
     }
 
     /**
