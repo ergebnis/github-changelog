@@ -64,8 +64,8 @@ class ChangeLogCommand extends Command
                 'The end reference, e.g. "1.1.0"'
             )
             ->addOption(
-                'token',
-                't',
+                'auth-token',
+                'a',
                 Input\InputOption::VALUE_OPTIONAL,
                 'The GitHub token'
             )
@@ -80,10 +80,10 @@ class ChangeLogCommand extends Command
     {
         $client = $this->client();
 
-        $token = $input->getOption('token');
-        if (null !== $token) {
+        $authToken = $input->getOption('auth-token');
+        if (null !== $authToken) {
             $client->authenticate(
-                $token,
+                $authToken,
                 Client::AUTH_HTTP_TOKEN
             );
         }

@@ -120,8 +120,8 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
     {
         return [
             [
-                'token',
-                't',
+                'auth-token',
+                'a',
                 false,
                 'The GitHub token',
                 null,
@@ -170,7 +170,7 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
 
     public function testExecuteAuthenticatesIfTokenOptionIsGiven()
     {
-        $token = 'foo9000';
+        $authToken = 'foo9000';
 
         $client = $this->client();
 
@@ -178,7 +178,7 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('authenticate')
             ->with(
-                $this->equalTo($token),
+                $this->equalTo($authToken),
                 $this->equalTo(Client::AUTH_HTTP_TOKEN)
             )
         ;
@@ -189,7 +189,7 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
             $this->input(
                 [],
                 [
-                    'token' => $token,
+                    'auth-token' => $authToken,
                 ]
             ),
             $this->output()
