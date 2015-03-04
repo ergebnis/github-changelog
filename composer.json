@@ -11,6 +11,7 @@
     "minimum-stability": "stable",
     "require": {
         "php": ">=5.5",
+        "symfony/console": "~2.6.0",
         "knplabs/github-api": "^1.4.4"
     },
     "require-dev": {
