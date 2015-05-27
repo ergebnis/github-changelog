@@ -8,4 +8,4 @@
 /phpunit.xml export-ignore
 /README.md export-ignore
 /CONTRIBUTING.md export-ignore
-/Makefile
+/Makefile export-ignore
