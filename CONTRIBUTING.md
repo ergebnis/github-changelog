@@ -12,3 +12,15 @@ $ make cs
 ```
 
 to ensure your changes to not break the build.
+
+## Tests
+
+This project uses [`phpunit/phpunit`](https://github.com/sebastianbergmann/phpunit) to drive the development using tests.
+
+Run
+
+```
+$ make test
+```
+
+to run the tests.
