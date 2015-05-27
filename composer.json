@@ -16,7 +16,7 @@
     },
     "require-dev": {
         "codeclimate/php-test-reporter": "0.1.*",
-        "fabpot/php-cs-fixer": "~1.5",
+        "fabpot/php-cs-fixer": "^1.8.0",
         "fzaninotto/faker": "^1.4.0",
         "phpunit/phpunit": "~4.5"
     },
