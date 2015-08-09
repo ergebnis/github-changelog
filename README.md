@@ -1,4 +1,9 @@
-# README [![Build Status](https://travis-ci.org/localheinz/github-changelog.svg?branch=master)](https://travis-ci.org/localheinz/github-changelog) [![Code Climate](https://codeclimate.com/github/localheinz/github-changelog/badges/gpa.svg)](https://codeclimate.com/github/localheinz/github-changelog) [![Test Coverage](https://codeclimate.com/github/localheinz/github-changelog/badges/coverage.svg)](https://codeclimate.com/github/localheinz/github-changelog) [![Dependency Status](https://www.versioneye.com/user/projects/54f078634f31083e1b0004c7/badge.svg?style=flat)](https://www.versioneye.com/user/projects/54f078634f31083e1b0004c7)
+# README 
+
+[![Build Status](https://travis-ci.org/localheinz/github-changelog.svg?branch=master)](https://travis-ci.org/localheinz/github-changelog) 
+[![Code Climate](https://codeclimate.com/github/localheinz/github-changelog/badges/gpa.svg)](https://codeclimate.com/github/localheinz/github-changelog) 
+[![Test Coverage](https://codeclimate.com/github/localheinz/github-changelog/badges/coverage.svg)](https://codeclimate.com/github/localheinz/github-changelog)
+[![Dependency Status](https://www.versioneye.com/user/projects/55c71992653762002000364c/badge.svg?style=flat)](https://www.versioneye.com/user/projects/55c71992653762002000364c)
 
 ## CLI Tool
 
