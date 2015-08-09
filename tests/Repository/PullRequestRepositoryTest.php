@@ -57,7 +57,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
         $vendor = 'foo';
         $package = 'bar';
 
-        $id = $this->faker()->unique()->randomNumber;
+        $id = $this->faker()->unique()->randomNumber();
 
         $api = $this->pullRequestApi();
 
@@ -325,7 +325,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $item = new stdClass();
 
-        $item->id = $this->faker()->unique()->randomNumber;
+        $item->id = $this->faker()->unique()->randomNumber();
         $item->title = $this->faker()->unique()->sentence();
 
         return $item;
