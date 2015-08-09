@@ -4,7 +4,8 @@ sudo: false
 
 env:
   global:
-    secure: "DcTtBsjNY8p9hRjtIbTHc3r4ZU6ksqE3Nx7GE/ncIlrdoO0DTxxA/zkN6aizDpQiC6P7sz4FhhiK6ixJOLmnigNuij0v03bjhFApte36jT92iJgMKTGXIsH0Hj5XNlMBFpy0oAU8irhiPBK3lPoPJK+iadYdFA8yHdkEeYmsS/o="
+    - secure: "DcTtBsjNY8p9hRjtIbTHc3r4ZU6ksqE3Nx7GE/ncIlrdoO0DTxxA/zkN6aizDpQiC6P7sz4FhhiK6ixJOLmnigNuij0v03bjhFApte36jT92iJgMKTGXIsH0Hj5XNlMBFpy0oAU8irhiPBK3lPoPJK+iadYdFA8yHdkEeYmsS/o="
+    - secure: "vLO6MNtynfHTrTM76rq13lnwPqm8ULyTjFysYSCDIgUBidi4PMbmNjTf72LTrG9NboqWJNzItuiK5aQQCaJaDCr+603Getv2bKSpsPn1wnr51zYPGDsvKFL3e040JuDLs/4TslVtZbnsU9QxSwnixWEIOPF5ECBwMVk31+E+ak0="
 
 php:
   - 5.5
@@ -12,11 +13,6 @@ php:
 cache:
   directories:
     - $HOME/.composer/cache
-
-addons:
-  code_climate:
-    repo_token:
-      secure: "jknkNfajYYpZfyUJuOlPS/3tXZeLrxcWFET1ZK+tc4UgfY69w4LSG9qrJnLfw0FdG32Rv9xlRkdaGCj7iBKl2p2pPnj0TfZ0a9PbQUA76g0+0ZFqwdYX8dmL1uPrdxp5P0n3Lakk10eJyjP9yX7E99OvSFt1ZCN4t4uIu/LIc0Q="
 
 before_install:
   - composer self-update
