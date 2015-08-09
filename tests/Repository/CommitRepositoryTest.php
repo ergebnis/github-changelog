@@ -11,7 +11,7 @@ use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
 use stdClass;
 
-class CommitTest extends PHPUnit_Framework_TestCase
+class CommitRepositoryTest extends PHPUnit_Framework_TestCase
 {
     use FakerTrait;
 
@@ -36,7 +36,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->willReturn($this->response($expectedItem))
         ;
 
-        $commitRepository = new Repository\Commit($api);
+        $commitRepository = new Repository\CommitRepository($api);
 
         $commit = $commitRepository->show(
             $vendor,
@@ -69,7 +69,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->willReturn('failure')
         ;
 
-        $commitRepository = new Repository\Commit($api);
+        $commitRepository = new Repository\CommitRepository($api);
 
         $commit = $commitRepository->show(
             $vendor,
@@ -99,7 +99,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->willReturn('snafu')
         ;
 
-        $repository = new Repository\Commit($api);
+        $repository = new Repository\CommitRepository($api);
 
         $commits = $repository->all(
             $vendor,
@@ -133,7 +133,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->willReturn($this->responseFromItems($expectedItems))
         ;
 
-        $repository = new Repository\Commit($api);
+        $repository = new Repository\CommitRepository($api);
 
         $repository->all(
             $vendor,
@@ -166,7 +166,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->willReturn($this->responseFromItems($expectedItems))
         ;
 
-        $repository = new Repository\Commit($api);
+        $repository = new Repository\CommitRepository($api);
 
         $repository->all(
             $vendor,
@@ -199,7 +199,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->willReturn($this->responseFromItems($expectedItems))
         ;
 
-        $repository = new Repository\Commit($api);
+        $repository = new Repository\CommitRepository($api);
 
         $commits = $repository->all(
             $vendor,
@@ -238,7 +238,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->method($this->anything())
         ;
 
-        $repository = new Repository\Commit($api);
+        $repository = new Repository\CommitRepository($api);
 
         $commits = $repository->items(
             $vendor,
@@ -275,7 +275,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->method('all')
         ;
 
-        $repository = new Repository\Commit($api);
+        $repository = new Repository\CommitRepository($api);
 
         $commits = $repository->items(
             $vendor,
@@ -323,7 +323,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->method('all')
         ;
 
-        $repository = new Repository\Commit($api);
+        $repository = new Repository\CommitRepository($api);
 
         $commits = $repository->items(
             $vendor,
@@ -380,7 +380,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
             )
         ;
 
-        $repository = new Repository\Commit($api);
+        $repository = new Repository\CommitRepository($api);
 
         $repository->items(
             $vendor,
@@ -458,7 +458,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->willReturn($this->responseFromItems($segment))
         ;
 
-        $repository = new Repository\Commit($api);
+        $repository = new Repository\CommitRepository($api);
 
         $commits = $repository->items(
             $vendor,
@@ -573,7 +573,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
             ->willReturn($this->responseFromItems($secondSegment))
         ;
 
-        $repository = new Repository\Commit($api);
+        $repository = new Repository\CommitRepository($api);
 
         $commits = $repository->items(
             $vendor,

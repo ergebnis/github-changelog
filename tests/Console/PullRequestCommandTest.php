@@ -256,7 +256,7 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
 
         $pullRequestRepository = $property->getValue($this->command);
 
-        $this->assertInstanceOf(Repository\PullRequest::class, $pullRequestRepository);
+        $this->assertInstanceOf(Repository\PullRequestRepository::class, $pullRequestRepository);
     }
 
     public function testExecuteDelegatesToPullRequestRepository()
@@ -398,11 +398,11 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return PHPUnit_Framework_MockObject_MockObject|Repository\PullRequest
+     * @return PHPUnit_Framework_MockObject_MockObject|Repository\PullRequestRepository
      */
     private function pullRequestRepository()
     {
-        return $this->getMockBuilder(Repository\PullRequest::class)
+        return $this->getMockBuilder(Repository\PullRequestRepository::class)
             ->disableOriginalConstructor()
             ->getMock()
         ;

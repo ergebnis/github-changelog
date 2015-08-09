@@ -11,7 +11,7 @@ use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
 use stdClass;
 
-class PullRequestTest extends PHPUnit_Framework_TestCase
+class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
 {
     use FakerTrait;
 
@@ -35,7 +35,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             ->willReturn($this->response($expectedItem))
         ;
 
-        $pullRequestRepository = new Repository\PullRequest(
+        $pullRequestRepository = new Repository\PullRequestRepository(
             $api,
             $this->commitRepository()
         );
@@ -72,7 +72,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             ->willReturn('snafu')
         ;
 
-        $pullRequestRepository = new Repository\PullRequest(
+        $pullRequestRepository = new Repository\PullRequestRepository(
             $api,
             $this->commitRepository()
         );
@@ -107,7 +107,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             ->willReturn([])
         ;
 
-        $repository = new Repository\PullRequest(
+        $repository = new Repository\PullRequestRepository(
             $this->pullRequestApi(),
             $commitRepository
         );
@@ -150,7 +150,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             ])
         ;
 
-        $repository = new Repository\PullRequest(
+        $repository = new Repository\PullRequestRepository(
             $this->pullRequestApi(),
             $commitRepository
         );
@@ -211,7 +211,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             ->willReturn($this->response($expectedItem))
         ;
 
-        $repository = new Repository\PullRequest(
+        $repository = new Repository\PullRequestRepository(
             $api,
             $commitRepository
         );
@@ -281,7 +281,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             ->willReturn(null)
         ;
 
-        $repository = new Repository\PullRequest(
+        $repository = new Repository\PullRequestRepository(
             $api,
             $commitRepository
         );
@@ -312,7 +312,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
      */
     private function commitRepository()
     {
-        return $this->getMockBuilder(Repository\Commit::class)
+        return $this->getMockBuilder(Repository\CommitRepository::class)
             ->disableOriginalConstructor()
             ->getMock()
         ;

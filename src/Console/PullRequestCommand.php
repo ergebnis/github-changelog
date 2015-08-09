@@ -20,7 +20,7 @@ class PullRequestCommand extends Command
     private $client;
 
     /**
-     * @var Repository\PullRequest
+     * @var Repository\PullRequestRepository
      */
     private $pullRequestRepository;
 
@@ -33,9 +33,9 @@ class PullRequestCommand extends Command
     }
 
     /**
-     * @param Repository\PullRequest $pullRequestRepository
+     * @param Repository\PullRequestRepository $pullRequestRepository
      */
-    public function setPullRequestRepository(Repository\PullRequest $pullRequestRepository)
+    public function setPullRequestRepository(Repository\PullRequestRepository $pullRequestRepository)
     {
         $this->pullRequestRepository = $pullRequestRepository;
     }
@@ -148,7 +148,7 @@ class PullRequestCommand extends Command
     }
 
     /**
-     * @return Repository\PullRequest
+     * @return Repository\PullRequestRepository
      */
     private function pullRequestRepository()
     {
@@ -158,9 +158,9 @@ class PullRequestCommand extends Command
             $pullRequestApi = new Api\PullRequest($client);
             $commitApi = new Api\Repository\Commits($client);
 
-            $this->pullRequestRepository = new Repository\PullRequest(
+            $this->pullRequestRepository = new Repository\PullRequestRepository(
                 $pullRequestApi,
-                new Repository\Commit($commitApi)
+                new Repository\CommitRepository($commitApi)
             );
         }
 
