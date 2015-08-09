@@ -19,30 +19,30 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $faker = $this->faker();
 
-        $vendor = $faker->userName;
-        $package = $faker->slug();
+        $owner = $faker->userName;
+        $repository = $faker->slug();
         $sha = $faker->sha1;
 
-        $api = $this->commitApi();
+        $commitApi = $this->commitApi();
 
         $expectedItem = $this->commitItem();
 
-        $api
+        $commitApi
             ->expects($this->once())
             ->method('show')
             ->with(
-                $this->equalTo($vendor),
-                $this->equalTo($package),
+                $this->equalTo($owner),
+                $this->equalTo($repository),
                 $this->equalTo($sha)
             )
             ->willReturn($this->response($expectedItem))
         ;
 
-        $commitRepository = new Repository\CommitRepository($api);
+        $commitRepository = new Repository\CommitRepository($commitApi);
 
         $commit = $commitRepository->show(
-            $vendor,
-            $package,
+            $owner,
+            $repository,
             $sha
         );
 
@@ -56,8 +56,8 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $faker = $this->faker();
 
-        $vendor = $faker->userName;
-        $package = $faker->slug();
+        $owner = $faker->userName;
+        $repository = $faker->slug();
         $sha = $faker->sha1;
 
         $api = $this->commitApi();
@@ -66,8 +66,8 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('show')
             ->with(
-                $this->equalTo($vendor),
-                $this->equalTo($package),
+                $this->equalTo($owner),
+                $this->equalTo($repository),
                 $this->equalTo($sha)
             )
             ->willReturn('failure')
@@ -76,8 +76,8 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
         $commitRepository = new Repository\CommitRepository($api);
 
         $commit = $commitRepository->show(
-            $vendor,
-            $package,
+            $owner,
+            $repository,
             $sha
         );
 
@@ -88,28 +88,28 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $faker = $this->faker();
 
-        $vendor = $faker->userName;
-        $package = $faker->slug();
+        $owner = $faker->userName;
+        $repository = $faker->slug();
         $sha = $faker->sha1;
 
-        $api = $this->commitApi();
+        $commitApi = $this->commitApi();
 
-        $api
+        $commitApi
             ->expects($this->once())
             ->method('all')
             ->with(
-                $this->equalTo($vendor),
-                $this->equalTo($package),
+                $this->equalTo($owner),
+                $this->equalTo($repository),
                 $this->arrayHasKeyAndValue('sha', $sha)
             )
             ->willReturn('snafu')
         ;
 
-        $repository = new Repository\CommitRepository($api);
+        $commitRepository = new Repository\CommitRepository($commitApi);
 
-        $commits = $repository->all(
-            $vendor,
-            $package,
+        $commits = $commitRepository->all(
+            $owner,
+            $repository,
             [
                 'sha' => $sha,
             ]
@@ -122,30 +122,30 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $faker = $this->faker();
 
-        $vendor = $faker->userName;
-        $package = $faker->slug();
+        $owner = $faker->userName;
+        $repository = $faker->slug();
         $sha = $faker->sha1;
 
-        $api = $this->commitApi();
+        $commitApi = $this->commitApi();
 
         $expectedItems = $this->commitItems(15);
 
-        $api
+        $commitApi
             ->expects($this->once())
             ->method('all')
             ->with(
-                $this->equalTo($vendor),
-                $this->equalTo($package),
+                $this->equalTo($owner),
+                $this->equalTo($repository),
                 $this->arrayHasKeyAndValue('per_page', 250)
             )
             ->willReturn($this->responseFromItems($expectedItems))
         ;
 
-        $repository = new Repository\CommitRepository($api);
+        $commitRepository = new Repository\CommitRepository($commitApi);
 
-        $repository->all(
-            $vendor,
-            $package,
+        $commitRepository->all(
+            $owner,
+            $repository,
             [
                 'sha' => $sha,
             ]
@@ -156,31 +156,31 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $faker = $this->faker();
 
-        $vendor = $faker->userName;
-        $package = $faker->slug();
+        $owner = $faker->userName;
+        $repository = $faker->slug();
         $sha = $faker->sha1;
         $perPage = $faker->randomNumber();
 
-        $api = $this->commitApi();
+        $commitApi = $this->commitApi();
 
         $expectedItems = $this->commitItems(15);
 
-        $api
+        $commitApi
             ->expects($this->once())
             ->method('all')
             ->with(
-                $this->equalTo($vendor),
-                $this->equalTo($package),
+                $this->equalTo($owner),
+                $this->equalTo($repository),
                 $this->arrayHasKeyAndValue('per_page', $perPage)
             )
             ->willReturn($this->responseFromItems($expectedItems))
         ;
 
-        $repository = new Repository\CommitRepository($api);
+        $commitRepository = new Repository\CommitRepository($commitApi);
 
-        $repository->all(
-            $vendor,
-            $package,
+        $commitRepository->all(
+            $owner,
+            $repository,
             [
                 'sha' => $sha,
                 'per_page' => $perPage,
@@ -192,30 +192,30 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $faker = $this->faker();
 
-        $vendor = $faker->userName;
-        $package = $faker->slug();
+        $owner = $faker->userName;
+        $repository = $faker->slug();
         $sha = $faker->sha1;
 
-        $api = $this->commitApi();
+        $commitApi = $this->commitApi();
 
         $expectedItems = $this->commitItems(15);
 
-        $api
+        $commitApi
             ->expects($this->once())
             ->method('all')
             ->with(
-                $this->equalTo($vendor),
-                $this->equalTo($package),
+                $this->equalTo($owner),
+                $this->equalTo($repository),
                 $this->arrayHasKeyAndValue('sha', $sha)
             )
             ->willReturn($this->responseFromItems($expectedItems))
         ;
 
-        $repository = new Repository\CommitRepository($api);
+        $commitRepository = new Repository\CommitRepository($commitApi);
 
-        $commits = $repository->all(
-            $vendor,
-            $package, [
+        $commits = $commitRepository->all(
+            $owner,
+            $repository, [
                 'sha' => $sha,
             ]
         );
@@ -240,24 +240,24 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $faker = $this->faker();
 
-        $vendor = $faker->userName;
-        $package = $faker->slug();
+        $owner = $faker->userName;
+        $repository = $faker->slug();
         $startReference = $faker->sha1;
 
         $endReference = $startReference;
 
-        $api = $this->commitApi();
+        $commitApi = $this->commitApi();
 
-        $api
+        $commitApi
             ->expects($this->never())
             ->method($this->anything())
         ;
 
-        $repository = new Repository\CommitRepository($api);
+        $commitRepository = new Repository\CommitRepository($commitApi);
 
-        $commits = $repository->items(
-            $vendor,
-            $package,
+        $commits = $commitRepository->items(
+            $owner,
+            $repository,
             $startReference,
             $endReference
         );
@@ -269,34 +269,34 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $faker = $this->faker();
 
-        $vendor = $faker->userName;
-        $package = $faker->slug();
+        $owner = $faker->userName;
+        $repository = $faker->slug();
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
-        $api = $this->commitApi();
+        $commitApi = $this->commitApi();
 
-        $api
+        $commitApi
             ->expects($this->at(0))
             ->method('show')
             ->with(
-                $this->equalTo($vendor),
-                $this->equalTo($package),
+                $this->equalTo($owner),
+                $this->equalTo($repository),
                 $this->equalTo($startReference)
             )
             ->willReturn(null)
         ;
 
-        $api
+        $commitApi
             ->expects($this->never())
             ->method('all')
         ;
 
-        $repository = new Repository\CommitRepository($api);
+        $commitRepository = new Repository\CommitRepository($commitApi);
 
-        $commits = $repository->items(
-            $vendor,
-            $package,
+        $commits = $commitRepository->items(
+            $owner,
+            $repository,
             $startReference,
             $endReference
         );
@@ -308,45 +308,45 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $faker = $this->faker();
 
-        $vendor = $faker->userName;
-        $package = $faker->slug();
+        $owner = $faker->userName;
+        $repository = $faker->slug();
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
-        $api = $this->commitApi();
+        $commitApi = $this->commitApi();
 
-        $api
+        $commitApi
             ->expects($this->at(0))
             ->method('show')
             ->with(
-                $this->equalTo($vendor),
-                $this->equalTo($package),
+                $this->equalTo($owner),
+                $this->equalTo($repository),
                 $this->equalTo($startReference)
             )
             ->willReturn($this->response($this->commitItem()))
         ;
 
-        $api
+        $commitApi
             ->expects($this->at(1))
             ->method('show')
             ->with(
-                $this->equalTo($vendor),
-                $this->equalTo($package),
+                $this->equalTo($owner),
+                $this->equalTo($repository),
                 $this->equalTo($endReference)
             )
             ->willReturn(null)
         ;
 
-        $api
+        $commitApi
             ->expects($this->never())
             ->method('all')
         ;
 
-        $repository = new Repository\CommitRepository($api);
+        $commitRepository = new Repository\CommitRepository($commitApi);
 
-        $commits = $repository->items(
-            $vendor,
-            $package,
+        $commits = $commitRepository->items(
+            $owner,
+            $repository,
             $startReference,
             $endReference
         );
@@ -358,21 +358,21 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $faker = $this->faker();
 
-        $vendor = $faker->userName;
-        $package = $faker->slug();
+        $owner = $faker->userName;
+        $repository = $faker->slug();
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
-        $api = $this->commitApi();
+        $commitApi = $this->commitApi();
 
         $startCommit = $this->commitItem();
 
-        $api
+        $commitApi
             ->expects($this->at(0))
             ->method('show')
             ->with(
-                $this->equalTo($vendor),
-                $this->equalTo($package),
+                $this->equalTo($owner),
+                $this->equalTo($repository),
                 $this->equalTo($startReference)
             )
             ->willReturn($this->response($startCommit))
@@ -380,32 +380,32 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
 
         $endCommit = $this->commitItem();
 
-        $api
+        $commitApi
             ->expects($this->at(1))
             ->method('show')
             ->with(
-                $this->equalTo($vendor),
-                $this->equalTo($package),
+                $this->equalTo($owner),
+                $this->equalTo($repository),
                 $this->equalTo($endReference)
             )
             ->willReturn($this->response($endCommit))
         ;
 
-        $api
+        $commitApi
             ->expects($this->once())
             ->method('all')
             ->with(
-                $this->equalTo($vendor),
-                $this->equalTo($package),
+                $this->equalTo($owner),
+                $this->equalTo($repository),
                 $this->arrayHasKeyAndValue('sha', $endCommit->sha)
             )
         ;
 
-        $repository = new Repository\CommitRepository($api);
+        $commitRepository = new Repository\CommitRepository($commitApi);
 
-        $repository->items(
-            $vendor,
-            $package,
+        $commitRepository->items(
+            $owner,
+            $repository,
             $startReference,
             $endReference
         );
@@ -415,22 +415,22 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $faker = $this->faker();
 
-        $vendor = $faker->userName;
-        $package = $faker->slug();
+        $owner = $faker->userName;
+        $repository = $faker->slug();
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
-        $api = $this->commitApi();
+        $commitApi = $this->commitApi();
 
         $startCommit = $this->commitItem();
         $startCommit->sha = 'start';
 
-        $api
+        $commitApi
             ->expects($this->at(0))
             ->method('show')
             ->with(
-                $this->equalTo($vendor),
-                $this->equalTo($package),
+                $this->equalTo($owner),
+                $this->equalTo($repository),
                 $this->equalTo($startReference)
             )
             ->willReturn($this->response($startCommit))
@@ -439,12 +439,12 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
         $endCommit = $this->commitItem();
         $endCommit->sha = 'end';
 
-        $api
+        $commitApi
             ->expects($this->at(1))
             ->method('show')
             ->with(
-                $this->equalTo($vendor),
-                $this->equalTo($package),
+                $this->equalTo($owner),
+                $this->equalTo($repository),
                 $this->equalTo($endReference)
             )
             ->willReturn($this->response($endCommit))
@@ -470,22 +470,22 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
             $countBetween + 1 // We want the commits in-between and the last commit
         );
 
-        $api
+        $commitApi
             ->expects($this->once())
             ->method('all')
             ->with(
-                $this->equalTo($vendor),
-                $this->equalTo($package),
+                $this->equalTo($owner),
+                $this->equalTo($repository),
                 $this->arrayHasKeyAndValue('sha', $endCommit->sha)
             )
             ->willReturn($this->responseFromItems($segment))
         ;
 
-        $repository = new Repository\CommitRepository($api);
+        $commitRepository = new Repository\CommitRepository($commitApi);
 
-        $commits = $repository->items(
-            $vendor,
-            $package,
+        $commits = $commitRepository->items(
+            $owner,
+            $repository,
             $startReference,
             $endReference
         );
@@ -507,22 +507,22 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $faker = $this->faker();
 
-        $vendor = $faker->userName;
-        $package = $faker->slug();
+        $owner = $faker->userName;
+        $repository = $faker->slug();
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
-        $api = $this->commitApi();
+        $commitApi = $this->commitApi();
 
         $startCommit = $this->commitItem();
         $startCommit->sha = 'start';
 
-        $api
+        $commitApi
             ->expects($this->at(0))
             ->method('show')
             ->with(
-                $this->equalTo($vendor),
-                $this->equalTo($package),
+                $this->equalTo($owner),
+                $this->equalTo($repository),
                 $this->equalTo($startReference)
             )
             ->willReturn($this->response($startCommit))
@@ -531,12 +531,12 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
         $endCommit = $this->commitItem();
         $endCommit->sha = 'end';
 
-        $api
+        $commitApi
             ->expects($this->at(1))
             ->method('show')
             ->with(
-                $this->equalTo($vendor),
-                $this->equalTo($package),
+                $this->equalTo($owner),
+                $this->equalTo($repository),
                 $this->equalTo($endReference)
             )
             ->willReturn($this->response($endCommit))
@@ -576,33 +576,33 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
             $firstSegment
         );
 
-        $api
+        $commitApi
             ->expects($this->at(2))
             ->method('all')
             ->with(
-                $this->equalTo($vendor),
-                $this->equalTo($package),
+                $this->equalTo($owner),
+                $this->equalTo($repository),
                 $this->arrayHasKeyAndValue('sha', $endCommit->sha)
             )
             ->willReturn($this->responseFromItems($firstSegment))
         ;
 
-        $api
+        $commitApi
             ->expects($this->at(3))
             ->method('all')
             ->with(
-                $this->equalTo($vendor),
-                $this->equalTo($package),
+                $this->equalTo($owner),
+                $this->equalTo($repository),
                 $this->arrayHasKeyAndValue('sha', $firstCommitFromFirstSegment->sha)
             )
             ->willReturn($this->responseFromItems($secondSegment))
         ;
 
-        $repository = new Repository\CommitRepository($api);
+        $commitRepository = new Repository\CommitRepository($commitApi);
 
-        $commits = $repository->items(
-            $vendor,
-            $package,
+        $commits = $commitRepository->items(
+            $owner,
+            $repository,
             $startReference,
             $endReference
         );

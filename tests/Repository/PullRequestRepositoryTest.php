@@ -248,8 +248,8 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $faker = $this->faker();
 
-        $vendor = $faker->userName;
-        $package = $faker->slug();
+        $owner = $faker->userName;
+        $repository = $faker->slug();
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
@@ -269,8 +269,8 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('items')
             ->with(
-                $this->equalTo($vendor),
-                $this->equalTo($package),
+                $this->equalTo($owner),
+                $this->equalTo($repository),
                 $this->equalTo($startReference),
                 $this->equalTo($endReference)
             )
@@ -279,27 +279,27 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
             ])
         ;
 
-        $api = $this->pullRequestApi();
+        $pullRequestApi = $this->pullRequestApi();
 
-        $api
+        $pullRequestApi
             ->expects($this->once())
             ->method('show')
             ->with(
-                $this->equalTo($vendor),
-                $this->equalTo($package),
+                $this->equalTo($owner),
+                $this->equalTo($repository),
                 $this->equalTo($id)
             )
             ->willReturn(null)
         ;
 
-        $repository = new Repository\PullRequestRepository(
-            $api,
+        $pullRequestRepository = new Repository\PullRequestRepository(
+            $pullRequestApi,
             $commitRepository
         );
 
-        $pullRequests = $repository->items(
-            $vendor,
-            $package,
+        $pullRequests = $pullRequestRepository->items(
+            $owner,
+            $repository,
             $startReference,
             $endReference
         );

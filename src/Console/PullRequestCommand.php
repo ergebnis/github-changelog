@@ -40,14 +40,14 @@ class PullRequestCommand extends Command
             ->setName('pull-request')
             ->setDescription('Creates a changelog from merged pull requests between references')
             ->addArgument(
-                'vendor',
+                'owner',
                 Input\InputArgument::REQUIRED,
-                'The name of the vendor, e.g., "localheinz"'
+                'The owner, e.g., "localheinz"'
             )
             ->addArgument(
-                'package',
+                'repository',
                 Input\InputArgument::REQUIRED,
-                'The name of the package, e.g. "github-changelog"'
+                'The repository, e.g. "github-changelog"'
             )
             ->addArgument(
                 'start-reference',
@@ -89,8 +89,8 @@ class PullRequestCommand extends Command
 
         try {
             $pullRequests = $this->pullRequestRepository()->items(
-                $input->getArgument('vendor'),
-                $input->getArgument('package'),
+                $input->getArgument('owner'),
+                $input->getArgument('repository'),
                 $input->getArgument('start-reference'),
                 $input->getArgument('end-reference')
             );

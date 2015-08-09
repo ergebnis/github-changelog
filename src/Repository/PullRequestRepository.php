@@ -24,16 +24,16 @@ class PullRequestRepository
     }
 
     /**
-     * @param string $vendor
-     * @param string $package
+     * @param string $owner
+     * @param string $repository
      * @param string $id
      * @return Entity\PullRequest|null
      */
-    public function show($vendor, $package, $id)
+    public function show($owner, $repository, $id)
     {
         $response = $this->api->show(
-            $vendor,
-            $package,
+            $owner,
+            $repository,
             $id
         );
 
@@ -48,24 +48,24 @@ class PullRequestRepository
     }
 
     /**
-     * @param string $vendor
-     * @param string $package
+     * @param string $owner
+     * @param string $repository
      * @param string $startReference
      * @param string $endReference
      * @return Entity\PullRequest[] array
      */
-    public function items($vendor, $package, $startReference, $endReference)
+    public function items($owner, $repository, $startReference, $endReference)
     {
         $commits = $this->commitRepository->items(
-            $vendor,
-            $package,
+            $owner,
+            $repository,
             $startReference,
             $endReference
         );
 
         $pullRequests = [];
 
-        array_walk($commits, function (Entity\Commit $commit) use (&$pullRequests, $vendor, $package) {
+        array_walk($commits, function (Entity\Commit $commit) use (&$pullRequests, $owner, $repository) {
 
             if (0 === preg_match('/^Merge pull request #(?P<id>\d+)/', $commit->message(), $matches)) {
                 return;
@@ -74,8 +74,8 @@ class PullRequestRepository
             $id = $matches['id'];
 
             $pullRequest = $this->show(
-                $vendor,
-                $package,
+                $owner,
+                $repository,
                 $id
             );
 

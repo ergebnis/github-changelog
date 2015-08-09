@@ -18,21 +18,21 @@ class CommitRepository
     }
 
     /**
-     * @param string $vendor
-     * @param string $package
+     * @param string $owner
+     * @param string $repository
      * @param string $startReference
      * @param string $endReference
      * @return Entity\Commit[]
      */
-    public function items($vendor, $package, $startReference, $endReference)
+    public function items($owner, $repository, $startReference, $endReference)
     {
         if ($startReference === $endReference) {
             return [];
         }
 
         $start = $this->show(
-            $vendor,
-            $package,
+            $owner,
+            $repository,
             $startReference
         );
 
@@ -41,8 +41,8 @@ class CommitRepository
         }
 
         $end = $this->show(
-            $vendor,
-            $package,
+            $owner,
+            $repository,
             $endReference
         );
 
@@ -50,7 +50,7 @@ class CommitRepository
             return [];
         }
 
-        $commits = $this->all($vendor, $package, [
+        $commits = $this->all($owner, $repository, [
             'sha' => $end->sha(),
         ]);
 
@@ -75,7 +75,7 @@ class CommitRepository
 
             if (!count($commits)) {
                 $tail = $commit;
-                $commits = $this->all($vendor, $package, [
+                $commits = $this->all($owner, $repository, [
                     'sha' => $tail->sha(),
                 ]);
             }
@@ -85,16 +85,16 @@ class CommitRepository
     }
 
     /**
-     * @param string $vendor
-     * @param string $package
+     * @param string $owner
+     * @param string $repository
      * @param string $sha
      * @return Entity\Commit|null
      */
-    public function show($vendor, $package, $sha)
+    public function show($owner, $repository, $sha)
     {
         $response = $this->api->show(
-            $vendor,
-            $package,
+            $owner,
+            $repository,
             $sha
         );
 
@@ -109,20 +109,20 @@ class CommitRepository
     }
 
     /**
-     * @param string $vendor
-     * @param string $package
+     * @param string $owner
+     * @param string $repository
      * @param array $params
      * @return Entity\Commit[]
      */
-    public function all($vendor, $package, array $params = [])
+    public function all($owner, $repository, array $params = [])
     {
         if (!array_key_exists('per_page', $params)) {
             $params['per_page'] = 250;
         }
 
         $response = $this->api->all(
-            $vendor,
-            $package,
+            $owner,
+            $repository,
             $params
         );
 
