@@ -20,6 +20,7 @@ addons:
 
 before_install:
   - composer self-update
+  - composer validate
   - composer config github-oauth.github.com $GITHUB_TOKEN
 
 install:
