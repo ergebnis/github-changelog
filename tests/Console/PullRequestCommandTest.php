@@ -528,17 +528,13 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
     {
         $output = $this->outputMock();
 
-        $output
-            ->expects($this->exactly(count($expectedMessages)))
-            ->method('writeln')
-            ->willReturnCallback(function ($message) use ($expectedMessages) {
-                static $invocation = 0;
-
-                $this->assertSame($message, $expectedMessages[$invocation]);
-
-                $invocation++;
-            })
-        ;
+        foreach (array_values($expectedMessages) as $i => $expectedMessage) {
+            $output
+                ->expects($this->at($i))
+                ->method('writeln')
+                ->with($expectedMessage)
+            ;
+        }
 
         return $output;
     }

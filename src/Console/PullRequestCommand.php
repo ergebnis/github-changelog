@@ -11,6 +11,8 @@ use Localheinz\GitHub\ChangeLog\Repository;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input;
 use Symfony\Component\Console\Output;
+use Symfony\Component\Stopwatch\Stopwatch;
+use Symfony\Component\Stopwatch\StopwatchEvent;
 
 class PullRequestCommand extends Command
 {
@@ -79,6 +81,9 @@ class PullRequestCommand extends Command
     {
         $client = $this->client();
 
+        $stopWatch = new Stopwatch();
+        $stopWatch->start('changelog');
+
         $authToken = $input->getOption('auth-token');
         if (null !== $authToken) {
             $client->authenticate(
@@ -116,39 +121,42 @@ class PullRequestCommand extends Command
                 $startReference,
                 $endReference
             ));
+        } else {
+            $output->writeln(sprintf(
+                'Found <info>%s</info> pull request(s) for <info>%s/%s</info> between <info>%s</info> and <info>%s</info>.',
+                count($pullRequests),
+                $owner,
+                $repository,
+                $startReference,
+                $endReference
+            ));
 
-            return 0;
+            $output->writeln('');
+
+            $template = $input->getOption('template');
+
+            array_walk($pullRequests, function (Entity\PullRequest $pullRequest) use ($output, $template) {
+
+                $message = str_replace(
+                    [
+                        '%title%',
+                        '%id%',
+                    ],
+                    [
+                        $pullRequest->title(),
+                        $pullRequest->id(),
+                    ],
+                    $template
+                );
+
+                $output->writeln($message);
+            });
         }
 
-        $output->writeln(sprintf(
-            'Found <info>%s</info> pull request(s) for <info>%s/%s</info> between <info>%s</info> and <info>%s</info>.',
-            count($pullRequests),
-            $owner,
-            $repository,
-            $startReference,
-            $endReference
-        ));
+        $stopWatch->stop('changelog');
 
         $output->writeln('');
-
-        $template = $input->getOption('template');
-
-        array_walk($pullRequests, function (Entity\PullRequest $pullRequest) use ($output, $template) {
-
-            $message = str_replace(
-                [
-                    '%title%',
-                    '%id%',
-                ],
-                [
-                    $pullRequest->title(),
-                    $pullRequest->id(),
-                ],
-                $template
-            );
-
-            $output->writeln($message);
-        });
+        $output->writeln($this->formatStopwatchEvent($stopWatch->getEvent('changelog')));
 
         return 0;
     }
@@ -183,5 +191,19 @@ class PullRequestCommand extends Command
         }
 
         return $this->pullRequestRepository;
+    }
+
+    /**
+     * @param StopwatchEvent $event
+     *
+     * @return string
+     */
+    private function formatStopwatchEvent(StopwatchEvent $event)
+    {
+        return sprintf(
+            'Time: %ss, Memory: %sMB.',
+            $event->getDuration() / 1000,
+            round($event->getMemory() / 1024 / 1024, 3)
+        );
     }
 }
