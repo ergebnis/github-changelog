@@ -411,6 +411,48 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    public function testItemsFetchesCommitsIfEndReferenceIsNotGiven()
+    {
+        $faker = $this->faker();
+
+        $owner = $faker->userName;
+        $repository = $faker->slug();
+        $startReference = $faker->sha1;
+
+        $commitApi = $this->commitApi();
+
+        $startCommit = $this->commitItem();
+
+        $commitApi
+            ->expects($this->once())
+            ->method('show')
+            ->with(
+                $this->equalTo($owner),
+                $this->equalTo($repository),
+                $this->equalTo($startReference)
+            )
+            ->willReturn($this->response($startCommit))
+        ;
+
+        $commitApi
+            ->expects($this->once())
+            ->method('all')
+            ->with(
+                $this->equalTo($owner),
+                $this->equalTo($repository),
+                $this->arrayNotHasKey('sha')
+            )
+        ;
+
+        $commitRepository = new Repository\CommitRepository($commitApi);
+
+        $commitRepository->items(
+            $owner,
+            $repository,
+            $startReference
+        );
+    }
+
     public function testItemsReturnsArrayOfCommitsFromStartToEndExcludingStart()
     {
         $faker = $this->faker();
@@ -714,6 +756,23 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
             if (is_array($array)
                 && array_key_exists($key, $array)
                 && $value === $array[$key]
+            ) {
+                return true;
+            }
+
+            return false;
+        });
+    }
+
+    /**
+     * @param string $key
+     * @return \PHPUnit_Framework_Constraint_Callback
+     */
+    private function arrayNotHasKey($key)
+    {
+        return $this->callback(function ($array) use ($key) {
+            if (is_array($array)
+                && !array_key_exists($key, $array)
             ) {
                 return true;
             }

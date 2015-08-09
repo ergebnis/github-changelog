@@ -21,10 +21,10 @@ class CommitRepository
      * @param string $owner
      * @param string $repository
      * @param string $startReference
-     * @param string $endReference
+     * @param string|null $endReference
      * @return Entity\Commit[]
      */
-    public function items($owner, $repository, $startReference, $endReference)
+    public function items($owner, $repository, $startReference, $endReference = null)
     {
         if ($startReference === $endReference) {
             return [];
@@ -40,19 +40,25 @@ class CommitRepository
             return [];
         }
 
-        $end = $this->show(
-            $owner,
-            $repository,
-            $endReference
-        );
+        $params = [];
 
-        if (null === $end) {
-            return [];
+        if ($endReference !== null) {
+            $end = $this->show(
+                $owner,
+                $repository,
+                $endReference
+            );
+
+            if (null === $end) {
+                return [];
+            }
+
+            $params = [
+                'sha' => $end->sha(),
+            ];
         }
 
-        $commits = $this->all($owner, $repository, [
-            'sha' => $end->sha(),
-        ]);
+        $commits = $this->all($owner, $repository, $params);
 
         $range = [];
 
