@@ -297,7 +297,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return PHPUnit_Framework_MockObject_MockObject
+     * @return PHPUnit_Framework_MockObject_MockObject|Api\PullRequest
      */
     private function pullRequestApi()
     {
@@ -308,7 +308,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return PHPUnit_Framework_MockObject_MockObject
+     * @return PHPUnit_Framework_MockObject_MockObject|Repository\CommitRepository
      */
     private function commitRepository()
     {

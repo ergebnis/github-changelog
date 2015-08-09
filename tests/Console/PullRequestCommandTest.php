@@ -159,6 +159,7 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
 
     public function testCanSetClient()
     {
+        /* @var Client $client */
         $client = $this->getMockBuilder(Client::class)
             ->disableOriginalConstructor()
             ->getMock()

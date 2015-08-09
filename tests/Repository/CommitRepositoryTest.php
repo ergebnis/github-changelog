@@ -596,7 +596,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return PHPUnit_Framework_MockObject_MockObject
+     * @return PHPUnit_Framework_MockObject_MockObject|Api\Repository\Commits
      */
     private function commitApi()
     {
