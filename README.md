@@ -33,7 +33,7 @@ Enjoy the changelog:
 Install locally:
 
 ```bash
-$ composer require --dev --sort-packages localheinz/github-changelog:^0.1
+$ composer require --dev --sort-packages localheinz/github-changelog
 ```
 
 Create your changelog from within in your project:
@@ -60,7 +60,7 @@ Enjoy the changelog:
 Install locally:
 
 ```bash
-$ composer require --sort-packages localheinz/github-changelog:^0.1
+$ composer require --sort-packages localheinz/github-changelog
 ```
 
 Retrieve pull requests between references in your application:
