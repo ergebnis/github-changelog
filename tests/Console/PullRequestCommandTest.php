@@ -58,7 +58,7 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
     public function testDescription()
     {
         $this->assertSame(
-            'Creates a changelog from merged pull requests between references',
+            'Creates a changelog from pull requests merged between references',
             $this->command->getDescription()
         );
     }
@@ -296,7 +296,7 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testExecuteRendersMessageEvenIfNoPullRequestsWereFound()
+    public function testExecuteRendersMessageIfNoPullRequestsWereFound()
     {
         $faker = $this->faker();
 
@@ -307,7 +307,7 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
 
         $expectedMessages = [
             sprintf(
-                'Could not find any pull requests for <info>%s/%s</info> between <info>%s</info> and <info>%s</info>.',
+                'Could not find any pull requests merged for <info>%s/%s</info> between <info>%s</info> and <info>%s</info>.',
                 $owner,
                 $repository,
                 $startReference,
@@ -340,7 +340,49 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
         $this->assertSame(0, $exitCode);
     }
 
-    public function testExecuteRendersPullRequestsWithTheTemplate()
+    public function testExecuteRendersDifferentMessageIfNoPullRequestsWereFoundAndNoEndReferenceWasGiven()
+    {
+        $faker = $this->faker();
+
+        $owner = $faker->userName;
+        $repository = $faker->slug();
+        $startReference = $faker->sha1;
+
+        $expectedMessages = [
+            sprintf(
+                'Could not find any pull requests merged for <info>%s/%s</info> since <info>%s</info>.',
+                $owner,
+                $repository,
+                $startReference
+            ),
+        ];
+
+        $pullRequestRepository = $this->pullRequestRepository();
+
+        $pullRequestRepository
+            ->expects($this->any())
+            ->method('items')
+            ->willReturn([])
+        ;
+
+        $this->command->setPullRequestRepository($pullRequestRepository);
+
+        $arguments = [
+            'owner' => $owner,
+            'repository' => $repository,
+            'start-reference' => $startReference,
+            'end-reference' => null,
+        ];
+
+        $exitCode = $this->command->run(
+            $this->inputMock($arguments),
+            $this->outputSpy($expectedMessages)
+        );
+
+        $this->assertSame(0, $exitCode);
+    }
+
+    public function testExecuteRendersPullRequestsWithTemplate()
     {
         $faker = $this->faker();
 
@@ -356,7 +398,7 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
 
         $expectedMessages = [
             sprintf(
-                'Found <info>%s</info> pull request(s) for <info>%s/%s</info> between <info>%s</info> and <info>%s</info>.',
+                'Found <info>%s</info> pull request(s) merged for <info>%s/%s</info> between <info>%s</info> and <info>%s</info>.',
                 count($pullRequests),
                 $owner,
                 $repository,
@@ -406,6 +448,53 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
                 $arguments,
                 $options
             ),
+            $this->outputSpy($expectedMessages)
+        );
+
+        $this->assertSame(0, $exitCode);
+    }
+
+    public function testExecuteRendersDifferentMessageWhenNoEndReferenceWasGiven()
+    {
+        $faker = $this->faker();
+
+        $owner = $faker->userName;
+        $repository = $faker->slug();
+        $startReference = $faker->sha1;
+        $count = $faker->numberBetween(1, 5);
+
+        $pullRequests = $this->pullRequests($count);
+
+        $expectedMessages = [
+            sprintf(
+                'Found <info>%s</info> pull request(s) merged for <info>%s/%s</info> since <info>%s</info>.',
+                count($pullRequests),
+                $owner,
+                $repository,
+                $startReference
+            ),
+            '',
+        ];
+
+        $pullRequestRepository = $this->pullRequestRepository();
+
+        $pullRequestRepository
+            ->expects($this->any())
+            ->method('items')
+            ->willReturn($pullRequests)
+        ;
+
+        $this->command->setPullRequestRepository($pullRequestRepository);
+
+        $arguments = [
+            'owner' => $owner,
+            'repository' => $repository,
+            'start-reference' => $startReference,
+            'end-reference' => null,
+        ];
+
+        $exitCode = $this->command->run(
+            $this->inputMock($arguments),
             $this->outputSpy($expectedMessages)
         );
 

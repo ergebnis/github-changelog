@@ -40,7 +40,7 @@ class PullRequestCommand extends Command
     {
         $this
             ->setName('pull-request')
-            ->setDescription('Creates a changelog from merged pull requests between references')
+            ->setDescription('Creates a changelog from pull requests merged between references')
             ->addArgument(
                 'owner',
                 Input\InputArgument::REQUIRED,
@@ -113,22 +113,33 @@ class PullRequestCommand extends Command
             return 1;
         }
 
-        if (!count($pullRequests)) {
-            $output->writeln(sprintf(
-                'Could not find any pull requests for <info>%s/%s</info> between <info>%s</info> and <info>%s</info>.',
-                $owner,
-                $repository,
+        if ($endReference === null) {
+            $range = sprintf(
+                'since <info>%s</info>',
+                $startReference
+            );
+        } else {
+            $range = sprintf(
+                'between <info>%s</info> and <info>%s</info>',
                 $startReference,
                 $endReference
+            );
+        }
+
+        if (!count($pullRequests)) {
+            $output->writeln(sprintf(
+                'Could not find any pull requests merged for <info>%s/%s</info> %s.',
+                $owner,
+                $repository,
+                $range
             ));
         } else {
             $output->writeln(sprintf(
-                'Found <info>%s</info> pull request(s) for <info>%s/%s</info> between <info>%s</info> and <info>%s</info>.',
+                'Found <info>%s</info> pull request(s) merged for <info>%s/%s</info> %s.',
                 count($pullRequests),
                 $owner,
                 $repository,
-                $startReference,
-                $endReference
+                $range
             ));
 
             $output->writeln('');
