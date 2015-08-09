@@ -23,7 +23,7 @@ before_install:
   - composer config github-oauth.github.com $GITHUB_TOKEN
 
 install:
-  - composer install
+  - composer install --prefer-dist
 
 script:
   - vendor/bin/php-cs-fixer fix --config-file=./.php_cs --dry-run --diff -v
