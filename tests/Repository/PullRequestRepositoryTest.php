@@ -57,7 +57,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
         $vendor = 'foo';
         $package = 'bar';
 
-        $id = $this->faker()->unique()->randomNumber;
+        $id = $this->faker()->unique()->randomNumber();
 
         $api = $this->pullRequestApi();
 
@@ -297,7 +297,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return PHPUnit_Framework_MockObject_MockObject
+     * @return PHPUnit_Framework_MockObject_MockObject|Api\PullRequest
      */
     private function pullRequestApi()
     {
@@ -308,7 +308,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return PHPUnit_Framework_MockObject_MockObject
+     * @return PHPUnit_Framework_MockObject_MockObject|Repository\CommitRepository
      */
     private function commitRepository()
     {
@@ -325,7 +325,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $item = new stdClass();
 
-        $item->id = $this->faker()->unique()->randomNumber;
+        $item->id = $this->faker()->unique()->randomNumber();
         $item->title = $this->faker()->unique()->sentence();
 
         return $item;
