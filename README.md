@@ -81,9 +81,9 @@ $client->authenticate(
     Client::AUTH_HTTP_TOKEN
 );
 
-$repository = new Repository\PullRequest(
+$repository = new Repository\PullRequestRepository(
     $client->pullRequests(),
-    new Repository\Commit($client->repositories()->commits())
+    new Repository\CommitRepository($client->repositories()->commits())
 );
 
 $pullRequests = $repository->items(

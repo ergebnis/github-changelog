@@ -5,7 +5,7 @@ namespace Localheinz\GitHub\ChangeLog\Repository;
 use Github\Api;
 use Localheinz\GitHub\ChangeLog\Entity;
 
-class PullRequest
+class PullRequestRepository
 {
     /**
      * @var Api\PullRequest
@@ -13,14 +13,14 @@ class PullRequest
     private $api;
 
     /**
-     * @var Commit
+     * @var CommitRepository
      */
     private $commitRepository;
 
     /**
      * @param Api\PullRequest $api
      */
-    public function __construct(Api\PullRequest $api, Commit $commitRepository)
+    public function __construct(Api\PullRequest $api, CommitRepository $commitRepository)
     {
         $this->api = $api;
         $this->commitRepository = $commitRepository;
