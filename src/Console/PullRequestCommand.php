@@ -24,17 +24,11 @@ class PullRequestCommand extends Command
      */
     private $pullRequestRepository;
 
-    /**
-     * @param Client $client
-     */
     public function setClient(Client $client)
     {
         $this->client = $client;
     }
 
-    /**
-     * @param Repository\PullRequestRepository $pullRequestRepository
-     */
     public function setPullRequestRepository(Repository\PullRequestRepository $pullRequestRepository)
     {
         $this->pullRequestRepository = $pullRequestRepository;
@@ -81,11 +75,6 @@ class PullRequestCommand extends Command
         ;
     }
 
-    /**
-     * @param Input\InputInterface $input
-     * @param Output\OutputInterface $output
-     * @return int
-     */
     protected function execute(Input\InputInterface $input, Output\OutputInterface $output)
     {
         $client = $this->client();

@@ -17,9 +17,6 @@ class PullRequestRepository
      */
     private $commitRepository;
 
-    /**
-     * @param Api\PullRequest $api
-     */
     public function __construct(Api\PullRequest $api, CommitRepository $commitRepository)
     {
         $this->api = $api;

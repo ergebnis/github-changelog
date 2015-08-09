@@ -12,9 +12,6 @@ class CommitRepository
      */
     private $api;
 
-    /**
-     * @param Api\Repository\Commits $api
-     */
     public function __construct(Api\Repository\Commits $api)
     {
         $this->api = $api;
