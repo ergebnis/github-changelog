@@ -199,7 +199,7 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
 
     public function testExecuteAuthenticatesIfTokenOptionIsGiven()
     {
-        $authToken = 'foo9000';
+        $authToken = $this->faker()->password();
 
         $client = $this->client();
 
@@ -262,10 +262,12 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
 
     public function testExecuteDelegatesToPullRequestRepository()
     {
-        $vendor = 'foo';
-        $package = 'bar';
-        $startReference = 'ad77125';
-        $endReference = '7fc1c4f';
+        $faker = $this->faker();
+
+        $vendor = $faker->unique()->word;
+        $package = $faker->unique()->word;
+        $startReference = $faker->unique()->sha1;
+        $endReference = $faker->unique()->sha1;
 
         $pullRequestRepository = $this->pullRequestRepository();
 
@@ -327,11 +329,13 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
 
         $this->command->setPullRequestRepository($pullRequestRepository);
 
+        $faker = $this->faker;
+
         $arguments = [
-            'vendor' => 'foo',
-            'package' => 'bar',
-            'start-reference' => 'ad77125',
-            'end-reference' => '7fc1c4f',
+            'vendor' => $faker->unique()->word,
+            'package' => $faker->unique()->word,
+            'start-reference' => $faker->unique()->sha1,
+            'end-reference' => $faker->unique()->sha1,
         ];
 
         $options = [
@@ -362,11 +366,13 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
 
         $this->command->setPullRequestRepository($pullRequestRepository);
 
+        $faker = $this->faker();
+
         $arguments = [
-            'vendor' => 'foo',
-            'package' => 'bar',
-            'start-reference' => 'ad77125',
-            'end-reference' => '7fc1c4f',
+            'vendor' => $faker->unique()->word,
+            'package' => $faker->unique()->word,
+            'start-reference' => $faker->unique()->sha1,
+            'end-reference' => $faker->unique()->sha1,
         ];
 
         $expectedMessages = [
@@ -476,9 +482,14 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
      */
     private function pullRequest()
     {
+        $faker = $this->faker();
+
+        $id = $faker->unique()->randomNumber();
+        $title = $faker->unique()->sentence();
+
         return new Entity\PullRequest(
-            $this->faker()->unique()->randomNumber(),
-            $this->faker()->unique()->sentence()
+            $id,
+            $title
         );
     }
 
