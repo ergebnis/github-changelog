@@ -23,8 +23,8 @@ install:
   - composer install --prefer-dist
 
 script:
-  - vendor/bin/php-cs-fixer fix --config-file=./.php_cs --dry-run --diff -v
   - vendor/bin/phpunit --coverage-clover build/logs/clover.xml
+  - vendor/bin/php-cs-fixer fix --config-file=./.php_cs --dry-run --diff --verbose
 
 after_success:
   - vendor/bin/test-reporter --stdout > codeclimate.json
