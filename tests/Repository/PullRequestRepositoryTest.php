@@ -89,6 +89,42 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
         $this->assertNull($pullRequest);
     }
 
+    public function testItemsDoesNotRequireAnEndReference()
+    {
+        $faker = $this->faker();
+
+        $vendor = $faker->userName;
+        $package = $faker->slug();
+        $startReference = $faker->sha1;
+
+        $commitRepository = $this->commitRepository();
+
+        $commitRepository
+            ->expects($this->once())
+            ->method('items')
+            ->with(
+                $this->equalTo($vendor),
+                $this->equalTo($package),
+                $this->equalTo($startReference),
+                $this->equalTo(null)
+            )
+            ->willReturn([])
+        ;
+
+        $repository = new Repository\PullRequestRepository(
+            $this->pullRequestApi(),
+            $commitRepository
+        );
+
+        $pullRequests = $repository->items(
+            $vendor,
+            $package,
+            $startReference
+        );
+
+        $this->assertSame([], $pullRequests);
+    }
+
     public function testItemsReturnsEmptyArrayIfNoCommitsWereFound()
     {
         $faker = $this->faker();

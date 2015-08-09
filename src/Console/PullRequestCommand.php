@@ -58,7 +58,7 @@ class PullRequestCommand extends Command
             )
             ->addArgument(
                 'end-reference',
-                Input\InputArgument::REQUIRED,
+                Input\InputArgument::OPTIONAL,
                 'The end reference, e.g. "1.1.0"'
             )
             ->addOption(

@@ -51,10 +51,10 @@ class PullRequestRepository
      * @param string $owner
      * @param string $repository
      * @param string $startReference
-     * @param string $endReference
+     * @param string|null $endReference
      * @return Entity\PullRequest[] array
      */
-    public function items($owner, $repository, $startReference, $endReference)
+    public function items($owner, $repository, $startReference, $endReference = null)
     {
         $commits = $this->commitRepository->items(
             $owner,

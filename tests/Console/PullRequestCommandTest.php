@@ -105,7 +105,7 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
             ],
             [
                 'end-reference',
-                true,
+                false,
                 'The end reference, e.g. "1.1.0"',
             ],
         ];
