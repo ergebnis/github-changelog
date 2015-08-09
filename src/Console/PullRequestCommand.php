@@ -11,6 +11,8 @@ use Localheinz\GitHub\ChangeLog\Repository;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input;
 use Symfony\Component\Console\Output;
+use Symfony\Component\Stopwatch\Stopwatch;
+use Symfony\Component\Stopwatch\StopwatchEvent;
 
 class PullRequestCommand extends Command
 {
@@ -79,6 +81,9 @@ class PullRequestCommand extends Command
     {
         $client = $this->client();
 
+        $stopWatch = new Stopwatch();
+        $stopWatch->start('changelog');
+
         $authToken = $input->getOption('auth-token');
         if (null !== $authToken) {
             $client->authenticate(
@@ -87,39 +92,71 @@ class PullRequestCommand extends Command
             );
         }
 
+        $owner = $input->getArgument('owner');
+        $repository = $input->getArgument('repository');
+        $startReference = $input->getArgument('start-reference');
+        $endReference = $input->getArgument('end-reference');
+
         try {
             $pullRequests = $this->pullRequestRepository()->items(
-                $input->getArgument('owner'),
-                $input->getArgument('repository'),
-                $input->getArgument('start-reference'),
-                $input->getArgument('end-reference')
+                $owner,
+                $repository,
+                $startReference,
+                $endReference
             );
         } catch (Exception $exception) {
             $output->writeln(sprintf(
-                '<error>%s</error>',
+                '<error>An error occurred: %s</error>',
                 $exception->getMessage()
             ));
 
             return 1;
         }
 
-        $template = $input->getOption('template');
+        if (!count($pullRequests)) {
+            $output->writeln(sprintf(
+                'Could not find any pull requests for <info>%s/%s</info> between <info>%s</info> and <info>%s</info>.',
+                $owner,
+                $repository,
+                $startReference,
+                $endReference
+            ));
+        } else {
+            $output->writeln(sprintf(
+                'Found <info>%s</info> pull request(s) for <info>%s/%s</info> between <info>%s</info> and <info>%s</info>.',
+                count($pullRequests),
+                $owner,
+                $repository,
+                $startReference,
+                $endReference
+            ));
 
-        array_walk($pullRequests, function (Entity\PullRequest $pullRequest) use ($output, $template) {
-            $message = str_replace(
-                [
-                    '%title%',
-                    '%id%',
-                ],
-                [
-                    $pullRequest->title(),
-                    $pullRequest->id(),
-                ],
-                $template
-            );
+            $output->writeln('');
 
-            $output->writeln($message);
-        });
+            $template = $input->getOption('template');
+
+            array_walk($pullRequests, function (Entity\PullRequest $pullRequest) use ($output, $template) {
+
+                $message = str_replace(
+                    [
+                        '%title%',
+                        '%id%',
+                    ],
+                    [
+                        $pullRequest->title(),
+                        $pullRequest->id(),
+                    ],
+                    $template
+                );
+
+                $output->writeln($message);
+            });
+        }
+
+        $stopWatch->stop('changelog');
+
+        $output->writeln('');
+        $output->writeln($this->formatStopwatchEvent($stopWatch->getEvent('changelog')));
 
         return 0;
     }
@@ -154,5 +191,19 @@ class PullRequestCommand extends Command
         }
 
         return $this->pullRequestRepository;
+    }
+
+    /**
+     * @param StopwatchEvent $event
+     *
+     * @return string
+     */
+    private function formatStopwatchEvent(StopwatchEvent $event)
+    {
+        return sprintf(
+            'Time: %ss, Memory: %sMB.',
+            $event->getDuration() / 1000,
+            round($event->getMemory() / 1024 / 1024, 3)
+        );
     }
 }
