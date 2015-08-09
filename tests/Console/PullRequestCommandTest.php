@@ -89,14 +89,14 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
     {
         return [
             [
-                'vendor',
+                'owner',
                 true,
-                'The name of the vendor, e.g., "localheinz"',
+                'The owner, e.g., "localheinz"',
             ],
             [
-                'package',
+                'repository',
                 true,
-                'The name of the package, e.g. "github-changelog"',
+                'The repository, e.g. "github-changelog"',
             ],
             [
                 'start-reference',
@@ -264,8 +264,8 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
     {
         $faker = $this->faker();
 
-        $vendor = $faker->unique()->word;
-        $package = $faker->unique()->word;
+        $owner = $faker->unique()->userName;
+        $repository = $faker->unique()->slug();
         $startReference = $faker->unique()->sha1;
         $endReference = $faker->unique()->sha1;
 
@@ -275,8 +275,8 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('items')
             ->with(
-                $this->equalTo($vendor),
-                $this->equalTo($package),
+                $this->equalTo($owner),
+                $this->equalTo($repository),
                 $this->equalTo($startReference),
                 $this->equalTo($endReference)
             )
@@ -287,8 +287,8 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
 
         $this->command->run(
             $this->input([
-                'vendor' => $vendor,
-                'package' => $package,
+                'owner' => $owner,
+                'repository' => $repository,
                 'start-reference' => $startReference,
                 'end-reference' => $endReference,
             ]),
@@ -332,8 +332,8 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
         $faker = $this->faker;
 
         $arguments = [
-            'vendor' => $faker->unique()->word,
-            'package' => $faker->unique()->word,
+            'owner' => $faker->unique()->userName,
+            'repository' => $faker->unique()->slug(),
             'start-reference' => $faker->unique()->sha1,
             'end-reference' => $faker->unique()->sha1,
         ];
@@ -369,8 +369,8 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
         $faker = $this->faker();
 
         $arguments = [
-            'vendor' => $faker->unique()->word,
-            'package' => $faker->unique()->word,
+            'owner' => $faker->unique()->userName,
+            'repository' => $faker->unique()->slug(),
             'start-reference' => $faker->unique()->sha1,
             'end-reference' => $faker->unique()->sha1,
         ];
