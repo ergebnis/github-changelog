@@ -87,25 +87,54 @@ class PullRequestCommand extends Command
             );
         }
 
+        $owner = $input->getArgument('owner');
+        $repository = $input->getArgument('repository');
+        $startReference = $input->getArgument('start-reference');
+        $endReference = $input->getArgument('end-reference');
+
         try {
             $pullRequests = $this->pullRequestRepository()->items(
-                $input->getArgument('owner'),
-                $input->getArgument('repository'),
-                $input->getArgument('start-reference'),
-                $input->getArgument('end-reference')
+                $owner,
+                $repository,
+                $startReference,
+                $endReference
             );
         } catch (Exception $exception) {
             $output->writeln(sprintf(
-                '<error>%s</error>',
+                '<error>An error occurred: %s</error>',
                 $exception->getMessage()
             ));
 
             return 1;
         }
 
+        if (!count($pullRequests)) {
+            $output->writeln(sprintf(
+                'Could not find any pull requests for <info>%s/%s</info> between <info>%s</info> and <info>%s</info>.',
+                $owner,
+                $repository,
+                $startReference,
+                $endReference
+            ));
+
+            return 0;
+        }
+
+        $output->writeln(sprintf(
+            'Found <info>%s</info> pull request(s) for <info>%s/%s</info> between <info>%s</info> and <info>%s</info>.',
+            count($pullRequests),
+            $owner,
+            $repository,
+            $startReference,
+            $endReference
+        ));
+
+        $output->writeln('');
+
         $template = $input->getOption('template');
 
         array_walk($pullRequests, function (Entity\PullRequest $pullRequest) use ($output, $template) {
+
             $message = str_replace(
                 [
                     '%title%',

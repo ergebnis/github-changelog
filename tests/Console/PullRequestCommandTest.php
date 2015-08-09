@@ -180,8 +180,8 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
         $this->command = new Console\PullRequestCommand();
 
         $this->command->run(
-            $this->input(),
-            $this->output()
+            $this->inputMock(),
+            $this->outputMock()
         );
 
         $reflectionObject = new ReflectionObject($this->command);
@@ -215,13 +215,13 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
         $this->command->setClient($client);
 
         $this->command->run(
-            $this->input(
+            $this->inputMock(
                 [],
                 [
                     'auth-token' => $authToken,
                 ]
             ),
-            $this->output()
+            $this->outputMock()
         );
     }
 
@@ -246,8 +246,8 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
         $this->command->setClient($client);
 
         $this->command->run(
-            $this->input(),
-            $this->output()
+            $this->inputMock(),
+            $this->outputMock()
         );
 
         $reflectionObject = new ReflectionObject($this->command);
@@ -286,26 +286,88 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
         $this->command->setPullRequestRepository($pullRequestRepository);
 
         $this->command->run(
-            $this->input([
+            $this->inputMock([
                 'owner' => $owner,
                 'repository' => $repository,
                 'start-reference' => $startReference,
                 'end-reference' => $endReference,
             ]),
-            $this->output()
+            $this->outputMock()
         );
+    }
+
+    public function testExecuteRendersMessageEvenIfNoPullRequestsWereFound()
+    {
+        $faker = $this->faker();
+
+        $owner = $faker->userName;
+        $repository = $faker->slug();
+        $startReference = $faker->sha1;
+        $endReference = $faker->sha1;
+
+        $expectedMessages = [
+            sprintf(
+                'Could not find any pull requests for <info>%s/%s</info> between <info>%s</info> and <info>%s</info>.',
+                $owner,
+                $repository,
+                $startReference,
+                $endReference
+            ),
+        ];
+
+        $pullRequestRepository = $this->pullRequestRepository();
+
+        $pullRequestRepository
+            ->expects($this->any())
+            ->method('items')
+            ->willReturn([])
+        ;
+
+        $this->command->setPullRequestRepository($pullRequestRepository);
+
+        $arguments = [
+            'owner' => $owner,
+            'repository' => $repository,
+            'start-reference' => $startReference,
+            'end-reference' => $endReference,
+        ];
+
+        $exitCode = $this->command->run(
+            $this->inputMock($arguments),
+            $this->outputSpy($expectedMessages)
+        );
+
+        $this->assertSame(0, $exitCode);
     }
 
     public function testExecuteRendersPullRequestsWithTheTemplate()
     {
-        $pullRequests = $this->pullRequests(5);
+        $faker = $this->faker();
 
-        $template = '%title% :: %id%';
+        $owner = $faker->userName;
+        $repository = $faker->slug();
+        $startReference = $faker->sha1;
+        $endReference = $faker->sha1;
+        $count = $faker->numberBetween(1, 5);
 
-        $expectedMessages = [];
+        $pullRequests = $this->pullRequests($count);
+
+        $template = '- %title% (#%id%)';
+
+        $expectedMessages = [
+            sprintf(
+                'Found <info>%s</info> pull request(s) for <info>%s/%s</info> between <info>%s</info> and <info>%s</info>.',
+                count($pullRequests),
+                $owner,
+                $repository,
+                $startReference,
+                $endReference
+            ),
+            '',
+        ];
 
         array_walk($pullRequests, function (Entity\PullRequest $pullRequest) use (&$expectedMessages, $template) {
-            $message = str_replace(
+            $expectedMessages[] = str_replace(
                 [
                     '%title%',
                     '%id%',
@@ -316,7 +378,6 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
                 ],
                 $template
             );
-            array_push($expectedMessages, $message);
         });
 
         $pullRequestRepository = $this->pullRequestRepository();
@@ -329,13 +390,11 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
 
         $this->command->setPullRequestRepository($pullRequestRepository);
 
-        $faker = $this->faker;
-
         $arguments = [
-            'owner' => $faker->unique()->userName,
-            'repository' => $faker->unique()->slug(),
-            'start-reference' => $faker->unique()->sha1,
-            'end-reference' => $faker->unique()->sha1,
+            'owner' => $owner,
+            'repository' => $repository,
+            'start-reference' => $startReference,
+            'end-reference' => $endReference,
         ];
 
         $options = [
@@ -343,11 +402,11 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
         ];
 
         $exitCode = $this->command->run(
-            $this->input(
+            $this->inputMock(
                 $arguments,
                 $options
             ),
-            $this->output($expectedMessages)
+            $this->outputSpy($expectedMessages)
         );
 
         $this->assertSame(0, $exitCode);
@@ -377,17 +436,17 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
 
         $expectedMessages = [
             sprintf(
-                '<error>%s</error>',
+                '<error>An error occurred: %s</error>',
                 $exception->getMessage()
             ),
         ];
 
         $exitCode = $this->command->run(
-            $this->input(
+            $this->inputMock(
                 $arguments,
                 []
             ),
-            $this->output($expectedMessages)
+            $this->outputSpy($expectedMessages)
         );
 
         $this->assertSame(1, $exitCode);
@@ -420,7 +479,7 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
      * @param array $options
      * @return Input\InputInterface
      */
-    private function input(array $arguments = [], array $options = [])
+    private function inputMock(array $arguments = [], array $options = [])
     {
         $input = $this->getMockBuilder(Input\InputInterface::class)->getMock();
 
@@ -452,15 +511,22 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param array $expectedMessages
      * @return PHPUnit_Framework_MockObject_MockObject|Output\OutputInterface
      */
-    private function output(array $expectedMessages = [])
+    private function outputMock()
     {
-        $output = $this->getMockBuilder(Output\OutputInterface::class)
+        return $this->getMockBuilder(Output\OutputInterface::class)
             ->disableOriginalConstructor()
             ->getMock()
         ;
+    }
+    /**
+     * @param array $expectedMessages
+     * @return PHPUnit_Framework_MockObject_MockObject|Output\OutputInterface
+     */
+    private function outputSpy(array $expectedMessages = [])
+    {
+        $output = $this->outputMock();
 
         $output
             ->expects($this->exactly(count($expectedMessages)))
