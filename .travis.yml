@@ -2,6 +2,10 @@ language: php
 
 sudo: false
 
+env:
+  global:
+    secure: "DcTtBsjNY8p9hRjtIbTHc3r4ZU6ksqE3Nx7GE/ncIlrdoO0DTxxA/zkN6aizDpQiC6P7sz4FhhiK6ixJOLmnigNuij0v03bjhFApte36jT92iJgMKTGXIsH0Hj5XNlMBFpy0oAU8irhiPBK3lPoPJK+iadYdFA8yHdkEeYmsS/o="
+
 php:
   - 5.5
 
@@ -16,9 +20,11 @@ addons:
 
 before_install:
   - composer self-update
+  - composer validate
+  - composer config github-oauth.github.com $GITHUB_TOKEN
 
 install:
-  - composer install
+  - composer install --prefer-dist
 
 script:
   - vendor/bin/php-cs-fixer fix --config-file=./.php_cs --dry-run --diff -v
