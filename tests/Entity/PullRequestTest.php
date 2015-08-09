@@ -3,14 +3,19 @@
 namespace Localheinz\GitHub\ChangeLog\Test\Entity;
 
 use Localheinz\GitHub\ChangeLog\Entity;
+use Localheinz\GitHub\ChangeLog\Test\Util\FakerTrait;
 use PHPUnit_Framework_TestCase;
 
 class PullRequestTest extends PHPUnit_Framework_TestCase
 {
+    use FakerTrait;
+
     public function testConstructorSetsIdAndTitle()
     {
-        $id = '9000';
-        $title = 'Enhancement: Reduce memory usage';
+        $faker = $this->faker();
+
+        $id = $faker->randomNumber();
+        $title = $faker->sentence();
 
         $entity = new Entity\PullRequest(
             $id,

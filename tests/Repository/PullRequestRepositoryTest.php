@@ -17,8 +17,10 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function testShowReturnsPullRequestEntityWithIdAndTitleOnSuccess()
     {
-        $vendor = 'foo';
-        $package = 'bar';
+        $faker = $this->faker();
+
+        $vendor = $faker->userName;
+        $package = $faker->slug();
 
         $api = $this->pullRequestApi();
 
@@ -54,10 +56,11 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function testShowReturnsNullOnFailure()
     {
-        $vendor = 'foo';
-        $package = 'bar';
+        $faker = $this->faker();
 
-        $id = $this->faker()->unique()->randomNumber();
+        $vendor = $faker->userName;
+        $package = $faker->slug();
+        $id = $faker->randomNumber();
 
         $api = $this->pullRequestApi();
 
@@ -88,10 +91,12 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function testItemsReturnsEmptyArrayIfNoCommitsWereFound()
     {
-        $vendor = 'foo';
-        $package = 'bar';
-        $startReference = 'ad77125';
-        $endReference = '7fc1c4f';
+        $faker = $this->faker();
+
+        $vendor = $faker->userName;
+        $package = $faker->slug();
+        $startReference = $faker->sha1;
+        $endReference = $faker->sha1;
 
         $commitRepository = $this->commitRepository();
 
@@ -124,15 +129,17 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function testItemsReturnsEmptyArrayIfNoMergeCommitsWereFound()
     {
-        $vendor = 'foo';
-        $package = 'bar';
-        $startReference = 'ad77125';
-        $endReference = '7fc1c4f';
+        $faker = $this->faker();
+
+        $vendor = $faker->userName;
+        $package = $faker->slug();
+        $startReference = $faker->sha1;
+        $endReference = $faker->sha1;
 
         $commitRepository = $this->commitRepository();
 
         $commit = new Entity\Commit(
-            $this->faker()->unique()->sha1,
+            $faker->sha1,
             'I am not a merge commit'
         );
 
@@ -167,10 +174,12 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function testItemsFetchesPullRequestIfMergeCommitWasFound()
     {
-        $vendor = 'foo';
-        $package = 'bar';
-        $startReference = 'ad77125';
-        $endReference = '7fc1c4f';
+        $faker = $this->faker();
+
+        $vendor = $faker->userName;
+        $package = $faker->slug();
+        $startReference = $faker->sha1;
+        $endReference = $faker->sha1;
 
         $commitRepository = $this->commitRepository();
 
@@ -237,17 +246,19 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function testItemsHandlesMergeCommitWherePullRequestWasNotFound()
     {
-        $vendor = 'foo';
-        $package = 'bar';
-        $startReference = 'ad77125';
-        $endReference = '7fc1c4f';
+        $faker = $this->faker();
+
+        $vendor = $faker->userName;
+        $package = $faker->slug();
+        $startReference = $faker->sha1;
+        $endReference = $faker->sha1;
 
         $commitRepository = $this->commitRepository();
 
         $id = 9000;
 
         $mergeCommit = new Entity\Commit(
-            'foo',
+            $faker->sha1,
             sprintf(
                 'Merge pull request #%s from localheinz/fix/directory',
                 $id

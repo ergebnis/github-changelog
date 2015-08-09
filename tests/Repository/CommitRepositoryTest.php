@@ -17,9 +17,11 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function testShowReturnsCommitEntityWithShaAndMessageOnSuccess()
     {
-        $vendor = 'foo';
-        $package = 'bar';
-        $sha = 'ad77125';
+        $faker = $this->faker();
+
+        $vendor = $faker->userName;
+        $package = $faker->slug();
+        $sha = $faker->sha1;
 
         $api = $this->commitApi();
 
@@ -52,9 +54,11 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function testShowReturnsNullOnFailure()
     {
-        $vendor = 'foo';
-        $package = 'bar';
-        $sha = 'ad77125';
+        $faker = $this->faker();
+
+        $vendor = $faker->userName;
+        $package = $faker->slug();
+        $sha = $faker->sha1;
 
         $api = $this->commitApi();
 
@@ -82,9 +86,11 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function testAllReturnsEmptyArrayOnFailure()
     {
-        $vendor = 'foo';
-        $package = 'bar';
-        $sha = 'ad77125';
+        $faker = $this->faker();
+
+        $vendor = $faker->userName;
+        $package = $faker->slug();
+        $sha = $faker->sha1;
 
         $api = $this->commitApi();
 
@@ -114,9 +120,11 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function testAllSetsParamsPerPageTo250()
     {
-        $vendor = 'foo';
-        $package = 'bar';
-        $sha = 'ad77125';
+        $faker = $this->faker();
+
+        $vendor = $faker->userName;
+        $package = $faker->slug();
+        $sha = $faker->sha1;
 
         $api = $this->commitApi();
 
@@ -146,10 +154,12 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function testAllStillAllowsSettingPerPage()
     {
-        $vendor = 'foo';
-        $package = 'bar';
-        $sha = 'ad77125';
-        $perPage = 13;
+        $faker = $this->faker();
+
+        $vendor = $faker->userName;
+        $package = $faker->slug();
+        $sha = $faker->sha1;
+        $perPage = $faker->randomNumber();
 
         $api = $this->commitApi();
 
@@ -180,9 +190,11 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function testAllReturnsArrayOfCommitEntities()
     {
-        $vendor = 'foo';
-        $package = 'bar';
-        $sha = 'ad77125';
+        $faker = $this->faker();
+
+        $vendor = $faker->userName;
+        $package = $faker->slug();
+        $sha = $faker->sha1;
 
         $api = $this->commitApi();
 
@@ -226,9 +238,12 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function testItemsDoesNotFetchCommitsIfStartAndEndReferencesAreTheSame()
     {
-        $vendor = 'foo';
-        $package = 'bar';
-        $startReference = 'ad77125';
+        $faker = $this->faker();
+
+        $vendor = $faker->userName;
+        $package = $faker->slug();
+        $startReference = $faker->sha1;
+
         $endReference = $startReference;
 
         $api = $this->commitApi();
@@ -252,10 +267,12 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function testItemsDoesNotFetchCommitsIfStartCommitCouldNotBeFound()
     {
-        $vendor = 'foo';
-        $package = 'bar';
-        $startReference = 'ad77125';
-        $endReference = '7fc1c4f';
+        $faker = $this->faker();
+
+        $vendor = $faker->userName;
+        $package = $faker->slug();
+        $startReference = $faker->sha1;
+        $endReference = $faker->sha1;
 
         $api = $this->commitApi();
 
@@ -289,10 +306,12 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function testItemsDoesNotFetchCommitsIfEndCommitCouldNotBeFound()
     {
-        $vendor = 'foo';
-        $package = 'bar';
-        $startReference = 'ad77125';
-        $endReference = '7fc1c4f';
+        $faker = $this->faker();
+
+        $vendor = $faker->userName;
+        $package = $faker->slug();
+        $startReference = $faker->sha1;
+        $endReference = $faker->sha1;
 
         $api = $this->commitApi();
 
@@ -337,10 +356,12 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function testItemsFetchesCommitsUsingShaFromEndCommit()
     {
-        $vendor = 'foo';
-        $package = 'bar';
-        $startReference = 'ad77125';
-        $endReference = '7fc1c4f';
+        $faker = $this->faker();
+
+        $vendor = $faker->userName;
+        $package = $faker->slug();
+        $startReference = $faker->sha1;
+        $endReference = $faker->sha1;
 
         $api = $this->commitApi();
 
@@ -392,10 +413,12 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function testItemsReturnsArrayOfCommitsFromStartToEndExcludingStart()
     {
-        $vendor = 'foo';
-        $package = 'bar';
-        $startReference = 'ad77125';
-        $endReference = '7fc1c4f';
+        $faker = $this->faker();
+
+        $vendor = $faker->userName;
+        $package = $faker->slug();
+        $startReference = $faker->sha1;
+        $endReference = $faker->sha1;
 
         $api = $this->commitApi();
 
@@ -482,10 +505,12 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function testItemsFetchesMoreCommitsIfEndIsNotContainedInFirstBatch()
     {
-        $vendor = 'foo';
-        $package = 'bar';
-        $startReference = 'ad77125';
-        $endReference = '7fc1c4f';
+        $faker = $this->faker();
+
+        $vendor = $faker->userName;
+        $package = $faker->slug();
+        $startReference = $faker->sha1;
+        $endReference = $faker->sha1;
 
         $api = $this->commitApi();
 
