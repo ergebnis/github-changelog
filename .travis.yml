@@ -29,11 +29,11 @@ install:
   - composer install --prefer-dist
 
 script:
-  - if [[ "$COLLECT_COVERAGE" == "true" ]]; then vendor/bin/phpunit --coverage-clover build/logs/clover.xml; else vendor/bin/phpunit; fi
+  - if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_BRANCH" == "master" && "COLLECT_COVERAGE" == "true" ]]; then vendor/bin/phpunit --coverage-clover build/logs/clover.xml; else vendor/bin/phpunit; fi
   - if [[ "$CHECK_CS" == "true" ]]; then vendor/bin/php-cs-fixer fix --config-file=./.php_cs --dry-run --diff --verbose; fi
 
 after_success:
-  - if [[ "$COLLECT_COVERAGE" == "true" ]]; then vendor/bin/test-reporter; fi
+  - if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_BRANCH" == "master" && "COLLECT_COVERAGE" == "true" ]]; then vendor/bin/test-reporter; fi
 
 notifications:
   email: false
