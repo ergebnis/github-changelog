@@ -11,12 +11,12 @@
     "minimum-stability": "stable",
     "require": {
         "php": ">=5.5",
+        "codeclimate/php-test-reporter": "0.2.0",
         "knplabs/github-api": "^1.4.14",
         "symfony/console": "^2.7.3",
         "symfony/stopwatch": "^2.7.3"
     },
     "require-dev": {
-        "codeclimate/php-test-reporter": "^0.1.2",
         "fabpot/php-cs-fixer": "^1.10",
         "fzaninotto/faker": "^1.5.0",
         "phpunit/phpunit": "^4.8.2"
