@@ -7,8 +7,14 @@ env:
     - secure: "DcTtBsjNY8p9hRjtIbTHc3r4ZU6ksqE3Nx7GE/ncIlrdoO0DTxxA/zkN6aizDpQiC6P7sz4FhhiK6ixJOLmnigNuij0v03bjhFApte36jT92iJgMKTGXIsH0Hj5XNlMBFpy0oAU8irhiPBK3lPoPJK+iadYdFA8yHdkEeYmsS/o="
     - secure: "vLO6MNtynfHTrTM76rq13lnwPqm8ULyTjFysYSCDIgUBidi4PMbmNjTf72LTrG9NboqWJNzItuiK5aQQCaJaDCr+603Getv2bKSpsPn1wnr51zYPGDsvKFL3e040JuDLs/4TslVtZbnsU9QxSwnixWEIOPF5ECBwMVk31+E+ak0="
 
-php:
-  - 5.5
+matrix:
+  fast_finish: true
+  include:
+    - php: 5.5
+    - php: 5.6
+      env: CHECK_CS=true COLLECT_COVERAGE=true
+    - php: 7
+    - php: hhvm
 
 cache:
   directories:
@@ -23,11 +29,11 @@ install:
   - composer install --prefer-dist
 
 script:
-  - vendor/bin/phpunit --coverage-clover build/logs/clover.xml
-  - vendor/bin/php-cs-fixer fix --config-file=./.php_cs --dry-run --diff --verbose
+  - if [[ "$COLLECT_COVERAGE" == "true" ]]; then vendor/bin/phpunit --coverage-clover build/logs/clover.xml; else vendor/bin/phpunit; fi
+  - if [[ "$CHECK_CS" == "true" ]]; then vendor/bin/php-cs-fixer fix --config-file=./.php_cs --dry-run --diff --verbose; fi
 
 after_success:
-  - vendor/bin/test-reporter
+  - if [[ "$COLLECT_COVERAGE" == "true" ]]; then vendor/bin/test-reporter; fi
 
 notifications:
   email: false
