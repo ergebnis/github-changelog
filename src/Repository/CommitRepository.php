@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * Copyright (c) 2016 Andreas Möller <am@localheinz.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 namespace Localheinz\GitHub\ChangeLog\Repository;
 
 use Github\Api;
@@ -18,10 +25,11 @@ class CommitRepository
     }
 
     /**
-     * @param string $owner
-     * @param string $repository
-     * @param string $startReference
+     * @param string      $owner
+     * @param string      $repository
+     * @param string      $startReference
      * @param string|null $endReference
+     *
      * @return Entity\Commit[]
      */
     public function items($owner, $repository, $startReference, $endReference = null)
@@ -94,6 +102,7 @@ class CommitRepository
      * @param string $owner
      * @param string $repository
      * @param string $sha
+     *
      * @return Entity\Commit|null
      */
     public function show($owner, $repository, $sha)
@@ -105,7 +114,7 @@ class CommitRepository
         );
 
         if (!is_array($response)) {
-            return null;
+            return;
         }
 
         return new Entity\Commit(
@@ -117,7 +126,8 @@ class CommitRepository
     /**
      * @param string $owner
      * @param string $repository
-     * @param array $params
+     * @param array  $params
+     *
      * @return Entity\Commit[]
      */
     public function all($owner, $repository, array $params = [])
