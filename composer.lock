@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "262c2619c18bf9b2616a210bcf2e61eb",
+    "hash": "4a80a6a0264aca65ed3994b06bc0005e",
     "content-hash": "fc030b20d1a3ba7ee17449a4cf44360d",
     "packages": [
         {
@@ -707,7 +707,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/2ac4bdb4cb989d7b32821265ef6dcdf9dcda06ba",
+                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/889208985fea32c68df24656e1c7ac7326980a4d",
                 "reference": "2ac4bdb4cb989d7b32821265ef6dcdf9dcda06ba",
                 "shasum": ""
             },
