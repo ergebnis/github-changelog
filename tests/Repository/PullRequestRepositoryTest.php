@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * Copyright (c) 2016 Andreas Möller <am@localheinz.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 namespace Localheinz\GitHub\ChangeLog\Test\Repository;
 
 use Faker;
@@ -380,6 +387,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
 
     /**
      * @param stdClass $item
+     *
      * @return array
      */
     private function response(stdClass $item)

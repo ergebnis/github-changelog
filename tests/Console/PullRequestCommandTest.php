@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * Copyright (c) 2016 Andreas Möller <am@localheinz.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 namespace Localheinz\GitHub\ChangeLog\Test\Console;
 
 use Exception;
@@ -67,7 +74,7 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
      * @dataProvider providerArgument
      *
      * @param string $name
-     * @param bool $required
+     * @param bool   $required
      * @param string $description
      */
     public function testArgument($name, $required, $description)
@@ -116,9 +123,9 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
      *
      * @param string $name
      * @param string $shortcut
-     * @param bool $required
+     * @param bool   $required
      * @param string $description
-     * @param mixed $default
+     * @param mixed  $default
      */
     public function testOption($name, $shortcut, $required, $description, $default)
     {
@@ -566,6 +573,7 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
     /**
      * @param array $arguments
      * @param array $options
+     *
      * @return Input\InputInterface
      */
     private function inputMock(array $arguments = [], array $options = [])
@@ -577,7 +585,7 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
             ->method('getArgument')
             ->willReturnCallback(function ($name) use ($arguments) {
                 if (!array_key_exists($name, $arguments)) {
-                    return null;
+                    return;
                 }
 
                 return $arguments[$name];
@@ -589,7 +597,7 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
             ->method('getOption')
             ->willReturnCallback(function ($name) use ($options) {
                 if (!array_key_exists($name, $options)) {
-                    return null;
+                    return;
                 }
 
                 return $options[$name];
@@ -609,8 +617,10 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
             ->getMock()
         ;
     }
+
     /**
      * @param array $expectedMessages
+     *
      * @return PHPUnit_Framework_MockObject_MockObject|Output\OutputInterface
      */
     private function outputSpy(array $expectedMessages = [])
@@ -646,13 +656,14 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
 
     /**
      * @param int $count
+     *
      * @return Entity\PullRequest[]
      */
     private function pullRequests($count)
     {
         $pullRequests = [];
 
-        for ($i = 0; $i < $count; $i++) {
+        for ($i = 0; $i < $count; ++$i) {
             array_push($pullRequests, $this->pullRequest());
         }
 

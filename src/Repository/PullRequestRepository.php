@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * Copyright (c) 2016 Andreas Möller <am@localheinz.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 namespace Localheinz\GitHub\ChangeLog\Repository;
 
 use Github\Api;
@@ -27,6 +34,7 @@ class PullRequestRepository
      * @param string $owner
      * @param string $repository
      * @param string $id
+     *
      * @return Entity\PullRequest|null
      */
     public function show($owner, $repository, $id)
@@ -38,7 +46,7 @@ class PullRequestRepository
         );
 
         if (!is_array($response)) {
-            return null;
+            return;
         }
 
         return new Entity\PullRequest(
@@ -48,10 +56,11 @@ class PullRequestRepository
     }
 
     /**
-     * @param string $owner
-     * @param string $repository
-     * @param string $startReference
+     * @param string      $owner
+     * @param string      $repository
+     * @param string      $startReference
      * @param string|null $endReference
+     *
      * @return Entity\PullRequest[] array
      */
     public function items($owner, $repository, $startReference, $endReference = null)

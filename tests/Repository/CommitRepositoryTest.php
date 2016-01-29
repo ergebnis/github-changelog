@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * Copyright (c) 2016 Andreas Möller <am@localheinz.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 namespace Localheinz\GitHub\ChangeLog\Test\Repository;
 
 use Faker;
@@ -676,6 +683,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
     /**
      * @param string $sha
      * @param string $message
+     *
      * @return stdClass
      */
     private function commitItem($sha = null, $message = null)
@@ -690,13 +698,14 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
 
     /**
      * @param int $count
+     *
      * @return stdClass[]
      */
     private function commitItems($count)
     {
         $items = [];
 
-        for ($i = 0; $i < $count; $i++) {
+        for ($i = 0; $i < $count; ++$i) {
             array_push($items, $this->commitItem());
         }
 
@@ -705,6 +714,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
 
     /**
      * @param stdClass $item
+     *
      * @return array
      */
     private function response(stdClass $item)
@@ -731,6 +741,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
 
     /**
      * @param array $commits
+     *
      * @return array
      */
     private function responseFromItems(array $commits)
@@ -748,6 +759,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
     /**
      * @param string $key
      * @param string $value
+     *
      * @return \PHPUnit_Framework_Constraint_Callback
      */
     private function arrayHasKeyAndValue($key, $value)
@@ -766,6 +778,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
 
     /**
      * @param string $key
+     *
      * @return \PHPUnit_Framework_Constraint_Callback
      */
     private function arrayNotHasKey($key)
