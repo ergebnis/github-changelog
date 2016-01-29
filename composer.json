@@ -8,7 +8,8 @@
         }
     ],
     "license": "MIT",
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "php": ">=5.5",
         "codeclimate/php-test-reporter": "0.2.0",
@@ -17,9 +18,9 @@
         "symfony/stopwatch": "^2.7.3"
     },
     "require-dev": {
-        "fabpot/php-cs-fixer": "^1.10",
         "fzaninotto/faker": "^1.5.0",
-        "phpunit/phpunit": "^4.8.2"
+        "phpunit/phpunit": "^4.8.2",
+        "refinery29/php-cs-fixer-config": "^0.3.7"
     },
     "autoload": {
         "psr-4": {
