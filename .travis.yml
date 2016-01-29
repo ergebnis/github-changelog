@@ -11,16 +11,20 @@ matrix:
   fast_finish: true
   include:
     - php: 5.5
+      env: WITH_CS=true
     - php: 5.6
-      env: CHECK_CS=true COLLECT_COVERAGE=true
+      env: WITH_COVERAGE=true
     - php: 7
     - php: hhvm
 
 cache:
   directories:
     - $HOME/.composer/cache
+    - $HOME/.php-cs-fixer
 
 before_install:
+  - if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_BRANCH" == "master" ]]; then IS_MERGE_TO_MASTER=true; else IS_MERGE_TO_MASTER=false; fi
+  - if [[ "$WITH_COVERAGE" != "true" && "$IS_MERGE_TO_MASTER" == "false" && "$TRAVIS_PHP_VERSION" != "hhvm" ]]; then phpenv config-rm xdebug.ini; fi
   - composer self-update
   - composer validate
   - composer config github-oauth.github.com $GITHUB_TOKEN
@@ -29,14 +33,15 @@ install:
   - composer install --prefer-dist
 
 before_script:
-  - if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_BRANCH" == "master" ]]; then IS_MERGE_TO_MASTER=true; else IS_MERGE_TO_MASTER=false; fi
+  - mkdir -p "$HOME/.php-cs-fixer"
+  - mkdir -p build/logs
 
 script:
-  - if [[ "$COLLECT_COVERAGE" == "true" && "$IS_MERGE_TO_MASTER" == "true" ]]; then vendor/bin/phpunit --coverage-clover build/logs/clover.xml; else vendor/bin/phpunit; fi
-  - if [[ "$CHECK_CS" == "true" ]]; then vendor/bin/php-cs-fixer fix --config-file=./.php_cs --dry-run --diff --verbose; fi
+  - if [[ "$WITH_COVERAGE" == "true" && "$IS_MERGE_TO_MASTER" == "true" ]]; then vendor/bin/phpunit --configuration=phpunit.xml --coverage-clover=build/logs/clover.xml; else vendor/bin/phpunit --configuration=phpunit.xml; fi
+  - if [[ "$WITH_CS" == "true" ]]; then vendor/bin/php-cs-fixer fix --config-file=.php_cs --verbose --diff --dry-run; fi
 
 after_success:
-  - if [[ "$COLLECT_COVERAGE" == "true" && "$IS_MERGE_TO_MASTER" == "true" ]]; then vendor/bin/test-reporter; fi
+  - if [[ "$WITH_COVERAGE" == "true" && "$IS_MERGE_TO_MASTER" == "true" ]]; then vendor/bin/test-reporter --coverage-report=build/logs/clover.xml; fi
 
 notifications:
   email: false
