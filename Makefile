@@ -1,5 +1,10 @@
-cs:
+it: cs test
+
+composer:
+	composer install
+
+cs: composer
 	vendor/bin/php-cs-fixer fix --verbose --diff
 
-test:
+test: composer
 	vendor/bin/phpunit
