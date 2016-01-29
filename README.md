@@ -113,3 +113,7 @@ Enjoy the changelog:
 ## Hints
 
 :bulb: You can use anything for a reference, e.g., a tag, a branch, a commit!
+
+## License
+
+This package is licensed using the MIT License.
