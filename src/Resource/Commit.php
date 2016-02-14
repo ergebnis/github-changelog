@@ -46,4 +46,9 @@ final class Commit implements CommitInterface
     {
         return $this->message;
     }
+
+    public function equals(CommitInterface $commit)
+    {
+        return $commit->sha() === $this->sha();
+    }
 }

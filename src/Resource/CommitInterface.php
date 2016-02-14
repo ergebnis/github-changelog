@@ -20,4 +20,11 @@ interface CommitInterface
      * @return string
      */
     public function message();
+
+    /**
+     * @param CommitInterface $commit
+     *
+     * @return bool
+     */
+    public function equals(CommitInterface $commit);
 }

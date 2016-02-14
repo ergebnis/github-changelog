@@ -125,4 +125,23 @@ class CommitTest extends PHPUnit_Framework_TestCase
         $this->assertSame($sha, $commit->sha());
         $this->assertSame($message, $commit->message());
     }
+
+    public function testEqualsReturnsTrueIfShasAreTheSame()
+    {
+        $faker = $this->getFaker();
+
+        $sha = $faker->sha1;
+
+        $commitOne = new Resource\Commit(
+            $sha,
+            $faker->unique()->sentence()
+        );
+
+        $commitTwo = new Resource\Commit(
+            $sha,
+            $faker->unique()->sentence()
+        );
+
+        $this->assertTrue($commitTwo->equals($commitOne));
+    }
 }
