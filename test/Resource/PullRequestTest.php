@@ -7,9 +7,9 @@
  * the LICENSE file that was distributed with this source code.
  */
 
-namespace Localheinz\GitHub\ChangeLog\Test\Entity;
+namespace Localheinz\GitHub\ChangeLog\Test\Resource;
 
-use Localheinz\GitHub\ChangeLog\Entity;
+use Localheinz\GitHub\ChangeLog\Resource;
 use PHPUnit_Framework_TestCase;
 use Refinery29\Test\Util\Faker\GeneratorTrait;
 
@@ -24,7 +24,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
         $id = $faker->randomNumber();
         $title = $faker->sentence();
 
-        $entity = new Entity\PullRequest(
+        $entity = new Resource\PullRequest(
             $id,
             $title
         );

@@ -10,8 +10,8 @@
 namespace Localheinz\GitHub\ChangeLog\Test\Repository;
 
 use Github\Api;
-use Localheinz\GitHub\ChangeLog\Entity;
 use Localheinz\GitHub\ChangeLog\Repository;
+use Localheinz\GitHub\ChangeLog\Resource;
 use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
 use Refinery29\Test\Util\Faker\GeneratorTrait;
@@ -52,7 +52,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
             $sha
         );
 
-        $this->assertInstanceOf(Entity\Commit::class, $commit);
+        $this->assertInstanceOf(Resource\Commit::class, $commit);
 
         $this->assertSame($expectedItem->sha, $commit->sha());
         $this->assertSame($expectedItem->message, $commit->message());
@@ -234,9 +234,9 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
         array_walk($commits, function ($commit) use (&$expectedItems) {
             $expectedItem = array_shift($expectedItems);
 
-            $this->assertInstanceOf(Entity\Commit::class, $commit);
+            $this->assertInstanceOf(Resource\Commit::class, $commit);
 
-            /* @var Entity\Commit $commit */
+            /* @var Resource\Commit $commit */
             $this->assertSame($expectedItem->sha, $commit->sha());
             $this->assertSame($expectedItem->message, $commit->message());
         });
@@ -543,9 +543,9 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
         array_walk($commits, function ($commit) use (&$expectedItems) {
             $expectedItem = array_shift($expectedItems);
 
-            $this->assertInstanceOf(Entity\Commit::class, $commit);
+            $this->assertInstanceOf(Resource\Commit::class, $commit);
 
-            /* @var Entity\Commit $commit */
+            /* @var Resource\Commit $commit */
             $this->assertSame($expectedItem->sha, $commit->sha());
             $this->assertSame($expectedItem->message, $commit->message());
         });
@@ -660,9 +660,9 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
         array_walk($commits, function ($commit) use (&$expectedItems) {
             $expectedItem = array_shift($expectedItems);
 
-            $this->assertInstanceOf(Entity\Commit::class, $commit);
+            $this->assertInstanceOf(Resource\Commit::class, $commit);
 
-            /* @var Entity\Commit $commit */
+            /* @var Resource\Commit $commit */
             $this->assertSame($expectedItem->sha, $commit->sha());
             $this->assertSame($expectedItem->message, $commit->message());
         });
