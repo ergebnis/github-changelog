@@ -15,16 +15,16 @@ use Github\HttpClient;
 use Localheinz\GitHub\ChangeLog\Console;
 use Localheinz\GitHub\ChangeLog\Entity;
 use Localheinz\GitHub\ChangeLog\Repository;
-use Localheinz\GitHub\ChangeLog\Test\Util\FakerTrait;
 use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
+use Refinery29\Test\Util\Faker\GeneratorTrait;
 use ReflectionObject;
 use Symfony\Component\Console\Input;
 use Symfony\Component\Console\Output;
 
 class PullRequestCommandTest extends PHPUnit_Framework_TestCase
 {
-    use FakerTrait;
+    use GeneratorTrait;
 
     /**
      * @var Console\PullRequestCommand
@@ -206,7 +206,7 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
 
     public function testExecuteAuthenticatesIfTokenOptionIsGiven()
     {
-        $authToken = $this->faker()->password();
+        $authToken = $this->getFaker()->password();
 
         $client = $this->client();
 
@@ -269,7 +269,7 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
 
     public function testExecuteDelegatesToPullRequestRepository()
     {
-        $faker = $this->faker();
+        $faker = $this->getFaker();
 
         $owner = $faker->unique()->userName;
         $repository = $faker->unique()->slug();
@@ -305,7 +305,7 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
 
     public function testExecuteRendersMessageIfNoPullRequestsWereFound()
     {
-        $faker = $this->faker();
+        $faker = $this->getFaker();
 
         $owner = $faker->userName;
         $repository = $faker->slug();
@@ -349,7 +349,7 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
 
     public function testExecuteRendersDifferentMessageIfNoPullRequestsWereFoundAndNoEndReferenceWasGiven()
     {
-        $faker = $this->faker();
+        $faker = $this->getFaker();
 
         $owner = $faker->userName;
         $repository = $faker->slug();
@@ -391,7 +391,7 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
 
     public function testExecuteRendersPullRequestsWithTemplate()
     {
-        $faker = $this->faker();
+        $faker = $this->getFaker();
 
         $owner = $faker->userName;
         $repository = $faker->slug();
@@ -463,7 +463,7 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
 
     public function testExecuteRendersDifferentMessageWhenNoEndReferenceWasGiven()
     {
-        $faker = $this->faker();
+        $faker = $this->getFaker();
 
         $owner = $faker->userName;
         $repository = $faker->slug();
@@ -521,7 +521,7 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
 
         $this->command->setPullRequestRepository($pullRequestRepository);
 
-        $faker = $this->faker();
+        $faker = $this->getFaker();
 
         $arguments = [
             'owner' => $faker->unique()->userName,
@@ -643,7 +643,7 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
      */
     private function pullRequest()
     {
-        $faker = $this->faker();
+        $faker = $this->getFaker();
 
         $id = $faker->unique()->randomNumber();
         $title = $faker->unique()->sentence();

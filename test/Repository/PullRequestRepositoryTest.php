@@ -9,22 +9,21 @@
 
 namespace Localheinz\GitHub\ChangeLog\Test\Repository;
 
-use Faker;
 use Github\Api;
 use Localheinz\GitHub\ChangeLog\Entity;
 use Localheinz\GitHub\ChangeLog\Repository;
-use Localheinz\GitHub\ChangeLog\Test\Util\FakerTrait;
 use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
+use Refinery29\Test\Util\Faker\GeneratorTrait;
 use stdClass;
 
 class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
 {
-    use FakerTrait;
+    use GeneratorTrait;
 
     public function testShowReturnsPullRequestEntityWithIdAndTitleOnSuccess()
     {
-        $faker = $this->faker();
+        $faker = $this->getFaker();
 
         $vendor = $faker->userName;
         $package = $faker->slug();
@@ -63,7 +62,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function testShowReturnsNullOnFailure()
     {
-        $faker = $this->faker();
+        $faker = $this->getFaker();
 
         $vendor = $faker->userName;
         $package = $faker->slug();
@@ -98,7 +97,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function testItemsDoesNotRequireAnEndReference()
     {
-        $faker = $this->faker();
+        $faker = $this->getFaker();
 
         $vendor = $faker->userName;
         $package = $faker->slug();
@@ -134,7 +133,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function testItemsReturnsEmptyArrayIfNoCommitsWereFound()
     {
-        $faker = $this->faker();
+        $faker = $this->getFaker();
 
         $vendor = $faker->userName;
         $package = $faker->slug();
@@ -172,7 +171,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function testItemsReturnsEmptyArrayIfNoMergeCommitsWereFound()
     {
-        $faker = $this->faker();
+        $faker = $this->getFaker();
 
         $vendor = $faker->userName;
         $package = $faker->slug();
@@ -217,7 +216,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function testItemsFetchesPullRequestIfMergeCommitWasFound()
     {
-        $faker = $this->faker();
+        $faker = $this->getFaker();
 
         $vendor = $faker->userName;
         $package = $faker->slug();
@@ -229,7 +228,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
         $expectedItem = $this->pullRequestItem();
 
         $mergeCommit = new Entity\Commit(
-            $this->faker()->unique()->sha1,
+            $this->getFaker()->unique()->sha1,
             sprintf(
                 'Merge pull request #%s from localheinz/fix/directory',
                 $expectedItem->id
@@ -289,7 +288,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function testItemsHandlesMergeCommitWherePullRequestWasNotFound()
     {
-        $faker = $this->faker();
+        $faker = $this->getFaker();
 
         $owner = $faker->userName;
         $repository = $faker->slug();
@@ -379,8 +378,8 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $item = new stdClass();
 
-        $item->id = $this->faker()->unique()->randomNumber();
-        $item->title = $this->faker()->unique()->sentence();
+        $item->id = $this->getFaker()->unique()->randomNumber();
+        $item->title = $this->getFaker()->unique()->sentence();
 
         return $item;
     }

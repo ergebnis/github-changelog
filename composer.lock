@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4a80a6a0264aca65ed3994b06bc0005e",
-    "content-hash": "fc030b20d1a3ba7ee17449a4cf44360d",
+    "hash": "4a60dab848f3a829d9a3463c91760322",
+    "content-hash": "1a299a9525b2ecca1a3a65b6e6d71344",
     "packages": [
         {
             "name": "codeclimate/php-test-reporter",
@@ -707,7 +707,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/889208985fea32c68df24656e1c7ac7326980a4d",
+                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/f59678b9896c1ff3e78b7ab418a0e8fa337d6f81",
                 "reference": "2ac4bdb4cb989d7b32821265ef6dcdf9dcda06ba",
                 "shasum": ""
             },
@@ -1325,6 +1325,65 @@
             ],
             "description": "Provides a configuration for fabpot/php-cs-fixer, used within Refinery29.",
             "time": "2016-01-28 15:12:05"
+        },
+        {
+            "name": "refinery29/test-util",
+            "version": "0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/refinery29/test-util.git",
+                "reference": "fcf182273718d431fe48d5f4fa25849d55757aa5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/refinery29/test-util/zipball/fcf182273718d431fe48d5f4fa25849d55757aa5",
+                "reference": "fcf182273718d431fe48d5f4fa25849d55757aa5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "0.2.0",
+                "fzaninotto/faker": "^1.5",
+                "phpunit/phpunit": "^4.8.18 || ^5.2.3",
+                "refinery29/php-cs-fixer-config": "0.4.1"
+            },
+            "suggest": {
+                "fzaninotto/faker": "If you want to make use of the Faker\\GeneratorTrait",
+                "phpunit/phpunit": "If you want to make use of the PHPUnit\\BuildsMocksTrait"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Refinery29\\Test\\Util\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kayla Daniels",
+                    "email": "kayla.daniels@refinery29.com"
+                },
+                {
+                    "name": "Andreas Möller",
+                    "email": "andreas.moller@refinery29.com"
+                },
+                {
+                    "name": "R29 Product & Engineering",
+                    "email": "p.e@refinery29.com"
+                }
+            ],
+            "description": "Provides helpers for testing.",
+            "keywords": [
+                "faker",
+                "test",
+                "util"
+            ],
+            "time": "2016-02-09 18:36:54"
         },
         {
             "name": "sebastian/comparator",

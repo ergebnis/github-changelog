@@ -9,22 +9,21 @@
 
 namespace Localheinz\GitHub\ChangeLog\Test\Repository;
 
-use Faker;
 use Github\Api;
 use Localheinz\GitHub\ChangeLog\Entity;
 use Localheinz\GitHub\ChangeLog\Repository;
-use Localheinz\GitHub\ChangeLog\Test\Util\FakerTrait;
 use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
+use Refinery29\Test\Util\Faker\GeneratorTrait;
 use stdClass;
 
 class CommitRepositoryTest extends PHPUnit_Framework_TestCase
 {
-    use FakerTrait;
+    use GeneratorTrait;
 
     public function testShowReturnsCommitEntityWithShaAndMessageOnSuccess()
     {
-        $faker = $this->faker();
+        $faker = $this->getFaker();
 
         $owner = $faker->userName;
         $repository = $faker->slug();
@@ -61,7 +60,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function testShowReturnsNullOnFailure()
     {
-        $faker = $this->faker();
+        $faker = $this->getFaker();
 
         $owner = $faker->userName;
         $repository = $faker->slug();
@@ -93,7 +92,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function testAllReturnsEmptyArrayOnFailure()
     {
-        $faker = $this->faker();
+        $faker = $this->getFaker();
 
         $owner = $faker->userName;
         $repository = $faker->slug();
@@ -127,7 +126,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function testAllSetsParamsPerPageTo250()
     {
-        $faker = $this->faker();
+        $faker = $this->getFaker();
 
         $owner = $faker->userName;
         $repository = $faker->slug();
@@ -161,7 +160,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function testAllStillAllowsSettingPerPage()
     {
-        $faker = $this->faker();
+        $faker = $this->getFaker();
 
         $owner = $faker->userName;
         $repository = $faker->slug();
@@ -197,7 +196,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function testAllReturnsArrayOfCommitEntities()
     {
-        $faker = $this->faker();
+        $faker = $this->getFaker();
 
         $owner = $faker->userName;
         $repository = $faker->slug();
@@ -245,7 +244,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function testItemsDoesNotFetchCommitsIfStartAndEndReferencesAreTheSame()
     {
-        $faker = $this->faker();
+        $faker = $this->getFaker();
 
         $owner = $faker->userName;
         $repository = $faker->slug();
@@ -274,7 +273,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function testItemsDoesNotFetchCommitsIfStartCommitCouldNotBeFound()
     {
-        $faker = $this->faker();
+        $faker = $this->getFaker();
 
         $owner = $faker->userName;
         $repository = $faker->slug();
@@ -313,7 +312,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function testItemsDoesNotFetchCommitsIfEndCommitCouldNotBeFound()
     {
-        $faker = $this->faker();
+        $faker = $this->getFaker();
 
         $owner = $faker->userName;
         $repository = $faker->slug();
@@ -363,7 +362,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function testItemsFetchesCommitsUsingShaFromEndCommit()
     {
-        $faker = $this->faker();
+        $faker = $this->getFaker();
 
         $owner = $faker->userName;
         $repository = $faker->slug();
@@ -420,7 +419,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function testItemsFetchesCommitsIfEndReferenceIsNotGiven()
     {
-        $faker = $this->faker();
+        $faker = $this->getFaker();
 
         $owner = $faker->userName;
         $repository = $faker->slug();
@@ -462,7 +461,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function testItemsReturnsArrayOfCommitsFromStartToEndExcludingStart()
     {
-        $faker = $this->faker();
+        $faker = $this->getFaker();
 
         $owner = $faker->userName;
         $repository = $faker->slug();
@@ -554,7 +553,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
 
     public function testItemsFetchesMoreCommitsIfEndIsNotContainedInFirstBatch()
     {
-        $faker = $this->faker();
+        $faker = $this->getFaker();
 
         $owner = $faker->userName;
         $repository = $faker->slug();
@@ -690,8 +689,8 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $data = new stdClass();
 
-        $data->sha = $sha ?: $this->faker()->unique()->sha1;
-        $data->message = $message ?: $this->faker()->unique()->sentence();
+        $data->sha = $sha ?: $this->getFaker()->unique()->sha1;
+        $data->message = $message ?: $this->getFaker()->unique()->sentence();
 
         return $data;
     }
