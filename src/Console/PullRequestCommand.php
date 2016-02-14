@@ -19,6 +19,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Input;
 use Symfony\Component\Console\Output;
+use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Stopwatch\Stopwatch;
 use Symfony\Component\Stopwatch\StopwatchEvent;
 
@@ -96,6 +97,13 @@ class PullRequestCommand extends Command
     {
         $this->stopwatch->start('changelog');
 
+        $io = new SymfonyStyle(
+            $input,
+            $output
+        );
+
+        $io->title('Localheinz GitHub Changelog');
+
         $authToken = $input->getOption('auth-token');
         if (null !== $authToken) {
             $this->client->authenticate(
@@ -109,6 +117,18 @@ class PullRequestCommand extends Command
         $startReference = $input->getArgument('start-reference');
         $endReference = $input->getArgument('end-reference');
 
+        $range = $this->range(
+            $startReference,
+            $endReference
+        );
+
+        $io->section(sprintf(
+            'Pull Requests for %s/%s %s',
+            $owner,
+            $repository,
+            $range
+        ));
+
         try {
             $pullRequests = $this->pullRequestRepository->items(
                 $owner,
@@ -117,49 +137,20 @@ class PullRequestCommand extends Command
                 $endReference
             );
         } catch (Exception $exception) {
-            $output->writeln(sprintf(
-                '<error>An error occurred: %s</error>',
+            $io->error(sprintf(
+                'An error occurred: %s',
                 $exception->getMessage()
             ));
 
             return 1;
         }
 
-        if ($endReference === null) {
-            $range = sprintf(
-                'since <info>%s</info>',
-                $startReference
-            );
-        } else {
-            $range = sprintf(
-                'between <info>%s</info> and <info>%s</info>',
-                $startReference,
-                $endReference
-            );
-        }
-
         if (!count($pullRequests)) {
-            $output->writeln(sprintf(
-                'Could not find any pull requests merged for <info>%s/%s</info> %s.',
-                $owner,
-                $repository,
-                $range
-            ));
+            $io->warning('Could not find any pull requests');
         } else {
-            $output->writeln(sprintf(
-                'Found <info>%s</info> pull request(s) merged for <info>%s/%s</info> %s.',
-                count($pullRequests),
-                $owner,
-                $repository,
-                $range
-            ));
-
-            $output->writeln('');
-
             $template = $input->getOption('template');
 
             array_walk($pullRequests, function (Resource\PullRequestInterface $pullRequest) use ($output, $template) {
-
                 $message = str_replace(
                     [
                         '%title%',
@@ -174,14 +165,44 @@ class PullRequestCommand extends Command
 
                 $output->writeln($message);
             });
+
+            $io->newLine();
+
+            $io->success(sprintf(
+                'Found %s pull request%s.',
+                count($pullRequests),
+                count($pullRequests) === 1 ? '' : 's',
+                $range
+            ));
         }
 
         $event = $this->stopwatch->stop('changelog');
 
-        $output->writeln('');
-        $output->writeln($this->formatStopwatchEvent($event));
+        $io->writeln($this->formatStopwatchEvent($event));
 
         return 0;
+    }
+
+    /**
+     * @param string $startReference
+     * @param string $endReference
+     *
+     * @return string
+     */
+    private function range($startReference, $endReference)
+    {
+        if ($endReference === null) {
+            return sprintf(
+                'since %s',
+                $startReference
+            );
+        }
+
+        return sprintf(
+            'between %s and %s',
+            $startReference,
+            $endReference
+        );
     }
 
     /**

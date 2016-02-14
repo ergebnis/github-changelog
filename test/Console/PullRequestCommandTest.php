@@ -245,13 +245,7 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
-        $expectedMessage = sprintf(
-            'Could not find any pull requests merged for %s/%s between %s and %s.',
-            $owner,
-            $repository,
-            $startReference,
-            $endReference
-        );
+        $expectedMessage = 'Could not find any pull requests';
 
         $pullRequestRepository = $this->pullRequestRepositoryMock();
 
@@ -287,12 +281,7 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
         $repository = $faker->slug();
         $startReference = $faker->sha1;
 
-        $expectedMessage = sprintf(
-            'Could not find any pull requests merged for %s/%s since %s.',
-            $owner,
-            $repository,
-            $startReference
-        );
+        $expectedMessage = 'Could not find any pull requests';
 
         $pullRequestRepository = $this->pullRequestRepositoryMock();
 
@@ -336,12 +325,8 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
 
         $expectedMessages = [
             sprintf(
-                'Found %s pull request(s) merged for %s/%s between %s and %s.',
-                count($pullRequests),
-                $owner,
-                $repository,
-                $startReference,
-                $endReference
+                'Found %s pull requests',
+                count($pullRequests)
             ),
         ];
 
@@ -401,11 +386,8 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
         $pullRequests = $this->pullRequests($count);
 
         $expectedMessage = sprintf(
-            'Found %s pull request(s) merged for %s/%s since %s.',
-            count($pullRequests),
-            $owner,
-            $repository,
-            $startReference
+            'Found %s pull requests',
+            count($pullRequests)
         );
 
         $pullRequestRepository = $this->pullRequestRepositoryMock();
