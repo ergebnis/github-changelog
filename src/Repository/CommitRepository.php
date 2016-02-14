@@ -76,11 +76,11 @@ class CommitRepository
             /* @var Resource\CommitInterface $commit */
             $commit = array_shift($commits);
 
-            if ($tail instanceof Resource\CommitInterface && $commit->sha() === $tail->sha()) {
+            if ($tail instanceof Resource\CommitInterface && $commit->equals($tail)) {
                 continue;
             }
 
-            if ($commit->sha() === $start->sha()) {
+            if ($commit->equals($start)) {
                 break;
             }
 
