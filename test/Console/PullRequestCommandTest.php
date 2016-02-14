@@ -161,7 +161,7 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
     {
         $authToken = $this->getFaker()->password();
 
-        $client = $this->clientMock();
+        $client = $this->getClientMock();
 
         $client
             ->expects($this->once())
@@ -172,12 +172,12 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
             )
         ;
 
-        $pullRequestRepository = $this->pullRequestRepositoryMock();
+        $pullRequestRepository = $this->getPullRequestRepositoryMock();
 
         $pullRequestRepository
             ->expects($this->any())
             ->method('items')
-            ->willReturn($this->rangeMock())
+            ->willReturn($this->getRangeMock())
         ;
 
         $command = new Console\PullRequestCommand(
@@ -215,7 +215,7 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
         $startReference = $faker->unique()->sha1;
         $endReference = $faker->unique()->sha1;
 
-        $pullRequestRepository = $this->pullRequestRepositoryMock();
+        $pullRequestRepository = $this->getPullRequestRepositoryMock();
 
         $pullRequestRepository
             ->expects($this->once())
@@ -226,11 +226,11 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($startReference),
                 $this->equalTo($endReference)
             )
-            ->willReturn($this->rangeMock([]))
+            ->willReturn($this->getRangeMock([]))
         ;
 
         $command = new Console\PullRequestCommand(
-            $this->clientMock(),
+            $this->getClientMock(),
             $pullRequestRepository
         );
 
@@ -255,16 +255,16 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
 
         $expectedMessage = 'Could not find any pull requests';
 
-        $pullRequestRepository = $this->pullRequestRepositoryMock();
+        $pullRequestRepository = $this->getPullRequestRepositoryMock();
 
         $pullRequestRepository
             ->expects($this->any())
             ->method('items')
-            ->willReturn($this->rangeMock())
+            ->willReturn($this->getRangeMock())
         ;
 
         $command = new Console\PullRequestCommand(
-            $this->clientMock(),
+            $this->getClientMock(),
             $pullRequestRepository
         );
 
@@ -291,16 +291,16 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
 
         $expectedMessage = 'Could not find any pull requests';
 
-        $pullRequestRepository = $this->pullRequestRepositoryMock();
+        $pullRequestRepository = $this->getPullRequestRepositoryMock();
 
         $pullRequestRepository
             ->expects($this->any())
             ->method('items')
-            ->willReturn($this->rangeMock())
+            ->willReturn($this->getRangeMock())
         ;
 
         $command = new Console\PullRequestCommand(
-            $this->clientMock(),
+            $this->getClientMock(),
             $pullRequestRepository
         );
 
@@ -352,16 +352,16 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
             );
         });
 
-        $pullRequestRepository = $this->pullRequestRepositoryMock();
+        $pullRequestRepository = $this->getPullRequestRepositoryMock();
 
         $pullRequestRepository
             ->expects($this->any())
             ->method('items')
-            ->willReturn($this->rangeMock($pullRequests))
+            ->willReturn($this->getRangeMock($pullRequests))
         ;
 
         $command = new Console\PullRequestCommand(
-            $this->clientMock(),
+            $this->getClientMock(),
             $pullRequestRepository
         );
 
@@ -398,16 +398,16 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
             count($pullRequests)
         );
 
-        $pullRequestRepository = $this->pullRequestRepositoryMock();
+        $pullRequestRepository = $this->getPullRequestRepositoryMock();
 
         $pullRequestRepository
             ->expects($this->any())
             ->method('items')
-            ->willReturn($this->rangeMock($pullRequests))
+            ->willReturn($this->getRangeMock($pullRequests))
         ;
 
         $command = new Console\PullRequestCommand(
-            $this->clientMock(),
+            $this->getClientMock(),
             $pullRequestRepository
         );
 
@@ -430,7 +430,7 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
 
         $exception = new Exception('Wait, this should not happen!');
 
-        $pullRequestRepository = $this->pullRequestRepositoryMock();
+        $pullRequestRepository = $this->getPullRequestRepositoryMock();
 
         $pullRequestRepository
             ->expects($this->any())
@@ -444,7 +444,7 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
         );
 
         $command = new Console\PullRequestCommand(
-            $this->clientMock(),
+            $this->getClientMock(),
             $pullRequestRepository
         );
 
@@ -464,7 +464,7 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
     /**
      * @return PHPUnit_Framework_MockObject_MockObject|Client
      */
-    private function clientMock()
+    private function getClientMock()
     {
         return $this->getMockBuilder(Client::class)
             ->disableOriginalConstructor()
@@ -475,7 +475,7 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
     /**
      * @return PHPUnit_Framework_MockObject_MockObject|Repository\PullRequestRepository
      */
-    private function pullRequestRepositoryMock()
+    private function getPullRequestRepositoryMock()
     {
         return $this->getMockBuilder(Repository\PullRequestRepository::class)
             ->disableOriginalConstructor()
@@ -488,7 +488,7 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
      *
      * @return PHPUnit_Framework_MockObject_MockObject|Resource\RangeInterface
      */
-    private function rangeMock(array $pullRequests = [])
+    private function getRangeMock(array $pullRequests = [])
     {
         $range = $this->getMockBuilder(Resource\RangeInterface::class)->getMock();
 
