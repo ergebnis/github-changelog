@@ -30,18 +30,12 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
     {
         $command = new Console\PullRequestCommand();
 
-        $command->setClient($this->clientMock());
-        $command->setPullRequestRepository($this->pullRequestRepositoryMock());
-
         $this->assertSame('pull-request', $command->getName());
     }
 
     public function testHasDescription()
     {
         $command = new Console\PullRequestCommand();
-
-        $command->setClient($this->clientMock());
-        $command->setPullRequestRepository($this->pullRequestRepositoryMock());
 
         $this->assertSame('Creates a changelog from pull requests merged between references', $command->getDescription());
     }
@@ -56,9 +50,6 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
     public function testArgument($name, $required, $description)
     {
         $command = new Console\PullRequestCommand();
-
-        $command->setClient($this->clientMock());
-        $command->setPullRequestRepository($this->pullRequestRepositoryMock());
 
         $this->assertTrue($command->getDefinition()->hasArgument($name));
 
@@ -112,9 +103,6 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
     {
         $command = new Console\PullRequestCommand();
 
-        $command->setClient($this->clientMock());
-        $command->setPullRequestRepository($this->pullRequestRepositoryMock());
-
         $this->assertTrue($command->getDefinition()->hasOption($name));
 
         /* @var Input\InputOption $option */
@@ -150,34 +138,9 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
         ];
     }
 
-    public function testCanSetClient()
-    {
-        /* @var Client $client */
-        $client = $this->getMockBuilder(Client::class)
-            ->disableOriginalConstructor()
-            ->getMock()
-        ;
-
-        $command = new Console\PullRequestCommand();
-
-        $command->setClient($client);
-
-        $reflectionObject = new ReflectionObject($command);
-
-        $property = $reflectionObject->getProperty('client');
-        $property->setAccessible(true);
-
-        $this->assertSame($client, $property->getValue($command));
-    }
-
-    public function testExecuteLazilyCreatesClientWithCachedHttpClient()
+    public function testConstructorCreatesClientWithCachedHttpClientIfNotInjected()
     {
         $command = new Console\PullRequestCommand();
-
-        $command->run(
-            $this->inputMock(),
-            $this->outputMock()
-        );
 
         $reflectionObject = new ReflectionObject($command);
 
@@ -206,9 +169,8 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
                 $this->equalTo(Client::AUTH_HTTP_TOKEN)
             )
         ;
-        $command = new Console\PullRequestCommand();
 
-        $command->setClient($client);
+        $command = new Console\PullRequestCommand($client);
 
         $command->run(
             $this->inputMock(
@@ -221,32 +183,9 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testCanSetPullRequestRepository()
-    {
-        $pullRequestRepository = $this->pullRequestRepositoryMock();
-
-        $command = new Console\PullRequestCommand();
-
-        $command->setPullRequestRepository($pullRequestRepository);
-
-        $reflectionObject = new ReflectionObject($command);
-
-        $property = $reflectionObject->getProperty('pullRequestRepository');
-        $property->setAccessible(true);
-
-        $this->assertSame($pullRequestRepository, $property->getValue($command));
-    }
-
-    public function testExecuteLazilyCreatesPullRequestRepository()
+    public function testConstructorCreatesPullRequestRepositoryIfNotInjected()
     {
         $command = new Console\PullRequestCommand();
-
-        $command->setClient($this->clientMock());
-
-        $command->run(
-            $this->inputMock(),
-            $this->outputMock()
-        );
 
         $reflectionObject = new ReflectionObject($command);
 
@@ -281,10 +220,10 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
             ->willReturn([])
         ;
 
-        $command = new Console\PullRequestCommand();
-
-        $command->setClient($this->clientMock());
-        $command->setPullRequestRepository($pullRequestRepository);
+        $command = new Console\PullRequestCommand(
+            $this->clientMock(),
+            $pullRequestRepository
+        );
 
         $command->run(
             $this->inputMock([
@@ -324,9 +263,10 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
             ->willReturn([])
         ;
 
-        $command = new Console\PullRequestCommand();
-
-        $command->setPullRequestRepository($pullRequestRepository);
+        $command = new Console\PullRequestCommand(
+            $this->clientMock(),
+            $pullRequestRepository
+        );
 
         $arguments = [
             'owner' => $owner,
@@ -368,9 +308,10 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
             ->willReturn([])
         ;
 
-        $command = new Console\PullRequestCommand();
-
-        $command->setPullRequestRepository($pullRequestRepository);
+        $command = new Console\PullRequestCommand(
+            $this->clientMock(),
+            $pullRequestRepository
+        );
 
         $arguments = [
             'owner' => $owner,
@@ -435,9 +376,10 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
             ->willReturn($pullRequests)
         ;
 
-        $command = new Console\PullRequestCommand();
-
-        $command->setPullRequestRepository($pullRequestRepository);
+        $command = new Console\PullRequestCommand(
+            $this->clientMock(),
+            $pullRequestRepository
+        );
 
         $arguments = [
             'owner' => $owner,
@@ -491,9 +433,10 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
             ->willReturn($pullRequests)
         ;
 
-        $command = new Console\PullRequestCommand();
-
-        $command->setPullRequestRepository($pullRequestRepository);
+        $command = new Console\PullRequestCommand(
+            $this->clientMock(),
+            $pullRequestRepository
+        );
 
         $arguments = [
             'owner' => $owner,
@@ -513,6 +456,7 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
     public function testExecuteHandlesExceptionsThrownWhenFetchingPullRequests()
     {
         $exception = new Exception('Wait, this should not happen!');
+
         $pullRequestRepository = $this->pullRequestRepositoryMock();
 
         $pullRequestRepository
@@ -521,9 +465,10 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
             ->willThrowException($exception)
         ;
 
-        $command = new Console\PullRequestCommand();
-
-        $command->setPullRequestRepository($pullRequestRepository);
+        $command = new Console\PullRequestCommand(
+            $this->clientMock(),
+            $pullRequestRepository
+        );
 
         $faker = $this->getFaker();
 

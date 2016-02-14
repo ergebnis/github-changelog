@@ -33,14 +33,15 @@ class PullRequestCommand extends Command
      */
     private $pullRequestRepository;
 
-    public function setClient(Client $client)
+    public function __construct(Client $client = null, Repository\PullRequestRepository $pullRequestRepository = null)
     {
-        $this->client = $client;
-    }
+        parent::__construct();
 
-    public function setPullRequestRepository(Repository\PullRequestRepository $pullRequestRepository)
-    {
-        $this->pullRequestRepository = $pullRequestRepository;
+        $this->client = $client ?: new Client(new HttpClient\CachedHttpClient());
+        $this->pullRequestRepository = $pullRequestRepository ?: new Repository\PullRequestRepository(
+            new Api\PullRequest($this->client),
+            new Repository\CommitRepository(new Api\Repository\Commits($this->client))
+        );
     }
 
     protected function configure()
@@ -86,14 +87,12 @@ class PullRequestCommand extends Command
 
     protected function execute(Input\InputInterface $input, Output\OutputInterface $output)
     {
-        $client = $this->client();
-
         $stopWatch = new Stopwatch();
         $stopWatch->start('changelog');
 
         $authToken = $input->getOption('auth-token');
         if (null !== $authToken) {
-            $client->authenticate(
+            $this->client->authenticate(
                 $authToken,
                 Client::AUTH_HTTP_TOKEN
             );
@@ -105,7 +104,7 @@ class PullRequestCommand extends Command
         $endReference = $input->getArgument('end-reference');
 
         try {
-            $pullRequests = $this->pullRequestRepository()->items(
+            $pullRequests = $this->pullRequestRepository->items(
                 $owner,
                 $repository,
                 $startReference,
@@ -177,38 +176,6 @@ class PullRequestCommand extends Command
         $output->writeln($this->formatStopwatchEvent($stopWatch->getEvent('changelog')));
 
         return 0;
-    }
-
-    /**
-     * @return Client
-     */
-    private function client()
-    {
-        if (null === $this->client) {
-            $this->client = new Client(new HttpClient\CachedHttpClient());
-        }
-
-        return $this->client;
-    }
-
-    /**
-     * @return Repository\PullRequestRepository
-     */
-    private function pullRequestRepository()
-    {
-        if (null === $this->pullRequestRepository) {
-            $client = $this->client();
-
-            $pullRequestApi = new Api\PullRequest($client);
-            $commitApi = new Api\Repository\Commits($client);
-
-            $this->pullRequestRepository = new Repository\PullRequestRepository(
-                $pullRequestApi,
-                new Repository\CommitRepository($commitApi)
-            );
-        }
-
-        return $this->pullRequestRepository;
     }
 
     /**
