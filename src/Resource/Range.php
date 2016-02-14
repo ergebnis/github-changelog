@@ -31,11 +31,6 @@ final class Range implements RangeInterface
         return $this->pullRequests;
     }
 
-    /**
-     * @param CommitInterface $commit
-     *
-     * @return static
-     */
     public function withCommit(CommitInterface $commit)
     {
         $commits = $this->commits;
@@ -47,11 +42,6 @@ final class Range implements RangeInterface
         return $instance;
     }
 
-    /**
-     * @param PullRequestInterface $pullRequest
-     *
-     * @return static
-     */
     public function withPullRequest(PullRequestInterface $pullRequest)
     {
         $pullRequests = $this->pullRequests();
