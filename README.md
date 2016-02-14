@@ -86,12 +86,15 @@ $repository = new Repository\PullRequestRepository(
     new Repository\CommitRepository($client->repositories()->commits())
 );
 
-$pullRequests = $repository->items(
+/* @var Resource\RangeInterface $range */
+$range = $repository->items(
     'localheinz',
     'github-changelog',
     '0.1.1',
     '0.1.2'
 );
+
+$pullRequests = $range->pullRequests();
 
 array_walk($pullRequests, function (Resource\PullRequestInterface $pullRequest) {
     echo sprintf(

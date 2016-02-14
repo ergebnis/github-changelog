@@ -172,9 +172,17 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
             )
         ;
 
+        $pullRequestRepository = $this->pullRequestRepositoryMock();
+
+        $pullRequestRepository
+            ->expects($this->any())
+            ->method('items')
+            ->willReturn($this->rangeMock())
+        ;
+
         $command = new Console\PullRequestCommand(
             $client,
-            $this->pullRequestRepositoryMock()
+            $pullRequestRepository
         );
 
         $tester = new CommandTester($command);
@@ -218,7 +226,7 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($startReference),
                 $this->equalTo($endReference)
             )
-            ->willReturn([])
+            ->willReturn($this->rangeMock([]))
         ;
 
         $command = new Console\PullRequestCommand(
@@ -252,7 +260,7 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
         $pullRequestRepository
             ->expects($this->any())
             ->method('items')
-            ->willReturn([])
+            ->willReturn($this->rangeMock())
         ;
 
         $command = new Console\PullRequestCommand(
@@ -288,7 +296,7 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
         $pullRequestRepository
             ->expects($this->any())
             ->method('items')
-            ->willReturn([])
+            ->willReturn($this->rangeMock())
         ;
 
         $command = new Console\PullRequestCommand(
@@ -349,7 +357,7 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
         $pullRequestRepository
             ->expects($this->any())
             ->method('items')
-            ->willReturn($pullRequests)
+            ->willReturn($this->rangeMock($pullRequests))
         ;
 
         $command = new Console\PullRequestCommand(
@@ -395,7 +403,7 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
         $pullRequestRepository
             ->expects($this->any())
             ->method('items')
-            ->willReturn($pullRequests)
+            ->willReturn($this->rangeMock($pullRequests))
         ;
 
         $command = new Console\PullRequestCommand(
@@ -473,6 +481,24 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock()
         ;
+    }
+
+    /**
+     * @param array $pullRequests
+     *
+     * @return PHPUnit_Framework_MockObject_MockObject|Resource\RangeInterface
+     */
+    private function rangeMock(array $pullRequests = [])
+    {
+        $range = $this->getMockBuilder(Resource\RangeInterface::class)->getMock();
+
+        $range
+            ->expects($this->any())
+            ->method('pullRequests')
+            ->willReturn($pullRequests)
+        ;
+
+        return $range;
     }
 
     /**
