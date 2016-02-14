@@ -120,12 +120,12 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
         $id = $faker->numberBetween(1);
         $title = $faker->sentence();
 
-        $entity = new Resource\PullRequest(
+        $pullRequest = new Resource\PullRequest(
             $id,
             $title
         );
 
-        $this->assertSame($id, $entity->id());
-        $this->assertSame($title, $entity->title());
+        $this->assertSame($id, $pullRequest->id());
+        $this->assertSame($title, $pullRequest->title());
     }
 }
