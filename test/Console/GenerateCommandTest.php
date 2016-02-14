@@ -22,22 +22,22 @@ use ReflectionProperty;
 use Symfony\Component\Console\Input;
 use Symfony\Component\Console\Tester\CommandTester;
 
-class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
+class GenerateCommandTest extends PHPUnit_Framework_TestCase
 {
     use GeneratorTrait;
 
     public function testHasName()
     {
-        $command = new Console\ChangeLogCommand();
+        $command = new Console\GenerateCommand();
 
-        $this->assertSame('change-log', $command->getName());
+        $this->assertSame('generate', $command->getName());
     }
 
     public function testHasDescription()
     {
-        $command = new Console\ChangeLogCommand();
+        $command = new Console\GenerateCommand();
 
-        $this->assertSame('Creates a changelog from pull requests merged between references', $command->getDescription());
+        $this->assertSame('Generates a changelog from information found between commit references', $command->getDescription());
     }
 
     /**
@@ -49,7 +49,7 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
      */
     public function testArgument($name, $required, $description)
     {
-        $command = new Console\ChangeLogCommand();
+        $command = new Console\GenerateCommand();
 
         $this->assertTrue($command->getDefinition()->hasArgument($name));
 
@@ -101,7 +101,7 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
      */
     public function testOption($name, $shortcut, $required, $description, $default)
     {
-        $command = new Console\ChangeLogCommand();
+        $command = new Console\GenerateCommand();
 
         $this->assertTrue($command->getDefinition()->hasOption($name));
 
@@ -140,10 +140,10 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
 
     public function testConstructorCreatesClientWithCachedHttpClientIfNotInjected()
     {
-        $command = new Console\ChangeLogCommand();
+        $command = new Console\GenerateCommand();
 
         $property = new ReflectionProperty(
-            Console\ChangeLogCommand::class,
+            Console\GenerateCommand::class,
             'client'
         );
 
@@ -180,7 +180,7 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
             ->willReturn($this->getRangeMock())
         ;
 
-        $command = new Console\ChangeLogCommand(
+        $command = new Console\GenerateCommand(
             $client,
             $pullRequestRepository
         );
@@ -197,7 +197,7 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
 
     public function testConstructorCreatesPullRequestRepositoryIfNotInjected()
     {
-        $command = new Console\ChangeLogCommand();
+        $command = new Console\GenerateCommand();
 
         $this->assertAttributeInstanceOf(
             Repository\PullRequestRepository::class,
@@ -229,7 +229,7 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
             ->willReturn($this->getRangeMock([]))
         ;
 
-        $command = new Console\ChangeLogCommand(
+        $command = new Console\GenerateCommand(
             $this->getClientMock(),
             $pullRequestRepository
         );
@@ -263,7 +263,7 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
             ->willReturn($this->getRangeMock())
         ;
 
-        $command = new Console\ChangeLogCommand(
+        $command = new Console\GenerateCommand(
             $this->getClientMock(),
             $pullRequestRepository
         );
@@ -299,7 +299,7 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
             ->willReturn($this->getRangeMock())
         ;
 
-        $command = new Console\ChangeLogCommand(
+        $command = new Console\GenerateCommand(
             $this->getClientMock(),
             $pullRequestRepository
         );
@@ -360,7 +360,7 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
             ->willReturn($this->getRangeMock($pullRequests))
         ;
 
-        $command = new Console\ChangeLogCommand(
+        $command = new Console\GenerateCommand(
             $this->getClientMock(),
             $pullRequestRepository
         );
@@ -406,7 +406,7 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
             ->willReturn($this->getRangeMock($pullRequests))
         ;
 
-        $command = new Console\ChangeLogCommand(
+        $command = new Console\GenerateCommand(
             $this->getClientMock(),
             $pullRequestRepository
         );
@@ -443,7 +443,7 @@ class ChangeLogCommandTest extends PHPUnit_Framework_TestCase
             $exception->getMessage()
         );
 
-        $command = new Console\ChangeLogCommand(
+        $command = new Console\GenerateCommand(
             $this->getClientMock(),
             $pullRequestRepository
         );

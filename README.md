@@ -18,7 +18,7 @@ $ composer global require localheinz/github-changelog
 Create your changelogs anywhere:
 
 ```bash
-$ github-changelog change-log localheinz github-changelog 0.1.1 0.1.2
+$ github-changelog generate localheinz github-changelog 0.1.1 0.1.2
 ```
 
 Enjoy the changelog:
@@ -39,7 +39,7 @@ $ composer require --dev --sort-packages localheinz/github-changelog
 Create your changelog from within in your project:
 
 ```bash
-$ vendor/bin/github-changelog pull-request localheinz github-changelog ae63248 master
+$ vendor/bin/github-changelog generate localheinz github-changelog ae63248 master
 ```
 
 Enjoy the changelog:
