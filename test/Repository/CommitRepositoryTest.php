@@ -471,7 +471,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
         $commitApi = $this->commitApi();
 
         $startCommit = $this->commitItem();
-        $startCommit->sha = 'start';
+        $startCommit->sha = $faker->sha1;
 
         $commitApi
             ->expects($this->at(0))
@@ -485,7 +485,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
         ;
 
         $endCommit = $this->commitItem();
-        $endCommit->sha = 'end';
+        $endCommit->sha = $faker->sha1;
 
         $commitApi
             ->expects($this->at(1))
@@ -563,7 +563,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
         $commitApi = $this->commitApi();
 
         $startCommit = $this->commitItem();
-        $startCommit->sha = 'start';
+        $startCommit->sha = $faker->sha1;
 
         $commitApi
             ->expects($this->at(0))
@@ -577,7 +577,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
         ;
 
         $endCommit = $this->commitItem();
-        $endCommit->sha = 'end';
+        $endCommit->sha = $faker->sha1;
 
         $commitApi
             ->expects($this->at(1))

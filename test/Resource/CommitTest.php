@@ -9,6 +9,7 @@
 
 namespace Localheinz\GitHub\ChangeLog\Test\Resource;
 
+use InvalidArgumentException;
 use Localheinz\GitHub\ChangeLog\Resource;
 use Localheinz\GitHub\ChangeLog\Resource\Commit;
 use Localheinz\GitHub\ChangeLog\Resource\CommitInterface;
@@ -31,6 +32,82 @@ class CommitTest extends PHPUnit_Framework_TestCase
         $reflectionClass = new \ReflectionClass(Commit::class);
 
         $this->assertTrue($reflectionClass->implementsInterface(CommitInterface::class));
+    }
+
+    /**
+     * @dataProvider providerInvalidSha
+     *
+     * @param mixed $sha
+     */
+    public function testConstructorRejectsInvalidSha($sha)
+    {
+        $this->setExpectedException(InvalidArgumentException::class);
+
+        $message = $this->getFaker()->sentence();
+
+        new Resource\Commit(
+            $sha,
+            $message
+        );
+    }
+
+    /**
+     * @return \Generator
+     */
+    public function providerInvalidSha()
+    {
+        $faker = $this->getFaker();
+
+        $values = [
+            new \stdClass(),
+            $faker->randomNumber(),
+            $faker->randomFloat(),
+            $faker->word,
+            $faker->words,
+            $faker->md5,
+        ];
+
+        foreach ($values as $value) {
+            yield [
+                $value,
+            ];
+        }
+    }
+
+    /**
+     * @dataProvider providerInvalidMessage
+     *
+     * @param mixed $message
+     */
+    public function testConstructorRejectsInvalidMessage($message)
+    {
+        $this->setExpectedException(InvalidArgumentException::class);
+
+        $sha = $this->getFaker()->sha1;
+
+        new Resource\Commit(
+            $sha,
+            $message
+        );
+    }
+
+    /**
+     * @return \Generator
+     */
+    public function providerInvalidMessage()
+    {
+        $faker = $this->getFaker();
+
+        $values = [
+            new \stdClass(),
+            $faker->words,
+        ];
+
+        foreach ($values as $value) {
+            yield [
+                $value,
+            ];
+        }
     }
 
     public function testConstructorSetsShaAndMessage()

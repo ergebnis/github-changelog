@@ -9,6 +9,8 @@
 
 namespace Localheinz\GitHub\ChangeLog\Resource;
 
+use Assert\Assertion;
+
 final class PullRequest implements PullRequestInterface
 {
     /**
@@ -27,6 +29,10 @@ final class PullRequest implements PullRequestInterface
      */
     public function __construct($id, $title)
     {
+        Assertion::integerish($id);
+        Assertion::greaterThan($id, 0);
+        Assertion::string($title);
+
         $this->id = $id;
         $this->title = $title;
     }

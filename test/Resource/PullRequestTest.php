@@ -9,6 +9,7 @@
 
 namespace Localheinz\GitHub\ChangeLog\Test\Resource;
 
+use InvalidArgumentException;
 use Localheinz\GitHub\ChangeLog\Resource;
 use Localheinz\GitHub\ChangeLog\Resource\PullRequest;
 use Localheinz\GitHub\ChangeLog\Resource\PullRequestInterface;
@@ -31,6 +32,85 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
         $reflectionClass = new \ReflectionClass(PullRequest::class);
 
         $this->assertTrue($reflectionClass->implementsInterface(PullRequestInterface::class));
+    }
+
+    /**
+     * @dataProvider providerInvalidId
+     *
+     * @param mixed $id
+     */
+    public function testConstructorRejectsInvalidId($id)
+    {
+        $this->setExpectedException(InvalidArgumentException::class);
+
+        $title = $this->getFaker()->sentence();
+
+        new Resource\PullRequest(
+            $id,
+            $title
+        );
+    }
+
+    /**
+     * @return \Generator
+     */
+    public function providerInvalidId()
+    {
+        $faker = $this->getFaker();
+
+        $values = [
+            new \stdClass(),
+            $faker->randomFloat(),
+            0,
+            -1 * $faker->numberBetween(1),
+            $faker->word,
+            $faker->words,
+            $faker->md5,
+        ];
+
+        foreach ($values as $value) {
+            yield [
+                $value,
+            ];
+        }
+    }
+
+    /**
+     * @dataProvider providerInvalidTitle
+     *
+     * @param mixed $message
+     */
+    public function testConstructorRejectsInvalidTitle($message)
+    {
+        $this->setExpectedException(InvalidArgumentException::class);
+
+        $sha = sha1($this->getFaker()->sentence());
+
+        new Resource\PullRequest(
+            $sha,
+            $message
+        );
+    }
+
+    /**
+     * @return \Generator
+     */
+    public function providerInvalidTitle()
+    {
+        $faker = $this->getFaker();
+
+        $values = [
+            new \stdClass(),
+            $faker->randomFloat(),
+            $faker->randomNumber(),
+            $faker->words,
+        ];
+
+        foreach ($values as $value) {
+            yield [
+                $value,
+            ];
+        }
     }
 
     public function testConstructorSetsIdAndTitle()
