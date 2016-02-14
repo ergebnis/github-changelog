@@ -20,7 +20,7 @@
     "require-dev": {
         "fzaninotto/faker": "^1.5.0",
         "phpunit/phpunit": "^4.8.2",
-        "refinery29/php-cs-fixer-config": "^0.3.7",
+        "refinery29/php-cs-fixer-config": "0.4.1",
         "refinery29/test-util": "0.3.0"
     },
     "autoload": {
