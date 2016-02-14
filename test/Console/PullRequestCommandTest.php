@@ -18,7 +18,7 @@ use Localheinz\GitHub\ChangeLog\Resource;
 use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
 use Refinery29\Test\Util\Faker\GeneratorTrait;
-use ReflectionObject;
+use ReflectionProperty;
 use Symfony\Component\Console\Input;
 use Symfony\Component\Console\Output;
 
@@ -142,9 +142,11 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
     {
         $command = new Console\PullRequestCommand();
 
-        $reflectionObject = new ReflectionObject($command);
+        $property = new ReflectionProperty(
+            Console\PullRequestCommand::class,
+            'client'
+        );
 
-        $property = $reflectionObject->getProperty('client');
         $property->setAccessible(true);
 
         $client = $property->getValue($command);
@@ -187,14 +189,11 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
     {
         $command = new Console\PullRequestCommand();
 
-        $reflectionObject = new ReflectionObject($command);
-
-        $property = $reflectionObject->getProperty('pullRequestRepository');
-        $property->setAccessible(true);
-
-        $pullRequestRepository = $property->getValue($command);
-
-        $this->assertInstanceOf(Repository\PullRequestRepository::class, $pullRequestRepository);
+        $this->assertAttributeInstanceOf(
+            Repository\PullRequestRepository::class,
+            'pullRequestRepository',
+            $command
+        );
     }
 
     public function testExecuteDelegatesToPullRequestRepository()
