@@ -10,16 +10,16 @@
 namespace Localheinz\GitHub\ChangeLog\Test\Entity;
 
 use Localheinz\GitHub\ChangeLog\Entity;
-use Localheinz\GitHub\ChangeLog\Test\Util\FakerTrait;
 use PHPUnit_Framework_TestCase;
+use Refinery29\Test\Util\Faker\GeneratorTrait;
 
 class CommitTest extends PHPUnit_Framework_TestCase
 {
-    use FakerTrait;
+    use GeneratorTrait;
 
     public function testConstructorSetsShaAndMessage()
     {
-        $faker = $this->faker();
+        $faker = $this->getFaker();
 
         $sha = $faker->sha1;
         $message = $faker->sentence();

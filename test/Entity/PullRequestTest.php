@@ -10,16 +10,16 @@
 namespace Localheinz\GitHub\ChangeLog\Test\Entity;
 
 use Localheinz\GitHub\ChangeLog\Entity;
-use Localheinz\GitHub\ChangeLog\Test\Util\FakerTrait;
 use PHPUnit_Framework_TestCase;
+use Refinery29\Test\Util\Faker\GeneratorTrait;
 
 class PullRequestTest extends PHPUnit_Framework_TestCase
 {
-    use FakerTrait;
+    use GeneratorTrait;
 
     public function testConstructorSetsIdAndTitle()
     {
-        $faker = $this->faker();
+        $faker = $this->getFaker();
 
         $id = $faker->randomNumber();
         $title = $faker->sentence();
