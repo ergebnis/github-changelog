@@ -117,7 +117,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
     {
         $faker = $this->getFaker();
 
-        $id = $faker->randomNumber();
+        $id = $faker->numberBetween(1);
         $title = $faker->sentence();
 
         $entity = new Resource\PullRequest(
