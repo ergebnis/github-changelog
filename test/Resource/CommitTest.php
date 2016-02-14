@@ -10,12 +10,28 @@
 namespace Localheinz\GitHub\ChangeLog\Test\Resource;
 
 use Localheinz\GitHub\ChangeLog\Resource;
+use Localheinz\GitHub\ChangeLog\Resource\Commit;
+use Localheinz\GitHub\ChangeLog\Resource\CommitInterface;
 use PHPUnit_Framework_TestCase;
 use Refinery29\Test\Util\Faker\GeneratorTrait;
 
 class CommitTest extends PHPUnit_Framework_TestCase
 {
     use GeneratorTrait;
+
+    public function testIsFinal()
+    {
+        $reflectionClass = new \ReflectionClass(Commit::class);
+
+        $this->assertTrue($reflectionClass->isFinal());
+    }
+
+    public function testImplementsCommitInterface()
+    {
+        $reflectionClass = new \ReflectionClass(Commit::class);
+
+        $this->assertTrue($reflectionClass->implementsInterface(CommitInterface::class));
+    }
 
     public function testConstructorSetsShaAndMessage()
     {

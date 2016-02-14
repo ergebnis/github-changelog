@@ -153,7 +153,7 @@ class PullRequestCommand extends Command
 
             $template = $input->getOption('template');
 
-            array_walk($pullRequests, function (Resource\PullRequest $pullRequest) use ($output, $template) {
+            array_walk($pullRequests, function (Resource\PullRequestInterface $pullRequest) use ($output, $template) {
 
                 $message = str_replace(
                     [

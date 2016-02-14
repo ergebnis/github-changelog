@@ -415,7 +415,7 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
             '',
         ];
 
-        array_walk($pullRequests, function (Resource\PullRequest $pullRequest) use (&$expectedMessages, $template) {
+        array_walk($pullRequests, function (Resource\PullRequestInterface $pullRequest) use (&$expectedMessages, $template) {
             $expectedMessages[] = str_replace(
                 [
                     '%title%',

@@ -52,7 +52,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
             $sha
         );
 
-        $this->assertInstanceOf(Resource\Commit::class, $commit);
+        $this->assertInstanceOf(Resource\CommitInterface::class, $commit);
 
         $this->assertSame($expectedItem->sha, $commit->sha());
         $this->assertSame($expectedItem->message, $commit->message());
@@ -234,9 +234,9 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
         array_walk($commits, function ($commit) use (&$expectedItems) {
             $expectedItem = array_shift($expectedItems);
 
-            $this->assertInstanceOf(Resource\Commit::class, $commit);
+            $this->assertInstanceOf(Resource\CommitInterface::class, $commit);
 
-            /* @var Resource\Commit $commit */
+            /* @var Resource\CommitInterface $commit */
             $this->assertSame($expectedItem->sha, $commit->sha());
             $this->assertSame($expectedItem->message, $commit->message());
         });
@@ -543,9 +543,9 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
         array_walk($commits, function ($commit) use (&$expectedItems) {
             $expectedItem = array_shift($expectedItems);
 
-            $this->assertInstanceOf(Resource\Commit::class, $commit);
+            $this->assertInstanceOf(Resource\CommitInterface::class, $commit);
 
-            /* @var Resource\Commit $commit */
+            /* @var Resource\CommitInterface $commit */
             $this->assertSame($expectedItem->sha, $commit->sha());
             $this->assertSame($expectedItem->message, $commit->message());
         });
@@ -660,9 +660,9 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
         array_walk($commits, function ($commit) use (&$expectedItems) {
             $expectedItem = array_shift($expectedItems);
 
-            $this->assertInstanceOf(Resource\Commit::class, $commit);
+            $this->assertInstanceOf(Resource\CommitInterface::class, $commit);
 
-            /* @var Resource\Commit $commit */
+            /* @var Resource\CommitInterface $commit */
             $this->assertSame($expectedItem->sha, $commit->sha());
             $this->assertSame($expectedItem->message, $commit->message());
         });

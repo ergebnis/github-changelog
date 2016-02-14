@@ -54,7 +54,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
             $expectedItem->id
         );
 
-        $this->assertInstanceOf(Resource\PullRequest::class, $pullRequest);
+        $this->assertInstanceOf(Resource\PullRequestInterface::class, $pullRequest);
 
         $this->assertSame($expectedItem->id, $pullRequest->id());
         $this->assertSame($expectedItem->title, $pullRequest->title());
@@ -279,9 +279,9 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
 
         $pullRequest = array_shift($pullRequests);
 
-        $this->assertInstanceOf(Resource\PullRequest::class, $pullRequest);
+        $this->assertInstanceOf(Resource\PullRequestInterface::class, $pullRequest);
 
-        /* @var Resource\PullRequest $pullRequest */
+        /* @var Resource\PullRequestInterface $pullRequest */
         $this->assertSame($expectedItem->id, $pullRequest->id());
         $this->assertSame($expectedItem->title, $pullRequest->title());
     }

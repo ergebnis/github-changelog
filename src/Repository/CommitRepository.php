@@ -30,7 +30,7 @@ class CommitRepository
      * @param string      $startReference
      * @param string|null $endReference
      *
-     * @return Resource\Commit[]
+     * @return Resource\CommitInterface[]
      */
     public function items($owner, $repository, $startReference, $endReference = null)
     {
@@ -73,10 +73,10 @@ class CommitRepository
         $tail = null;
 
         while (count($commits)) {
-            /* @var Resource\Commit $commit */
+            /* @var Resource\CommitInterface $commit */
             $commit = array_shift($commits);
 
-            if ($tail instanceof Resource\Commit && $commit->sha() === $tail->sha()) {
+            if ($tail instanceof Resource\CommitInterface && $commit->sha() === $tail->sha()) {
                 continue;
             }
 
@@ -103,7 +103,7 @@ class CommitRepository
      * @param string $repository
      * @param string $sha
      *
-     * @return Resource\Commit|null
+     * @return Resource\CommitInterface|null
      */
     public function show($owner, $repository, $sha)
     {
@@ -128,7 +128,7 @@ class CommitRepository
      * @param string $repository
      * @param array  $params
      *
-     * @return Resource\Commit[]
+     * @return Resource\CommitInterface[]
      */
     public function all($owner, $repository, array $params = [])
     {

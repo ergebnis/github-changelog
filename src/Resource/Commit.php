@@ -9,7 +9,7 @@
 
 namespace Localheinz\GitHub\ChangeLog\Resource;
 
-class Commit
+final class Commit implements CommitInterface
 {
     /**
      * @var string
@@ -31,17 +31,11 @@ class Commit
         $this->message = $message;
     }
 
-    /**
-     * @return string
-     */
     public function sha()
     {
         return $this->sha;
     }
 
-    /**
-     * @return string
-     */
     public function message()
     {
         return $this->message;
