@@ -152,6 +152,8 @@ class GenerateCommand extends Command
         } else {
             $template = $input->getOption('template');
 
+            $pullRequests = array_reverse($pullRequests);
+
             array_walk($pullRequests, function (Resource\PullRequestInterface $pullRequest) use ($output, $template) {
                 $message = str_replace(
                     [
