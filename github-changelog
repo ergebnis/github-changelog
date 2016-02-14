@@ -18,5 +18,5 @@ use Symfony\Component\Console;
 
 $application = new Console\Application('github-changelog', '0.3.0');
 
-$application->add(new ChangeLog\Console\PullRequestCommand());
+$application->add(new ChangeLog\Console\ChangeLogCommand());
 $application->run();

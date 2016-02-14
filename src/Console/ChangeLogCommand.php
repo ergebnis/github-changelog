@@ -23,7 +23,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Stopwatch\Stopwatch;
 use Symfony\Component\Stopwatch\StopwatchEvent;
 
-class PullRequestCommand extends Command
+class ChangeLogCommand extends Command
 {
     /**
      * @var Client
@@ -55,7 +55,7 @@ class PullRequestCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('pull-request')
+            ->setName('change-log')
             ->setDescription('Creates a changelog from pull requests merged between references')
             ->addArgument(
                 'owner',
