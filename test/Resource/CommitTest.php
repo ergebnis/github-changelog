@@ -7,9 +7,9 @@
  * the LICENSE file that was distributed with this source code.
  */
 
-namespace Localheinz\GitHub\ChangeLog\Test\Entity;
+namespace Localheinz\GitHub\ChangeLog\Test\Resource;
 
-use Localheinz\GitHub\ChangeLog\Entity;
+use Localheinz\GitHub\ChangeLog\Resource;
 use PHPUnit_Framework_TestCase;
 use Refinery29\Test\Util\Faker\GeneratorTrait;
 
@@ -24,7 +24,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
         $sha = $faker->sha1;
         $message = $faker->sentence();
 
-        $entity = new Entity\Commit(
+        $entity = new Resource\Commit(
             $sha,
             $message
         );

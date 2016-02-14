@@ -13,8 +13,8 @@ use Exception;
 use Github\Client;
 use Github\HttpClient;
 use Localheinz\GitHub\ChangeLog\Console;
-use Localheinz\GitHub\ChangeLog\Entity;
 use Localheinz\GitHub\ChangeLog\Repository;
+use Localheinz\GitHub\ChangeLog\Resource;
 use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
 use Refinery29\Test\Util\Faker\GeneratorTrait;
@@ -415,7 +415,7 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
             '',
         ];
 
-        array_walk($pullRequests, function (Entity\PullRequest $pullRequest) use (&$expectedMessages, $template) {
+        array_walk($pullRequests, function (Resource\PullRequest $pullRequest) use (&$expectedMessages, $template) {
             $expectedMessages[] = str_replace(
                 [
                     '%title%',
@@ -639,7 +639,7 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return Entity\PullRequest
+     * @return Resource\PullRequest
      */
     private function pullRequest()
     {
@@ -648,7 +648,7 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
         $id = $faker->unique()->randomNumber();
         $title = $faker->unique()->sentence();
 
-        return new Entity\PullRequest(
+        return new Resource\PullRequest(
             $id,
             $title
         );
@@ -657,7 +657,7 @@ class PullRequestCommandTest extends PHPUnit_Framework_TestCase
     /**
      * @param int $count
      *
-     * @return Entity\PullRequest[]
+     * @return Resource\PullRequest[]
      */
     private function pullRequests($count)
     {

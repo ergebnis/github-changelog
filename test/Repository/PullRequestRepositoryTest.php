@@ -10,8 +10,8 @@
 namespace Localheinz\GitHub\ChangeLog\Test\Repository;
 
 use Github\Api;
-use Localheinz\GitHub\ChangeLog\Entity;
 use Localheinz\GitHub\ChangeLog\Repository;
+use Localheinz\GitHub\ChangeLog\Resource;
 use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
 use Refinery29\Test\Util\Faker\GeneratorTrait;
@@ -54,7 +54,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
             $expectedItem->id
         );
 
-        $this->assertInstanceOf(Entity\PullRequest::class, $pullRequest);
+        $this->assertInstanceOf(Resource\PullRequest::class, $pullRequest);
 
         $this->assertSame($expectedItem->id, $pullRequest->id());
         $this->assertSame($expectedItem->title, $pullRequest->title());
@@ -180,7 +180,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
 
         $commitRepository = $this->commitRepository();
 
-        $commit = new Entity\Commit(
+        $commit = new Resource\Commit(
             $faker->sha1,
             'I am not a merge commit'
         );
@@ -227,7 +227,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
 
         $expectedItem = $this->pullRequestItem();
 
-        $mergeCommit = new Entity\Commit(
+        $mergeCommit = new Resource\Commit(
             $this->getFaker()->unique()->sha1,
             sprintf(
                 'Merge pull request #%s from localheinz/fix/directory',
@@ -279,9 +279,9 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
 
         $pullRequest = array_shift($pullRequests);
 
-        $this->assertInstanceOf(Entity\PullRequest::class, $pullRequest);
+        $this->assertInstanceOf(Resource\PullRequest::class, $pullRequest);
 
-        /* @var Entity\PullRequest $pullRequest */
+        /* @var Resource\PullRequest $pullRequest */
         $this->assertSame($expectedItem->id, $pullRequest->id());
         $this->assertSame($expectedItem->title, $pullRequest->title());
     }
@@ -299,7 +299,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
 
         $id = 9000;
 
-        $mergeCommit = new Entity\Commit(
+        $mergeCommit = new Resource\Commit(
             $faker->sha1,
             sprintf(
                 'Merge pull request #%s from localheinz/fix/directory',

@@ -72,8 +72,8 @@ require 'vendor/autoload.php';
 
 use Github\Client;
 use Github\HttpClient\CachedHttpClient;
-use Localheinz\GitHub\ChangeLog\Entity;
 use Localheinz\GitHub\ChangeLog\Repository;
+use Localheinz\GitHub\ChangeLog\Resource;
 
 $client = new Client(new CachedHttpClient());
 $client->authenticate(
@@ -93,7 +93,7 @@ $pullRequests = $repository->items(
     '0.1.2'
 );
 
-array_walk($pullRequests, function (Entity\PullRequest $pullRequest) {
+array_walk($pullRequests, function (Resource\PullRequest $pullRequest) {
     echo sprintf(
         '- %s (#%s)' . PHP_EOL,
         $pullRequest->title(),

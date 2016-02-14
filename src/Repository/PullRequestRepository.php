@@ -10,7 +10,7 @@
 namespace Localheinz\GitHub\ChangeLog\Repository;
 
 use Github\Api;
-use Localheinz\GitHub\ChangeLog\Entity;
+use Localheinz\GitHub\ChangeLog\Resource;
 
 class PullRequestRepository
 {
@@ -35,7 +35,7 @@ class PullRequestRepository
      * @param string $repository
      * @param string $id
      *
-     * @return Entity\PullRequest|null
+     * @return Resource\PullRequest|null
      */
     public function show($owner, $repository, $id)
     {
@@ -49,7 +49,7 @@ class PullRequestRepository
             return;
         }
 
-        return new Entity\PullRequest(
+        return new Resource\PullRequest(
             $response['number'],
             $response['title']
         );
@@ -61,7 +61,7 @@ class PullRequestRepository
      * @param string      $startReference
      * @param string|null $endReference
      *
-     * @return Entity\PullRequest[] array
+     * @return Resource\PullRequest[] array
      */
     public function items($owner, $repository, $startReference, $endReference = null)
     {
@@ -74,7 +74,7 @@ class PullRequestRepository
 
         $pullRequests = [];
 
-        array_walk($commits, function (Entity\Commit $commit) use (&$pullRequests, $owner, $repository) {
+        array_walk($commits, function (Resource\Commit $commit) use (&$pullRequests, $owner, $repository) {
 
             if (0 === preg_match('/^Merge pull request #(?P<id>\d+)/', $commit->message(), $matches)) {
                 return;

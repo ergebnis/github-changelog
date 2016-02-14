@@ -13,8 +13,8 @@ use Exception;
 use Github\Api;
 use Github\Client;
 use Github\HttpClient;
-use Localheinz\GitHub\ChangeLog\Entity;
 use Localheinz\GitHub\ChangeLog\Repository;
+use Localheinz\GitHub\ChangeLog\Resource;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input;
 use Symfony\Component\Console\Output;
@@ -153,7 +153,7 @@ class PullRequestCommand extends Command
 
             $template = $input->getOption('template');
 
-            array_walk($pullRequests, function (Entity\PullRequest $pullRequest) use ($output, $template) {
+            array_walk($pullRequests, function (Resource\PullRequest $pullRequest) use ($output, $template) {
 
                 $message = str_replace(
                     [

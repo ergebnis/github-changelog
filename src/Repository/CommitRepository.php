@@ -10,7 +10,7 @@
 namespace Localheinz\GitHub\ChangeLog\Repository;
 
 use Github\Api;
-use Localheinz\GitHub\ChangeLog\Entity;
+use Localheinz\GitHub\ChangeLog\Resource;
 
 class CommitRepository
 {
@@ -30,7 +30,7 @@ class CommitRepository
      * @param string      $startReference
      * @param string|null $endReference
      *
-     * @return Entity\Commit[]
+     * @return Resource\Commit[]
      */
     public function items($owner, $repository, $startReference, $endReference = null)
     {
@@ -73,10 +73,10 @@ class CommitRepository
         $tail = null;
 
         while (count($commits)) {
-            /* @var Entity\Commit $commit */
+            /* @var Resource\Commit $commit */
             $commit = array_shift($commits);
 
-            if ($tail instanceof Entity\Commit && $commit->sha() === $tail->sha()) {
+            if ($tail instanceof Resource\Commit && $commit->sha() === $tail->sha()) {
                 continue;
             }
 
@@ -103,7 +103,7 @@ class CommitRepository
      * @param string $repository
      * @param string $sha
      *
-     * @return Entity\Commit|null
+     * @return Resource\Commit|null
      */
     public function show($owner, $repository, $sha)
     {
@@ -117,7 +117,7 @@ class CommitRepository
             return;
         }
 
-        return new Entity\Commit(
+        return new Resource\Commit(
             $response['sha'],
             $response['commit']['message']
         );
@@ -128,7 +128,7 @@ class CommitRepository
      * @param string $repository
      * @param array  $params
      *
-     * @return Entity\Commit[]
+     * @return Resource\Commit[]
      */
     public function all($owner, $repository, array $params = [])
     {
@@ -149,7 +149,7 @@ class CommitRepository
         $commits = [];
 
         array_walk($response, function ($data) use (&$commits) {
-            $commit = new Entity\Commit(
+            $commit = new Resource\Commit(
                 $data['sha'],
                 $data['commit']['message']
             );
