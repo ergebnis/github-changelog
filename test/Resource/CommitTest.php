@@ -117,12 +117,12 @@ class CommitTest extends PHPUnit_Framework_TestCase
         $sha = $faker->sha1;
         $message = $faker->sentence();
 
-        $entity = new Resource\Commit(
+        $commit = new Resource\Commit(
             $sha,
             $message
         );
 
-        $this->assertSame($sha, $entity->sha());
-        $this->assertSame($message, $entity->message());
+        $this->assertSame($sha, $commit->sha());
+        $this->assertSame($message, $commit->message());
     }
 }
