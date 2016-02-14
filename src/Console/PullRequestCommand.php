@@ -16,6 +16,7 @@ use Github\HttpClient;
 use Localheinz\GitHub\ChangeLog\Repository;
 use Localheinz\GitHub\ChangeLog\Resource;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Input;
 use Symfony\Component\Console\Output;
 use Symfony\Component\Stopwatch\Stopwatch;
@@ -186,9 +187,9 @@ class PullRequestCommand extends Command
     private function formatStopwatchEvent(StopwatchEvent $event)
     {
         return sprintf(
-            'Time: %ss, Memory: %sMB.',
-            $event->getDuration() / 1000,
-            round($event->getMemory() / 1024 / 1024, 3)
+            'Time: %s, Memory: %s.',
+            Helper::formatTime($event->getDuration() / 1000),
+            Helper::formatMemory($event->getMemory())
         );
     }
 }
