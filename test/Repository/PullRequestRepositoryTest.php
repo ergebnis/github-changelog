@@ -28,7 +28,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
         $vendor = $faker->userName;
         $package = $faker->slug();
 
-        $api = $this->pullRequestApi();
+        $api = $this->getPullRequestApiMock();
 
         $expectedItem = $this->pullRequestItem();
 
@@ -45,7 +45,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
 
         $pullRequestRepository = new Repository\PullRequestRepository(
             $api,
-            $this->commitRepository()
+            $this->getCommitRepositoryMock()
         );
 
         $pullRequest = $pullRequestRepository->show(
@@ -68,7 +68,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
         $package = $faker->slug();
         $id = $faker->randomNumber();
 
-        $api = $this->pullRequestApi();
+        $api = $this->getPullRequestApiMock();
 
         $api
             ->expects($this->once())
@@ -83,7 +83,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
 
         $pullRequestRepository = new Repository\PullRequestRepository(
             $api,
-            $this->commitRepository()
+            $this->getCommitRepositoryMock()
         );
 
         $pullRequest = $pullRequestRepository->show(
@@ -103,9 +103,9 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
         $package = $faker->slug();
         $startReference = $faker->sha1;
 
-        $commitRepository = $this->commitRepository();
+        $commitRepository = $this->getCommitRepositoryMock();
 
-        $range = $this->rangeMock();
+        $range = $this->getRangeMock();
 
         $range
             ->expects($this->any())
@@ -126,7 +126,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
         ;
 
         $repository = new Repository\PullRequestRepository(
-            $this->pullRequestApi(),
+            $this->getPullRequestApiMock(),
             $commitRepository
         );
 
@@ -146,7 +146,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
-        $range = $this->rangeMock();
+        $range = $this->getRangeMock();
 
         $range
             ->expects($this->any())
@@ -159,7 +159,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
             ->method('withPullRequest')
         ;
 
-        $commitRepository = $this->commitRepository();
+        $commitRepository = $this->getCommitRepositoryMock();
 
         $commitRepository
             ->expects($this->once())
@@ -174,7 +174,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
         ;
 
         $repository = new Repository\PullRequestRepository(
-            $this->pullRequestApi(),
+            $this->getPullRequestApiMock(),
             $commitRepository
         );
 
@@ -195,14 +195,14 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
-        $commitRepository = $this->commitRepository();
+        $commitRepository = $this->getCommitRepositoryMock();
 
         $commit = new Resource\Commit(
             $faker->sha1,
             'I am not a merge commit'
         );
 
-        $range = $this->rangeMock();
+        $range = $this->getRangeMock();
 
         $range
             ->expects($this->any())
@@ -230,7 +230,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
         ;
 
         $repository = new Repository\PullRequestRepository(
-            $this->pullRequestApi(),
+            $this->getPullRequestApiMock(),
             $commitRepository
         );
 
@@ -251,7 +251,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
-        $commitRepository = $this->commitRepository();
+        $commitRepository = $this->getCommitRepositoryMock();
 
         $expectedItem = $this->pullRequestItem();
 
@@ -263,9 +263,9 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
             )
         );
 
-        $mutatedRange = $this->rangeMock();
+        $mutatedRange = $this->getRangeMock();
 
-        $range = $this->rangeMock();
+        $range = $this->getRangeMock();
 
         $range
             ->expects($this->any())
@@ -294,7 +294,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
             ->willReturn($range)
         ;
 
-        $api = $this->pullRequestApi();
+        $api = $this->getPullRequestApiMock();
 
         $api
             ->expects($this->once())
@@ -331,7 +331,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
-        $commitRepository = $this->commitRepository();
+        $commitRepository = $this->getCommitRepositoryMock();
 
         $id = 9000;
 
@@ -343,7 +343,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
             )
         );
 
-        $range = $this->rangeMock();
+        $range = $this->getRangeMock();
 
         $range
             ->expects($this->any())
@@ -370,7 +370,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
             ->willReturn($range)
         ;
 
-        $pullRequestApi = $this->pullRequestApi();
+        $pullRequestApi = $this->getPullRequestApiMock();
 
         $pullRequestApi
             ->expects($this->once())
@@ -399,7 +399,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
     /**
      * @return PHPUnit_Framework_MockObject_MockObject|Api\PullRequest
      */
-    private function pullRequestApi()
+    private function getPullRequestApiMock()
     {
         return $this->getMockBuilder(Api\PullRequest::class)
             ->disableOriginalConstructor()
@@ -410,7 +410,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
     /**
      * @return PHPUnit_Framework_MockObject_MockObject|Repository\CommitRepository
      */
-    private function commitRepository()
+    private function getCommitRepositoryMock()
     {
         return $this->getMockBuilder(Repository\CommitRepository::class)
             ->disableOriginalConstructor()
@@ -421,7 +421,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
     /**
      * @return PHPUnit_Framework_MockObject_MockObject|Resource\RangeInterface
      */
-    private function rangeMock()
+    private function getRangeMock()
     {
         return $this->getMockBuilder(Resource\RangeInterface::class)->getMock();
     }

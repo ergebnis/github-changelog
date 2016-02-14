@@ -44,7 +44,7 @@ class RangeTest extends PHPUnit_Framework_TestCase
 
     public function testWithCommitClonesRangeAndAddsCommit()
     {
-        $commit = $this->commitMock();
+        $commit = $this->getCommitMock();
 
         $range = new Range();
 
@@ -59,7 +59,7 @@ class RangeTest extends PHPUnit_Framework_TestCase
 
     public function testWithPullRequestClonesRangeAndAddsPullRequest()
     {
-        $pullRequest = $this->pullRequestMock();
+        $pullRequest = $this->getPullRequestMock();
 
         $range = new Range();
 
@@ -75,7 +75,7 @@ class RangeTest extends PHPUnit_Framework_TestCase
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject|CommitInterface
      */
-    private function commitMock()
+    private function getCommitMock()
     {
         return $this->getMockBuilder(CommitInterface::class)->getMock();
     }
@@ -83,7 +83,7 @@ class RangeTest extends PHPUnit_Framework_TestCase
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject|PullRequestInterface
      */
-    private function pullRequestMock()
+    private function getPullRequestMock()
     {
         return $this->getMockBuilder(PullRequestInterface::class)->getMock();
     }

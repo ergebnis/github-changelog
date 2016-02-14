@@ -29,7 +29,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
         $repository = $faker->slug();
         $sha = $faker->sha1;
 
-        $commitApi = $this->commitApi();
+        $commitApi = $this->getCommitApiMock();
 
         $expectedItem = $this->commitItem();
 
@@ -66,7 +66,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
         $repository = $faker->slug();
         $sha = $faker->sha1;
 
-        $api = $this->commitApi();
+        $api = $this->getCommitApiMock();
 
         $api
             ->expects($this->once())
@@ -98,7 +98,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
         $repository = $faker->slug();
         $sha = $faker->sha1;
 
-        $commitApi = $this->commitApi();
+        $commitApi = $this->getCommitApiMock();
 
         $commitApi
             ->expects($this->once())
@@ -133,7 +133,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
         $repository = $faker->slug();
         $sha = $faker->sha1;
 
-        $commitApi = $this->commitApi();
+        $commitApi = $this->getCommitApiMock();
 
         $expectedItems = $this->commitItems(15);
 
@@ -168,7 +168,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
         $sha = $faker->sha1;
         $perPage = $faker->randomNumber();
 
-        $commitApi = $this->commitApi();
+        $commitApi = $this->getCommitApiMock();
 
         $expectedItems = $this->commitItems(15);
 
@@ -203,7 +203,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
         $repository = $faker->slug();
         $sha = $faker->sha1;
 
-        $commitApi = $this->commitApi();
+        $commitApi = $this->getCommitApiMock();
 
         $expectedItems = $this->commitItems(15);
 
@@ -251,7 +251,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
 
         $endReference = $startReference;
 
-        $commitApi = $this->commitApi();
+        $commitApi = $this->getCommitApiMock();
 
         $commitApi
             ->expects($this->never())
@@ -279,7 +279,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
-        $commitApi = $this->commitApi();
+        $commitApi = $this->getCommitApiMock();
 
         $commitApi
             ->expects($this->at(0))
@@ -318,7 +318,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
-        $commitApi = $this->commitApi();
+        $commitApi = $this->getCommitApiMock();
 
         $commitApi
             ->expects($this->at(0))
@@ -368,7 +368,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
-        $commitApi = $this->commitApi();
+        $commitApi = $this->getCommitApiMock();
 
         $startCommit = $this->commitItem();
 
@@ -424,7 +424,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
         $repository = $faker->slug();
         $startReference = $faker->sha1;
 
-        $commitApi = $this->commitApi();
+        $commitApi = $this->getCommitApiMock();
 
         $startCommit = $this->commitItem();
 
@@ -467,7 +467,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
-        $commitApi = $this->commitApi();
+        $commitApi = $this->getCommitApiMock();
 
         $startCommit = $this->commitItem();
         $startCommit->sha = $faker->sha1;
@@ -566,7 +566,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
-        $commitApi = $this->commitApi();
+        $commitApi = $this->getCommitApiMock();
 
         $startCommit = $this->commitItem();
         $startCommit->sha = $faker->sha1;
@@ -684,7 +684,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
     /**
      * @return PHPUnit_Framework_MockObject_MockObject|Api\Repository\Commits
      */
-    private function commitApi()
+    private function getCommitApiMock()
     {
         return $this->getMockBuilder(Api\Repository\Commits::class)
             ->disableOriginalConstructor()
