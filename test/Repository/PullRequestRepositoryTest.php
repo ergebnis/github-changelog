@@ -105,6 +105,14 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
 
         $commitRepository = $this->commitRepository();
 
+        $range = $this->rangeMock();
+
+        $range
+            ->expects($this->any())
+            ->method('commits')
+            ->willReturn([])
+        ;
+
         $commitRepository
             ->expects($this->once())
             ->method('items')
@@ -114,7 +122,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($startReference),
                 $this->equalTo(null)
             )
-            ->willReturn([])
+            ->willReturn($range)
         ;
 
         $repository = new Repository\PullRequestRepository(
@@ -122,16 +130,14 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
             $commitRepository
         );
 
-        $pullRequests = $repository->items(
+        $repository->items(
             $vendor,
             $package,
             $startReference
         );
-
-        $this->assertSame([], $pullRequests);
     }
 
-    public function testItemsReturnsEmptyArrayIfNoCommitsWereFound()
+    public function testItemsDoesNotTouchRangeIfNoCommitsWereFound()
     {
         $faker = $this->getFaker();
 
@@ -139,6 +145,19 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
         $package = $faker->slug();
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
+
+        $range = $this->rangeMock();
+
+        $range
+            ->expects($this->any())
+            ->method('commits')
+            ->willReturn([])
+        ;
+
+        $range
+            ->expects($this->never())
+            ->method('withPullRequest')
+        ;
 
         $commitRepository = $this->commitRepository();
 
@@ -151,7 +170,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($startReference),
                 $this->equalTo($endReference)
             )
-            ->willReturn([])
+            ->willReturn($range)
         ;
 
         $repository = new Repository\PullRequestRepository(
@@ -159,17 +178,15 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
             $commitRepository
         );
 
-        $pullRequests = $repository->items(
+        $repository->items(
             $vendor,
             $package,
             $startReference,
             $endReference
         );
-
-        $this->assertSame([], $pullRequests);
     }
 
-    public function testItemsReturnsEmptyArrayIfNoMergeCommitsWereFound()
+    public function testItemsDoesNotTouchRangeIfNoMergeCommitsWereFound()
     {
         $faker = $this->getFaker();
 
@@ -185,6 +202,21 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
             'I am not a merge commit'
         );
 
+        $range = $this->rangeMock();
+
+        $range
+            ->expects($this->any())
+            ->method('commits')
+            ->willReturn([
+                $commit,
+            ])
+        ;
+
+        $range
+            ->expects($this->never())
+            ->method('withPullRequest')
+        ;
+
         $commitRepository
             ->expects($this->once())
             ->method('items')
@@ -194,9 +226,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($startReference),
                 $this->equalTo($endReference)
             )
-            ->willReturn([
-                $commit,
-            ])
+            ->willReturn($range)
         ;
 
         $repository = new Repository\PullRequestRepository(
@@ -204,14 +234,12 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
             $commitRepository
         );
 
-        $pullRequests = $repository->items(
+        $repository->items(
             $vendor,
             $package,
             $startReference,
             $endReference
         );
-
-        $this->assertSame([], $pullRequests);
     }
 
     public function testItemsFetchesPullRequestIfMergeCommitWasFound()
@@ -235,6 +263,25 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
             )
         );
 
+        $mutatedRange = $this->rangeMock();
+
+        $range = $this->rangeMock();
+
+        $range
+            ->expects($this->any())
+            ->method('commits')
+            ->willReturn([
+                $mergeCommit,
+            ])
+        ;
+
+        $range
+            ->expects($this->once())
+            ->method('withPullRequest')
+            ->with($this->isInstanceOf(Resource\PullRequestInterface::class))
+            ->willReturn($mutatedRange)
+        ;
+
         $commitRepository
             ->expects($this->once())
             ->method('items')
@@ -244,9 +291,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($startReference),
                 $this->equalTo($endReference)
             )
-            ->willReturn([
-                $mergeCommit,
-            ])
+            ->willReturn($range)
         ;
 
         $api = $this->pullRequestApi();
@@ -267,23 +312,14 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
             $commitRepository
         );
 
-        $pullRequests = $repository->items(
+        $actualRange = $repository->items(
             $vendor,
             $package,
             $startReference,
             $endReference
         );
 
-        $this->assertInternalType('array', $pullRequests);
-        $this->assertCount(1, $pullRequests);
-
-        $pullRequest = array_shift($pullRequests);
-
-        $this->assertInstanceOf(Resource\PullRequestInterface::class, $pullRequest);
-
-        /* @var Resource\PullRequestInterface $pullRequest */
-        $this->assertSame($expectedItem->id, $pullRequest->id());
-        $this->assertSame($expectedItem->title, $pullRequest->title());
+        $this->assertSame($mutatedRange, $actualRange);
     }
 
     public function testItemsHandlesMergeCommitWherePullRequestWasNotFound()
@@ -307,6 +343,21 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
             )
         );
 
+        $range = $this->rangeMock();
+
+        $range
+            ->expects($this->any())
+            ->method('commits')
+            ->willReturn([
+                $mergeCommit,
+            ])
+        ;
+
+        $range
+            ->expects($this->never())
+            ->method('withPullRequest')
+        ;
+
         $commitRepository
             ->expects($this->once())
             ->method('items')
@@ -316,9 +367,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($startReference),
                 $this->equalTo($endReference)
             )
-            ->willReturn([
-                $mergeCommit,
-            ])
+            ->willReturn($range)
         ;
 
         $pullRequestApi = $this->pullRequestApi();
@@ -339,14 +388,12 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
             $commitRepository
         );
 
-        $pullRequests = $pullRequestRepository->items(
+        $pullRequestRepository->items(
             $owner,
             $repository,
             $startReference,
             $endReference
         );
-
-        $this->assertSame([], $pullRequests);
     }
 
     /**
@@ -369,6 +416,14 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock()
         ;
+    }
+
+    /**
+     * @return PHPUnit_Framework_MockObject_MockObject|Resource\RangeInterface
+     */
+    private function rangeMock()
+    {
+        return $this->getMockBuilder(Resource\RangeInterface::class)->getMock();
     }
 
     /**

@@ -30,7 +30,7 @@ class CommitRepository
      * @param string      $startReference
      * @param string|null $endReference
      *
-     * @return Resource\CommitInterface[]
+     * @return Resource\Range
      */
     public function items($owner, $repository, $startReference, $endReference = null)
     {
@@ -66,9 +66,9 @@ class CommitRepository
             ];
         }
 
-        $commits = $this->all($owner, $repository, $params);
+        $commits = $this->all($owner, $repository, $params)->commits();
 
-        $range = [];
+        $range = new Resource\Range();
 
         $tail = null;
 
@@ -84,14 +84,15 @@ class CommitRepository
                 break;
             }
 
-            // API returns items in reverse order!
-            array_unshift($range, $commit);
+            $range = $range->withCommit($commit);
 
             if (!count($commits)) {
                 $tail = $commit;
-                $commits = $this->all($owner, $repository, [
+                $params = [
                     'sha' => $tail->sha(),
-                ]);
+                ];
+
+                $commits = $this->all($owner, $repository, $params)->commits();
             }
         }
 
@@ -128,10 +129,12 @@ class CommitRepository
      * @param string $repository
      * @param array  $params
      *
-     * @return Resource\CommitInterface[]
+     * @return Resource\Range
      */
     public function all($owner, $repository, array $params = [])
     {
+        $range = new Resource\Range();
+
         if (!array_key_exists('per_page', $params)) {
             $params['per_page'] = 250;
         }
@@ -143,20 +146,18 @@ class CommitRepository
         );
 
         if (!is_array($response)) {
-            return [];
+            return $range;
         }
 
-        $commits = [];
-
-        array_walk($response, function ($data) use (&$commits) {
+        array_walk($response, function ($data) use (&$range) {
             $commit = new Resource\Commit(
                 $data['sha'],
                 $data['commit']['message']
             );
 
-            array_push($commits, $commit);
+            $range = $range->withCommit($commit);
         });
 
-        return $commits;
+        return $range;
     }
 }

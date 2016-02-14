@@ -61,20 +61,20 @@ class PullRequestRepository
      * @param string      $startReference
      * @param string|null $endReference
      *
-     * @return Resource\PullRequestInterface[] array
+     * @return Resource\Range
      */
     public function items($owner, $repository, $startReference, $endReference = null)
     {
-        $commits = $this->commitRepository->items(
+        $range = $this->commitRepository->items(
             $owner,
             $repository,
             $startReference,
             $endReference
         );
 
-        $pullRequests = [];
+        $commits = $range->commits();
 
-        array_walk($commits, function (Resource\CommitInterface $commit) use (&$pullRequests, $owner, $repository) {
+        array_walk($commits, function (Resource\CommitInterface $commit) use (&$range, $owner, $repository) {
 
             if (0 === preg_match('/^Merge pull request #(?P<id>\d+)/', $commit->message(), $matches)) {
                 return;
@@ -92,9 +92,9 @@ class PullRequestRepository
                 return;
             }
 
-            array_push($pullRequests, $pullRequest);
+            $range = $range->withPullRequest($pullRequest);
         });
 
-        return $pullRequests;
+        return $range;
     }
 }

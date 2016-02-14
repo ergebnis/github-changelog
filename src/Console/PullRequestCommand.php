@@ -130,7 +130,7 @@ class PullRequestCommand extends Command
         ));
 
         try {
-            $pullRequests = $this->pullRequestRepository->items(
+            $range = $this->pullRequestRepository->items(
                 $owner,
                 $repository,
                 $startReference,
@@ -144,6 +144,8 @@ class PullRequestCommand extends Command
 
             return 1;
         }
+
+        $pullRequests = $range->pullRequests();
 
         if (!count($pullRequests)) {
             $io->warning('Could not find any pull requests');

@@ -113,7 +113,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
 
         $commitRepository = new Repository\CommitRepository($commitApi);
 
-        $commits = $commitRepository->all(
+        $range = $commitRepository->all(
             $owner,
             $repository,
             [
@@ -121,7 +121,8 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
             ]
         );
 
-        $this->assertSame([], $commits);
+        $this->assertInstanceOf(Resource\Range::class, $range);
+        $this->assertCount(0, $range->commits());
     }
 
     public function testAllSetsParamsPerPageTo250()
@@ -194,7 +195,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testAllReturnsArrayOfCommitEntities()
+    public function testAllReturnsRange()
     {
         $faker = $this->getFaker();
 
@@ -219,24 +220,22 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
 
         $commitRepository = new Repository\CommitRepository($commitApi);
 
-        $commits = $commitRepository->all(
-            $owner,
-            $repository, [
-                'sha' => $sha,
-            ]
-        );
+        $range = $commitRepository->all($owner, $repository, [
+            'sha' => $sha,
+        ]);
+
+        $this->assertInstanceOf(Resource\Range::class, $range);
+
+        $commits = $range->commits();
 
         $this->assertCount(count($expectedItems), $commits);
 
-        // The GitHub API returns commits in reverse order!
-        $commits = array_reverse($commits);
+        array_walk($commits, function (Resource\CommitInterface $commit) use (&$expectedItems) {
+            /*
+             * API returns commits in reverse order
+             */
+            $expectedItem = array_pop($expectedItems);
 
-        array_walk($commits, function ($commit) use (&$expectedItems) {
-            $expectedItem = array_shift($expectedItems);
-
-            $this->assertInstanceOf(Resource\CommitInterface::class, $commit);
-
-            /* @var Resource\CommitInterface $commit */
             $this->assertSame($expectedItem->sha, $commit->sha());
             $this->assertSame($expectedItem->message, $commit->message());
         });
@@ -459,7 +458,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testItemsReturnsArrayOfCommitsFromStartToEndExcludingStart()
+    public function testItemsReturnsRangeOfCommitsFromEndToStartExcludingStart()
     {
         $faker = $this->getFaker();
 
@@ -531,17 +530,24 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
 
         $commitRepository = new Repository\CommitRepository($commitApi);
 
-        $commits = $commitRepository->items(
+        $range = $commitRepository->items(
             $owner,
             $repository,
             $startReference,
             $endReference
         );
 
+        $this->assertInstanceOf(Resource\RangeInterface::class, $range);
+
+        $commits = $range->commits();
+
         $this->assertCount(count($expectedItems), $commits);
 
         array_walk($commits, function ($commit) use (&$expectedItems) {
-            $expectedItem = array_shift($expectedItems);
+            /*
+             * API returns items in reverse order
+             */
+            $expectedItem = array_pop($expectedItems);
 
             $this->assertInstanceOf(Resource\CommitInterface::class, $commit);
 
@@ -648,17 +654,24 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
 
         $commitRepository = new Repository\CommitRepository($commitApi);
 
-        $commits = $commitRepository->items(
+        $range = $commitRepository->items(
             $owner,
             $repository,
             $startReference,
             $endReference
         );
 
+        $this->assertInstanceOf(Resource\RangeInterface::class, $range);
+
+        $commits = $range->commits();
+
         $this->assertCount(count($expectedItems), $commits);
 
         array_walk($commits, function ($commit) use (&$expectedItems) {
-            $expectedItem = array_shift($expectedItems);
+            /*
+             * API returns items in reverse order
+             */
+            $expectedItem = array_pop($expectedItems);
 
             $this->assertInstanceOf(Resource\CommitInterface::class, $commit);
 
