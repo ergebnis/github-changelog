@@ -93,7 +93,7 @@ $pullRequests = $repository->items(
     '0.1.2'
 );
 
-array_walk($pullRequests, function (Resource\PullRequest $pullRequest) {
+array_walk($pullRequests, function (Resource\PullRequestInterface $pullRequest) {
     echo sprintf(
         '- %s (#%s)' . PHP_EOL,
         $pullRequest->title(),

@@ -9,7 +9,7 @@
 
 namespace Localheinz\GitHub\ChangeLog\Resource;
 
-class PullRequest
+final class PullRequest implements PullRequestInterface
 {
     /**
      * @var string
@@ -31,17 +31,11 @@ class PullRequest
         $this->title = $title;
     }
 
-    /**
-     * @return string
-     */
     public function id()
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
     public function title()
     {
         return $this->title;
