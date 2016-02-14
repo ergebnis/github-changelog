@@ -34,6 +34,11 @@ class PullRequestCommand extends Command
      */
     private $pullRequestRepository;
 
+    /**
+     * @var Stopwatch
+     */
+    private $stopwatch;
+
     public function __construct(Client $client = null, Repository\PullRequestRepository $pullRequestRepository = null)
     {
         parent::__construct();
@@ -43,6 +48,7 @@ class PullRequestCommand extends Command
             new Api\PullRequest($this->client),
             new Repository\CommitRepository(new Api\Repository\Commits($this->client))
         );
+        $this->stopwatch = new Stopwatch();
     }
 
     protected function configure()
@@ -88,8 +94,7 @@ class PullRequestCommand extends Command
 
     protected function execute(Input\InputInterface $input, Output\OutputInterface $output)
     {
-        $stopWatch = new Stopwatch();
-        $stopWatch->start('changelog');
+        $this->stopwatch->start('changelog');
 
         $authToken = $input->getOption('auth-token');
         if (null !== $authToken) {
@@ -171,10 +176,10 @@ class PullRequestCommand extends Command
             });
         }
 
-        $stopWatch->stop('changelog');
+        $event = $this->stopwatch->stop('changelog');
 
         $output->writeln('');
-        $output->writeln($this->formatStopwatchEvent($stopWatch->getEvent('changelog')));
+        $output->writeln($this->formatStopwatchEvent($event));
 
         return 0;
     }
