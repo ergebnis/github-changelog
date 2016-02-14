@@ -20,4 +20,18 @@ interface RangeInterface
      * @return PullRequestInterface[]
      */
     public function pullRequests();
+
+    /**
+     * @param CommitInterface $commit
+     *
+     * @return static
+     */
+    public function withCommit(CommitInterface $commit);
+
+    /**
+     * @param PullRequestInterface $pullRequest
+     *
+     * @return static
+     */
+    public function withPullRequest(PullRequestInterface $pullRequest);
 }
