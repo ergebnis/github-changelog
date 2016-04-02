@@ -16,7 +16,7 @@ foreach ($autoloaders as $autoloader) {
 use Localheinz\GitHub\ChangeLog;
 use Symfony\Component\Console;
 
-$application = new Console\Application('github-changelog', '0.3.0');
+$application = new Console\Application('github-changelog', '0.5.2');
 
 $application->add(new ChangeLog\Console\GenerateCommand());
 $application->run();
