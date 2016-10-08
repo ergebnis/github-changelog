@@ -41,7 +41,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
      */
     public function testConstructorRejectsInvalidSha($sha)
     {
-        $this->setExpectedException(InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
 
         $message = $this->getFaker()->sentence();
 
@@ -81,7 +81,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
      */
     public function testConstructorRejectsInvalidMessage($message)
     {
-        $this->setExpectedException(InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
 
         $sha = $this->getFaker()->sha1;
 

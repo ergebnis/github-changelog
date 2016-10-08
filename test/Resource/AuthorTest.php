@@ -41,7 +41,7 @@ class AuthorTest extends PHPUnit_Framework_TestCase
      */
     public function testConstructorRejectsInvalidLogin($login)
     {
-        $this->setExpectedException(InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
 
         $htmlUrl = $this->getFaker()->url;
 
@@ -77,7 +77,7 @@ class AuthorTest extends PHPUnit_Framework_TestCase
      */
     public function testConstructorRejectsInvalidHtmlUrl($htmlUrl)
     {
-        $this->setExpectedException(InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
 
         $login = $this->getFaker()->userName;
 
