@@ -383,9 +383,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
      */
     private function getPullRequestApiMock()
     {
-        return $this->getMockBuilder(Api\PullRequest::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        return $this->createMock(Api\PullRequest::class);
     }
 
     /**
@@ -393,9 +391,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
      */
     private function getCommitRepositoryMock()
     {
-        return $this->getMockBuilder(Repository\CommitRepository::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        return $this->createMock(Repository\CommitRepository::class);
     }
 
     /**
@@ -403,7 +399,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
      */
     private function getRangeMock()
     {
-        return $this->getMockBuilder(Resource\RangeInterface::class)->getMock();
+        return $this->createMock(Resource\RangeInterface::class);
     }
 
     /**

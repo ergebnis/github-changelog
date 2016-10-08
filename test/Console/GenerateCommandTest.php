@@ -458,9 +458,7 @@ class GenerateCommandTest extends PHPUnit_Framework_TestCase
      */
     private function getClientMock()
     {
-        return $this->getMockBuilder(Client::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        return $this->createMock(Client::class);
     }
 
     /**
@@ -468,9 +466,7 @@ class GenerateCommandTest extends PHPUnit_Framework_TestCase
      */
     private function getPullRequestRepositoryMock()
     {
-        return $this->getMockBuilder(Repository\PullRequestRepository::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        return $this->createMock(Repository\PullRequestRepository::class);
     }
 
     /**
@@ -480,7 +476,7 @@ class GenerateCommandTest extends PHPUnit_Framework_TestCase
      */
     private function getRangeMock(array $pullRequests = [])
     {
-        $range = $this->getMockBuilder(Resource\RangeInterface::class)->getMock();
+        $range = $this->createMock(Resource\RangeInterface::class);
 
         $range
             ->expects($this->any())
