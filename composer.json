@@ -18,7 +18,7 @@
         "beberlei/assert": "^2.6.4",
         "knplabs/github-api": "^1.4.14",
         "symfony/console": "^3.1.5",
-        "symfony/stopwatch": "^3.0.2"
+        "symfony/stopwatch": "^3.1.5"
     },
     "require-dev": {
         "codeclimate/php-test-reporter": "0.3.2",
