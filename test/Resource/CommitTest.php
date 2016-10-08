@@ -13,7 +13,7 @@ use Localheinz\GitHub\ChangeLog\Resource;
 use Refinery29\Test\Util\DataProvider;
 use Refinery29\Test\Util\TestHelper;
 
-class CommitTest extends \PHPUnit_Framework_TestCase
+final class CommitTest extends \PHPUnit_Framework_TestCase
 {
     use TestHelper;
 

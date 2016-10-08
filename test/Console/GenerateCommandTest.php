@@ -19,7 +19,7 @@ use ReflectionProperty;
 use Symfony\Component\Console\Input;
 use Symfony\Component\Console\Tester\CommandTester;
 
-class GenerateCommandTest extends \PHPUnit_Framework_TestCase
+final class GenerateCommandTest extends \PHPUnit_Framework_TestCase
 {
     use TestHelper;
 
