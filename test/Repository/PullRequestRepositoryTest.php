@@ -40,8 +40,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($package),
                 $this->equalTo($expectedItem->id)
             )
-            ->willReturn($this->response($expectedItem))
-        ;
+            ->willReturn($this->response($expectedItem));
 
         $pullRequestRepository = new Repository\PullRequestRepository(
             $api,
@@ -78,8 +77,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($package),
                 $this->equalTo($id)
             )
-            ->willReturn('snafu')
-        ;
+            ->willReturn('snafu');
 
         $pullRequestRepository = new Repository\PullRequestRepository(
             $api,
@@ -110,8 +108,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
         $range
             ->expects($this->any())
             ->method('commits')
-            ->willReturn([])
-        ;
+            ->willReturn([]);
 
         $commitRepository
             ->expects($this->once())
@@ -122,8 +119,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($startReference),
                 $this->equalTo(null)
             )
-            ->willReturn($range)
-        ;
+            ->willReturn($range);
 
         $repository = new Repository\PullRequestRepository(
             $this->getPullRequestApiMock(),
@@ -151,13 +147,11 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
         $range
             ->expects($this->any())
             ->method('commits')
-            ->willReturn([])
-        ;
+            ->willReturn([]);
 
         $range
             ->expects($this->never())
-            ->method('withPullRequest')
-        ;
+            ->method('withPullRequest');
 
         $commitRepository = $this->getCommitRepositoryMock();
 
@@ -170,8 +164,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($startReference),
                 $this->equalTo($endReference)
             )
-            ->willReturn($range)
-        ;
+            ->willReturn($range);
 
         $repository = new Repository\PullRequestRepository(
             $this->getPullRequestApiMock(),
@@ -209,13 +202,11 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
             ->method('commits')
             ->willReturn([
                 $commit,
-            ])
-        ;
+            ]);
 
         $range
             ->expects($this->never())
-            ->method('withPullRequest')
-        ;
+            ->method('withPullRequest');
 
         $commitRepository
             ->expects($this->once())
@@ -226,8 +217,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($startReference),
                 $this->equalTo($endReference)
             )
-            ->willReturn($range)
-        ;
+            ->willReturn($range);
 
         $repository = new Repository\PullRequestRepository(
             $this->getPullRequestApiMock(),
@@ -272,15 +262,13 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
             ->method('commits')
             ->willReturn([
                 $mergeCommit,
-            ])
-        ;
+            ]);
 
         $range
             ->expects($this->once())
             ->method('withPullRequest')
             ->with($this->isInstanceOf(Resource\PullRequestInterface::class))
-            ->willReturn($mutatedRange)
-        ;
+            ->willReturn($mutatedRange);
 
         $commitRepository
             ->expects($this->once())
@@ -291,8 +279,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($startReference),
                 $this->equalTo($endReference)
             )
-            ->willReturn($range)
-        ;
+            ->willReturn($range);
 
         $api = $this->getPullRequestApiMock();
 
@@ -304,8 +291,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($package),
                 $this->equalTo($expectedItem->id)
             )
-            ->willReturn($this->response($expectedItem))
-        ;
+            ->willReturn($this->response($expectedItem));
 
         $repository = new Repository\PullRequestRepository(
             $api,
@@ -350,13 +336,11 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
             ->method('commits')
             ->willReturn([
                 $mergeCommit,
-            ])
-        ;
+            ]);
 
         $range
             ->expects($this->never())
-            ->method('withPullRequest')
-        ;
+            ->method('withPullRequest');
 
         $commitRepository
             ->expects($this->once())
@@ -367,8 +351,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($startReference),
                 $this->equalTo($endReference)
             )
-            ->willReturn($range)
-        ;
+            ->willReturn($range);
 
         $pullRequestApi = $this->getPullRequestApiMock();
 
@@ -380,8 +363,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($repository),
                 $this->equalTo($id)
             )
-            ->willReturn(null)
-        ;
+            ->willReturn(null);
 
         $pullRequestRepository = new Repository\PullRequestRepository(
             $pullRequestApi,
@@ -403,8 +385,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
     {
         return $this->getMockBuilder(Api\PullRequest::class)
             ->disableOriginalConstructor()
-            ->getMock()
-        ;
+            ->getMock();
     }
 
     /**
@@ -414,8 +395,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
     {
         return $this->getMockBuilder(Repository\CommitRepository::class)
             ->disableOriginalConstructor()
-            ->getMock()
-        ;
+            ->getMock();
     }
 
     /**

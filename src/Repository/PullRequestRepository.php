@@ -75,7 +75,6 @@ class PullRequestRepository
         $commits = $range->commits();
 
         array_walk($commits, function (Resource\CommitInterface $commit) use (&$range, $owner, $repository) {
-
             if (0 === preg_match('/^Merge pull request #(?P<id>\d+)/', $commit->message(), $matches)) {
                 return;
             }

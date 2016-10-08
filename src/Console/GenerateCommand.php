@@ -89,8 +89,7 @@ class GenerateCommand extends Command
                 Input\InputOption::VALUE_OPTIONAL,
                 'The template to use for rendering a pull request',
                 '- %title% (#%id%)'
-            )
-        ;
+            );
     }
 
     protected function execute(Input\InputInterface $input, Output\OutputInterface $output)

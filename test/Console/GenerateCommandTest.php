@@ -169,16 +169,14 @@ class GenerateCommandTest extends PHPUnit_Framework_TestCase
             ->with(
                 $this->equalTo($authToken),
                 $this->equalTo(Client::AUTH_HTTP_TOKEN)
-            )
-        ;
+            );
 
         $pullRequestRepository = $this->getPullRequestRepositoryMock();
 
         $pullRequestRepository
             ->expects($this->any())
             ->method('items')
-            ->willReturn($this->getRangeMock())
-        ;
+            ->willReturn($this->getRangeMock());
 
         $command = new Console\GenerateCommand(
             $client,
@@ -226,8 +224,7 @@ class GenerateCommandTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($startReference),
                 $this->equalTo($endReference)
             )
-            ->willReturn($this->getRangeMock([]))
-        ;
+            ->willReturn($this->getRangeMock([]));
 
         $command = new Console\GenerateCommand(
             $this->getClientMock(),
@@ -260,8 +257,7 @@ class GenerateCommandTest extends PHPUnit_Framework_TestCase
         $pullRequestRepository
             ->expects($this->any())
             ->method('items')
-            ->willReturn($this->getRangeMock())
-        ;
+            ->willReturn($this->getRangeMock());
 
         $command = new Console\GenerateCommand(
             $this->getClientMock(),
@@ -296,8 +292,7 @@ class GenerateCommandTest extends PHPUnit_Framework_TestCase
         $pullRequestRepository
             ->expects($this->any())
             ->method('items')
-            ->willReturn($this->getRangeMock())
-        ;
+            ->willReturn($this->getRangeMock());
 
         $command = new Console\GenerateCommand(
             $this->getClientMock(),
@@ -357,8 +352,7 @@ class GenerateCommandTest extends PHPUnit_Framework_TestCase
         $pullRequestRepository
             ->expects($this->any())
             ->method('items')
-            ->willReturn($this->getRangeMock($pullRequests))
-        ;
+            ->willReturn($this->getRangeMock($pullRequests));
 
         $command = new Console\GenerateCommand(
             $this->getClientMock(),
@@ -403,8 +397,7 @@ class GenerateCommandTest extends PHPUnit_Framework_TestCase
         $pullRequestRepository
             ->expects($this->any())
             ->method('items')
-            ->willReturn($this->getRangeMock($pullRequests))
-        ;
+            ->willReturn($this->getRangeMock($pullRequests));
 
         $command = new Console\GenerateCommand(
             $this->getClientMock(),
@@ -435,10 +428,9 @@ class GenerateCommandTest extends PHPUnit_Framework_TestCase
         $pullRequestRepository
             ->expects($this->any())
             ->method('items')
-            ->willThrowException($exception)
-        ;
+            ->willThrowException($exception);
 
-        $expectedMessage= sprintf(
+        $expectedMessage = sprintf(
             'An error occurred: %s',
             $exception->getMessage()
         );
@@ -468,8 +460,7 @@ class GenerateCommandTest extends PHPUnit_Framework_TestCase
     {
         return $this->getMockBuilder(Client::class)
             ->disableOriginalConstructor()
-            ->getMock()
-        ;
+            ->getMock();
     }
 
     /**
@@ -479,8 +470,7 @@ class GenerateCommandTest extends PHPUnit_Framework_TestCase
     {
         return $this->getMockBuilder(Repository\PullRequestRepository::class)
             ->disableOriginalConstructor()
-            ->getMock()
-        ;
+            ->getMock();
     }
 
     /**
@@ -495,8 +485,7 @@ class GenerateCommandTest extends PHPUnit_Framework_TestCase
         $range
             ->expects($this->any())
             ->method('pullRequests')
-            ->willReturn($pullRequests)
-        ;
+            ->willReturn($pullRequests);
 
         return $range;
     }

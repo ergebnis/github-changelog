@@ -41,8 +41,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($repository),
                 $this->equalTo($sha)
             )
-            ->willReturn($this->response($expectedItem))
-        ;
+            ->willReturn($this->response($expectedItem));
 
         $commitRepository = new Repository\CommitRepository($commitApi);
 
@@ -76,8 +75,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($repository),
                 $this->equalTo($sha)
             )
-            ->willReturn('failure')
-        ;
+            ->willReturn('failure');
 
         $commitRepository = new Repository\CommitRepository($api);
 
@@ -108,8 +106,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($repository),
                 $this->arrayHasKeyAndValue('sha', $sha)
             )
-            ->willReturn('snafu')
-        ;
+            ->willReturn('snafu');
 
         $commitRepository = new Repository\CommitRepository($commitApi);
 
@@ -145,8 +142,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($repository),
                 $this->arrayHasKeyAndValue('per_page', 250)
             )
-            ->willReturn($this->responseFromItems($expectedItems))
-        ;
+            ->willReturn($this->responseFromItems($expectedItems));
 
         $commitRepository = new Repository\CommitRepository($commitApi);
 
@@ -180,8 +176,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($repository),
                 $this->arrayHasKeyAndValue('per_page', $perPage)
             )
-            ->willReturn($this->responseFromItems($expectedItems))
-        ;
+            ->willReturn($this->responseFromItems($expectedItems));
 
         $commitRepository = new Repository\CommitRepository($commitApi);
 
@@ -215,8 +210,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($repository),
                 $this->arrayHasKeyAndValue('sha', $sha)
             )
-            ->willReturn($this->responseFromItems($expectedItems))
-        ;
+            ->willReturn($this->responseFromItems($expectedItems));
 
         $commitRepository = new Repository\CommitRepository($commitApi);
 
@@ -255,8 +249,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
 
         $commitApi
             ->expects($this->never())
-            ->method($this->anything())
-        ;
+            ->method($this->anything());
 
         $commitRepository = new Repository\CommitRepository($commitApi);
 
@@ -289,13 +282,11 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($repository),
                 $this->equalTo($startReference)
             )
-            ->willReturn(null)
-        ;
+            ->willReturn(null);
 
         $commitApi
             ->expects($this->never())
-            ->method('all')
-        ;
+            ->method('all');
 
         $commitRepository = new Repository\CommitRepository($commitApi);
 
@@ -328,8 +319,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($repository),
                 $this->equalTo($startReference)
             )
-            ->willReturn($this->response($this->commitItem()))
-        ;
+            ->willReturn($this->response($this->commitItem()));
 
         $commitApi
             ->expects($this->at(1))
@@ -339,13 +329,11 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($repository),
                 $this->equalTo($endReference)
             )
-            ->willReturn(null)
-        ;
+            ->willReturn(null);
 
         $commitApi
             ->expects($this->never())
-            ->method('all')
-        ;
+            ->method('all');
 
         $commitRepository = new Repository\CommitRepository($commitApi);
 
@@ -380,8 +368,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($repository),
                 $this->equalTo($startReference)
             )
-            ->willReturn($this->response($startCommit))
-        ;
+            ->willReturn($this->response($startCommit));
 
         $endCommit = $this->commitItem();
 
@@ -393,8 +380,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($repository),
                 $this->equalTo($endReference)
             )
-            ->willReturn($this->response($endCommit))
-        ;
+            ->willReturn($this->response($endCommit));
 
         $commitApi
             ->expects($this->once())
@@ -403,8 +389,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($owner),
                 $this->equalTo($repository),
                 $this->arrayHasKeyAndValue('sha', $endCommit->sha)
-            )
-        ;
+            );
 
         $commitRepository = new Repository\CommitRepository($commitApi);
 
@@ -436,8 +421,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($repository),
                 $this->equalTo($startReference)
             )
-            ->willReturn($this->response($startCommit))
-        ;
+            ->willReturn($this->response($startCommit));
 
         $commitApi
             ->expects($this->once())
@@ -446,8 +430,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($owner),
                 $this->equalTo($repository),
                 $this->arrayNotHasKey('sha')
-            )
-        ;
+            );
 
         $commitRepository = new Repository\CommitRepository($commitApi);
 
@@ -480,8 +463,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($repository),
                 $this->equalTo($startReference)
             )
-            ->willReturn($this->response($startCommit))
-        ;
+            ->willReturn($this->response($startCommit));
 
         $endCommit = $this->commitItem();
         $endCommit->sha = $faker->sha1;
@@ -494,8 +476,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($repository),
                 $this->equalTo($endReference)
             )
-            ->willReturn($this->response($endCommit))
-        ;
+            ->willReturn($this->response($endCommit));
 
         $countBetween = 9;
         $countBefore = 2;
@@ -525,8 +506,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($repository),
                 $this->arrayHasKeyAndValue('sha', $endCommit->sha)
             )
-            ->willReturn($this->responseFromItems($segment))
-        ;
+            ->willReturn($this->responseFromItems($segment));
 
         $commitRepository = new Repository\CommitRepository($commitApi);
 
@@ -579,8 +559,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($repository),
                 $this->equalTo($startReference)
             )
-            ->willReturn($this->response($startCommit))
-        ;
+            ->willReturn($this->response($startCommit));
 
         $endCommit = $this->commitItem();
         $endCommit->sha = $faker->sha1;
@@ -593,8 +572,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($repository),
                 $this->equalTo($endReference)
             )
-            ->willReturn($this->response($endCommit))
-        ;
+            ->willReturn($this->response($endCommit));
 
         $countBetweenFirstSegment = 4;
         $countBetweenSecondSegment = 5;
@@ -638,8 +616,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($repository),
                 $this->arrayHasKeyAndValue('sha', $endCommit->sha)
             )
-            ->willReturn($this->responseFromItems($firstSegment))
-        ;
+            ->willReturn($this->responseFromItems($firstSegment));
 
         $commitApi
             ->expects($this->at(3))
@@ -649,8 +626,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($repository),
                 $this->arrayHasKeyAndValue('sha', $firstCommitFromFirstSegment->sha)
             )
-            ->willReturn($this->responseFromItems($secondSegment))
-        ;
+            ->willReturn($this->responseFromItems($secondSegment));
 
         $commitRepository = new Repository\CommitRepository($commitApi);
 
@@ -688,8 +664,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
     {
         return $this->getMockBuilder(Api\Repository\Commits::class)
             ->disableOriginalConstructor()
-            ->getMock()
-        ;
+            ->getMock();
     }
 
     /**
