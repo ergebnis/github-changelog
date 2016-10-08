@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b936d351eb5d1962d4d8992abb45cdde",
-    "content-hash": "901a9a4c4106891919fdf3e6dcf56c65",
+    "hash": "863e56db0fa8381daedb72017c37dbfd",
+    "content-hash": "88703af5352fccaa98b4d2d1122e7683",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -732,33 +732,29 @@
         },
         {
             "name": "fzaninotto/faker",
-            "version": "v1.5.0",
+            "version": "v1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "d0190b156bcca848d401fb80f31f504f37141c8d"
+                "reference": "44f9a286a04b80c76a4e5fb7aad8bb539b920123"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/d0190b156bcca848d401fb80f31f504f37141c8d",
-                "reference": "d0190b156bcca848d401fb80f31f504f37141c8d",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/44f9a286a04b80c76a4e5fb7aad8bb539b920123",
+                "reference": "44f9a286a04b80c76a4e5fb7aad8bb539b920123",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3"
+                "php": "^5.3.3|^7.0"
             },
             "require-dev": {
+                "ext-intl": "*",
                 "phpunit/phpunit": "~4.0",
                 "squizlabs/php_codesniffer": "~1.5"
             },
-            "suggest": {
-                "ext-intl": "*"
-            },
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-master": "1.5.x-dev"
-                }
+                "branch-alias": []
             },
             "autoload": {
                 "psr-4": {
@@ -780,7 +776,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2015-05-29 06:29:14"
+            "time": "2016-04-29 12:21:54"
         },
         {
             "name": "myclabs/deep-copy",
@@ -1460,30 +1456,27 @@
         },
         {
             "name": "refinery29/test-util",
-            "version": "0.3.0",
+            "version": "0.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/refinery29/test-util.git",
-                "reference": "fcf182273718d431fe48d5f4fa25849d55757aa5"
+                "reference": "e0dab8aa0b29b4c8f0c0f7fdadd211759e6bc51e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/refinery29/test-util/zipball/fcf182273718d431fe48d5f4fa25849d55757aa5",
-                "reference": "fcf182273718d431fe48d5f4fa25849d55757aa5",
+                "url": "https://api.github.com/repos/refinery29/test-util/zipball/e0dab8aa0b29b4c8f0c0f7fdadd211759e6bc51e",
+                "reference": "e0dab8aa0b29b4c8f0c0f7fdadd211759e6bc51e",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5"
+                "fzaninotto/faker": "^1.6.0",
+                "php": "^5.6 || ^7.0"
             },
             "require-dev": {
-                "codeclimate/php-test-reporter": "0.2.0",
-                "fzaninotto/faker": "^1.5",
-                "phpunit/phpunit": "^4.8.18 || ^5.2.3",
-                "refinery29/php-cs-fixer-config": "0.4.1"
-            },
-            "suggest": {
-                "fzaninotto/faker": "If you want to make use of the Faker\\GeneratorTrait",
-                "phpunit/phpunit": "If you want to make use of the PHPUnit\\BuildsMocksTrait"
+                "beberlei/assert": "^2.6.2",
+                "codeclimate/php-test-reporter": "0.3.2",
+                "phpunit/phpunit": "^5.4.2",
+                "refinery29/php-cs-fixer-config": "0.4.20"
             },
             "type": "library",
             "autoload": {
@@ -1509,13 +1502,13 @@
                     "email": "p.e@refinery29.com"
                 }
             ],
-            "description": "Provides helpers for testing.",
+            "description": "Provides test helpers and generic data providers.",
             "keywords": [
                 "faker",
                 "test",
                 "util"
             ],
-            "time": "2016-02-09 18:36:54"
+            "time": "2016-08-30 16:28:34"
         },
         {
             "name": "satooshi/php-coveralls",
