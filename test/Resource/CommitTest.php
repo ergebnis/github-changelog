@@ -14,6 +14,7 @@ use Localheinz\GitHub\ChangeLog\Resource;
 use Localheinz\GitHub\ChangeLog\Resource\Commit;
 use Localheinz\GitHub\ChangeLog\Resource\CommitInterface;
 use PHPUnit_Framework_TestCase;
+use Refinery29\Test\Util\DataProvider;
 use Refinery29\Test\Util\TestHelper;
 
 class CommitTest extends PHPUnit_Framework_TestCase
@@ -58,24 +59,18 @@ class CommitTest extends PHPUnit_Framework_TestCase
     {
         $faker = $this->getFaker();
 
-        $values = [
-            new \stdClass(),
-            $faker->randomNumber(),
-            $faker->randomFloat(),
-            $faker->word,
-            $faker->words,
-            $faker->md5,
-        ];
-
-        foreach ($values as $value) {
-            yield [
-                $value,
-            ];
-        }
+        return $this->provideDataFrom(
+            new DataProvider\InvalidString(),
+            new DataProvider\Elements([
+                $faker->word,
+                $faker->words,
+                $faker->md5,
+            ])
+        );
     }
 
     /**
-     * @dataProvider providerInvalidMessage
+     * @dataProvider \Refinery29\Test\Util\DataProvider\InvalidString::data()
      *
      * @param mixed $message
      */
@@ -89,25 +84,6 @@ class CommitTest extends PHPUnit_Framework_TestCase
             $sha,
             $message
         );
-    }
-
-    /**
-     * @return \Generator
-     */
-    public function providerInvalidMessage()
-    {
-        $faker = $this->getFaker();
-
-        $values = [
-            new \stdClass(),
-            $faker->words,
-        ];
-
-        foreach ($values as $value) {
-            yield [
-                $value,
-            ];
-        }
     }
 
     public function testConstructorSetsShaAndMessage()

@@ -14,6 +14,7 @@ use Localheinz\GitHub\ChangeLog\Resource;
 use Localheinz\GitHub\ChangeLog\Resource\PullRequest;
 use Localheinz\GitHub\ChangeLog\Resource\PullRequestInterface;
 use PHPUnit_Framework_TestCase;
+use Refinery29\Test\Util\DataProvider;
 use Refinery29\Test\Util\TestHelper;
 
 class PullRequestTest extends PHPUnit_Framework_TestCase
@@ -56,27 +57,17 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
      */
     public function providerInvalidId()
     {
-        $faker = $this->getFaker();
-
-        $values = [
-            new \stdClass(),
-            $faker->randomFloat(),
-            0,
-            -1 * $faker->numberBetween(1),
-            $faker->word,
-            $faker->words,
-            $faker->md5,
-        ];
-
-        foreach ($values as $value) {
-            yield [
-                $value,
-            ];
-        }
+        return $this->provideDataFrom(
+            new DataProvider\InvalidIntegerish(),
+            new DataProvider\Elements([
+                0,
+                -1 * $this->getFaker()->numberBetween(1),
+            ])
+        );
     }
 
     /**
-     * @dataProvider providerInvalidTitle
+     * @dataProvider \Refinery29\Test\Util\DataProvider\InvalidString::data()
      *
      * @param mixed $message
      */
@@ -90,27 +81,6 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
             $sha,
             $message
         );
-    }
-
-    /**
-     * @return \Generator
-     */
-    public function providerInvalidTitle()
-    {
-        $faker = $this->getFaker();
-
-        $values = [
-            new \stdClass(),
-            $faker->randomFloat(),
-            $faker->randomNumber(),
-            $faker->words,
-        ];
-
-        foreach ($values as $value) {
-            yield [
-                $value,
-            ];
-        }
     }
 
     public function testConstructorSetsIdAndTitle()
