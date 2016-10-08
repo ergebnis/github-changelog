@@ -243,7 +243,7 @@ class PullRequestRepositoryTest extends \PHPUnit_Framework_TestCase
         $expectedItem = $this->pullRequestItem();
 
         $mergeCommit = new Resource\Commit(
-            $this->getFaker()->unique()->sha1,
+            $faker->unique()->sha1,
             sprintf(
                 'Merge pull request #%s from localheinz/fix/directory',
                 $expectedItem->id
@@ -404,10 +404,12 @@ class PullRequestRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     private function pullRequestItem()
     {
+        $faker = $this->getFaker();
+
         $item = new \stdClass();
 
-        $item->id = $this->getFaker()->unique()->randomNumber();
-        $item->title = $this->getFaker()->unique()->sentence();
+        $item->id = $faker->unique()->randomNumber();
+        $item->title = $faker->unique()->sentence();
 
         return $item;
     }

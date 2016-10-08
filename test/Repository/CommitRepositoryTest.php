@@ -670,10 +670,12 @@ class CommitRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     private function commitItem($sha = null, $message = null)
     {
+        $faker = $this->getFaker();
+
         $data = new \stdClass();
 
-        $data->sha = $sha ?: $this->getFaker()->unique()->sha1;
-        $data->message = $message ?: $this->getFaker()->unique()->sentence();
+        $data->sha = $sha ?: $faker->unique()->sha1;
+        $data->message = $message ?: $faker->unique()->sentence();
 
         return $data;
     }
