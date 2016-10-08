@@ -17,14 +17,14 @@ use Localheinz\GitHub\ChangeLog\Repository;
 use Localheinz\GitHub\ChangeLog\Resource;
 use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
-use Refinery29\Test\Util\Faker\GeneratorTrait;
+use Refinery29\Test\Util\TestHelper;
 use ReflectionProperty;
 use Symfony\Component\Console\Input;
 use Symfony\Component\Console\Tester\CommandTester;
 
 class GenerateCommandTest extends PHPUnit_Framework_TestCase
 {
-    use GeneratorTrait;
+    use TestHelper;
 
     public function testHasName()
     {
