@@ -12,7 +12,7 @@ namespace Localheinz\GitHub\ChangeLog\Test\Resource;
 use Localheinz\GitHub\ChangeLog\Resource;
 use Refinery29\Test\Util\TestHelper;
 
-class RangeTest extends \PHPUnit_Framework_TestCase
+final class RangeTest extends \PHPUnit_Framework_TestCase
 {
     use TestHelper;
 
