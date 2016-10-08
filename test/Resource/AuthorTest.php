@@ -35,7 +35,7 @@ class AuthorTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider providerInvalidLogin
+     * @dataProvider \Refinery29\Test\Util\DataProvider\InvalidString::data()
      *
      * @param mixed $login
      */
@@ -52,26 +52,7 @@ class AuthorTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return \Generator
-     */
-    public function providerInvalidLogin()
-    {
-        $faker = $this->getFaker();
-
-        $values = [
-            new \stdClass(),
-            $faker->words,
-        ];
-
-        foreach ($values as $value) {
-            yield [
-                $value,
-            ];
-        }
-    }
-
-    /**
-     * @dataProvider providerInvalidHtmlUrl
+     * @dataProvider \Refinery29\Test\Util\DataProvider\InvalidUrl::data()
      *
      * @param mixed $htmlUrl
      */
@@ -85,28 +66,6 @@ class AuthorTest extends PHPUnit_Framework_TestCase
             $login,
             $htmlUrl
         );
-    }
-
-    /**
-     * @return \Generator
-     */
-    public function providerInvalidHtmlUrl()
-    {
-        $faker = $this->getFaker();
-
-        $values = [
-            new \stdClass(),
-            $faker->randomNumber(),
-            $faker->randomFloat(),
-            $faker->word,
-            $faker->words,
-        ];
-
-        foreach ($values as $value) {
-            yield [
-                $value,
-            ];
-        }
     }
 
     public function testConstructorSetsLoginAndHtmlUrl()
