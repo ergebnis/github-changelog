@@ -116,6 +116,10 @@ Enjoy the changelog:
 
 :bulb: You can use anything for a reference, e.g., a tag, a branch, a commit!
 
+## Contributing
+
+Please have a look at [`CONTRIBUTING.md`](.github/CONTRIBUTING.md).
+
 ## License
 
 This package is licensed using the MIT License.
