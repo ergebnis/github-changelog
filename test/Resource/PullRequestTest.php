@@ -41,7 +41,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
      */
     public function testConstructorRejectsInvalidId($id)
     {
-        $this->setExpectedException(InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
 
         $title = $this->getFaker()->sentence();
 
@@ -82,7 +82,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
      */
     public function testConstructorRejectsInvalidTitle($message)
     {
-        $this->setExpectedException(InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
 
         $sha = sha1($this->getFaker()->sentence());
 
