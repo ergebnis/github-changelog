@@ -1,2 +1,18 @@
-languages:
-  PHP: true
+engines:
+  duplication:
+    enabled: true
+    config:
+      languages:
+        - php
+  fixme:
+    enabled: true
+  phpmd:
+    enabled: true
+
+ratings:
+  paths:
+    - src/
+    - test/
+
+exclude_paths:
+  - vendor/
