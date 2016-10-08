@@ -1,17 +1,23 @@
 <?xml version="1.0"?>
 <phpunit
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/5.6/phpunit.xsd"
+    beStrictAboutChangesToGlobalState="true"
+    beStrictAboutOutputDuringTests="true"
+    beStrictAboutTestsThatDoNotTestAnything="true"
     bootstrap="vendor/autoload.php"
     colors="true"
+    columns="max"
     convertErrorsToExceptions="true"
     convertNoticesToExceptions="true"
     convertWarningsToExceptions="true"
-    verbose="true"
+    stopOnError="false"
     stopOnFailure="false"
-    processIsolation="false"
-    backupGlobals="false"
-    syntaxCheck="true"
+    stopOnIncomplete="false"
+    stopOnSkipped="false"
+    verbose="true"
 >
-    <testsuite name="Localheinz\ChangeLog">
+    <testsuite name="Localheinz\GitHub\ChangeLog">
         <directory>test</directory>
     </testsuite>
     <filter>
