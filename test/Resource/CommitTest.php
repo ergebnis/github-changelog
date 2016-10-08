@@ -9,30 +9,26 @@
 
 namespace Localheinz\GitHub\ChangeLog\Test\Resource;
 
-use InvalidArgumentException;
 use Localheinz\GitHub\ChangeLog\Resource;
-use Localheinz\GitHub\ChangeLog\Resource\Commit;
-use Localheinz\GitHub\ChangeLog\Resource\CommitInterface;
-use PHPUnit_Framework_TestCase;
 use Refinery29\Test\Util\DataProvider;
 use Refinery29\Test\Util\TestHelper;
 
-class CommitTest extends PHPUnit_Framework_TestCase
+class CommitTest extends \PHPUnit_Framework_TestCase
 {
     use TestHelper;
 
     public function testIsFinal()
     {
-        $reflectionClass = new \ReflectionClass(Commit::class);
+        $reflectionClass = new \ReflectionClass(Resource\Commit::class);
 
         $this->assertTrue($reflectionClass->isFinal());
     }
 
     public function testImplementsCommitInterface()
     {
-        $reflectionClass = new \ReflectionClass(Commit::class);
+        $reflectionClass = new \ReflectionClass(Resource\Commit::class);
 
-        $this->assertTrue($reflectionClass->implementsInterface(CommitInterface::class));
+        $this->assertTrue($reflectionClass->implementsInterface(Resource\CommitInterface::class));
     }
 
     /**
@@ -42,7 +38,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
      */
     public function testConstructorRejectsInvalidSha($sha)
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
 
         $message = $this->getFaker()->sentence();
 
@@ -76,7 +72,7 @@ class CommitTest extends PHPUnit_Framework_TestCase
      */
     public function testConstructorRejectsInvalidMessage($message)
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
 
         $sha = $this->getFaker()->sha1;
 

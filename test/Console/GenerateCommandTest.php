@@ -9,20 +9,17 @@
 
 namespace Localheinz\GitHub\ChangeLog\Test\Console;
 
-use Exception;
 use Github\Client;
 use Github\HttpClient;
 use Localheinz\GitHub\ChangeLog\Console;
 use Localheinz\GitHub\ChangeLog\Repository;
 use Localheinz\GitHub\ChangeLog\Resource;
-use PHPUnit_Framework_MockObject_MockObject;
-use PHPUnit_Framework_TestCase;
 use Refinery29\Test\Util\TestHelper;
 use ReflectionProperty;
 use Symfony\Component\Console\Input;
 use Symfony\Component\Console\Tester\CommandTester;
 
-class GenerateCommandTest extends PHPUnit_Framework_TestCase
+class GenerateCommandTest extends \PHPUnit_Framework_TestCase
 {
     use TestHelper;
 
@@ -421,7 +418,7 @@ class GenerateCommandTest extends PHPUnit_Framework_TestCase
     {
         $faker = $this->getFaker();
 
-        $exception = new Exception('Wait, this should not happen!');
+        $exception = new \Exception('Wait, this should not happen!');
 
         $pullRequestRepository = $this->getPullRequestRepositoryMock();
 
@@ -454,7 +451,7 @@ class GenerateCommandTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return PHPUnit_Framework_MockObject_MockObject|Client
+     * @return \PHPUnit_Framework_MockObject_MockObject|Client
      */
     private function getClientMock()
     {
@@ -462,7 +459,7 @@ class GenerateCommandTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return PHPUnit_Framework_MockObject_MockObject|Repository\PullRequestRepository
+     * @return \PHPUnit_Framework_MockObject_MockObject|Repository\PullRequestRepository
      */
     private function getPullRequestRepositoryMock()
     {
@@ -472,7 +469,7 @@ class GenerateCommandTest extends PHPUnit_Framework_TestCase
     /**
      * @param array $pullRequests
      *
-     * @return PHPUnit_Framework_MockObject_MockObject|Resource\RangeInterface
+     * @return \PHPUnit_Framework_MockObject_MockObject|Resource\RangeInterface
      */
     private function getRangeMock(array $pullRequests = [])
     {

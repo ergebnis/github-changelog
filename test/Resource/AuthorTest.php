@@ -9,29 +9,25 @@
 
 namespace Localheinz\GitHub\ChangeLog\Test\Resource;
 
-use InvalidArgumentException;
 use Localheinz\GitHub\ChangeLog\Resource;
-use Localheinz\GitHub\ChangeLog\Resource\Author;
-use Localheinz\GitHub\ChangeLog\Resource\AuthorInterface;
-use PHPUnit_Framework_TestCase;
 use Refinery29\Test\Util\TestHelper;
 
-class AuthorTest extends PHPUnit_Framework_TestCase
+class AuthorTest extends \PHPUnit_Framework_TestCase
 {
     use TestHelper;
 
     public function testIsFinal()
     {
-        $reflectionClass = new \ReflectionClass(Author::class);
+        $reflectionClass = new \ReflectionClass(Resource\Author::class);
 
         $this->assertTrue($reflectionClass->isFinal());
     }
 
     public function testImplementsAuthorInterface()
     {
-        $reflectionClass = new \ReflectionClass(Author::class);
+        $reflectionClass = new \ReflectionClass(Resource\Author::class);
 
-        $this->assertTrue($reflectionClass->implementsInterface(AuthorInterface::class));
+        $this->assertTrue($reflectionClass->implementsInterface(Resource\AuthorInterface::class));
     }
 
     /**
@@ -41,7 +37,7 @@ class AuthorTest extends PHPUnit_Framework_TestCase
      */
     public function testConstructorRejectsInvalidLogin($login)
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
 
         $htmlUrl = $this->getFaker()->url;
 
@@ -58,7 +54,7 @@ class AuthorTest extends PHPUnit_Framework_TestCase
      */
     public function testConstructorRejectsInvalidHtmlUrl($htmlUrl)
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
 
         $login = $this->getFaker()->userName;
 
