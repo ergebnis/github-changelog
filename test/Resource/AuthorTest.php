@@ -18,16 +18,16 @@ final class AuthorTest extends \PHPUnit_Framework_TestCase
 
     public function testIsFinal()
     {
-        $reflectionClass = new \ReflectionClass(Resource\Author::class);
+        $reflection = new \ReflectionClass(Resource\Author::class);
 
-        $this->assertTrue($reflectionClass->isFinal());
+        $this->assertTrue($reflection->isFinal());
     }
 
     public function testImplementsAuthorInterface()
     {
-        $reflectionClass = new \ReflectionClass(Resource\Author::class);
+        $reflection = new \ReflectionClass(Resource\Author::class);
 
-        $this->assertTrue($reflectionClass->implementsInterface(Resource\AuthorInterface::class));
+        $this->assertTrue($reflection->implementsInterface(Resource\AuthorInterface::class));
     }
 
     /**

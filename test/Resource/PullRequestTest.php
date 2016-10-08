@@ -19,16 +19,16 @@ final class PullRequestTest extends \PHPUnit_Framework_TestCase
 
     public function testIsFinal()
     {
-        $reflectionClass = new \ReflectionClass(Resource\PullRequest::class);
+        $reflection = new \ReflectionClass(Resource\PullRequest::class);
 
-        $this->assertTrue($reflectionClass->isFinal());
+        $this->assertTrue($reflection->isFinal());
     }
 
     public function testImplementsPullRequestInterface()
     {
-        $reflectionClass = new \ReflectionClass(Resource\PullRequest::class);
+        $reflection = new \ReflectionClass(Resource\PullRequest::class);
 
-        $this->assertTrue($reflectionClass->implementsInterface(Resource\PullRequestInterface::class));
+        $this->assertTrue($reflection->implementsInterface(Resource\PullRequestInterface::class));
     }
 
     /**
