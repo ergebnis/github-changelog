@@ -14,12 +14,12 @@ use Localheinz\GitHub\ChangeLog\Repository;
 use Localheinz\GitHub\ChangeLog\Resource;
 use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
-use Refinery29\Test\Util\Faker\GeneratorTrait;
+use Refinery29\Test\Util\TestHelper;
 use stdClass;
 
 class CommitRepositoryTest extends PHPUnit_Framework_TestCase
 {
-    use GeneratorTrait;
+    use TestHelper;
 
     public function testShowReturnsCommitEntityWithShaAndMessageOnSuccess()
     {

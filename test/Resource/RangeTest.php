@@ -14,11 +14,11 @@ use Localheinz\GitHub\ChangeLog\Resource\PullRequestInterface;
 use Localheinz\GitHub\ChangeLog\Resource\Range;
 use Localheinz\GitHub\ChangeLog\Resource\RangeInterface;
 use PHPUnit_Framework_TestCase;
-use Refinery29\Test\Util\Faker\GeneratorTrait;
+use Refinery29\Test\Util\TestHelper;
 
 class RangeTest extends PHPUnit_Framework_TestCase
 {
-    use GeneratorTrait;
+    use TestHelper;
 
     public function testIsFinal()
     {

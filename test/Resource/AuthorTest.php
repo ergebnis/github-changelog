@@ -14,11 +14,11 @@ use Localheinz\GitHub\ChangeLog\Resource;
 use Localheinz\GitHub\ChangeLog\Resource\Author;
 use Localheinz\GitHub\ChangeLog\Resource\AuthorInterface;
 use PHPUnit_Framework_TestCase;
-use Refinery29\Test\Util\Faker\GeneratorTrait;
+use Refinery29\Test\Util\TestHelper;
 
 class AuthorTest extends PHPUnit_Framework_TestCase
 {
-    use GeneratorTrait;
+    use TestHelper;
 
     public function testIsFinal()
     {
