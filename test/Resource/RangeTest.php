@@ -77,7 +77,7 @@ class RangeTest extends PHPUnit_Framework_TestCase
      */
     private function getCommitMock()
     {
-        return $this->getMockBuilder(CommitInterface::class)->getMock();
+        return $this->createMock(CommitInterface::class);
     }
 
     /**
@@ -85,6 +85,6 @@ class RangeTest extends PHPUnit_Framework_TestCase
      */
     private function getPullRequestMock()
     {
-        return $this->getMockBuilder(PullRequestInterface::class)->getMock();
+        return $this->createMock(PullRequestInterface::class);
     }
 }
