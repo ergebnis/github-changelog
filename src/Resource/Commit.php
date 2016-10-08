@@ -9,7 +9,7 @@
 
 namespace Localheinz\GitHub\ChangeLog\Resource;
 
-use Assert\Assertion;
+use Assert;
 
 final class Commit implements CommitInterface
 {
@@ -29,9 +29,8 @@ final class Commit implements CommitInterface
      */
     public function __construct($sha, $message)
     {
-        Assertion::string($sha);
-        Assertion::regex($sha, '/^[0-9a-f]{40}$/i');
-        Assertion::string($message);
+        Assert\that($sha)->string()->regex('/^[0-9a-f]{40}$/i');
+        Assert\that($message)->string();
 
         $this->sha = $sha;
         $this->message = $message;
