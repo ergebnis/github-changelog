@@ -19,16 +19,16 @@ final class CommitTest extends \PHPUnit_Framework_TestCase
 
     public function testIsFinal()
     {
-        $reflectionClass = new \ReflectionClass(Resource\Commit::class);
+        $reflection = new \ReflectionClass(Resource\Commit::class);
 
-        $this->assertTrue($reflectionClass->isFinal());
+        $this->assertTrue($reflection->isFinal());
     }
 
     public function testImplementsCommitInterface()
     {
-        $reflectionClass = new \ReflectionClass(Resource\Commit::class);
+        $reflection = new \ReflectionClass(Resource\Commit::class);
 
-        $this->assertTrue($reflectionClass->implementsInterface(Resource\CommitInterface::class));
+        $this->assertTrue($reflection->implementsInterface(Resource\CommitInterface::class));
     }
 
     /**

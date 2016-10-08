@@ -18,16 +18,16 @@ final class RangeTest extends \PHPUnit_Framework_TestCase
 
     public function testIsFinal()
     {
-        $reflectionClass = new \ReflectionClass(Resource\Range::class);
+        $reflection = new \ReflectionClass(Resource\Range::class);
 
-        $this->assertTrue($reflectionClass->isFinal());
+        $this->assertTrue($reflection->isFinal());
     }
 
     public function testImplementsRangeInterface()
     {
-        $reflectionClass = new \ReflectionClass(Resource\Range::class);
+        $reflection = new \ReflectionClass(Resource\Range::class);
 
-        $this->assertTrue($reflectionClass->implementsInterface(Resource\RangeInterface::class));
+        $this->assertTrue($reflection->implementsInterface(Resource\RangeInterface::class));
     }
 
     public function testDefaults()
