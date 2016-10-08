@@ -12,12 +12,9 @@ namespace Localheinz\GitHub\ChangeLog\Test\Repository;
 use Github\Api;
 use Localheinz\GitHub\ChangeLog\Repository;
 use Localheinz\GitHub\ChangeLog\Resource;
-use PHPUnit_Framework_MockObject_MockObject;
-use PHPUnit_Framework_TestCase;
 use Refinery29\Test\Util\TestHelper;
-use stdClass;
 
-class CommitRepositoryTest extends PHPUnit_Framework_TestCase
+class CommitRepositoryTest extends \PHPUnit_Framework_TestCase
 {
     use TestHelper;
 
@@ -658,7 +655,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return PHPUnit_Framework_MockObject_MockObject|Api\Repository\Commits
+     * @return \PHPUnit_Framework_MockObject_MockObject|Api\Repository\Commits
      */
     private function getCommitApiMock()
     {
@@ -669,11 +666,11 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
      * @param string $sha
      * @param string $message
      *
-     * @return stdClass
+     * @return \stdClass
      */
     private function commitItem($sha = null, $message = null)
     {
-        $data = new stdClass();
+        $data = new \stdClass();
 
         $data->sha = $sha ?: $this->getFaker()->unique()->sha1;
         $data->message = $message ?: $this->getFaker()->unique()->sentence();
@@ -684,7 +681,7 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
     /**
      * @param int $count
      *
-     * @return stdClass[]
+     * @return \stdClass[]
      */
     private function commitItems($count)
     {
@@ -698,11 +695,11 @@ class CommitRepositoryTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param stdClass $item
+     * @param \stdClass $item
      *
      * @return array
      */
-    private function response(stdClass $item)
+    private function response(\stdClass $item)
     {
         $template = file_get_contents(__DIR__ . '/_response/commit.json');
 

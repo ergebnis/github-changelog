@@ -9,30 +9,26 @@
 
 namespace Localheinz\GitHub\ChangeLog\Test\Resource;
 
-use InvalidArgumentException;
 use Localheinz\GitHub\ChangeLog\Resource;
-use Localheinz\GitHub\ChangeLog\Resource\PullRequest;
-use Localheinz\GitHub\ChangeLog\Resource\PullRequestInterface;
-use PHPUnit_Framework_TestCase;
 use Refinery29\Test\Util\DataProvider;
 use Refinery29\Test\Util\TestHelper;
 
-class PullRequestTest extends PHPUnit_Framework_TestCase
+class PullRequestTest extends \PHPUnit_Framework_TestCase
 {
     use TestHelper;
 
     public function testIsFinal()
     {
-        $reflectionClass = new \ReflectionClass(PullRequest::class);
+        $reflectionClass = new \ReflectionClass(Resource\PullRequest::class);
 
         $this->assertTrue($reflectionClass->isFinal());
     }
 
     public function testImplementsPullRequestInterface()
     {
-        $reflectionClass = new \ReflectionClass(PullRequest::class);
+        $reflectionClass = new \ReflectionClass(Resource\PullRequest::class);
 
-        $this->assertTrue($reflectionClass->implementsInterface(PullRequestInterface::class));
+        $this->assertTrue($reflectionClass->implementsInterface(Resource\PullRequestInterface::class));
     }
 
     /**
@@ -42,7 +38,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
      */
     public function testConstructorRejectsInvalidId($id)
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
 
         $title = $this->getFaker()->sentence();
 
@@ -73,7 +69,7 @@ class PullRequestTest extends PHPUnit_Framework_TestCase
      */
     public function testConstructorRejectsInvalidTitle($message)
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
 
         $sha = sha1($this->getFaker()->sentence());
 

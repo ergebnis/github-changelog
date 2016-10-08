@@ -9,34 +9,30 @@
 
 namespace Localheinz\GitHub\ChangeLog\Test\Resource;
 
-use Localheinz\GitHub\ChangeLog\Resource\CommitInterface;
-use Localheinz\GitHub\ChangeLog\Resource\PullRequestInterface;
-use Localheinz\GitHub\ChangeLog\Resource\Range;
-use Localheinz\GitHub\ChangeLog\Resource\RangeInterface;
-use PHPUnit_Framework_TestCase;
+use Localheinz\GitHub\ChangeLog\Resource;
 use Refinery29\Test\Util\TestHelper;
 
-class RangeTest extends PHPUnit_Framework_TestCase
+class RangeTest extends \PHPUnit_Framework_TestCase
 {
     use TestHelper;
 
     public function testIsFinal()
     {
-        $reflectionClass = new \ReflectionClass(Range::class);
+        $reflectionClass = new \ReflectionClass(Resource\Range::class);
 
         $this->assertTrue($reflectionClass->isFinal());
     }
 
     public function testImplementsRangeInterface()
     {
-        $reflectionClass = new \ReflectionClass(Range::class);
+        $reflectionClass = new \ReflectionClass(Resource\Range::class);
 
-        $this->assertTrue($reflectionClass->implementsInterface(RangeInterface::class));
+        $this->assertTrue($reflectionClass->implementsInterface(Resource\RangeInterface::class));
     }
 
     public function testDefaults()
     {
-        $range = new Range();
+        $range = new Resource\Range();
 
         $this->assertSame([], $range->commits());
         $this->assertSame([], $range->pullRequests());
@@ -46,11 +42,11 @@ class RangeTest extends PHPUnit_Framework_TestCase
     {
         $commit = $this->getCommitMock();
 
-        $range = new Range();
+        $range = new Resource\Range();
 
         $mutated = $range->withCommit($commit);
 
-        $this->assertInstanceOf(Range::class, $mutated);
+        $this->assertInstanceOf(Resource\Range::class, $mutated);
         $this->assertNotSame($range, $mutated);
         $this->assertCount(0, $range->commits());
         $this->assertCount(1, $mutated->commits());
@@ -61,11 +57,11 @@ class RangeTest extends PHPUnit_Framework_TestCase
     {
         $pullRequest = $this->getPullRequestMock();
 
-        $range = new Range();
+        $range = new Resource\Range();
 
         $mutated = $range->withPullRequest($pullRequest);
 
-        $this->assertInstanceOf(Range::class, $mutated);
+        $this->assertInstanceOf(Resource\Range::class, $mutated);
         $this->assertNotSame($range, $mutated);
         $this->assertCount(0, $range->pullRequests());
         $this->assertCount(1, $mutated->pullRequests());
@@ -73,18 +69,18 @@ class RangeTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|CommitInterface
+     * @return \PHPUnit_Framework_MockObject_MockObject|Resource\CommitInterface
      */
     private function getCommitMock()
     {
-        return $this->createMock(CommitInterface::class);
+        return $this->createMock(Resource\CommitInterface::class);
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|PullRequestInterface
+     * @return \PHPUnit_Framework_MockObject_MockObject|Resource\PullRequestInterface
      */
     private function getPullRequestMock()
     {
-        return $this->createMock(PullRequestInterface::class);
+        return $this->createMock(Resource\PullRequestInterface::class);
     }
 }

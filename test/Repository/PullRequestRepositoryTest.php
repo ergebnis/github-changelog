@@ -12,12 +12,9 @@ namespace Localheinz\GitHub\ChangeLog\Test\Repository;
 use Github\Api;
 use Localheinz\GitHub\ChangeLog\Repository;
 use Localheinz\GitHub\ChangeLog\Resource;
-use PHPUnit_Framework_MockObject_MockObject;
-use PHPUnit_Framework_TestCase;
 use Refinery29\Test\Util\TestHelper;
-use stdClass;
 
-class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
+class PullRequestRepositoryTest extends \PHPUnit_Framework_TestCase
 {
     use TestHelper;
 
@@ -379,7 +376,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return PHPUnit_Framework_MockObject_MockObject|Api\PullRequest
+     * @return \PHPUnit_Framework_MockObject_MockObject|Api\PullRequest
      */
     private function getPullRequestApiMock()
     {
@@ -387,7 +384,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return PHPUnit_Framework_MockObject_MockObject|Repository\CommitRepository
+     * @return \PHPUnit_Framework_MockObject_MockObject|Repository\CommitRepository
      */
     private function getCommitRepositoryMock()
     {
@@ -395,7 +392,7 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return PHPUnit_Framework_MockObject_MockObject|Resource\RangeInterface
+     * @return \PHPUnit_Framework_MockObject_MockObject|Resource\RangeInterface
      */
     private function getRangeMock()
     {
@@ -403,11 +400,11 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return stdClass
+     * @return \stdClass
      */
     private function pullRequestItem()
     {
-        $item = new stdClass();
+        $item = new \stdClass();
 
         $item->id = $this->getFaker()->unique()->randomNumber();
         $item->title = $this->getFaker()->unique()->sentence();
@@ -416,11 +413,11 @@ class PullRequestRepositoryTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param stdClass $item
+     * @param \stdClass $item
      *
      * @return array
      */
-    private function response(stdClass $item)
+    private function response(\stdClass $item)
     {
         $template = file_get_contents(__DIR__ . '/_response/pull-request.json');
 

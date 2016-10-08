@@ -9,7 +9,6 @@
 
 namespace Localheinz\GitHub\ChangeLog\Console;
 
-use Exception;
 use Github\Api;
 use Github\Client;
 use Github\HttpClient;
@@ -135,7 +134,7 @@ class GenerateCommand extends Command
                 $startReference,
                 $endReference
             );
-        } catch (Exception $exception) {
+        } catch (\Exception $exception) {
             $io->error(sprintf(
                 'An error occurred: %s',
                 $exception->getMessage()
