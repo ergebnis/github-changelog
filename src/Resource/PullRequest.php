@@ -9,7 +9,7 @@
 
 namespace Localheinz\GitHub\ChangeLog\Resource;
 
-use Assert\Assertion;
+use Assert;
 
 final class PullRequest implements PullRequestInterface
 {
@@ -29,9 +29,8 @@ final class PullRequest implements PullRequestInterface
      */
     public function __construct($id, $title)
     {
-        Assertion::integerish($id);
-        Assertion::greaterThan($id, 0);
-        Assertion::string($title);
+        Assert\that($id)->integerish()->greaterThan(0);
+        Assert\that($title)->string();
 
         $this->id = $id;
         $this->title = $title;

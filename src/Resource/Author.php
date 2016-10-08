@@ -9,7 +9,7 @@
 
 namespace Localheinz\GitHub\ChangeLog\Resource;
 
-use Assert\Assertion;
+use Assert;
 
 final class Author implements AuthorInterface
 {
@@ -29,9 +29,8 @@ final class Author implements AuthorInterface
      */
     public function __construct($login, $htmlUrl)
     {
-        Assertion::string($login);
-        Assertion::string($htmlUrl);
-        Assertion::url($htmlUrl);
+        Assert\that($login)->string();
+        Assert\that($htmlUrl)->string()->url();
 
         $this->login = $login;
         $this->htmlUrl = $htmlUrl;
