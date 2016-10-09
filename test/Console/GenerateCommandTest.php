@@ -10,12 +10,10 @@
 namespace Localheinz\GitHub\ChangeLog\Test\Console;
 
 use Github\Client;
-use Github\HttpClient;
 use Localheinz\GitHub\ChangeLog\Console;
 use Localheinz\GitHub\ChangeLog\Repository;
 use Localheinz\GitHub\ChangeLog\Resource;
 use Refinery29\Test\Util\TestHelper;
-use ReflectionProperty;
 use Symfony\Component\Console\Input;
 use Symfony\Component\Console\Tester\CommandTester;
 
@@ -25,14 +23,20 @@ final class GenerateCommandTest extends \PHPUnit_Framework_TestCase
 
     public function testHasName()
     {
-        $command = new Console\GenerateCommand();
+        $command = new Console\GenerateCommand(
+            $this->getClientMock(),
+            $this->getPullRequestRepositoryMock()
+        );
 
         $this->assertSame('generate', $command->getName());
     }
 
     public function testHasDescription()
     {
-        $command = new Console\GenerateCommand();
+        $command = new Console\GenerateCommand(
+            $this->getClientMock(),
+            $this->getPullRequestRepositoryMock()
+        );
 
         $this->assertSame('Generates a changelog from information found between commit references', $command->getDescription());
     }
@@ -46,7 +50,10 @@ final class GenerateCommandTest extends \PHPUnit_Framework_TestCase
      */
     public function testArgument($name, $required, $description)
     {
-        $command = new Console\GenerateCommand();
+        $command = new Console\GenerateCommand(
+            $this->getClientMock(),
+            $this->getPullRequestRepositoryMock()
+        );
 
         $this->assertTrue($command->getDefinition()->hasArgument($name));
 
@@ -98,7 +105,10 @@ final class GenerateCommandTest extends \PHPUnit_Framework_TestCase
      */
     public function testOption($name, $shortcut, $required, $description, $default)
     {
-        $command = new Console\GenerateCommand();
+        $command = new Console\GenerateCommand(
+            $this->getClientMock(),
+            $this->getPullRequestRepositoryMock()
+        );
 
         $this->assertTrue($command->getDefinition()->hasOption($name));
 
@@ -135,25 +145,6 @@ final class GenerateCommandTest extends \PHPUnit_Framework_TestCase
         ];
     }
 
-    public function testConstructorCreatesClientWithCachedHttpClientIfNotInjected()
-    {
-        $command = new Console\GenerateCommand();
-
-        $property = new ReflectionProperty(
-            Console\GenerateCommand::class,
-            'client'
-        );
-
-        $property->setAccessible(true);
-
-        $client = $property->getValue($command);
-
-        $this->assertInstanceOf(Client::class, $client);
-
-        /* @var Client $client */
-        $this->assertInstanceOf(HttpClient\CachedHttpClient::class, $client->getHttpClient());
-    }
-
     public function testExecuteAuthenticatesIfTokenOptionIsGiven()
     {
         $authToken = $this->getFaker()->password();
@@ -188,17 +179,6 @@ final class GenerateCommandTest extends \PHPUnit_Framework_TestCase
             'start-reference' => '0.1.0',
             '--auth-token' => $authToken,
         ]);
-    }
-
-    public function testConstructorCreatesPullRequestRepositoryIfNotInjected()
-    {
-        $command = new Console\GenerateCommand();
-
-        $this->assertAttributeInstanceOf(
-            Repository\PullRequestRepository::class,
-            'pullRequestRepository',
-            $command
-        );
     }
 
     public function testExecuteDelegatesToPullRequestRepository()

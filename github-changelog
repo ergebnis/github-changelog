@@ -1,22 +1,4 @@
 #!/usr/bin/env php
 <?php
 
-$autoloaders = [
-    __DIR__ . '/../../../vendor/autoload.php',
-    __DIR__ . '/vendor/autoload.php',
-];
-
-foreach ($autoloaders as $autoloader) {
-    if (file_exists($autoloader)) {
-        require $autoloader;
-        break;
-    }
-}
-
-use Localheinz\GitHub\ChangeLog;
-use Symfony\Component\Console;
-
-$application = new Console\Application('github-changelog', '0.5.2');
-
-$application->add(new ChangeLog\Console\GenerateCommand());
-$application->run();
+include __DIR__ . '/github-changelog.php';
