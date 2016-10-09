@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c4fc31e4f76053e2dacb67a95580e3a8",
-    "content-hash": "95e41b7306d62ba1e51e8d8978480c9f",
+    "hash": "2a00660832e19870e8e90b9d8d0d617d",
+    "content-hash": "6125ff5a815db1ec34e35c857d28c08c",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1456,16 +1456,16 @@
         },
         {
             "name": "refinery29/test-util",
-            "version": "0.8.4",
+            "version": "0.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/refinery29/test-util.git",
-                "reference": "8e61a0886addaaf1284d6f16a6d1d56a1b22da90"
+                "reference": "756f8c71abb40007091b782edbbb0933ec5ee65b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/refinery29/test-util/zipball/8e61a0886addaaf1284d6f16a6d1d56a1b22da90",
-                "reference": "8e61a0886addaaf1284d6f16a6d1d56a1b22da90",
+                "url": "https://api.github.com/repos/refinery29/test-util/zipball/756f8c71abb40007091b782edbbb0933ec5ee65b",
+                "reference": "756f8c71abb40007091b782edbbb0933ec5ee65b",
                 "shasum": ""
             },
             "require": {
@@ -1475,7 +1475,7 @@
             "require-dev": {
                 "beberlei/assert": "^2.6.2",
                 "codeclimate/php-test-reporter": "0.3.2",
-                "phpunit/phpunit": "^5.4.2",
+                "phpunit/phpunit": "^5.6.1",
                 "refinery29/php-cs-fixer-config": "0.4.20"
             },
             "type": "library",
@@ -1490,25 +1490,25 @@
             ],
             "authors": [
                 {
-                    "name": "Kayla Daniels",
-                    "email": "kayla.daniels@refinery29.com"
-                },
-                {
                     "name": "Andreas Möller",
                     "email": "andreas.moller@refinery29.com"
                 },
                 {
                     "name": "R29 Product & Engineering",
                     "email": "p.e@refinery29.com"
+                },
+                {
+                    "name": "Graham Daniels",
+                    "email": "graham.daniels@refinery29.com"
                 }
             ],
-            "description": "Provides test helpers and generic data providers.",
+            "description": "Provides a test helper, generic data providers, and assertions.",
             "keywords": [
                 "faker",
                 "test",
                 "util"
             ],
-            "time": "2016-09-14 12:34:00"
+            "time": "2016-10-08 20:33:20"
         },
         {
             "name": "satooshi/php-coveralls",
