@@ -9,9 +9,7 @@
 
 namespace Localheinz\GitHub\ChangeLog\Console;
 
-use Github\Api;
 use Github\Client;
-use Github\HttpClient;
 use Localheinz\GitHub\ChangeLog\Repository;
 use Localheinz\GitHub\ChangeLog\Resource;
 use Symfony\Component\Console\Command\Command;
@@ -39,15 +37,12 @@ class GenerateCommand extends Command
      */
     private $stopwatch;
 
-    public function __construct(Client $client = null, Repository\PullRequestRepository $pullRequestRepository = null)
+    public function __construct(Client $client, Repository\PullRequestRepository $pullRequestRepository)
     {
         parent::__construct();
 
-        $this->client = $client ?: new Client(new HttpClient\CachedHttpClient());
-        $this->pullRequestRepository = $pullRequestRepository ?: new Repository\PullRequestRepository(
-            new Api\PullRequest($this->client),
-            new Repository\CommitRepository(new Api\Repository\Commits($this->client))
-        );
+        $this->client = $client;
+        $this->pullRequestRepository = $pullRequestRepository;
         $this->stopwatch = new Stopwatch();
     }
 
