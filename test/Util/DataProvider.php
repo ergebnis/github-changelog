@@ -22,10 +22,6 @@ final class DataProvider
     public function providerGenerateCommandArgument(): \Generator
     {
         $arguments = [
-            'repository' => [
-                true,
-                'The repository, e.g. "localheinz/github-changelog"',
-            ],
             'start-reference' => [
                 true,
                 'The start reference, e.g. "1.0.0"',
@@ -52,6 +48,12 @@ final class DataProvider
                 'a',
                 true,
                 'The GitHub token',
+                null,
+            ],
+            'repository' => [
+                'r',
+                true,
+                'The repository, e.g. "localheinz/github-changelog"',
                 null,
             ],
             'template' => [
@@ -181,6 +183,94 @@ final class DataProvider
         $values = [
             'int-negative' => -1 * $this->faker()->numberBetween(1),
             'int-zero' => 0,
+        ];
+
+        foreach ($values as $key => $value) {
+            yield $key => [
+                $value,
+            ];
+        }
+    }
+
+    public function providerInvalidRemoteUrl(): \Generator
+    {
+        foreach ($this->remoteUrlPrefixes() as $keyOne => $remoteUrlPrefix) {
+            foreach ($this->invalidStrings() as $keyTwo => $string) {
+                $key = \implode('/', [
+                    $keyOne,
+                    $keyTwo,
+                ]);
+
+                $remoteUrl = \sprintf(
+                    '%s%s.git',
+                    $remoteUrlPrefix,
+                    $string
+                );
+
+                yield $key => [
+                    $remoteUrl,
+                ];
+            }
+        }
+    }
+
+    public function providerValidRemoteUrlOwnerAndName(): \Generator
+    {
+        foreach ($this->remoteUrlPrefixes() as $keyOne => $remoteUrlPrefix) {
+            foreach ($this->validRepositoryOwners() as $keyTwo => $owner) {
+                foreach ($this->validRepositoryNames() as $keyThree => $name) {
+                    $key = \implode('/', [
+                        $keyOne,
+                        $keyTwo,
+                        $keyThree,
+                    ]);
+
+                    $remoteUrl = \sprintf(
+                        '%s%s/%s.git',
+                        $remoteUrlPrefix,
+                        $owner,
+                        $name
+                    );
+
+                    yield $key => [
+                        $remoteUrl,
+                        $owner,
+                        $name,
+                    ];
+                }
+            }
+        }
+    }
+
+    public function providerInvalidRemoteName(): \Generator
+    {
+        $faker = $this->faker();
+
+        $values = [
+            'blank' => '  ',
+            'empty' => '',
+            'starts-with-hyphen' => \sprintf(
+                '-%s',
+                $faker->word
+            ),
+            'ends-with-hyphen' => \sprintf(
+                '%s-',
+                $faker->word
+            ),
+            'contains-dots' => \sprintf(
+                '%s.%s',
+                $faker->word,
+                $faker->word
+            ),
+            'has-special-characters' => \implode('', $faker->randomElements([
+                '.',
+                ':',
+                'ä',
+                'ü',
+                'ö',
+                'ß',
+                '🤓',
+            ])),
         ];
 
         foreach ($values as $key => $value) {
@@ -327,5 +417,62 @@ final class DataProvider
                 ])
             ),
         ];
+    }
+
+    /**
+     * @return string[]
+     */
+    private function remoteUrlPrefixes(): array
+    {
+        return [
+            'https' => 'https://github.com/',
+            'ssh' => 'git@github.com:',
+        ];
+    }
+
+    /**
+     * @return string[]
+     */
+    private function invalidStrings(): array
+    {
+        $invalidStrings = [];
+
+        foreach ($this->invalidRepositoryOwners() as $keyOne => $owner) {
+            foreach ($this->invalidRepositoryNames() as $keyTwo => $name) {
+                $key = \sprintf(
+                    'invalid-owner-and-invalid-name-%s/%s',
+                    $keyOne,
+                    $keyTwo
+                );
+
+                $value = \sprintf(
+                    '%s/%s',
+                    $owner,
+                    $name
+                );
+
+                $invalidStrings[$key] = $value;
+            }
+        }
+
+        foreach ($this->validRepositoryOwners() as $key => $owner) {
+            $key = \sprintf(
+                'valid-owner-only-%s',
+                $key
+            );
+
+            $invalidStrings[$key] = $owner;
+        }
+
+        foreach ($this->validRepositoryNames()  as $key => $name) {
+            $key = \sprintf(
+                'valid-name-only-%s',
+                $key
+            );
+
+            $invalidStrings[$key] = $name;
+        }
+
+        return $invalidStrings;
     }
 }

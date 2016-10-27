@@ -17,6 +17,7 @@ use Github\Client;
 use Localheinz\GitHub\ChangeLog\Exception;
 use Localheinz\GitHub\ChangeLog\Repository;
 use Localheinz\GitHub\ChangeLog\Resource;
+use Localheinz\GitHub\ChangeLog\Util;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Input;
@@ -38,16 +39,25 @@ final class GenerateCommand extends Command
     private $pullRequestRepository;
 
     /**
+     * @var Util\RepositoryResolverInterface
+     */
+    private $repositoryResolver;
+
+    /**
      * @var Stopwatch
      */
     private $stopwatch;
 
-    public function __construct(Client $client, Repository\PullRequestRepositoryInterface $pullRequestRepository)
-    {
+    public function __construct(
+        Client $client,
+        Repository\PullRequestRepositoryInterface $pullRequestRepository,
+        Util\RepositoryResolverInterface $repositoryResolver
+    ) {
         parent::__construct();
 
         $this->client = $client;
         $this->pullRequestRepository = $pullRequestRepository;
+        $this->repositoryResolver = $repositoryResolver;
         $this->stopwatch = new Stopwatch();
     }
 
@@ -56,11 +66,6 @@ final class GenerateCommand extends Command
         $this
             ->setName('generate')
             ->setDescription('Generates a changelog from merged pull requests found between commit references')
-            ->addArgument(
-                'repository',
-                Input\InputArgument::REQUIRED,
-                'The repository, e.g. "localheinz/github-changelog"'
-            )
             ->addArgument(
                 'start-reference',
                 Input\InputArgument::REQUIRED,
@@ -76,6 +81,12 @@ final class GenerateCommand extends Command
                 'a',
                 Input\InputOption::VALUE_REQUIRED,
                 'The GitHub token'
+            )
+            ->addOption(
+                'repository',
+                'r',
+                Input\InputOption::VALUE_REQUIRED,
+                'The repository, e.g. "localheinz/github-changelog"'
             )
             ->addOption(
                 'template',
@@ -106,15 +117,30 @@ final class GenerateCommand extends Command
             );
         }
 
-        try {
-            $repository = Resource\Repository::fromString($input->getArgument('repository'));
-        } catch (Exception\InvalidArgumentException $exception) {
-            $io->error(\sprintf(
-                'Repository "%s" appears to be invalid.',
-                $input->getArgument('repository')
-            ));
+        $repository = $input->getOption('repository');
 
-            return 1;
+        if (null !== $repository) {
+            try {
+                $repository = Resource\Repository::fromString($repository);
+            } catch (Exception\InvalidArgumentException $exception) {
+                $io->error(\sprintf(
+                    'Repository "%s" appears to be invalid.',
+                    $repository
+                ));
+
+                return 1;
+            }
+        } else {
+            try {
+                $repository = $this->repositoryResolver->resolve(
+                    'upstream',
+                    'origin'
+                );
+            } catch (Exception\RuntimeException $exception) {
+                $io->error('Unable to resolve repository, please specify using --repository option.');
+
+                return 1;
+            }
         }
 
         $startReference = $input->getArgument('start-reference');
