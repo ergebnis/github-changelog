@@ -470,7 +470,7 @@ final class GenerateCommandTest extends \PHPUnit_Framework_TestCase
     {
         $faker = $this->getFaker();
 
-        $id = $faker->unique()->randomNumber();
+        $id = $faker->unique()->numberBetween(1);
         $title = $faker->unique()->sentence();
 
         return new Resource\PullRequest(
