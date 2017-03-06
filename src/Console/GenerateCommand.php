@@ -1,10 +1,12 @@
 <?php
 
-/*
- * Copyright (c) 2016 Andreas Möller <am@localheinz.com>
+/**
+ * Copyright (c) 2017 Andreas Möller
  *
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
+ *
+ * @link https://github.com/localheinz/github-changelog
  */
 
 namespace Localheinz\GitHub\ChangeLog\Console;
@@ -115,7 +117,7 @@ class GenerateCommand extends Command
             $endReference
         );
 
-        $io->section(sprintf(
+        $io->section(\sprintf(
             'Pull Requests for %s/%s %s',
             $owner,
             $repository,
@@ -130,7 +132,7 @@ class GenerateCommand extends Command
                 $endReference
             );
         } catch (\Exception $exception) {
-            $io->error(sprintf(
+            $io->error(\sprintf(
                 'An error occurred: %s',
                 $exception->getMessage()
             ));
@@ -140,15 +142,15 @@ class GenerateCommand extends Command
 
         $pullRequests = $range->pullRequests();
 
-        if (!count($pullRequests)) {
+        if (!\count($pullRequests)) {
             $io->warning('Could not find any pull requests');
         } else {
             $template = $input->getOption('template');
 
-            $pullRequests = array_reverse($pullRequests);
+            $pullRequests = \array_reverse($pullRequests);
 
-            array_walk($pullRequests, function (Resource\PullRequestInterface $pullRequest) use ($output, $template) {
-                $message = str_replace(
+            \array_walk($pullRequests, function (Resource\PullRequestInterface $pullRequest) use ($output, $template) {
+                $message = \str_replace(
                     [
                         '%title%',
                         '%id%',
@@ -165,10 +167,10 @@ class GenerateCommand extends Command
 
             $io->newLine();
 
-            $io->success(sprintf(
+            $io->success(\sprintf(
                 'Found %s pull request%s.',
-                count($pullRequests),
-                count($pullRequests) === 1 ? '' : 's',
+                \count($pullRequests),
+                \count($pullRequests) === 1 ? '' : 's',
                 $range
             ));
         }
@@ -189,13 +191,13 @@ class GenerateCommand extends Command
     private function range($startReference, $endReference)
     {
         if ($endReference === null) {
-            return sprintf(
+            return \sprintf(
                 'since %s',
                 $startReference
             );
         }
 
-        return sprintf(
+        return \sprintf(
             'between %s and %s',
             $startReference,
             $endReference
@@ -209,7 +211,7 @@ class GenerateCommand extends Command
      */
     private function formatStopwatchEvent(StopwatchEvent $event)
     {
-        return sprintf(
+        return \sprintf(
             'Time: %s, Memory: %s.',
             Helper::formatTime($event->getDuration() / 1000),
             Helper::formatMemory($event->getMemory())

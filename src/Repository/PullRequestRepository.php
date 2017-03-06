@@ -1,10 +1,12 @@
 <?php
 
-/*
- * Copyright (c) 2016 Andreas Möller <am@localheinz.com>
+/**
+ * Copyright (c) 2017 Andreas Möller
  *
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
+ *
+ * @link https://github.com/localheinz/github-changelog
  */
 
 namespace Localheinz\GitHub\ChangeLog\Repository;
@@ -45,7 +47,7 @@ class PullRequestRepository
             $id
         );
 
-        if (!is_array($response)) {
+        if (!\is_array($response)) {
             return;
         }
 
@@ -74,8 +76,8 @@ class PullRequestRepository
 
         $commits = $range->commits();
 
-        array_walk($commits, function (Resource\CommitInterface $commit) use (&$range, $owner, $repository) {
-            if (0 === preg_match('/^Merge pull request #(?P<id>\d+)/', $commit->message(), $matches)) {
+        \array_walk($commits, function (Resource\CommitInterface $commit) use (&$range, $owner, $repository) {
+            if (0 === \preg_match('/^Merge pull request #(?P<id>\d+)/', $commit->message(), $matches)) {
                 return;
             }
 

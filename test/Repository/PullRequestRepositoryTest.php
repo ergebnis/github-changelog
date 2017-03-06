@@ -1,10 +1,12 @@
 <?php
 
-/*
- * Copyright (c) 2016 Andreas Möller <am@localheinz.com>
+/**
+ * Copyright (c) 2017 Andreas Möller
  *
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
+ *
+ * @link https://github.com/localheinz/github-changelog
  */
 
 namespace Localheinz\GitHub\ChangeLog\Test\Repository;
@@ -244,7 +246,7 @@ final class PullRequestRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $mergeCommit = new Resource\Commit(
             $faker->unique()->sha1,
-            sprintf(
+            \sprintf(
                 'Merge pull request #%s from localheinz/fix/directory',
                 $expectedItem->id
             )
@@ -320,7 +322,7 @@ final class PullRequestRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $mergeCommit = new Resource\Commit(
             $faker->sha1,
-            sprintf(
+            \sprintf(
                 'Merge pull request #%s from localheinz/fix/directory',
                 $id
             )
@@ -421,9 +423,9 @@ final class PullRequestRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     private function response(\stdClass $item)
     {
-        $template = file_get_contents(__DIR__ . '/_response/pull-request.json');
+        $template = \file_get_contents(__DIR__ . '/_response/pull-request.json');
 
-        $body = str_replace(
+        $body = \str_replace(
             [
                 '%id%',
                 '%title%',
@@ -435,7 +437,7 @@ final class PullRequestRepositoryTest extends \PHPUnit_Framework_TestCase
             $template
         );
 
-        return json_decode(
+        return \json_decode(
             $body,
             true
         );

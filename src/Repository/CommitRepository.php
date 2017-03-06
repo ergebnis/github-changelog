@@ -1,10 +1,12 @@
 <?php
 
-/*
- * Copyright (c) 2016 Andreas Möller <am@localheinz.com>
+/**
+ * Copyright (c) 2017 Andreas Möller
  *
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
+ *
+ * @link https://github.com/localheinz/github-changelog
  */
 
 namespace Localheinz\GitHub\ChangeLog\Repository;
@@ -72,9 +74,9 @@ class CommitRepository
 
         $tail = null;
 
-        while (count($commits)) {
+        while (\count($commits)) {
             /* @var Resource\CommitInterface $commit */
-            $commit = array_shift($commits);
+            $commit = \array_shift($commits);
 
             if ($tail instanceof Resource\CommitInterface && $commit->equals($tail)) {
                 continue;
@@ -86,7 +88,7 @@ class CommitRepository
 
             $range = $range->withCommit($commit);
 
-            if (!count($commits)) {
+            if (!\count($commits)) {
                 $tail = $commit;
                 $params = [
                     'sha' => $tail->sha(),
@@ -114,7 +116,7 @@ class CommitRepository
             $sha
         );
 
-        if (!is_array($response)) {
+        if (!\is_array($response)) {
             return;
         }
 
@@ -135,7 +137,7 @@ class CommitRepository
     {
         $range = new Resource\Range();
 
-        if (!array_key_exists('per_page', $params)) {
+        if (!\array_key_exists('per_page', $params)) {
             $params['per_page'] = 250;
         }
 
@@ -145,11 +147,11 @@ class CommitRepository
             $params
         );
 
-        if (!is_array($response)) {
+        if (!\is_array($response)) {
             return $range;
         }
 
-        array_walk($response, function ($data) use (&$range) {
+        \array_walk($response, function ($data) use (&$range) {
             $commit = new Resource\Commit(
                 $data['sha'],
                 $data['commit']['message']
