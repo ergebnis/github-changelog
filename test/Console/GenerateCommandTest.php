@@ -1,10 +1,12 @@
 <?php
 
-/*
- * Copyright (c) 2016 Andreas Möller <am@localheinz.com>
+/**
+ * Copyright (c) 2017 Andreas Möller
  *
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
+ *
+ * @link https://github.com/localheinz/github-changelog
  */
 
 namespace Localheinz\GitHub\ChangeLog\Test\Console;
@@ -304,14 +306,14 @@ final class GenerateCommandTest extends \PHPUnit_Framework_TestCase
         $template = '- %title% (#%id%)';
 
         $expectedMessages = [
-            sprintf(
+            \sprintf(
                 'Found %s pull requests',
-                count($pullRequests)
+                \count($pullRequests)
             ),
         ];
 
-        array_walk($pullRequests, function (Resource\PullRequestInterface $pullRequest) use (&$expectedMessages, $template) {
-            $expectedMessages[] = str_replace(
+        \array_walk($pullRequests, function (Resource\PullRequestInterface $pullRequest) use (&$expectedMessages, $template) {
+            $expectedMessages[] = \str_replace(
                 [
                     '%title%',
                     '%id%',
@@ -364,9 +366,9 @@ final class GenerateCommandTest extends \PHPUnit_Framework_TestCase
 
         $pullRequests = $this->pullRequests($count);
 
-        $expectedMessage = sprintf(
+        $expectedMessage = \sprintf(
             'Found %s pull requests',
-            count($pullRequests)
+            \count($pullRequests)
         );
 
         $pullRequestRepository = $this->getPullRequestRepositoryMock();
@@ -407,7 +409,7 @@ final class GenerateCommandTest extends \PHPUnit_Framework_TestCase
             ->method('items')
             ->willThrowException($exception);
 
-        $expectedMessage = sprintf(
+        $expectedMessage = \sprintf(
             'An error occurred: %s',
             $exception->getMessage()
         );
@@ -489,7 +491,7 @@ final class GenerateCommandTest extends \PHPUnit_Framework_TestCase
         $pullRequests = [];
 
         for ($i = 0; $i < $count; ++$i) {
-            array_push($pullRequests, $this->pullRequest());
+            \array_push($pullRequests, $this->pullRequest());
         }
 
         return $pullRequests;

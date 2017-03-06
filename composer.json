@@ -22,8 +22,8 @@
     },
     "require-dev": {
         "codeclimate/php-test-reporter": "0.3.2",
+        "localheinz/php-cs-fixer-config": "1.0.0",
         "phpunit/phpunit": "^5.7.4",
-        "refinery29/php-cs-fixer-config": "0.6.5",
         "refinery29/test-util": "0.9.6"
     },
     "autoload": {

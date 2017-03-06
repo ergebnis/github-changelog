@@ -1,10 +1,12 @@
 <?php
 
-/*
- * Copyright (c) 2016 Andreas Möller <am@localheinz.com>
+/**
+ * Copyright (c) 2017 Andreas Möller
  *
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
+ *
+ * @link https://github.com/localheinz/github-changelog
  */
 
 namespace Localheinz\GitHub\ChangeLog\Test\Repository;
@@ -219,13 +221,13 @@ final class CommitRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $commits = $range->commits();
 
-        $this->assertCount(count($expectedItems), $commits);
+        $this->assertCount(\count($expectedItems), $commits);
 
-        array_walk($commits, function (Resource\CommitInterface $commit) use (&$expectedItems) {
+        \array_walk($commits, function (Resource\CommitInterface $commit) use (&$expectedItems) {
             /*
              * API returns commits in reverse order
              */
-            $expectedItem = array_pop($expectedItems);
+            $expectedItem = \array_pop($expectedItems);
 
             $this->assertSame($expectedItem->sha, $commit->sha());
             $this->assertSame($expectedItem->message, $commit->message());
@@ -478,7 +480,7 @@ final class CommitRepositoryTest extends \PHPUnit_Framework_TestCase
         $countBetween = 9;
         $countBefore = 2;
 
-        $segment = array_merge(
+        $segment = \array_merge(
             $this->commitItems($countBefore),
             [
                 $startCommit,
@@ -489,7 +491,7 @@ final class CommitRepositoryTest extends \PHPUnit_Framework_TestCase
             ]
         );
 
-        $expectedItems = array_slice(
+        $expectedItems = \array_slice(
             $segment,
             $countBefore + 1, // We don't want the first commit
             $countBetween + 1 // We want the commits in-between and the last commit
@@ -518,13 +520,13 @@ final class CommitRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $commits = $range->commits();
 
-        $this->assertCount(count($expectedItems), $commits);
+        $this->assertCount(\count($expectedItems), $commits);
 
-        array_walk($commits, function ($commit) use (&$expectedItems) {
+        \array_walk($commits, function ($commit) use (&$expectedItems) {
             /*
              * API returns items in reverse order
              */
-            $expectedItem = array_pop($expectedItems);
+            $expectedItem = \array_pop($expectedItems);
 
             $this->assertInstanceOf(Resource\CommitInterface::class, $commit);
 
@@ -576,16 +578,16 @@ final class CommitRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $countBefore = 2;
 
-        $firstSegment = array_merge(
+        $firstSegment = \array_merge(
             $this->commitItems($countBetweenFirstSegment),
             [
                 $endCommit,
             ]
         );
 
-        $firstCommitFromFirstSegment = reset($firstSegment);
+        $firstCommitFromFirstSegment = \reset($firstSegment);
 
-        $secondSegment = array_merge(
+        $secondSegment = \array_merge(
             $this->commitItems($countBefore),
             [
                 $startCommit,
@@ -596,8 +598,8 @@ final class CommitRepositoryTest extends \PHPUnit_Framework_TestCase
             ]
         );
 
-        $expectedItems = array_merge(
-            array_slice(
+        $expectedItems = \array_merge(
+            \array_slice(
                 $secondSegment,
                 $countBefore + 1,
                 $countBetweenSecondSegment
@@ -638,13 +640,13 @@ final class CommitRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $commits = $range->commits();
 
-        $this->assertCount(count($expectedItems), $commits);
+        $this->assertCount(\count($expectedItems), $commits);
 
-        array_walk($commits, function ($commit) use (&$expectedItems) {
+        \array_walk($commits, function ($commit) use (&$expectedItems) {
             /*
              * API returns items in reverse order
              */
-            $expectedItem = array_pop($expectedItems);
+            $expectedItem = \array_pop($expectedItems);
 
             $this->assertInstanceOf(Resource\CommitInterface::class, $commit);
 
@@ -690,7 +692,7 @@ final class CommitRepositoryTest extends \PHPUnit_Framework_TestCase
         $items = [];
 
         for ($i = 0; $i < $count; ++$i) {
-            array_push($items, $this->commitItem());
+            \array_push($items, $this->commitItem());
         }
 
         return $items;
@@ -703,9 +705,9 @@ final class CommitRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     private function response(\stdClass $item)
     {
-        $template = file_get_contents(__DIR__ . '/_response/commit.json');
+        $template = \file_get_contents(__DIR__ . '/_response/commit.json');
 
-        $body = str_replace(
+        $body = \str_replace(
             [
                 '%sha%',
                 '%message%',
@@ -717,7 +719,7 @@ final class CommitRepositoryTest extends \PHPUnit_Framework_TestCase
             $template
         );
 
-        return json_decode(
+        return \json_decode(
             $body,
             true
         );
@@ -732,9 +734,9 @@ final class CommitRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $response = [];
 
-        array_walk($commits, function ($commit) use (&$response) {
+        \array_walk($commits, function ($commit) use (&$response) {
             // The GitHub API returns commits in reverse order!
-            array_unshift($response, $this->response($commit));
+            \array_unshift($response, $this->response($commit));
         });
 
         return $response;
@@ -749,8 +751,8 @@ final class CommitRepositoryTest extends \PHPUnit_Framework_TestCase
     private function arrayHasKeyAndValue($key, $value)
     {
         return $this->callback(function ($array) use ($key, $value) {
-            if (is_array($array)
-                && array_key_exists($key, $array)
+            if (\is_array($array)
+                && \array_key_exists($key, $array)
                 && $value === $array[$key]
             ) {
                 return true;
@@ -768,8 +770,8 @@ final class CommitRepositoryTest extends \PHPUnit_Framework_TestCase
     private function arrayNotHasKey($key)
     {
         return $this->callback(function ($array) use ($key) {
-            if (is_array($array)
-                && !array_key_exists($key, $array)
+            if (\is_array($array)
+                && !\array_key_exists($key, $array)
             ) {
                 return true;
             }
