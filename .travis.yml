@@ -15,10 +15,6 @@ matrix:
     - php: 7.0
       env: WITH_COVERAGE=true
     - php: 7.1
-    - php: hhvm
-      sudo: required
-      dist: trusty
-      group: edge
 
 cache:
   directories:
