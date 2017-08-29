@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright (c) 2017 Andreas Möller
+ * Copyright (c) 2017 Andreas Möller.
  *
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
@@ -37,7 +37,7 @@ class PullRequestRepository
      * @param string $repository
      * @param string $id
      *
-     * @return Resource\PullRequestInterface|null
+     * @return null|Resource\PullRequestInterface
      */
     public function show($owner, $repository, $id)
     {
@@ -61,7 +61,7 @@ class PullRequestRepository
      * @param string      $owner
      * @param string      $repository
      * @param string      $startReference
-     * @param string|null $endReference
+     * @param null|string $endReference
      *
      * @return Resource\Range
      */

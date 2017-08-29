@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright (c) 2017 Andreas Möller
+ * Copyright (c) 2017 Andreas Möller.
  *
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
@@ -30,7 +30,7 @@ class CommitRepository
      * @param string      $owner
      * @param string      $repository
      * @param string      $startReference
-     * @param string|null $endReference
+     * @param null|string $endReference
      *
      * @return Resource\Range
      */
@@ -106,7 +106,7 @@ class CommitRepository
      * @param string $repository
      * @param string $sha
      *
-     * @return Resource\CommitInterface|null
+     * @return null|Resource\CommitInterface
      */
     public function show($owner, $repository, $sha)
     {
