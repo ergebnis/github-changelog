@@ -15,6 +15,7 @@ $autoloaders = [
 foreach ($autoloaders as $autoloader) {
     if (\file_exists($autoloader)) {
         require $autoloader;
+
         break;
     }
 }
