@@ -22,7 +22,7 @@ cache:
     - $HOME/.php-cs-fixer
 
 before_install:
-  - if [[ "$WITH_COVERAGE" != "true" && "$TRAVIS_PHP_VERSION" != "hhvm" ]]; then phpenv config-rm xdebug.ini; fi
+  - if [[ "$WITH_COVERAGE" != "true" ]]; then phpenv config-rm xdebug.ini; fi
   - composer validate
   - composer config github-oauth.github.com $GITHUB_TOKEN
 
