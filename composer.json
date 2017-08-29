@@ -9,6 +9,7 @@
     ],
     "license": "MIT",
     "config": {
+        "preferred-install": "dist",
         "sort-packages": true
     },
     "require": {
