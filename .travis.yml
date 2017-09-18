@@ -8,13 +8,25 @@ env:
     - secure: "vLO6MNtynfHTrTM76rq13lnwPqm8ULyTjFysYSCDIgUBidi4PMbmNjTf72LTrG9NboqWJNzItuiK5aQQCaJaDCr+603Getv2bKSpsPn1wnr51zYPGDsvKFL3e040JuDLs/4TslVtZbnsU9QxSwnixWEIOPF5ECBwMVk31+E+ak0="
 
 matrix:
-  fast_finish: true
   include:
     - php: 5.6
-      env: WITH_CS=true
+      env: WITH_LOWEST=true
+    - php: 5.6
+      env: WITH_LOCKED=true WITH_CS=true
+    - php: 5.6
+      env: WITH_HIGHEST=true
     - php: 7.0
+      env: WITH_LOWEST=true
+    - php: 7.0
+      env: WITH_LOCKED=true
+    - php: 7.0
+      env: WITH_HIGHEST=true
     - php: 7.1
-      env: WITH_COVERAGE=true
+      env: WITH_LOWEST=true
+    - php: 7.1
+      env: WITH_LOCKED=true WITH_COVERAGE=true
+    - php: 7.1
+      env: WITH_HIGHEST=true
 
 cache:
   directories:
@@ -28,14 +40,15 @@ before_install:
   - composer config github-oauth.github.com $GITHUB_TOKEN
 
 install:
-  - composer install
+  - if [[ "$WITH_LOWEST" == "true" ]]; then composer update --prefer-lowest; fi
+  - if [[ "$WITH_LOCKED" == "true" ]]; then composer install; fi
+  - if [[ "$WITH_HIGHEST" == "true" ]]; then composer update; fi
 
 before_script:
-  - mkdir -p "$HOME/.php-cs-fixer"
-  - mkdir -p build/logs
+  - mkdir -p $HOME/.php-cs-fixer
 
 script:
-  - if [[ "$WITH_CS" == "true" ]]; then vendor/bin/php-cs-fixer fix --config=.php_cs --verbose --diff --dry-run; fi
+  - if [[ "$WITH_CS" == "true" ]]; then vendor/bin/php-cs-fixer fix --config=.php_cs --diff --dry-run --verbose; fi
   - if [[ "$WITH_COVERAGE" == "true" ]]; then xdebug-enable; fi
   - if [[ "$WITH_COVERAGE" == "true" ]]; then vendor/bin/phpunit --configuration=test/Unit/phpunit.xml --coverage-clover=build/logs/clover.xml; else vendor/bin/phpunit --configuration=test/Unit/phpunit.xml; fi
   - if [[ "$WITH_COVERAGE" == "true" ]]; then xdebug-disable; fi
