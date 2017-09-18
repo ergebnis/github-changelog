@@ -9,7 +9,7 @@
  * @link https://github.com/localheinz/github-changelog
  */
 
-namespace Localheinz\GitHub\ChangeLog\Test\Console;
+namespace Localheinz\GitHub\ChangeLog\Test\Unit\Console;
 
 use Github\Client;
 use Localheinz\GitHub\ChangeLog\Console;

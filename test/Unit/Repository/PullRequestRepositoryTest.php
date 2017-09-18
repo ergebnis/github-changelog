@@ -9,7 +9,7 @@
  * @link https://github.com/localheinz/github-changelog
  */
 
-namespace Localheinz\GitHub\ChangeLog\Test\Repository;
+namespace Localheinz\GitHub\ChangeLog\Test\Unit\Repository;
 
 use Github\Api;
 use Localheinz\GitHub\ChangeLog\Repository;

@@ -9,7 +9,7 @@
  * @link https://github.com/localheinz/github-changelog
  */
 
-namespace Localheinz\GitHub\ChangeLog\Test\Resource;
+namespace Localheinz\GitHub\ChangeLog\Test\Unit\Resource;
 
 use Localheinz\GitHub\ChangeLog\Resource;
 use Refinery29\Test\Util\DataProvider;
