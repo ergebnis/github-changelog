@@ -1,4 +1,4 @@
-# README
+# github-changelog
 
 [![Build Status](https://travis-ci.org/localheinz/github-changelog.svg?branch=master)](https://travis-ci.org/localheinz/github-changelog)
 [![Code Climate](https://codeclimate.com/github/localheinz/github-changelog/badges/gpa.svg)](https://codeclimate.com/github/localheinz/github-changelog)
@@ -6,6 +6,44 @@
 [![Issue Count](https://codeclimate.com/github/localheinz/github-changelog/badges/issue_count.svg)](https://codeclimate.com/github/localheinz/github-changelog)
 [![Latest Stable Version](https://poser.pugx.org/localheinz/github-changelog/v/stable)](https://packagist.org/packages/localheinz/github-changelog)
 [![Total Downloads](https://poser.pugx.org/localheinz/github-changelog/downloads)](https://packagist.org/packages/localheinz/github-changelog)
+
+Provides a script that generates a changelog based on titles of pull requests merged between specified references.
+
+## Is this the right tool for me?
+
+Probably not. There are a range of other tools that probably do a better job.
+
+Take a look at 
+
+* https://packagist.org/?q=changelog
+* https://www.npmjs.com/search?q=changelog
+* https://pypi.python.org/pypi?%3Aaction=search&term=changelog
+
+Nonetheless, for me and my projects, it's the second best thing after *manually* 
+keeping a changelog as suggested at http://keepachangelog.com.
+
+## When will it work for me?
+
+| My process                                   | Will this tool work for me? |
+|----------------------------------------------|-----------------------------|
+| I need elaborate changelogs                  | No                          |
+| I push to `master`                           | No                          |
+| ![Rebase and merge][rebase-and-merge-button] | No                          |
+| ![Squash and merge][squash-and-merge-button] | No                          |
+| ![Merge pull request][merge-button]          | **Yes**                     |
+
+[rebase-and-merge-button]: https://user-images.githubusercontent.com/605483/30547612-18674f5c-9c90-11e7-8c0c-b300a8abb30c.png
+[squash-and-merge-button]: https://user-images.githubusercontent.com/605483/30547621-1e1683fa-9c90-11e7-8233-fe41629d84d6.png
+[merge-button]: https://user-images.githubusercontent.com/605483/30547611-18656e26-9c90-11e7-9dd3-c49aaa9bb4bf.png
+
+## Why is this tool so limited?
+
+All this tool does is this:
+
+- it collects commits between references
+- it matches commit messages against what is used by GitHub as a merge commit message
+- it fetches the pull request title from the corresponding pull request
+- it then uses all of the pull request titles to compile a list
 
 ## CLI Tool
 
