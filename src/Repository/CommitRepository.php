@@ -52,7 +52,7 @@ class CommitRepository
 
         $params = [];
 
-        if ($endReference !== null) {
+        if (null !== $endReference) {
             $end = $this->show(
                 $owner,
                 $repository,

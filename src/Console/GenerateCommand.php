@@ -171,7 +171,7 @@ class GenerateCommand extends Command
             $io->success(\sprintf(
                 'Found %s pull request%s.',
                 \count($pullRequests),
-                \count($pullRequests) === 1 ? '' : 's',
+                1 === \count($pullRequests) ? '' : 's',
                 $range
             ));
         }
@@ -191,7 +191,7 @@ class GenerateCommand extends Command
      */
     private function range($startReference, $endReference)
     {
-        if ($endReference === null) {
+        if (null === $endReference) {
             return \sprintf(
                 'since %s',
                 $startReference
