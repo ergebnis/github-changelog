@@ -1,6 +1,6 @@
 {
     "name": "localheinz/github-changelog",
-    "description": "A script that generates a change log based on specified references.",
+    "description": "Provides a script that generates a changelog based on titles of pull requests merged between specified references.",
     "authors": [
         {
             "name": "Andreas Möller",
