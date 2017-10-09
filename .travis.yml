@@ -7,41 +7,68 @@ env:
     - secure: "QQEDmMEd9FctVNUHuuNnZaNPCQuQrVGF4hJbfBdkw2GhgqegIrTK47G0FaHl2y/lez82N3Jpuf/mpTO2jnw1aA+bIAJVo5NcY+0bTrm23SBS1lyyUs3TgTmkw6ByfLk3bmZ4TpRj8kAQdPK+aDWoK3Va0XdZt7swA39MugGYxvQ="
     - secure: "vLO6MNtynfHTrTM76rq13lnwPqm8ULyTjFysYSCDIgUBidi4PMbmNjTf72LTrG9NboqWJNzItuiK5aQQCaJaDCr+603Getv2bKSpsPn1wnr51zYPGDsvKFL3e040JuDLs/4TslVtZbnsU9QxSwnixWEIOPF5ECBwMVk31+E+ak0="
 
-matrix:
-  fast_finish: true
-  include:
-    - php: 5.6
-      env: WITH_CS=true
-    - php: 7.0
-    - php: 7.1
-      env: WITH_COVERAGE=true
-
 cache:
   directories:
     - $HOME/.composer/cache
     - $HOME/.php-cs-fixer
 
-before_install:
-  - source .travis/xdebug.sh
-  - xdebug-disable
-  - composer validate
-  - composer config github-oauth.github.com $GITHUB_TOKEN
+stages:
+  - style
+  - test
 
-install:
-  - composer install
+jobs:
+  include:
+    - stage: Style
 
-before_script:
-  - mkdir -p "$HOME/.php-cs-fixer"
-  - mkdir -p build/logs
+      php: 5.6
 
-script:
-  - if [[ "$WITH_CS" == "true" ]]; then vendor/bin/php-cs-fixer fix --config=.php_cs --verbose --diff --dry-run; fi
-  - if [[ "$WITH_COVERAGE" == "true" ]]; then xdebug-enable; fi
-  - if [[ "$WITH_COVERAGE" == "true" ]]; then vendor/bin/phpunit --configuration=test/Unit/phpunit.xml --coverage-clover=build/logs/clover.xml; else vendor/bin/phpunit --configuration=test/Unit/phpunit.xml; fi
-  - if [[ "$WITH_COVERAGE" == "true" ]]; then xdebug-disable; fi
+      before_install:
+        - source .travis/xdebug.sh
+        - xdebug-disable
+        - composer validate
+        - composer config github-oauth.github.com $GITHUB_TOKEN
 
-after_success:
-  - if [[ "$WITH_COVERAGE" == "true" ]]; then vendor/bin/test-reporter --coverage-report=build/logs/clover.xml; fi
+      install:
+        - composer install
+
+      before_script:
+        - mkdir -p $HOME/.php-cs-fixer
+
+      script:
+        - vendor/bin/php-cs-fixer fix --config=.php_cs --diff --dry-run --verbose
+
+    - &TEST
+
+      stage: Test
+
+      php: 5.6
+
+      before_install:
+        - source .travis/xdebug.sh
+        - xdebug-disable
+        - composer validate
+        - composer config github-oauth.github.com $GITHUB_TOKEN
+
+      install:
+        - composer install
+
+      script:
+        - if [[ "$WITH_COVERAGE" == "true" ]]; then xdebug-enable; fi
+        - if [[ "$WITH_COVERAGE" == "true" ]]; then vendor/bin/phpunit --configuration=test/Unit/phpunit.xml --coverage-clover=build/logs/clover.xml; else vendor/bin/phpunit --configuration=test/Unit/phpunit.xml; fi
+        - if [[ "$WITH_COVERAGE" == "true" ]]; then xdebug-disable; fi
+
+      after_success:
+        - if [[ "$WITH_COVERAGE" == "true" ]]; then vendor/bin/test-reporter --coverage-report=build/logs/clover.xml; fi
+
+    - <<: *TEST
+
+      php: 7.0
+
+    - <<: *TEST
+
+      php: 7.1
+
+      env: WITH_COVERAGE=true
 
 notifications:
   email: false
