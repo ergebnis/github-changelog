@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "fed6d4ff6528dabe15fbc64715bae5ed",
+    "content-hash": "a9f7afadd0bb48501b1534d6b10c0133",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -290,16 +290,16 @@
         },
         {
             "name": "knplabs/github-api",
-            "version": "2.5.0",
+            "version": "2.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/php-github-api.git",
-                "reference": "05b24ed592a61ea947b45d8d14cde25f9795fb2f"
+                "reference": "cacf6f38bf9e6c5242e2b6dc26a67c4791bc7751"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/php-github-api/zipball/05b24ed592a61ea947b45d8d14cde25f9795fb2f",
-                "reference": "05b24ed592a61ea947b45d8d14cde25f9795fb2f",
+                "url": "https://api.github.com/repos/KnpLabs/php-github-api/zipball/cacf6f38bf9e6c5242e2b6dc26a67c4791bc7751",
+                "reference": "cacf6f38bf9e6c5242e2b6dc26a67c4791bc7751",
                 "shasum": ""
             },
             "require": {
@@ -323,7 +323,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.5.x-dev"
+                    "dev-master": "2.6.x-dev"
                 }
             },
             "autoload": {
@@ -354,7 +354,7 @@
                 "gist",
                 "github"
             ],
-            "time": "2017-06-26T07:29:00+00:00"
+            "time": "2017-09-30T20:00:06+00:00"
         },
         {
             "name": "php-http/cache-plugin",
