@@ -20,7 +20,7 @@ jobs:
   include:
     - stage: Style
 
-      php: 5.6
+      php: 7.0
 
       before_install:
         - source .travis/xdebug.sh
@@ -41,7 +41,7 @@ jobs:
 
       stage: Test
 
-      php: 5.6
+      php: 7.0
 
       before_install:
         - source .travis/xdebug.sh
@@ -59,10 +59,6 @@ jobs:
 
       after_success:
         - if [[ "$WITH_COVERAGE" == "true" && -n "$CODECLIMATE_REPO_TOKEN" ]]; then vendor/bin/test-reporter --coverage-report=build/logs/clover.xml; fi
-
-    - <<: *TEST
-
-      php: 7.0
 
     - <<: *TEST
 
