@@ -16,9 +16,10 @@ namespace Localheinz\GitHub\ChangeLog\Test\Unit\Repository;
 use Github\Api;
 use Localheinz\GitHub\ChangeLog\Repository;
 use Localheinz\GitHub\ChangeLog\Resource;
+use PHPUnit\Framework;
 use Refinery29\Test\Util\TestHelper;
 
-final class CommitRepositoryTest extends \PHPUnit_Framework_TestCase
+final class CommitRepositoryTest extends Framework\TestCase
 {
     use TestHelper;
 

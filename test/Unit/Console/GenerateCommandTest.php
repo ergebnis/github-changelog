@@ -17,11 +17,12 @@ use Github\Client;
 use Localheinz\GitHub\ChangeLog\Console;
 use Localheinz\GitHub\ChangeLog\Repository;
 use Localheinz\GitHub\ChangeLog\Resource;
+use PHPUnit\Framework;
 use Refinery29\Test\Util\TestHelper;
 use Symfony\Component\Console\Input;
 use Symfony\Component\Console\Tester\CommandTester;
 
-final class GenerateCommandTest extends \PHPUnit_Framework_TestCase
+final class GenerateCommandTest extends Framework\TestCase
 {
     use TestHelper;
 

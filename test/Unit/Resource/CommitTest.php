@@ -14,10 +14,11 @@ declare(strict_types=1);
 namespace Localheinz\GitHub\ChangeLog\Test\Unit\Resource;
 
 use Localheinz\GitHub\ChangeLog\Resource;
+use PHPUnit\Framework;
 use Refinery29\Test\Util\DataProvider;
 use Refinery29\Test\Util\TestHelper;
 
-final class CommitTest extends \PHPUnit_Framework_TestCase
+final class CommitTest extends Framework\TestCase
 {
     use TestHelper;
 
