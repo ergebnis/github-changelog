@@ -14,9 +14,10 @@ declare(strict_types=1);
 namespace Localheinz\GitHub\ChangeLog\Test\Unit\Resource;
 
 use Localheinz\GitHub\ChangeLog\Resource;
+use PHPUnit\Framework;
 use Refinery29\Test\Util\TestHelper;
 
-final class AuthorTest extends \PHPUnit_Framework_TestCase
+final class AuthorTest extends Framework\TestCase
 {
     use TestHelper;
 
