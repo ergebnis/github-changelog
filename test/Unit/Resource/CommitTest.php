@@ -49,10 +49,7 @@ final class CommitTest extends Framework\TestCase
         );
     }
 
-    /**
-     * @return \Generator
-     */
-    public function providerInvalidSha()
+    public function providerInvalidSha(): \Generator
     {
         $faker = $this->getFaker();
 

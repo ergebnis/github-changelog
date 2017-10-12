@@ -50,10 +50,10 @@ final class GenerateCommandTest extends Framework\TestCase
      * @dataProvider providerArgument
      *
      * @param string $name
-     * @param bool   $required
+     * @param bool   $isRequired
      * @param string $description
      */
-    public function testArgument($name, $required, $description)
+    public function testArgument(string $name, bool $isRequired, string $description)
     {
         $command = new Console\GenerateCommand(
             $this->createClientMock(),
@@ -66,37 +66,38 @@ final class GenerateCommandTest extends Framework\TestCase
         $argument = $command->getDefinition()->getArgument($name);
 
         $this->assertSame($name, $argument->getName());
-        $this->assertSame($required, $argument->isRequired());
+        $this->assertSame($isRequired, $argument->isRequired());
         $this->assertSame($description, $argument->getDescription());
     }
 
-    /**
-     * @return array
-     */
-    public function providerArgument()
+    public function providerArgument(): \Generator
     {
-        return [
-            [
-                'owner',
+        $arguments = [
+            'owner' => [
                 true,
                 'The owner, e.g., "localheinz"',
             ],
-            [
-                'repository',
+            'repository' => [
                 true,
                 'The repository, e.g. "github-changelog"',
             ],
-            [
-                'start-reference',
+            'start-reference' => [
                 true,
                 'The start reference, e.g. "1.0.0"',
             ],
-            [
-                'end-reference',
+            'end-reference' => [
                 false,
                 'The end reference, e.g. "1.1.0"',
             ],
         ];
+
+        foreach ($arguments as $name => list($isRequired, $description)) {
+            yield $name => [
+                $name,
+                $isRequired,
+                $description,
+            ];
+        }
     }
 
     /**
@@ -104,11 +105,11 @@ final class GenerateCommandTest extends Framework\TestCase
      *
      * @param string $name
      * @param string $shortcut
-     * @param bool   $required
+     * @param bool   $isValueRequired
      * @param string $description
      * @param mixed  $default
      */
-    public function testOption($name, $shortcut, $required, $description, $default)
+    public function testOption(string $name, string $shortcut, bool $isValueRequired, string $description, $default)
     {
         $command = new Console\GenerateCommand(
             $this->createClientMock(),
@@ -122,32 +123,37 @@ final class GenerateCommandTest extends Framework\TestCase
 
         $this->assertSame($name, $option->getName());
         $this->assertSame($shortcut, $option->getShortcut());
-        $this->assertSame($required, $option->isValueRequired());
+        $this->assertSame($isValueRequired, $option->isValueRequired());
         $this->assertSame($description, $option->getDescription());
         $this->assertSame($default, $option->getDefault());
     }
 
-    /**
-     * @return array
-     */
-    public function providerOption()
+    public function providerOption(): \Generator
     {
-        return [
-            [
-                'auth-token',
+        $options = [
+            'auth-token' => [
                 'a',
                 false,
                 'The GitHub token',
                 null,
             ],
-            [
-                'template',
+            'template' => [
                 't',
                 false,
                 'The template to use for rendering a pull request',
                 '- %title% (#%id%)',
             ],
         ];
+
+        foreach ($options as $name => list($shortcut, $isValueRequired, $description, $default)) {
+            yield $name => [
+                $name,
+                $shortcut,
+                $isValueRequired,
+                $description,
+                $default,
+            ];
+        }
     }
 
     public function testExecuteAuthenticatesIfTokenOptionIsGiven()

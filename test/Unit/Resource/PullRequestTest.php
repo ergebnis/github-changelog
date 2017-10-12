@@ -49,10 +49,7 @@ final class PullRequestTest extends Framework\TestCase
         );
     }
 
-    /**
-     * @return \Generator
-     */
-    public function providerInvalidId()
+    public function providerInvalidId(): \Generator
     {
         return $this->provideDataFrom(
             new DataProvider\InvalidIntegerish(),
