@@ -30,7 +30,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         $vendor = $faker->userName;
         $package = $faker->slug();
 
-        $api = $this->getPullRequestApiMock();
+        $api = $this->createPullRequestApiMock();
 
         $expectedItem = $this->pullRequestItem();
 
@@ -46,7 +46,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
 
         $pullRequestRepository = new Repository\PullRequestRepository(
             $api,
-            $this->getCommitRepositoryMock()
+            $this->createCommitRepositoryMock()
         );
 
         $pullRequest = $pullRequestRepository->show(
@@ -69,7 +69,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         $package = $faker->slug();
         $id = $faker->randomNumber();
 
-        $api = $this->getPullRequestApiMock();
+        $api = $this->createPullRequestApiMock();
 
         $api
             ->expects($this->once())
@@ -83,7 +83,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
 
         $pullRequestRepository = new Repository\PullRequestRepository(
             $api,
-            $this->getCommitRepositoryMock()
+            $this->createCommitRepositoryMock()
         );
 
         $pullRequest = $pullRequestRepository->show(
@@ -103,9 +103,9 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         $package = $faker->slug();
         $startReference = $faker->sha1;
 
-        $commitRepository = $this->getCommitRepositoryMock();
+        $commitRepository = $this->createCommitRepositoryMock();
 
-        $range = $this->getRangeMock();
+        $range = $this->createRangeMock();
 
         $range
             ->expects($this->any())
@@ -124,7 +124,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             ->willReturn($range);
 
         $repository = new Repository\PullRequestRepository(
-            $this->getPullRequestApiMock(),
+            $this->createPullRequestApiMock(),
             $commitRepository
         );
 
@@ -144,7 +144,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
-        $range = $this->getRangeMock();
+        $range = $this->createRangeMock();
 
         $range
             ->expects($this->any())
@@ -155,7 +155,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             ->expects($this->never())
             ->method('withPullRequest');
 
-        $commitRepository = $this->getCommitRepositoryMock();
+        $commitRepository = $this->createCommitRepositoryMock();
 
         $commitRepository
             ->expects($this->once())
@@ -169,7 +169,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             ->willReturn($range);
 
         $repository = new Repository\PullRequestRepository(
-            $this->getPullRequestApiMock(),
+            $this->createPullRequestApiMock(),
             $commitRepository
         );
 
@@ -190,14 +190,14 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
-        $commitRepository = $this->getCommitRepositoryMock();
+        $commitRepository = $this->createCommitRepositoryMock();
 
         $commit = new Resource\Commit(
             $faker->sha1,
             'I am not a merge commit'
         );
 
-        $range = $this->getRangeMock();
+        $range = $this->createRangeMock();
 
         $range
             ->expects($this->any())
@@ -222,7 +222,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             ->willReturn($range);
 
         $repository = new Repository\PullRequestRepository(
-            $this->getPullRequestApiMock(),
+            $this->createPullRequestApiMock(),
             $commitRepository
         );
 
@@ -243,7 +243,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
-        $commitRepository = $this->getCommitRepositoryMock();
+        $commitRepository = $this->createCommitRepositoryMock();
 
         $expectedItem = $this->pullRequestItem();
 
@@ -255,9 +255,9 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             )
         );
 
-        $mutatedRange = $this->getRangeMock();
+        $mutatedRange = $this->createRangeMock();
 
-        $range = $this->getRangeMock();
+        $range = $this->createRangeMock();
 
         $range
             ->expects($this->any())
@@ -283,7 +283,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             )
             ->willReturn($range);
 
-        $api = $this->getPullRequestApiMock();
+        $api = $this->createPullRequestApiMock();
 
         $api
             ->expects($this->once())
@@ -319,7 +319,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
-        $commitRepository = $this->getCommitRepositoryMock();
+        $commitRepository = $this->createCommitRepositoryMock();
 
         $id = 9000;
 
@@ -331,7 +331,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             )
         );
 
-        $range = $this->getRangeMock();
+        $range = $this->createRangeMock();
 
         $range
             ->expects($this->any())
@@ -355,7 +355,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             )
             ->willReturn($range);
 
-        $pullRequestApi = $this->getPullRequestApiMock();
+        $pullRequestApi = $this->createPullRequestApiMock();
 
         $pullRequestApi
             ->expects($this->once())
@@ -383,7 +383,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
     /**
      * @return Api\PullRequest|\PHPUnit_Framework_MockObject_MockObject
      */
-    private function getPullRequestApiMock()
+    private function createPullRequestApiMock()
     {
         return $this->createMock(Api\PullRequest::class);
     }
@@ -391,7 +391,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject|Repository\CommitRepository
      */
-    private function getCommitRepositoryMock()
+    private function createCommitRepositoryMock()
     {
         return $this->createMock(Repository\CommitRepository::class);
     }
@@ -399,7 +399,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject|Resource\RangeInterface
      */
-    private function getRangeMock()
+    private function createRangeMock()
     {
         return $this->createMock(Resource\RangeInterface::class);
     }

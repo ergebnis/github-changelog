@@ -31,7 +31,7 @@ final class CommitRepositoryTest extends Framework\TestCase
         $repository = $faker->slug();
         $sha = $faker->sha1;
 
-        $commitApi = $this->getCommitApiMock();
+        $commitApi = $this->createCommitApiMock();
 
         $expectedItem = $this->commitItem();
 
@@ -67,7 +67,7 @@ final class CommitRepositoryTest extends Framework\TestCase
         $repository = $faker->slug();
         $sha = $faker->sha1;
 
-        $api = $this->getCommitApiMock();
+        $api = $this->createCommitApiMock();
 
         $api
             ->expects($this->once())
@@ -98,7 +98,7 @@ final class CommitRepositoryTest extends Framework\TestCase
         $repository = $faker->slug();
         $sha = $faker->sha1;
 
-        $commitApi = $this->getCommitApiMock();
+        $commitApi = $this->createCommitApiMock();
 
         $commitApi
             ->expects($this->once())
@@ -132,7 +132,7 @@ final class CommitRepositoryTest extends Framework\TestCase
         $repository = $faker->slug();
         $sha = $faker->sha1;
 
-        $commitApi = $this->getCommitApiMock();
+        $commitApi = $this->createCommitApiMock();
 
         $expectedItems = $this->commitItems(15);
 
@@ -166,7 +166,7 @@ final class CommitRepositoryTest extends Framework\TestCase
         $sha = $faker->sha1;
         $perPage = $faker->randomNumber();
 
-        $commitApi = $this->getCommitApiMock();
+        $commitApi = $this->createCommitApiMock();
 
         $expectedItems = $this->commitItems(15);
 
@@ -200,7 +200,7 @@ final class CommitRepositoryTest extends Framework\TestCase
         $repository = $faker->slug();
         $sha = $faker->sha1;
 
-        $commitApi = $this->getCommitApiMock();
+        $commitApi = $this->createCommitApiMock();
 
         $expectedItems = $this->commitItems(15);
 
@@ -247,7 +247,7 @@ final class CommitRepositoryTest extends Framework\TestCase
 
         $endReference = $startReference;
 
-        $commitApi = $this->getCommitApiMock();
+        $commitApi = $this->createCommitApiMock();
 
         $commitApi
             ->expects($this->never())
@@ -274,7 +274,7 @@ final class CommitRepositoryTest extends Framework\TestCase
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
-        $commitApi = $this->getCommitApiMock();
+        $commitApi = $this->createCommitApiMock();
 
         $commitApi
             ->expects($this->at(0))
@@ -311,7 +311,7 @@ final class CommitRepositoryTest extends Framework\TestCase
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
-        $commitApi = $this->getCommitApiMock();
+        $commitApi = $this->createCommitApiMock();
 
         $commitApi
             ->expects($this->at(0))
@@ -358,7 +358,7 @@ final class CommitRepositoryTest extends Framework\TestCase
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
-        $commitApi = $this->getCommitApiMock();
+        $commitApi = $this->createCommitApiMock();
 
         $startCommit = $this->commitItem();
 
@@ -411,7 +411,7 @@ final class CommitRepositoryTest extends Framework\TestCase
         $repository = $faker->slug();
         $startReference = $faker->sha1;
 
-        $commitApi = $this->getCommitApiMock();
+        $commitApi = $this->createCommitApiMock();
 
         $startCommit = $this->commitItem();
 
@@ -452,7 +452,7 @@ final class CommitRepositoryTest extends Framework\TestCase
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
-        $commitApi = $this->getCommitApiMock();
+        $commitApi = $this->createCommitApiMock();
 
         $startCommit = $this->commitItem();
         $startCommit->sha = $faker->sha1;
@@ -548,7 +548,7 @@ final class CommitRepositoryTest extends Framework\TestCase
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
-        $commitApi = $this->getCommitApiMock();
+        $commitApi = $this->createCommitApiMock();
 
         $startCommit = $this->commitItem();
         $startCommit->sha = $faker->sha1;
@@ -662,7 +662,7 @@ final class CommitRepositoryTest extends Framework\TestCase
     /**
      * @return Api\Repository\Commits|\PHPUnit_Framework_MockObject_MockObject
      */
-    private function getCommitApiMock()
+    private function createCommitApiMock()
     {
         return $this->createMock(Api\Repository\Commits::class);
     }
