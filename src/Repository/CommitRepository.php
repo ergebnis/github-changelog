@@ -39,7 +39,7 @@ class CommitRepository
     public function items($owner, $repository, $startReference, $endReference = null)
     {
         if ($startReference === $endReference) {
-            return [];
+            return new Resource\Range();
         }
 
         $start = $this->show(
@@ -49,7 +49,7 @@ class CommitRepository
         );
 
         if (null === $start) {
-            return [];
+            return new Resource\Range();
         }
 
         $params = [];
@@ -62,7 +62,7 @@ class CommitRepository
             );
 
             if (null === $end) {
-                return [];
+                return new Resource\Range();
             }
 
             $params = [

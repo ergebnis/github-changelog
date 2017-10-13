@@ -255,14 +255,16 @@ final class CommitRepositoryTest extends Framework\TestCase
 
         $commitRepository = new Repository\CommitRepository($commitApi);
 
-        $commits = $commitRepository->items(
+        $range = $commitRepository->items(
             $owner,
             $repository,
             $startReference,
             $endReference
         );
 
-        $this->assertSame([], $commits);
+        $this->assertInstanceOf(Resource\RangeInterface::class, $range);
+        $this->assertEmpty($range->commits());
+        $this->assertEmpty($range->pullRequests());
     }
 
     public function testItemsDoesNotFetchCommitsIfStartCommitCouldNotBeFound()
@@ -292,14 +294,16 @@ final class CommitRepositoryTest extends Framework\TestCase
 
         $commitRepository = new Repository\CommitRepository($commitApi);
 
-        $commits = $commitRepository->items(
+        $range = $commitRepository->items(
             $owner,
             $repository,
             $startReference,
             $endReference
         );
 
-        $this->assertSame([], $commits);
+        $this->assertInstanceOf(Resource\RangeInterface::class, $range);
+        $this->assertEmpty($range->commits());
+        $this->assertEmpty($range->pullRequests());
     }
 
     public function testItemsDoesNotFetchCommitsIfEndCommitCouldNotBeFound()
@@ -339,14 +343,16 @@ final class CommitRepositoryTest extends Framework\TestCase
 
         $commitRepository = new Repository\CommitRepository($commitApi);
 
-        $commits = $commitRepository->items(
+        $range = $commitRepository->items(
             $owner,
             $repository,
             $startReference,
             $endReference
         );
 
-        $this->assertSame([], $commits);
+        $this->assertInstanceOf(Resource\RangeInterface::class, $range);
+        $this->assertEmpty($range->commits());
+        $this->assertEmpty($range->pullRequests());
     }
 
     public function testItemsFetchesCommitsUsingShaFromEndCommit()
