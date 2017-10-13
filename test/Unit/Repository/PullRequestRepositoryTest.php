@@ -40,7 +40,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             ->with(
                 $this->equalTo($vendor),
                 $this->equalTo($package),
-                $this->equalTo($expectedItem->id)
+                $this->equalTo($expectedItem->number)
             )
             ->willReturn($this->response($expectedItem));
 
@@ -52,12 +52,12 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         $pullRequest = $pullRequestRepository->show(
             $vendor,
             $package,
-            $expectedItem->id
+            $expectedItem->number
         );
 
         $this->assertInstanceOf(Resource\PullRequestInterface::class, $pullRequest);
 
-        $this->assertSame($expectedItem->id, $pullRequest->id());
+        $this->assertSame($expectedItem->number, $pullRequest->number());
         $this->assertSame($expectedItem->title, $pullRequest->title());
     }
 
@@ -251,7 +251,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             $faker->unique()->sha1,
             \sprintf(
                 'Merge pull request #%s from localheinz/fix/directory',
-                $expectedItem->id
+                $expectedItem->number
             )
         );
 
@@ -291,7 +291,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             ->with(
                 $this->equalTo($vendor),
                 $this->equalTo($package),
-                $this->equalTo($expectedItem->id)
+                $this->equalTo($expectedItem->number)
             )
             ->willReturn($this->response($expectedItem));
 
@@ -413,7 +413,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
 
         $item = new \stdClass();
 
-        $item->id = $faker->unique()->randomNumber();
+        $item->number = $faker->unique()->randomNumber();
         $item->title = $faker->unique()->sentence();
 
         return $item;
@@ -434,7 +434,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
                 '%title%',
             ],
             [
-                $item->id,
+                $item->number,
                 $item->title,
             ],
             $template

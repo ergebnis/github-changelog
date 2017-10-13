@@ -20,7 +20,7 @@ final class PullRequest implements PullRequestInterface
     /**
      * @var string
      */
-    private $id;
+    private $number;
 
     /**
      * @var string
@@ -28,23 +28,23 @@ final class PullRequest implements PullRequestInterface
     private $title;
 
     /**
-     * @param string $id
+     * @param string $number
      * @param string $title
      *
      * @throws \InvalidArgumentException
      */
-    public function __construct($id, $title)
+    public function __construct($number, $title)
     {
-        Assert\that($id)->integerish()->greaterThan(0);
+        Assert\that($number)->integerish()->greaterThan(0);
         Assert\that($title)->string();
 
-        $this->id = $id;
+        $this->number = $number;
         $this->title = $title;
     }
 
-    public function id()
+    public function number()
     {
-        return $this->id;
+        return $this->number;
     }
 
     public function title()

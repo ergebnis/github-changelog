@@ -160,7 +160,7 @@ class GenerateCommand extends Command
                     ],
                     [
                         $pullRequest->title(),
-                        $pullRequest->id(),
+                        $pullRequest->number(),
                     ],
                     $template
                 );

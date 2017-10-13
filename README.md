@@ -140,7 +140,7 @@ array_walk($pullRequests, function (Resource\PullRequestInterface $pullRequest) 
     echo sprintf(
         '- %s (#%s)' . PHP_EOL,
         $pullRequest->title(),
-        $pullRequest->id()
+        $pullRequest->number()
     );
 });
 

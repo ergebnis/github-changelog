@@ -89,7 +89,7 @@ final class PullRequestTest extends Framework\TestCase
             $title
         );
 
-        $this->assertSame($id, $pullRequest->id());
+        $this->assertSame($id, $pullRequest->number());
         $this->assertSame($title, $pullRequest->title());
     }
 }
