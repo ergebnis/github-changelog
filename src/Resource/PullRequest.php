@@ -30,6 +30,8 @@ final class PullRequest implements PullRequestInterface
     /**
      * @param string $id
      * @param string $title
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct($id, $title)
     {

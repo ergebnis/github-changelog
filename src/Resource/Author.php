@@ -30,6 +30,8 @@ final class Author implements AuthorInterface
     /**
      * @param string $login
      * @param string $htmlUrl
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct($login, $htmlUrl)
     {

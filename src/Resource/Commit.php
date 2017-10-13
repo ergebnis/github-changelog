@@ -30,6 +30,8 @@ final class Commit implements CommitInterface
     /**
      * @param string $sha
      * @param string $message
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct($sha, $message)
     {
