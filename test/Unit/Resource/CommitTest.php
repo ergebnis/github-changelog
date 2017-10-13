@@ -96,22 +96,39 @@ final class CommitTest extends Framework\TestCase
         $this->assertSame($message, $commit->message());
     }
 
-    public function testEqualsReturnsTrueIfShasAreTheSame()
+    public function testEqualsReturnsFalseIfHashesAreDifferent()
+    {
+        $faker = $this->getFaker();
+
+        $one = new Resource\Commit(
+            $faker->unique()->sha1,
+            $faker->unique()->sentence()
+        );
+
+        $two = new Resource\Commit(
+            $faker->unique()->sha1,
+            $faker->unique()->sentence()
+        );
+
+        $this->assertFalse($one->equals($two));
+    }
+
+    public function testEqualsReturnsTrueIfHashesAreTheSame()
     {
         $faker = $this->getFaker();
 
         $sha = $faker->sha1;
 
-        $commitOne = new Resource\Commit(
+        $one = new Resource\Commit(
             $sha,
             $faker->unique()->sentence()
         );
 
-        $commitTwo = new Resource\Commit(
+        $two = new Resource\Commit(
             $sha,
             $faker->unique()->sentence()
         );
 
-        $this->assertTrue($commitTwo->equals($commitOne));
+        $this->assertTrue($one->equals($two));
     }
 }
