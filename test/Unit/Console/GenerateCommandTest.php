@@ -329,7 +329,7 @@ final class GenerateCommandTest extends Framework\TestCase
                 ],
                 [
                     $pullRequest->title(),
-                    $pullRequest->id(),
+                    $pullRequest->number(),
                 ],
                 $template
             );

@@ -18,7 +18,7 @@ interface PullRequestInterface
     /**
      * @return string
      */
-    public function id();
+    public function number();
 
     /**
      * @return string
