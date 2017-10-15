@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Localheinz\GitHub\ChangeLog\Test\Unit\Repository;
 
 use Github\Api;
+use Localheinz\GitHub\ChangeLog\Exception\CommitNotFound;
 use Localheinz\GitHub\ChangeLog\Repository;
 use Localheinz\GitHub\ChangeLog\Resource;
 use PHPUnit\Framework;
@@ -59,7 +60,7 @@ final class CommitRepositoryTest extends Framework\TestCase
         $this->assertSame($expectedItem->message, $commit->message());
     }
 
-    public function testShowReturnsNullOnFailure()
+    public function testShowThrowsCommitNotFoundOnFailure()
     {
         $faker = $this->getFaker();
 
@@ -81,13 +82,13 @@ final class CommitRepositoryTest extends Framework\TestCase
 
         $commitRepository = new Repository\CommitRepository($api);
 
-        $commit = $commitRepository->show(
+        $this->expectException(CommitNotFound::class);
+
+        $commitRepository->show(
             $owner,
             $repository,
             $sha
         );
-
-        $this->assertNull($commit);
     }
 
     public function testAllReturnsEmptyArrayOnFailure()

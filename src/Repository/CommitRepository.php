@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Localheinz\GitHub\ChangeLog\Repository;
 
 use Github\Api;
+use Localheinz\GitHub\ChangeLog\Exception;
 use Localheinz\GitHub\ChangeLog\Resource;
 
 class CommitRepository
@@ -42,26 +43,26 @@ class CommitRepository
             return new Resource\Range();
         }
 
-        $start = $this->show(
-            $owner,
-            $repository,
-            $startReference
-        );
-
-        if (null === $start) {
+        try {
+            $start = $this->show(
+                $owner,
+                $repository,
+                $startReference
+            );
+        } catch (Exception\CommitNotFound $exception) {
             return new Resource\Range();
         }
 
         $params = [];
 
         if (null !== $endReference) {
-            $end = $this->show(
-                $owner,
-                $repository,
-                $endReference
-            );
-
-            if (null === $end) {
+            try {
+                $end = $this->show(
+                    $owner,
+                    $repository,
+                    $endReference
+                );
+            } catch (Exception\CommitNotFound $exception) {
                 return new Resource\Range();
             }
 
@@ -108,7 +109,9 @@ class CommitRepository
      * @param string $repository
      * @param string $sha
      *
-     * @return null|Resource\CommitInterface
+     * @throws Exception\CommitNotFound
+     *
+     * @return Resource\CommitInterface
      */
     public function show($owner, $repository, $sha)
     {
@@ -119,7 +122,11 @@ class CommitRepository
         );
 
         if (!\is_array($response)) {
-            return;
+            throw Exception\CommitNotFound::fromOwnerRepositoryAndReference(
+                $owner,
+                $repository,
+                $sha
+            );
         }
 
         return new Resource\Commit(
