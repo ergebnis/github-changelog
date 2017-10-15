@@ -27,8 +27,8 @@ final class PullRequestRepositoryTest extends Framework\TestCase
     {
         $faker = $this->getFaker();
 
-        $vendor = $faker->userName;
-        $package = $faker->slug();
+        $owner = $faker->userName;
+        $name = $faker->slug();
 
         $api = $this->createPullRequestApiMock();
 
@@ -38,8 +38,8 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             ->expects($this->once())
             ->method('show')
             ->with(
-                $this->equalTo($vendor),
-                $this->equalTo($package),
+                $this->equalTo($owner),
+                $this->equalTo($name),
                 $this->equalTo($expectedItem->number)
             )
             ->willReturn($this->response($expectedItem));
@@ -50,8 +50,8 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         );
 
         $pullRequest = $pullRequestRepository->show(
-            $vendor,
-            $package,
+            $owner,
+            $name,
             $expectedItem->number
         );
 
@@ -65,9 +65,9 @@ final class PullRequestRepositoryTest extends Framework\TestCase
     {
         $faker = $this->getFaker();
 
-        $vendor = $faker->userName;
-        $package = $faker->slug();
-        $id = $faker->randomNumber();
+        $owner = $faker->userName;
+        $name = $faker->slug();
+        $number = $faker->randomNumber();
 
         $api = $this->createPullRequestApiMock();
 
@@ -75,9 +75,9 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             ->expects($this->once())
             ->method('show')
             ->with(
-                $this->equalTo($vendor),
-                $this->equalTo($package),
-                $this->equalTo($id)
+                $this->equalTo($owner),
+                $this->equalTo($name),
+                $this->equalTo($number)
             )
             ->willReturn('snafu');
 
@@ -87,9 +87,9 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         );
 
         $pullRequest = $pullRequestRepository->show(
-            $vendor,
-            $package,
-            $id
+            $owner,
+            $name,
+            $number
         );
 
         $this->assertNull($pullRequest);
@@ -99,8 +99,8 @@ final class PullRequestRepositoryTest extends Framework\TestCase
     {
         $faker = $this->getFaker();
 
-        $vendor = $faker->userName;
-        $package = $faker->slug();
+        $owner = $faker->userName;
+        $name = $faker->slug();
         $startReference = $faker->sha1;
 
         $commitRepository = $this->createCommitRepositoryMock();
@@ -116,8 +116,8 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             ->expects($this->once())
             ->method('items')
             ->with(
-                $this->equalTo($vendor),
-                $this->equalTo($package),
+                $this->equalTo($owner),
+                $this->equalTo($name),
                 $this->equalTo($startReference),
                 $this->equalTo(null)
             )
@@ -129,8 +129,8 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         );
 
         $repository->items(
-            $vendor,
-            $package,
+            $owner,
+            $name,
             $startReference
         );
     }
@@ -139,8 +139,8 @@ final class PullRequestRepositoryTest extends Framework\TestCase
     {
         $faker = $this->getFaker();
 
-        $vendor = $faker->userName;
-        $package = $faker->slug();
+        $owner = $faker->userName;
+        $name = $faker->slug();
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
@@ -161,8 +161,8 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             ->expects($this->once())
             ->method('items')
             ->with(
-                $this->equalTo($vendor),
-                $this->equalTo($package),
+                $this->equalTo($owner),
+                $this->equalTo($name),
                 $this->equalTo($startReference),
                 $this->equalTo($endReference)
             )
@@ -174,8 +174,8 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         );
 
         $repository->items(
-            $vendor,
-            $package,
+            $owner,
+            $name,
             $startReference,
             $endReference
         );
@@ -185,8 +185,8 @@ final class PullRequestRepositoryTest extends Framework\TestCase
     {
         $faker = $this->getFaker();
 
-        $vendor = $faker->userName;
-        $package = $faker->slug();
+        $owner = $faker->userName;
+        $name = $faker->slug();
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
@@ -214,8 +214,8 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             ->expects($this->once())
             ->method('items')
             ->with(
-                $this->equalTo($vendor),
-                $this->equalTo($package),
+                $this->equalTo($owner),
+                $this->equalTo($name),
                 $this->equalTo($startReference),
                 $this->equalTo($endReference)
             )
@@ -227,8 +227,8 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         );
 
         $repository->items(
-            $vendor,
-            $package,
+            $owner,
+            $name,
             $startReference,
             $endReference
         );
@@ -238,8 +238,8 @@ final class PullRequestRepositoryTest extends Framework\TestCase
     {
         $faker = $this->getFaker();
 
-        $vendor = $faker->userName;
-        $package = $faker->slug();
+        $owner = $faker->userName;
+        $name = $faker->slug();
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
@@ -276,8 +276,8 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             ->expects($this->once())
             ->method('items')
             ->with(
-                $this->equalTo($vendor),
-                $this->equalTo($package),
+                $this->equalTo($owner),
+                $this->equalTo($name),
                 $this->equalTo($startReference),
                 $this->equalTo($endReference)
             )
@@ -289,8 +289,8 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             ->expects($this->once())
             ->method('show')
             ->with(
-                $this->equalTo($vendor),
-                $this->equalTo($package),
+                $this->equalTo($owner),
+                $this->equalTo($name),
                 $this->equalTo($expectedItem->number)
             )
             ->willReturn($this->response($expectedItem));
@@ -301,8 +301,8 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         );
 
         $actualRange = $repository->items(
-            $vendor,
-            $package,
+            $owner,
+            $name,
             $startReference,
             $endReference
         );
@@ -315,19 +315,19 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         $faker = $this->getFaker();
 
         $owner = $faker->userName;
-        $repository = $faker->slug();
+        $name = $faker->slug();
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
         $commitRepository = $this->createCommitRepositoryMock();
 
-        $id = 9000;
+        $number = 9000;
 
         $mergeCommit = new Resource\Commit(
             $faker->sha1,
             \sprintf(
                 'Merge pull request #%s from localheinz/fix/directory',
-                $id
+                $number
             )
         );
 
@@ -349,7 +349,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             ->method('items')
             ->with(
                 $this->equalTo($owner),
-                $this->equalTo($repository),
+                $this->equalTo($name),
                 $this->equalTo($startReference),
                 $this->equalTo($endReference)
             )
@@ -362,8 +362,8 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             ->method('show')
             ->with(
                 $this->equalTo($owner),
-                $this->equalTo($repository),
-                $this->equalTo($id)
+                $this->equalTo($name),
+                $this->equalTo($number)
             )
             ->willReturn(null);
 
@@ -374,7 +374,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
 
         $pullRequestRepository->items(
             $owner,
-            $repository,
+            $name,
             $startReference,
             $endReference
         );
@@ -430,7 +430,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
 
         $body = \str_replace(
             [
-                '%id%',
+                '%number%',
                 '%title%',
             ],
             [

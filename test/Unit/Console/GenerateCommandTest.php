@@ -141,7 +141,7 @@ final class GenerateCommandTest extends Framework\TestCase
                 't',
                 false,
                 'The template to use for rendering a pull request',
-                '- %title% (#%id%)',
+                '- %title% (#%number%)',
             ],
         ];
 
@@ -197,7 +197,7 @@ final class GenerateCommandTest extends Framework\TestCase
         $faker = $this->getFaker();
 
         $owner = $faker->unique()->userName;
-        $repository = $faker->unique()->slug();
+        $name = $faker->unique()->slug();
         $startReference = $faker->unique()->sha1;
         $endReference = $faker->unique()->sha1;
 
@@ -208,7 +208,7 @@ final class GenerateCommandTest extends Framework\TestCase
             ->method('items')
             ->with(
                 $this->equalTo($owner),
-                $this->equalTo($repository),
+                $this->equalTo($name),
                 $this->equalTo($startReference),
                 $this->equalTo($endReference)
             )
@@ -223,7 +223,7 @@ final class GenerateCommandTest extends Framework\TestCase
 
         $tester->execute([
             'owner' => $owner,
-            'repository' => $repository,
+            'repository' => $name,
             'start-reference' => $startReference,
             'end-reference' => $endReference,
         ]);
@@ -234,7 +234,7 @@ final class GenerateCommandTest extends Framework\TestCase
         $faker = $this->getFaker();
 
         $owner = $faker->userName;
-        $repository = $faker->slug();
+        $name = $faker->slug();
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
@@ -256,7 +256,7 @@ final class GenerateCommandTest extends Framework\TestCase
 
         $exitCode = $tester->execute([
             'owner' => $owner,
-            'repository' => $repository,
+            'repository' => $name,
             'start-reference' => $startReference,
             'end-reference' => $endReference,
         ]);
@@ -270,7 +270,7 @@ final class GenerateCommandTest extends Framework\TestCase
         $faker = $this->getFaker();
 
         $owner = $faker->userName;
-        $repository = $faker->slug();
+        $name = $faker->slug();
         $startReference = $faker->sha1;
 
         $expectedMessage = 'Could not find any pull requests';
@@ -291,7 +291,7 @@ final class GenerateCommandTest extends Framework\TestCase
 
         $exitCode = $tester->execute([
             'owner' => $owner,
-            'repository' => $repository,
+            'repository' => $name,
             'start-reference' => $startReference,
             'end-reference' => null,
         ]);
@@ -305,14 +305,14 @@ final class GenerateCommandTest extends Framework\TestCase
         $faker = $this->getFaker();
 
         $owner = $faker->userName;
-        $repository = $faker->slug();
+        $name = $faker->slug();
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
         $count = $faker->numberBetween(1, 5);
 
         $pullRequests = $this->pullRequests($count);
 
-        $template = '- %title% (#%id%)';
+        $template = '- %title% (#%number%)';
 
         $expectedMessages = [
             \sprintf(
@@ -325,7 +325,7 @@ final class GenerateCommandTest extends Framework\TestCase
             $expectedMessages[] = \str_replace(
                 [
                     '%title%',
-                    '%id%',
+                    '%number%',
                 ],
                 [
                     $pullRequest->title(),
@@ -351,7 +351,7 @@ final class GenerateCommandTest extends Framework\TestCase
 
         $exitCode = $tester->execute([
             'owner' => $owner,
-            'repository' => $repository,
+            'repository' => $name,
             'start-reference' => $startReference,
             'end-reference' => $endReference,
             '--template' => $template,
@@ -369,7 +369,7 @@ final class GenerateCommandTest extends Framework\TestCase
         $faker = $this->getFaker();
 
         $owner = $faker->userName;
-        $repository = $faker->slug();
+        $name = $faker->slug();
         $startReference = $faker->sha1;
         $count = $faker->numberBetween(1, 5);
 
@@ -396,7 +396,7 @@ final class GenerateCommandTest extends Framework\TestCase
 
         $exitCode = $tester->execute([
             'owner' => $owner,
-            'repository' => $repository,
+            'repository' => $name,
             'start-reference' => $startReference,
             'end-reference' => null,
         ]);
@@ -481,11 +481,11 @@ final class GenerateCommandTest extends Framework\TestCase
     {
         $faker = $this->getFaker();
 
-        $id = $faker->unique()->numberBetween(1);
+        $number = $faker->unique()->numberBetween(1);
         $title = $faker->unique()->sentence();
 
         return new Resource\PullRequest(
-            $id,
+            $number,
             $title
         );
     }

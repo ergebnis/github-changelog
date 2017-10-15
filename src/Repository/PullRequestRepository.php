@@ -36,17 +36,17 @@ class PullRequestRepository
 
     /**
      * @param string $owner
-     * @param string $repository
-     * @param string $id
+     * @param string $name
+     * @param string $number
      *
      * @return null|Resource\PullRequestInterface
      */
-    public function show($owner, $repository, $id)
+    public function show($owner, $name, $number)
     {
         $response = $this->api->show(
             $owner,
-            $repository,
-            $id
+            $name,
+            $number
         );
 
         if (!\is_array($response)) {
@@ -61,34 +61,34 @@ class PullRequestRepository
 
     /**
      * @param string      $owner
-     * @param string      $repository
+     * @param string      $name
      * @param string      $startReference
      * @param null|string $endReference
      *
      * @return Resource\Range
      */
-    public function items($owner, $repository, $startReference, $endReference = null)
+    public function items($owner, $name, $startReference, $endReference = null)
     {
         $range = $this->commitRepository->items(
             $owner,
-            $repository,
+            $name,
             $startReference,
             $endReference
         );
 
         $commits = $range->commits();
 
-        \array_walk($commits, function (Resource\CommitInterface $commit) use (&$range, $owner, $repository) {
-            if (0 === \preg_match('/^Merge pull request #(?P<id>\d+)/', $commit->message(), $matches)) {
+        \array_walk($commits, function (Resource\CommitInterface $commit) use (&$range, $owner, $name) {
+            if (0 === \preg_match('/^Merge pull request #(?P<number>\d+)/', $commit->message(), $matches)) {
                 return;
             }
 
-            $id = $matches['id'];
+            $number = $matches['number'];
 
             $pullRequest = $this->show(
                 $owner,
-                $repository,
-                $id
+                $name,
+                $number
             );
 
             if (null === $pullRequest) {

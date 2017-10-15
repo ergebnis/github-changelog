@@ -86,7 +86,7 @@ class GenerateCommand extends Command
                 't',
                 Input\InputOption::VALUE_OPTIONAL,
                 'The template to use for rendering a pull request',
-                '- %title% (#%id%)'
+                '- %title% (#%number%)'
             );
     }
 
@@ -111,7 +111,7 @@ class GenerateCommand extends Command
         }
 
         $owner = $input->getArgument('owner');
-        $repository = $input->getArgument('repository');
+        $name = $input->getArgument('repository');
         $startReference = $input->getArgument('start-reference');
         $endReference = $input->getArgument('end-reference');
 
@@ -123,14 +123,14 @@ class GenerateCommand extends Command
         $io->section(\sprintf(
             'Pull Requests for %s/%s %s',
             $owner,
-            $repository,
+            $name,
             $range
         ));
 
         try {
             $range = $this->pullRequestRepository->items(
                 $owner,
-                $repository,
+                $name,
                 $startReference,
                 $endReference
             );
@@ -156,7 +156,7 @@ class GenerateCommand extends Command
                 $message = \str_replace(
                     [
                         '%title%',
-                        '%id%',
+                        '%number%',
                     ],
                     [
                         $pullRequest->title(),

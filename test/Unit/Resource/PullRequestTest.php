@@ -33,23 +33,23 @@ final class PullRequestTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider providerInvalidId
+     * @dataProvider providerInvalidNumber
      *
-     * @param mixed $id
+     * @param mixed $number
      */
-    public function testConstructorRejectsInvalidId($id)
+    public function testConstructorRejectsInvalidNumber($number)
     {
         $this->expectException(\InvalidArgumentException::class);
 
         $title = $this->getFaker()->sentence();
 
         new Resource\PullRequest(
-            $id,
+            $number,
             $title
         );
     }
 
-    public function providerInvalidId(): \Generator
+    public function providerInvalidNumber(): \Generator
     {
         return $this->provideDataFrom(
             new DataProvider\InvalidIntegerish(),
@@ -81,15 +81,15 @@ final class PullRequestTest extends Framework\TestCase
     {
         $faker = $this->getFaker();
 
-        $id = $faker->numberBetween(1);
+        $number = $faker->numberBetween(1);
         $title = $faker->sentence();
 
         $pullRequest = new Resource\PullRequest(
-            $id,
+            $number,
             $title
         );
 
-        $this->assertSame($id, $pullRequest->number());
+        $this->assertSame($number, $pullRequest->number());
         $this->assertSame($title, $pullRequest->title());
     }
 }

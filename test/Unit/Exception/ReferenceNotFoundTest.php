@@ -42,15 +42,12 @@ final class ReferenceNotFoundTest extends Framework\TestCase
         $faker = $this->getFaker();
 
         $owner = $faker->userName;
-        $repository = \implode(
-            '-',
-            $faker->words()
-        );
+        $name = $faker->slug();
         $reference = $faker->sha1;
 
-        $exception = ReferenceNotFound::fromOwnerRepositoryAndReference(
+        $exception = ReferenceNotFound::fromOwnerNameAndReference(
             $owner,
-            $repository,
+            $name,
             $reference
         );
 
@@ -60,7 +57,7 @@ final class ReferenceNotFoundTest extends Framework\TestCase
             'Could not find reference "%s" in "%s/%s".',
             $reference,
             $owner,
-            $repository
+            $name
         );
 
         $this->assertSame($message, $exception->getMessage());
