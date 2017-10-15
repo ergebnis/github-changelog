@@ -49,7 +49,7 @@ class CommitRepository
                 $repository,
                 $startReference
             );
-        } catch (Exception\CommitNotFound $exception) {
+        } catch (Exception\ReferenceNotFound $exception) {
             return new Resource\Range();
         }
 
@@ -62,7 +62,7 @@ class CommitRepository
                     $repository,
                     $endReference
                 );
-            } catch (Exception\CommitNotFound $exception) {
+            } catch (Exception\ReferenceNotFound $exception) {
                 return new Resource\Range();
             }
 
@@ -109,7 +109,7 @@ class CommitRepository
      * @param string $repository
      * @param string $sha
      *
-     * @throws Exception\CommitNotFound
+     * @throws Exception\ReferenceNotFound
      *
      * @return Resource\CommitInterface
      */
@@ -122,7 +122,7 @@ class CommitRepository
         );
 
         if (!\is_array($response)) {
-            throw Exception\CommitNotFound::fromOwnerRepositoryAndReference(
+            throw Exception\ReferenceNotFound::fromOwnerRepositoryAndReference(
                 $owner,
                 $repository,
                 $sha

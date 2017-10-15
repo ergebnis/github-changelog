@@ -13,31 +13,31 @@ declare(strict_types=1);
 
 namespace Localheinz\GitHub\ChangeLog\Test\Unit\Exception;
 
-use Localheinz\GitHub\ChangeLog\Exception\CommitNotFound;
 use Localheinz\GitHub\ChangeLog\Exception\ExceptionInterface;
+use Localheinz\GitHub\ChangeLog\Exception\ReferenceNotFound;
 use PHPUnit\Framework;
 use Refinery29\Test\Util\TestHelper;
 
-final class CommitNotFoundTest extends Framework\TestCase
+final class ReferenceNotFoundTest extends Framework\TestCase
 {
     use TestHelper;
 
     public function testIsFinal()
     {
-        $this->assertFinal(CommitNotFound::class);
+        $this->assertFinal(ReferenceNotFound::class);
     }
 
     public function testExtendsRuntimeException()
     {
-        $this->assertExtends(\RuntimeException::class, CommitNotFound::class);
+        $this->assertExtends(\RuntimeException::class, ReferenceNotFound::class);
     }
 
     public function testImplementsExceptionInterface()
     {
-        $this->assertImplements(ExceptionInterface::class, CommitNotFound::class);
+        $this->assertImplements(ExceptionInterface::class, ReferenceNotFound::class);
     }
 
-    public function testFromOwnerRepositoryAndShaCreatesException()
+    public function testFromOwnerRepositoryAndReferenceCreatesException()
     {
         $faker = $this->getFaker();
 
@@ -46,19 +46,19 @@ final class CommitNotFoundTest extends Framework\TestCase
             '-',
             $faker->words()
         );
-        $sha = $faker->sha1;
+        $reference = $faker->sha1;
 
-        $exception = CommitNotFound::fromOwnerRepositoryAndReference(
+        $exception = ReferenceNotFound::fromOwnerRepositoryAndReference(
             $owner,
             $repository,
-            $sha
+            $reference
         );
 
-        $this->assertInstanceOf(CommitNotFound::class, $exception);
+        $this->assertInstanceOf(ReferenceNotFound::class, $exception);
 
         $message = \sprintf(
-            'Could not find commit "%s" in "%s/%s".',
-            $sha,
+            'Could not find reference "%s" in "%s/%s".',
+            $reference,
             $owner,
             $repository
         );

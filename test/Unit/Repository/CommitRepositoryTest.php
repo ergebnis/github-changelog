@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Localheinz\GitHub\ChangeLog\Test\Unit\Repository;
 
 use Github\Api;
-use Localheinz\GitHub\ChangeLog\Exception\CommitNotFound;
+use Localheinz\GitHub\ChangeLog\Exception\ReferenceNotFound;
 use Localheinz\GitHub\ChangeLog\Repository;
 use Localheinz\GitHub\ChangeLog\Resource;
 use PHPUnit\Framework;
@@ -82,7 +82,7 @@ final class CommitRepositoryTest extends Framework\TestCase
 
         $commitRepository = new Repository\CommitRepository($api);
 
-        $this->expectException(CommitNotFound::class);
+        $this->expectException(ReferenceNotFound::class);
 
         $commitRepository->show(
             $owner,
