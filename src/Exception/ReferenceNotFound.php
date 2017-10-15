@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace Localheinz\GitHub\ChangeLog\Exception;
 
-final class CommitNotFound extends \RuntimeException implements ExceptionInterface
+final class ReferenceNotFound extends \RuntimeException implements ExceptionInterface
 {
-    public static function fromOwnerRepositoryAndReference(string $owner, string $repository, string $sha): self
+    public static function fromOwnerRepositoryAndReference(string $owner, string $repository, string $reference): self
     {
         return new self(\sprintf(
-            'Could not find commit "%s" in "%s/%s".',
-            $sha,
+            'Could not find reference "%s" in "%s/%s".',
+            $reference,
             $owner,
             $repository
         ));
