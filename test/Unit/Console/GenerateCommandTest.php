@@ -500,7 +500,7 @@ final class GenerateCommandTest extends Framework\TestCase
         $pullRequests = [];
 
         for ($i = 0; $i < $count; ++$i) {
-            \array_push($pullRequests, $this->pullRequest());
+            $pullRequests[] = $this->pullRequest();
         }
 
         return $pullRequests;
