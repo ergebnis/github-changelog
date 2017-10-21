@@ -37,22 +37,18 @@ final class Range implements RangeInterface
 
     public function withCommit(CommitInterface $commit)
     {
-        $commits = $this->commits;
-        $commits[] = $commit;
-
         $instance = clone $this;
-        $instance->commits = $commits;
+
+        $instance->commits[] = $commit;
 
         return $instance;
     }
 
     public function withPullRequest(PullRequestInterface $pullRequest)
     {
-        $pullRequests = $this->pullRequests();
-        $pullRequests[] = $pullRequest;
-
         $instance = clone $this;
-        $instance->pullRequests = $pullRequests;
+
+        $instance->pullRequests[] = $pullRequest;
 
         return $instance;
     }
