@@ -17,7 +17,7 @@ use Github\Api;
 use Localheinz\GitHub\ChangeLog\Exception;
 use Localheinz\GitHub\ChangeLog\Resource;
 
-class CommitRepository
+final class CommitRepository implements CommitRepositoryInterface
 {
     /**
      * @var Api\Repository\Commits
@@ -29,14 +29,6 @@ class CommitRepository
         $this->api = $api;
     }
 
-    /**
-     * @param string      $owner
-     * @param string      $name
-     * @param string      $startReference
-     * @param null|string $endReference
-     *
-     * @return Resource\Range
-     */
     public function items($owner, $name, $startReference, $endReference = null)
     {
         if ($startReference === $endReference) {
@@ -104,15 +96,6 @@ class CommitRepository
         return $range;
     }
 
-    /**
-     * @param string $owner
-     * @param string $name
-     * @param string $sha
-     *
-     * @throws Exception\ReferenceNotFound
-     *
-     * @return Resource\CommitInterface
-     */
     public function show($owner, $name, $sha)
     {
         $response = $this->api->show(
@@ -135,13 +118,6 @@ class CommitRepository
         );
     }
 
-    /**
-     * @param string $owner
-     * @param string $name
-     * @param array  $params
-     *
-     * @return Resource\Range
-     */
     public function all($owner, $name, array $params = [])
     {
         $range = new Resource\Range();

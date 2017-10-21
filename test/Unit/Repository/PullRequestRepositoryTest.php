@@ -23,6 +23,16 @@ final class PullRequestRepositoryTest extends Framework\TestCase
 {
     use TestHelper;
 
+    public function testIsFinal()
+    {
+        $this->assertFinal(Repository\PullRequestRepository::class);
+    }
+
+    public function testImplementsPullRequestRepositoryInterface()
+    {
+        $this->assertImplements(Repository\PullRequestRepositoryInterface::class, Repository\PullRequestRepository::class);
+    }
+
     public function testShowReturnsPullRequestEntityWithIdAndTitleOnSuccess()
     {
         $faker = $this->getFaker();
@@ -389,11 +399,11 @@ final class PullRequestRepositoryTest extends Framework\TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|Repository\CommitRepository
+     * @return \PHPUnit_Framework_MockObject_MockObject|Repository\CommitRepositoryInterface
      */
     private function createCommitRepositoryMock()
     {
-        return $this->createMock(Repository\CommitRepository::class);
+        return $this->createMock(Repository\CommitRepositoryInterface::class);
     }
 
     /**

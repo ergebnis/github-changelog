@@ -24,6 +24,16 @@ final class CommitRepositoryTest extends Framework\TestCase
 {
     use TestHelper;
 
+    public function testIsFinal()
+    {
+        $this->assertFinal(Repository\CommitRepository::class);
+    }
+
+    public function testImplementsCommitRepositoryInterface()
+    {
+        $this->assertImplements(Repository\CommitRepositoryInterface::class, Repository\CommitRepository::class);
+    }
+
     public function testShowReturnsCommitEntityWithShaAndMessageOnSuccess()
     {
         $faker = $this->getFaker();
