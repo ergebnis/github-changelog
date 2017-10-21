@@ -31,13 +31,13 @@ class CommitRepository
 
     /**
      * @param string      $owner
-     * @param string      $repository
+     * @param string      $name
      * @param string      $startReference
      * @param null|string $endReference
      *
      * @return Resource\Range
      */
-    public function items($owner, $repository, $startReference, $endReference = null)
+    public function items($owner, $name, $startReference, $endReference = null)
     {
         if ($startReference === $endReference) {
             return new Resource\Range();
@@ -46,7 +46,7 @@ class CommitRepository
         try {
             $start = $this->show(
                 $owner,
-                $repository,
+                $name,
                 $startReference
             );
         } catch (Exception\ReferenceNotFound $exception) {
@@ -59,7 +59,7 @@ class CommitRepository
             try {
                 $end = $this->show(
                     $owner,
-                    $repository,
+                    $name,
                     $endReference
                 );
             } catch (Exception\ReferenceNotFound $exception) {
@@ -71,7 +71,7 @@ class CommitRepository
             ];
         }
 
-        $commits = $this->all($owner, $repository, $params)->commits();
+        $commits = $this->all($owner, $name, $params)->commits();
 
         $range = new Resource\Range();
 
@@ -97,7 +97,7 @@ class CommitRepository
                     'sha' => $tail->sha(),
                 ];
 
-                $commits = $this->all($owner, $repository, $params)->commits();
+                $commits = $this->all($owner, $name, $params)->commits();
             }
         }
 
@@ -106,25 +106,25 @@ class CommitRepository
 
     /**
      * @param string $owner
-     * @param string $repository
+     * @param string $name
      * @param string $sha
      *
      * @throws Exception\ReferenceNotFound
      *
      * @return Resource\CommitInterface
      */
-    public function show($owner, $repository, $sha)
+    public function show($owner, $name, $sha)
     {
         $response = $this->api->show(
             $owner,
-            $repository,
+            $name,
             $sha
         );
 
         if (!\is_array($response)) {
-            throw Exception\ReferenceNotFound::fromOwnerRepositoryAndReference(
+            throw Exception\ReferenceNotFound::fromOwnerNameAndReference(
                 $owner,
-                $repository,
+                $name,
                 $sha
             );
         }
@@ -137,12 +137,12 @@ class CommitRepository
 
     /**
      * @param string $owner
-     * @param string $repository
+     * @param string $name
      * @param array  $params
      *
      * @return Resource\Range
      */
-    public function all($owner, $repository, array $params = [])
+    public function all($owner, $name, array $params = [])
     {
         $range = new Resource\Range();
 
@@ -152,7 +152,7 @@ class CommitRepository
 
         $response = $this->api->all(
             $owner,
-            $repository,
+            $name,
             $params
         );
 

@@ -29,7 +29,7 @@ final class CommitRepositoryTest extends Framework\TestCase
         $faker = $this->getFaker();
 
         $owner = $faker->userName;
-        $repository = $faker->slug();
+        $name = $faker->slug();
         $sha = $faker->sha1;
 
         $commitApi = $this->createCommitApiMock();
@@ -41,7 +41,7 @@ final class CommitRepositoryTest extends Framework\TestCase
             ->method('show')
             ->with(
                 $this->equalTo($owner),
-                $this->equalTo($repository),
+                $this->equalTo($name),
                 $this->equalTo($sha)
             )
             ->willReturn($this->response($expectedItem));
@@ -50,7 +50,7 @@ final class CommitRepositoryTest extends Framework\TestCase
 
         $commit = $commitRepository->show(
             $owner,
-            $repository,
+            $name,
             $sha
         );
 
@@ -65,7 +65,7 @@ final class CommitRepositoryTest extends Framework\TestCase
         $faker = $this->getFaker();
 
         $owner = $faker->userName;
-        $repository = $faker->slug();
+        $name = $faker->slug();
         $sha = $faker->sha1;
 
         $api = $this->createCommitApiMock();
@@ -75,7 +75,7 @@ final class CommitRepositoryTest extends Framework\TestCase
             ->method('show')
             ->with(
                 $this->equalTo($owner),
-                $this->equalTo($repository),
+                $this->equalTo($name),
                 $this->equalTo($sha)
             )
             ->willReturn('failure');
@@ -86,7 +86,7 @@ final class CommitRepositoryTest extends Framework\TestCase
 
         $commitRepository->show(
             $owner,
-            $repository,
+            $name,
             $sha
         );
     }
@@ -96,7 +96,7 @@ final class CommitRepositoryTest extends Framework\TestCase
         $faker = $this->getFaker();
 
         $owner = $faker->userName;
-        $repository = $faker->slug();
+        $name = $faker->slug();
         $sha = $faker->sha1;
 
         $commitApi = $this->createCommitApiMock();
@@ -106,7 +106,7 @@ final class CommitRepositoryTest extends Framework\TestCase
             ->method('all')
             ->with(
                 $this->equalTo($owner),
-                $this->equalTo($repository),
+                $this->equalTo($name),
                 $this->arrayHasKeyAndValue('sha', $sha)
             )
             ->willReturn('snafu');
@@ -115,7 +115,7 @@ final class CommitRepositoryTest extends Framework\TestCase
 
         $range = $commitRepository->all(
             $owner,
-            $repository,
+            $name,
             [
                 'sha' => $sha,
             ]
@@ -130,7 +130,7 @@ final class CommitRepositoryTest extends Framework\TestCase
         $faker = $this->getFaker();
 
         $owner = $faker->userName;
-        $repository = $faker->slug();
+        $name = $faker->slug();
         $sha = $faker->sha1;
 
         $commitApi = $this->createCommitApiMock();
@@ -142,7 +142,7 @@ final class CommitRepositoryTest extends Framework\TestCase
             ->method('all')
             ->with(
                 $this->equalTo($owner),
-                $this->equalTo($repository),
+                $this->equalTo($name),
                 $this->arrayHasKeyAndValue('per_page', 250)
             )
             ->willReturn($this->responseFromItems($expectedItems));
@@ -151,7 +151,7 @@ final class CommitRepositoryTest extends Framework\TestCase
 
         $commitRepository->all(
             $owner,
-            $repository,
+            $name,
             [
                 'sha' => $sha,
             ]
@@ -163,7 +163,7 @@ final class CommitRepositoryTest extends Framework\TestCase
         $faker = $this->getFaker();
 
         $owner = $faker->userName;
-        $repository = $faker->slug();
+        $name = $faker->slug();
         $sha = $faker->sha1;
         $perPage = $faker->randomNumber();
 
@@ -176,7 +176,7 @@ final class CommitRepositoryTest extends Framework\TestCase
             ->method('all')
             ->with(
                 $this->equalTo($owner),
-                $this->equalTo($repository),
+                $this->equalTo($name),
                 $this->arrayHasKeyAndValue('per_page', $perPage)
             )
             ->willReturn($this->responseFromItems($expectedItems));
@@ -185,7 +185,7 @@ final class CommitRepositoryTest extends Framework\TestCase
 
         $commitRepository->all(
             $owner,
-            $repository,
+            $name,
             [
                 'sha' => $sha,
                 'per_page' => $perPage,
@@ -198,7 +198,7 @@ final class CommitRepositoryTest extends Framework\TestCase
         $faker = $this->getFaker();
 
         $owner = $faker->userName;
-        $repository = $faker->slug();
+        $name = $faker->slug();
         $sha = $faker->sha1;
 
         $commitApi = $this->createCommitApiMock();
@@ -210,14 +210,14 @@ final class CommitRepositoryTest extends Framework\TestCase
             ->method('all')
             ->with(
                 $this->equalTo($owner),
-                $this->equalTo($repository),
+                $this->equalTo($name),
                 $this->arrayHasKeyAndValue('sha', $sha)
             )
             ->willReturn($this->responseFromItems($expectedItems));
 
         $commitRepository = new Repository\CommitRepository($commitApi);
 
-        $range = $commitRepository->all($owner, $repository, [
+        $range = $commitRepository->all($owner, $name, [
             'sha' => $sha,
         ]);
 
@@ -243,7 +243,7 @@ final class CommitRepositoryTest extends Framework\TestCase
         $faker = $this->getFaker();
 
         $owner = $faker->userName;
-        $repository = $faker->slug();
+        $name = $faker->slug();
         $startReference = $faker->sha1;
 
         $endReference = $startReference;
@@ -258,7 +258,7 @@ final class CommitRepositoryTest extends Framework\TestCase
 
         $range = $commitRepository->items(
             $owner,
-            $repository,
+            $name,
             $startReference,
             $endReference
         );
@@ -273,7 +273,7 @@ final class CommitRepositoryTest extends Framework\TestCase
         $faker = $this->getFaker();
 
         $owner = $faker->userName;
-        $repository = $faker->slug();
+        $name = $faker->slug();
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
@@ -284,7 +284,7 @@ final class CommitRepositoryTest extends Framework\TestCase
             ->method('show')
             ->with(
                 $this->equalTo($owner),
-                $this->equalTo($repository),
+                $this->equalTo($name),
                 $this->equalTo($startReference)
             )
             ->willReturn(null);
@@ -297,7 +297,7 @@ final class CommitRepositoryTest extends Framework\TestCase
 
         $range = $commitRepository->items(
             $owner,
-            $repository,
+            $name,
             $startReference,
             $endReference
         );
@@ -312,7 +312,7 @@ final class CommitRepositoryTest extends Framework\TestCase
         $faker = $this->getFaker();
 
         $owner = $faker->userName;
-        $repository = $faker->slug();
+        $name = $faker->slug();
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
@@ -323,7 +323,7 @@ final class CommitRepositoryTest extends Framework\TestCase
             ->method('show')
             ->with(
                 $this->equalTo($owner),
-                $this->equalTo($repository),
+                $this->equalTo($name),
                 $this->equalTo($startReference)
             )
             ->willReturn($this->response($this->commitItem()));
@@ -333,7 +333,7 @@ final class CommitRepositoryTest extends Framework\TestCase
             ->method('show')
             ->with(
                 $this->equalTo($owner),
-                $this->equalTo($repository),
+                $this->equalTo($name),
                 $this->equalTo($endReference)
             )
             ->willReturn(null);
@@ -346,7 +346,7 @@ final class CommitRepositoryTest extends Framework\TestCase
 
         $range = $commitRepository->items(
             $owner,
-            $repository,
+            $name,
             $startReference,
             $endReference
         );
@@ -361,7 +361,7 @@ final class CommitRepositoryTest extends Framework\TestCase
         $faker = $this->getFaker();
 
         $owner = $faker->userName;
-        $repository = $faker->slug();
+        $name = $faker->slug();
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
@@ -374,7 +374,7 @@ final class CommitRepositoryTest extends Framework\TestCase
             ->method('show')
             ->with(
                 $this->equalTo($owner),
-                $this->equalTo($repository),
+                $this->equalTo($name),
                 $this->equalTo($startReference)
             )
             ->willReturn($this->response($startCommit));
@@ -386,7 +386,7 @@ final class CommitRepositoryTest extends Framework\TestCase
             ->method('show')
             ->with(
                 $this->equalTo($owner),
-                $this->equalTo($repository),
+                $this->equalTo($name),
                 $this->equalTo($endReference)
             )
             ->willReturn($this->response($endCommit));
@@ -396,7 +396,7 @@ final class CommitRepositoryTest extends Framework\TestCase
             ->method('all')
             ->with(
                 $this->equalTo($owner),
-                $this->equalTo($repository),
+                $this->equalTo($name),
                 $this->arrayHasKeyAndValue('sha', $endCommit->sha)
             );
 
@@ -404,7 +404,7 @@ final class CommitRepositoryTest extends Framework\TestCase
 
         $commitRepository->items(
             $owner,
-            $repository,
+            $name,
             $startReference,
             $endReference
         );
@@ -415,7 +415,7 @@ final class CommitRepositoryTest extends Framework\TestCase
         $faker = $this->getFaker();
 
         $owner = $faker->userName;
-        $repository = $faker->slug();
+        $name = $faker->slug();
         $startReference = $faker->sha1;
 
         $commitApi = $this->createCommitApiMock();
@@ -427,7 +427,7 @@ final class CommitRepositoryTest extends Framework\TestCase
             ->method('show')
             ->with(
                 $this->equalTo($owner),
-                $this->equalTo($repository),
+                $this->equalTo($name),
                 $this->equalTo($startReference)
             )
             ->willReturn($this->response($startCommit));
@@ -437,7 +437,7 @@ final class CommitRepositoryTest extends Framework\TestCase
             ->method('all')
             ->with(
                 $this->equalTo($owner),
-                $this->equalTo($repository),
+                $this->equalTo($name),
                 $this->arrayNotHasKey('sha')
             );
 
@@ -445,7 +445,7 @@ final class CommitRepositoryTest extends Framework\TestCase
 
         $commitRepository->items(
             $owner,
-            $repository,
+            $name,
             $startReference
         );
     }
@@ -455,7 +455,7 @@ final class CommitRepositoryTest extends Framework\TestCase
         $faker = $this->getFaker();
 
         $owner = $faker->userName;
-        $repository = $faker->slug();
+        $name = $faker->slug();
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
@@ -469,7 +469,7 @@ final class CommitRepositoryTest extends Framework\TestCase
             ->method('show')
             ->with(
                 $this->equalTo($owner),
-                $this->equalTo($repository),
+                $this->equalTo($name),
                 $this->equalTo($startReference)
             )
             ->willReturn($this->response($startCommit));
@@ -482,7 +482,7 @@ final class CommitRepositoryTest extends Framework\TestCase
             ->method('show')
             ->with(
                 $this->equalTo($owner),
-                $this->equalTo($repository),
+                $this->equalTo($name),
                 $this->equalTo($endReference)
             )
             ->willReturn($this->response($endCommit));
@@ -512,7 +512,7 @@ final class CommitRepositoryTest extends Framework\TestCase
             ->method('all')
             ->with(
                 $this->equalTo($owner),
-                $this->equalTo($repository),
+                $this->equalTo($name),
                 $this->arrayHasKeyAndValue('sha', $endCommit->sha)
             )
             ->willReturn($this->responseFromItems($segment));
@@ -521,7 +521,7 @@ final class CommitRepositoryTest extends Framework\TestCase
 
         $range = $commitRepository->items(
             $owner,
-            $repository,
+            $name,
             $startReference,
             $endReference
         );
@@ -551,7 +551,7 @@ final class CommitRepositoryTest extends Framework\TestCase
         $faker = $this->getFaker();
 
         $owner = $faker->userName;
-        $repository = $faker->slug();
+        $name = $faker->slug();
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
@@ -565,7 +565,7 @@ final class CommitRepositoryTest extends Framework\TestCase
             ->method('show')
             ->with(
                 $this->equalTo($owner),
-                $this->equalTo($repository),
+                $this->equalTo($name),
                 $this->equalTo($startReference)
             )
             ->willReturn($this->response($startCommit));
@@ -578,7 +578,7 @@ final class CommitRepositoryTest extends Framework\TestCase
             ->method('show')
             ->with(
                 $this->equalTo($owner),
-                $this->equalTo($repository),
+                $this->equalTo($name),
                 $this->equalTo($endReference)
             )
             ->willReturn($this->response($endCommit));
@@ -622,7 +622,7 @@ final class CommitRepositoryTest extends Framework\TestCase
             ->method('all')
             ->with(
                 $this->equalTo($owner),
-                $this->equalTo($repository),
+                $this->equalTo($name),
                 $this->arrayHasKeyAndValue('sha', $endCommit->sha)
             )
             ->willReturn($this->responseFromItems($firstSegment));
@@ -632,7 +632,7 @@ final class CommitRepositoryTest extends Framework\TestCase
             ->method('all')
             ->with(
                 $this->equalTo($owner),
-                $this->equalTo($repository),
+                $this->equalTo($name),
                 $this->arrayHasKeyAndValue('sha', $firstCommitFromFirstSegment->sha)
             )
             ->willReturn($this->responseFromItems($secondSegment));
@@ -641,7 +641,7 @@ final class CommitRepositoryTest extends Framework\TestCase
 
         $range = $commitRepository->items(
             $owner,
-            $repository,
+            $name,
             $startReference,
             $endReference
         );
