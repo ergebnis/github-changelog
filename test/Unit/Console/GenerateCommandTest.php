@@ -450,11 +450,11 @@ final class GenerateCommandTest extends Framework\TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|Repository\PullRequestRepository
+     * @return \PHPUnit_Framework_MockObject_MockObject|Repository\PullRequestRepositoryInterface
      */
     private function createPullRequestRepositoryMock()
     {
-        return $this->createMock(Repository\PullRequestRepository::class);
+        return $this->createMock(Repository\PullRequestRepositoryInterface::class);
     }
 
     /**

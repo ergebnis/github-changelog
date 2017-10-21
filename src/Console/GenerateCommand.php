@@ -32,7 +32,7 @@ class GenerateCommand extends Command
     private $client;
 
     /**
-     * @var Repository\PullRequestRepository
+     * @var Repository\PullRequestRepositoryInterface
      */
     private $pullRequestRepository;
 
@@ -41,7 +41,7 @@ class GenerateCommand extends Command
      */
     private $stopwatch;
 
-    public function __construct(Client $client, Repository\PullRequestRepository $pullRequestRepository)
+    public function __construct(Client $client, Repository\PullRequestRepositoryInterface $pullRequestRepository)
     {
         parent::__construct();
 

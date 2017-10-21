@@ -16,7 +16,7 @@ namespace Localheinz\GitHub\ChangeLog\Repository;
 use Github\Api;
 use Localheinz\GitHub\ChangeLog\Resource;
 
-class PullRequestRepository
+final class PullRequestRepository implements PullRequestRepositoryInterface
 {
     /**
      * @var Api\PullRequest
@@ -24,23 +24,16 @@ class PullRequestRepository
     private $api;
 
     /**
-     * @var CommitRepository
+     * @var CommitRepositoryInterface
      */
     private $commitRepository;
 
-    public function __construct(Api\PullRequest $api, CommitRepository $commitRepository)
+    public function __construct(Api\PullRequest $api, CommitRepositoryInterface $commitRepository)
     {
         $this->api = $api;
         $this->commitRepository = $commitRepository;
     }
 
-    /**
-     * @param string $owner
-     * @param string $name
-     * @param string $number
-     *
-     * @return null|Resource\PullRequestInterface
-     */
     public function show($owner, $name, $number)
     {
         $response = $this->api->show(
@@ -59,14 +52,6 @@ class PullRequestRepository
         );
     }
 
-    /**
-     * @param string      $owner
-     * @param string      $name
-     * @param string      $startReference
-     * @param null|string $endReference
-     *
-     * @return Resource\Range
-     */
     public function items($owner, $name, $startReference, $endReference = null)
     {
         $range = $this->commitRepository->items(
