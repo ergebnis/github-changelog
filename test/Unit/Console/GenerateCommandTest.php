@@ -444,7 +444,7 @@ final class GenerateCommandTest extends Framework\TestCase
     /**
      * @return Client|\PHPUnit_Framework_MockObject_MockObject
      */
-    private function createClientMock()
+    private function createClientMock(): Client
     {
         return $this->createMock(Client::class);
     }
@@ -452,7 +452,7 @@ final class GenerateCommandTest extends Framework\TestCase
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject|Repository\PullRequestRepositoryInterface
      */
-    private function createPullRequestRepositoryMock()
+    private function createPullRequestRepositoryMock(): Repository\PullRequestRepositoryInterface
     {
         return $this->createMock(Repository\PullRequestRepositoryInterface::class);
     }
@@ -462,7 +462,7 @@ final class GenerateCommandTest extends Framework\TestCase
      *
      * @return \PHPUnit_Framework_MockObject_MockObject|Resource\RangeInterface
      */
-    private function createRangeMock(array $pullRequests = [])
+    private function createRangeMock(array $pullRequests = []): Resource\RangeInterface
     {
         $range = $this->createMock(Resource\RangeInterface::class);
 
@@ -474,10 +474,7 @@ final class GenerateCommandTest extends Framework\TestCase
         return $range;
     }
 
-    /**
-     * @return Resource\PullRequest
-     */
-    private function pullRequest()
+    private function pullRequest(): Resource\PullRequestInterface
     {
         $faker = $this->getFaker();
 
@@ -495,7 +492,7 @@ final class GenerateCommandTest extends Framework\TestCase
      *
      * @return Resource\PullRequest[]
      */
-    private function pullRequests($count)
+    private function pullRequests(int $count): array
     {
         $pullRequests = [];
 

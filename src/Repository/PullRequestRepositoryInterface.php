@@ -27,7 +27,7 @@ interface PullRequestRepositoryInterface
      *
      * @return Resource\PullRequestInterface
      */
-    public function show($owner, $name, $number);
+    public function show(string $owner, string $name, int $number): Resource\PullRequestInterface;
 
     /**
      * @param string      $owner
@@ -35,7 +35,7 @@ interface PullRequestRepositoryInterface
      * @param string      $startReference
      * @param null|string $endReference
      *
-     * @return Resource\Range
+     * @return Resource\RangeInterface
      */
-    public function items($owner, $name, $startReference, $endReference = null);
+    public function items(string $owner, string $name, string $startReference, string $endReference = null): Resource\RangeInterface;
 }

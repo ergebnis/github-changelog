@@ -72,7 +72,7 @@ final class RangeTest extends Framework\TestCase
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject|Resource\CommitInterface
      */
-    private function createCommitMock()
+    private function createCommitMock(): Resource\CommitInterface
     {
         return $this->createMock(Resource\CommitInterface::class);
     }
@@ -80,7 +80,7 @@ final class RangeTest extends Framework\TestCase
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject|Resource\PullRequestInterface
      */
-    private function createPullRequestMock()
+    private function createPullRequestMock(): Resource\PullRequestInterface
     {
         return $this->createMock(Resource\PullRequestInterface::class);
     }

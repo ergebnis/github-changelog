@@ -32,28 +32,11 @@ final class AuthorTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider \Refinery29\Test\Util\DataProvider\InvalidString::data()
-     *
-     * @param mixed $login
-     */
-    public function testConstructorRejectsInvalidLogin($login)
-    {
-        $this->expectException(\InvalidArgumentException::class);
-
-        $htmlUrl = $this->getFaker()->url;
-
-        new Resource\Author(
-            $login,
-            $htmlUrl
-        );
-    }
-
-    /**
-     * @dataProvider \Refinery29\Test\Util\DataProvider\InvalidUrl::data()
+     * @dataProvider providerInvalidHtmlUrl
      *
      * @param mixed $htmlUrl
      */
-    public function testConstructorRejectsInvalidHtmlUrl($htmlUrl)
+    public function testConstructorRejectsInvalidHtmlUrl(string $htmlUrl)
     {
         $this->expectException(\InvalidArgumentException::class);
 
@@ -63,6 +46,22 @@ final class AuthorTest extends Framework\TestCase
             $login,
             $htmlUrl
         );
+    }
+
+    public function providerInvalidHtmlUrl(): \Generator
+    {
+        $faker = $this->getFaker();
+
+        $values = [
+            'string-path-only' => \implode('/', $faker->words),
+            'string-word-only' => $faker->word,
+        ];
+
+        foreach ($values as $key => $value) {
+            yield $key => [
+                $value,
+            ];
+        }
     }
 
     public function testConstructorSetsLoginAndHtmlUrl()

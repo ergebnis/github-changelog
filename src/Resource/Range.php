@@ -25,17 +25,17 @@ final class Range implements RangeInterface
      */
     private $pullRequests = [];
 
-    public function commits()
+    public function commits(): array
     {
         return $this->commits;
     }
 
-    public function pullRequests()
+    public function pullRequests(): array
     {
         return $this->pullRequests;
     }
 
-    public function withCommit(CommitInterface $commit)
+    public function withCommit(CommitInterface $commit): RangeInterface
     {
         $instance = clone $this;
 
@@ -44,7 +44,7 @@ final class Range implements RangeInterface
         return $instance;
     }
 
-    public function withPullRequest(PullRequestInterface $pullRequest)
+    public function withPullRequest(PullRequestInterface $pullRequest): RangeInterface
     {
         $instance = clone $this;
 

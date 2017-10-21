@@ -15,7 +15,6 @@ namespace Localheinz\GitHub\ChangeLog\Test\Unit\Resource;
 
 use Localheinz\GitHub\ChangeLog\Resource;
 use PHPUnit\Framework;
-use Refinery29\Test\Util\DataProvider;
 use Refinery29\Test\Util\TestHelper;
 
 final class CommitTest extends Framework\TestCase
@@ -53,31 +52,18 @@ final class CommitTest extends Framework\TestCase
     {
         $faker = $this->getFaker();
 
-        return $this->provideDataFrom(
-            new DataProvider\InvalidString(),
-            new DataProvider\Elements([
-                $faker->word,
-                $faker->words,
-                $faker->md5,
-            ])
-        );
-    }
+        $values = [
+            'md5' => $faker->md5,
+            'sentence' => $faker->sentence(),
+            'sha256' => $faker->sha256,
+            'word' => $faker->word,
+        ];
 
-    /**
-     * @dataProvider \Refinery29\Test\Util\DataProvider\InvalidString::data()
-     *
-     * @param mixed $message
-     */
-    public function testConstructorRejectsInvalidMessage($message)
-    {
-        $this->expectException(\InvalidArgumentException::class);
-
-        $sha = $this->getFaker()->sha1;
-
-        new Resource\Commit(
-            $sha,
-            $message
-        );
+        foreach ($values as $key => $value) {
+            yield $key => [
+                $value,
+            ];
+        }
     }
 
     public function testConstructorSetsShaAndMessage()

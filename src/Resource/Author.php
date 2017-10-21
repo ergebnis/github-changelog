@@ -33,21 +33,20 @@ final class Author implements AuthorInterface
      *
      * @throws \InvalidArgumentException
      */
-    public function __construct($login, $htmlUrl)
+    public function __construct(string $login, string $htmlUrl)
     {
-        Assert\that($login)->string();
-        Assert\that($htmlUrl)->string()->url();
+        Assert\that($htmlUrl)->url();
 
         $this->login = $login;
         $this->htmlUrl = $htmlUrl;
     }
 
-    public function login()
+    public function login(): string
     {
         return $this->login;
     }
 
-    public function htmlUrl()
+    public function htmlUrl(): string
     {
         return $this->htmlUrl;
     }

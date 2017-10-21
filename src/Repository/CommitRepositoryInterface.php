@@ -24,9 +24,9 @@ interface CommitRepositoryInterface
      * @param string      $startReference
      * @param null|string $endReference
      *
-     * @return Resource\Range
+     * @return Resource\RangeInterface
      */
-    public function items($owner, $name, $startReference, $endReference = null);
+    public function items(string $owner, string $name, string $startReference, string $endReference = null): Resource\RangeInterface;
 
     /**
      * @param string $owner
@@ -37,14 +37,14 @@ interface CommitRepositoryInterface
      *
      * @return Resource\CommitInterface
      */
-    public function show($owner, $name, $sha);
+    public function show(string $owner, string $name, string $sha): Resource\CommitInterface;
 
     /**
      * @param string $owner
      * @param string $name
      * @param array  $params
      *
-     * @return Resource\Range
+     * @return Resource\RangeInterface
      */
-    public function all($owner, $name, array $params = []);
+    public function all(string $owner, string $name, array $params = []): Resource\RangeInterface;
 }

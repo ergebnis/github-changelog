@@ -15,13 +15,7 @@ namespace Localheinz\GitHub\ChangeLog\Resource;
 
 interface AuthorInterface
 {
-    /**
-     * @return string
-     */
-    public function login();
+    public function login(): string;
 
-    /**
-     * @return string
-     */
-    public function htmlUrl();
+    public function htmlUrl(): string;
 }

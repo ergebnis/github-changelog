@@ -33,21 +33,20 @@ final class PullRequest implements PullRequestInterface
      *
      * @throws \InvalidArgumentException
      */
-    public function __construct($number, $title)
+    public function __construct(int $number, string $title)
     {
-        Assert\that($number)->integer()->greaterThan(0);
-        Assert\that($title)->string();
+        Assert\that($number)->greaterThan(0);
 
         $this->number = $number;
         $this->title = $title;
     }
 
-    public function number()
+    public function number(): int
     {
         return $this->number;
     }
 
-    public function title()
+    public function title(): string
     {
         return $this->title;
     }
