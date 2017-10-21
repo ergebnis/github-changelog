@@ -702,7 +702,7 @@ final class CommitRepositoryTest extends Framework\TestCase
         $items = [];
 
         for ($i = 0; $i < $count; ++$i) {
-            \array_push($items, $this->commitItem());
+            $items[] = $this->commitItem();
         }
 
         return $items;
