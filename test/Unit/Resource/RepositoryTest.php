@@ -47,9 +47,37 @@ final class RepositoryTest extends Framework\TestCase
 
     public function providerInvalidOwner(): \Generator
     {
+        $faker = $this->faker();
+
         $values = [
-            'blank' => '  ',
-            'empty' => '',
+            'starts-with-hyphen' => \sprintf(
+                '-%s',
+                $faker->word
+            ),
+            'ends-with-hyphen' => \sprintf(
+                '%s-',
+                $faker->word
+            ),
+            'has-multiple-successive-hyphens' => \sprintf(
+                '%s--%s',
+                $faker->word,
+                $faker->word
+            ),
+            'has-underscores' => \sprintf(
+                '%s_%s',
+                $faker->word,
+                $faker->word
+            ),
+            'has-special-characters' => \implode('', $faker->randomElements([
+                '.',
+                '_',
+                ':',
+                'ä',
+                'ü',
+                'ö',
+                'ß',
+                '🤓',
+            ])),
         ];
 
         foreach ($values as $key => $value) {
@@ -92,11 +120,15 @@ final class RepositoryTest extends Framework\TestCase
         }
     }
 
-    public function testConstructorSetsValues()
+    /**
+     * @dataProvider providerValidName
+     *
+     * @param string $owner
+     */
+    public function testConstructorSetsValues(string $owner)
     {
         $faker = $this->faker();
 
-        $owner = $faker->userName;
         $name = $faker->slug();
 
         $repository = new Resource\Repository(
@@ -106,5 +138,38 @@ final class RepositoryTest extends Framework\TestCase
 
         $this->assertSame($owner, $repository->owner());
         $this->assertSame($name, $repository->name());
+    }
+
+    public function providerValidName(): \Generator
+    {
+        $faker = $this->faker();
+
+        $values = [
+            'digit' => $faker->randomDigitNotNull,
+            'letter' => $faker->randomLetter,
+            'word' => $faker->word,
+            'word-with-numbers' => \sprintf(
+                '%s%d',
+                $faker->word,
+                $faker->randomNumber()
+            ),
+            'words-separated-by-hyphen' => \implode(
+                '-',
+                $faker->words()
+            ),
+            'words-with-numbers-separated-by-hyphens' => \implode(
+                '-',
+                \array_merge($faker->words(), [
+                    $faker->randomNumber(),
+                    $faker->randomNumber(),
+                ])
+            ),
+        ];
+
+        foreach ($values as $key => $value) {
+            yield $key => [
+                $value,
+            ];
+        }
     }
 }
