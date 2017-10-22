@@ -36,7 +36,7 @@ final class Repository implements RepositoryInterface
     public function __construct(string $owner, string $name)
     {
         Assert\that($owner)->regex('/^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$/');
-        Assert\that($name)->notBlank();
+        Assert\that($name)->regex('/^[a-zA-Z0-9-_]+$/');
 
         $this->owner = $owner;
         $this->name = $name;
