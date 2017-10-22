@@ -48,9 +48,9 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             ->expects($this->once())
             ->method('show')
             ->with(
-                $this->equalTo($owner),
-                $this->equalTo($name),
-                $this->equalTo($expectedItem->number)
+                $this->identicalTo($owner),
+                $this->identicalTo($name),
+                $this->identicalTo($expectedItem->number)
             )
             ->willReturn($this->response($expectedItem));
 
@@ -85,9 +85,9 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             ->expects($this->once())
             ->method('show')
             ->with(
-                $this->equalTo($owner),
-                $this->equalTo($name),
-                $this->equalTo($number)
+                $this->identicalTo($owner),
+                $this->identicalTo($name),
+                $this->identicalTo($number)
             )
             ->willReturn('snafu');
 
@@ -126,10 +126,10 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             ->expects($this->once())
             ->method('items')
             ->with(
-                $this->equalTo($owner),
-                $this->equalTo($name),
-                $this->equalTo($startReference),
-                $this->equalTo(null)
+                $this->identicalTo($owner),
+                $this->identicalTo($name),
+                $this->identicalTo($startReference),
+                $this->identicalTo(null)
             )
             ->willReturn($range);
 
@@ -171,10 +171,10 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             ->expects($this->once())
             ->method('items')
             ->with(
-                $this->equalTo($owner),
-                $this->equalTo($name),
-                $this->equalTo($startReference),
-                $this->equalTo($endReference)
+                $this->identicalTo($owner),
+                $this->identicalTo($name),
+                $this->identicalTo($startReference),
+                $this->identicalTo($endReference)
             )
             ->willReturn($range);
 
@@ -224,10 +224,10 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             ->expects($this->once())
             ->method('items')
             ->with(
-                $this->equalTo($owner),
-                $this->equalTo($name),
-                $this->equalTo($startReference),
-                $this->equalTo($endReference)
+                $this->identicalTo($owner),
+                $this->identicalTo($name),
+                $this->identicalTo($startReference),
+                $this->identicalTo($endReference)
             )
             ->willReturn($range);
 
@@ -286,10 +286,10 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             ->expects($this->once())
             ->method('items')
             ->with(
-                $this->equalTo($owner),
-                $this->equalTo($name),
-                $this->equalTo($startReference),
-                $this->equalTo($endReference)
+                $this->identicalTo($owner),
+                $this->identicalTo($name),
+                $this->identicalTo($startReference),
+                $this->identicalTo($endReference)
             )
             ->willReturn($range);
 
@@ -299,9 +299,9 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             ->expects($this->once())
             ->method('show')
             ->with(
-                $this->equalTo($owner),
-                $this->equalTo($name),
-                $this->equalTo($expectedItem->number)
+                $this->identicalTo($owner),
+                $this->identicalTo($name),
+                $this->identicalTo($expectedItem->number)
             )
             ->willReturn($this->response($expectedItem));
 
@@ -358,10 +358,10 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             ->expects($this->once())
             ->method('items')
             ->with(
-                $this->equalTo($owner),
-                $this->equalTo($name),
-                $this->equalTo($startReference),
-                $this->equalTo($endReference)
+                $this->identicalTo($owner),
+                $this->identicalTo($name),
+                $this->identicalTo($startReference),
+                $this->identicalTo($endReference)
             )
             ->willReturn($range);
 
@@ -371,9 +371,9 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             ->expects($this->once())
             ->method('show')
             ->with(
-                $this->equalTo($owner),
-                $this->equalTo($name),
-                $this->equalTo($number)
+                $this->identicalTo($owner),
+                $this->identicalTo($name),
+                $this->identicalTo($number)
             )
             ->willReturn(null);
 

@@ -166,8 +166,8 @@ final class GenerateCommandTest extends Framework\TestCase
             ->expects($this->once())
             ->method('authenticate')
             ->with(
-                $this->equalTo($authToken),
-                $this->equalTo(Client::AUTH_HTTP_TOKEN)
+                $this->identicalTo($authToken),
+                $this->identicalTo(Client::AUTH_HTTP_TOKEN)
             );
 
         $pullRequestRepository = $this->createPullRequestRepositoryMock();
@@ -207,10 +207,10 @@ final class GenerateCommandTest extends Framework\TestCase
             ->expects($this->once())
             ->method('items')
             ->with(
-                $this->equalTo($owner),
-                $this->equalTo($name),
-                $this->equalTo($startReference),
-                $this->equalTo($endReference)
+                $this->identicalTo($owner),
+                $this->identicalTo($name),
+                $this->identicalTo($startReference),
+                $this->identicalTo($endReference)
             )
             ->willReturn($this->createRangeMock([]));
 

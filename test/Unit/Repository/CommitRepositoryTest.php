@@ -50,9 +50,9 @@ final class CommitRepositoryTest extends Framework\TestCase
             ->expects($this->once())
             ->method('show')
             ->with(
-                $this->equalTo($owner),
-                $this->equalTo($name),
-                $this->equalTo($sha)
+                $this->identicalTo($owner),
+                $this->identicalTo($name),
+                $this->identicalTo($sha)
             )
             ->willReturn($this->response($expectedItem));
 
@@ -84,9 +84,9 @@ final class CommitRepositoryTest extends Framework\TestCase
             ->expects($this->once())
             ->method('show')
             ->with(
-                $this->equalTo($owner),
-                $this->equalTo($name),
-                $this->equalTo($sha)
+                $this->identicalTo($owner),
+                $this->identicalTo($name),
+                $this->identicalTo($sha)
             )
             ->willReturn('failure');
 
@@ -115,8 +115,8 @@ final class CommitRepositoryTest extends Framework\TestCase
             ->expects($this->once())
             ->method('all')
             ->with(
-                $this->equalTo($owner),
-                $this->equalTo($name),
+                $this->identicalTo($owner),
+                $this->identicalTo($name),
                 $this->arrayHasKeyAndValue('sha', $sha)
             )
             ->willReturn('snafu');
@@ -151,8 +151,8 @@ final class CommitRepositoryTest extends Framework\TestCase
             ->expects($this->once())
             ->method('all')
             ->with(
-                $this->equalTo($owner),
-                $this->equalTo($name),
+                $this->identicalTo($owner),
+                $this->identicalTo($name),
                 $this->arrayHasKeyAndValue('per_page', 250)
             )
             ->willReturn($this->responseFromItems($expectedItems));
@@ -185,8 +185,8 @@ final class CommitRepositoryTest extends Framework\TestCase
             ->expects($this->once())
             ->method('all')
             ->with(
-                $this->equalTo($owner),
-                $this->equalTo($name),
+                $this->identicalTo($owner),
+                $this->identicalTo($name),
                 $this->arrayHasKeyAndValue('per_page', $perPage)
             )
             ->willReturn($this->responseFromItems($expectedItems));
@@ -219,8 +219,8 @@ final class CommitRepositoryTest extends Framework\TestCase
             ->expects($this->once())
             ->method('all')
             ->with(
-                $this->equalTo($owner),
-                $this->equalTo($name),
+                $this->identicalTo($owner),
+                $this->identicalTo($name),
                 $this->arrayHasKeyAndValue('sha', $sha)
             )
             ->willReturn($this->responseFromItems($expectedItems));
@@ -293,9 +293,9 @@ final class CommitRepositoryTest extends Framework\TestCase
             ->expects($this->at(0))
             ->method('show')
             ->with(
-                $this->equalTo($owner),
-                $this->equalTo($name),
-                $this->equalTo($startReference)
+                $this->identicalTo($owner),
+                $this->identicalTo($name),
+                $this->identicalTo($startReference)
             )
             ->willReturn(null);
 
@@ -332,9 +332,9 @@ final class CommitRepositoryTest extends Framework\TestCase
             ->expects($this->at(0))
             ->method('show')
             ->with(
-                $this->equalTo($owner),
-                $this->equalTo($name),
-                $this->equalTo($startReference)
+                $this->identicalTo($owner),
+                $this->identicalTo($name),
+                $this->identicalTo($startReference)
             )
             ->willReturn($this->response($this->commitItem()));
 
@@ -342,9 +342,9 @@ final class CommitRepositoryTest extends Framework\TestCase
             ->expects($this->at(1))
             ->method('show')
             ->with(
-                $this->equalTo($owner),
-                $this->equalTo($name),
-                $this->equalTo($endReference)
+                $this->identicalTo($owner),
+                $this->identicalTo($name),
+                $this->identicalTo($endReference)
             )
             ->willReturn(null);
 
@@ -383,9 +383,9 @@ final class CommitRepositoryTest extends Framework\TestCase
             ->expects($this->at(0))
             ->method('show')
             ->with(
-                $this->equalTo($owner),
-                $this->equalTo($name),
-                $this->equalTo($startReference)
+                $this->identicalTo($owner),
+                $this->identicalTo($name),
+                $this->identicalTo($startReference)
             )
             ->willReturn($this->response($startCommit));
 
@@ -395,9 +395,9 @@ final class CommitRepositoryTest extends Framework\TestCase
             ->expects($this->at(1))
             ->method('show')
             ->with(
-                $this->equalTo($owner),
-                $this->equalTo($name),
-                $this->equalTo($endReference)
+                $this->identicalTo($owner),
+                $this->identicalTo($name),
+                $this->identicalTo($endReference)
             )
             ->willReturn($this->response($endCommit));
 
@@ -405,8 +405,8 @@ final class CommitRepositoryTest extends Framework\TestCase
             ->expects($this->once())
             ->method('all')
             ->with(
-                $this->equalTo($owner),
-                $this->equalTo($name),
+                $this->identicalTo($owner),
+                $this->identicalTo($name),
                 $this->arrayHasKeyAndValue('sha', $endCommit->sha)
             );
 
@@ -436,9 +436,9 @@ final class CommitRepositoryTest extends Framework\TestCase
             ->expects($this->once())
             ->method('show')
             ->with(
-                $this->equalTo($owner),
-                $this->equalTo($name),
-                $this->equalTo($startReference)
+                $this->identicalTo($owner),
+                $this->identicalTo($name),
+                $this->identicalTo($startReference)
             )
             ->willReturn($this->response($startCommit));
 
@@ -446,8 +446,8 @@ final class CommitRepositoryTest extends Framework\TestCase
             ->expects($this->once())
             ->method('all')
             ->with(
-                $this->equalTo($owner),
-                $this->equalTo($name),
+                $this->identicalTo($owner),
+                $this->identicalTo($name),
                 $this->arrayNotHasKey('sha')
             );
 
@@ -478,9 +478,9 @@ final class CommitRepositoryTest extends Framework\TestCase
             ->expects($this->at(0))
             ->method('show')
             ->with(
-                $this->equalTo($owner),
-                $this->equalTo($name),
-                $this->equalTo($startReference)
+                $this->identicalTo($owner),
+                $this->identicalTo($name),
+                $this->identicalTo($startReference)
             )
             ->willReturn($this->response($startCommit));
 
@@ -491,9 +491,9 @@ final class CommitRepositoryTest extends Framework\TestCase
             ->expects($this->at(1))
             ->method('show')
             ->with(
-                $this->equalTo($owner),
-                $this->equalTo($name),
-                $this->equalTo($endReference)
+                $this->identicalTo($owner),
+                $this->identicalTo($name),
+                $this->identicalTo($endReference)
             )
             ->willReturn($this->response($endCommit));
 
@@ -521,8 +521,8 @@ final class CommitRepositoryTest extends Framework\TestCase
             ->expects($this->once())
             ->method('all')
             ->with(
-                $this->equalTo($owner),
-                $this->equalTo($name),
+                $this->identicalTo($owner),
+                $this->identicalTo($name),
                 $this->arrayHasKeyAndValue('sha', $endCommit->sha)
             )
             ->willReturn($this->responseFromItems($segment));
@@ -574,9 +574,9 @@ final class CommitRepositoryTest extends Framework\TestCase
             ->expects($this->at(0))
             ->method('show')
             ->with(
-                $this->equalTo($owner),
-                $this->equalTo($name),
-                $this->equalTo($startReference)
+                $this->identicalTo($owner),
+                $this->identicalTo($name),
+                $this->identicalTo($startReference)
             )
             ->willReturn($this->response($startCommit));
 
@@ -587,9 +587,9 @@ final class CommitRepositoryTest extends Framework\TestCase
             ->expects($this->at(1))
             ->method('show')
             ->with(
-                $this->equalTo($owner),
-                $this->equalTo($name),
-                $this->equalTo($endReference)
+                $this->identicalTo($owner),
+                $this->identicalTo($name),
+                $this->identicalTo($endReference)
             )
             ->willReturn($this->response($endCommit));
 
@@ -631,8 +631,8 @@ final class CommitRepositoryTest extends Framework\TestCase
             ->expects($this->at(2))
             ->method('all')
             ->with(
-                $this->equalTo($owner),
-                $this->equalTo($name),
+                $this->identicalTo($owner),
+                $this->identicalTo($name),
                 $this->arrayHasKeyAndValue('sha', $endCommit->sha)
             )
             ->willReturn($this->responseFromItems($firstSegment));
@@ -641,8 +641,8 @@ final class CommitRepositoryTest extends Framework\TestCase
             ->expects($this->at(3))
             ->method('all')
             ->with(
-                $this->equalTo($owner),
-                $this->equalTo($name),
+                $this->identicalTo($owner),
+                $this->identicalTo($name),
                 $this->arrayHasKeyAndValue('sha', $firstCommitFromFirstSegment->sha)
             )
             ->willReturn($this->responseFromItems($secondSegment));
