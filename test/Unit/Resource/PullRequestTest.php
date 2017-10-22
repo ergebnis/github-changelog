@@ -21,11 +21,6 @@ final class PullRequestTest extends Framework\TestCase
 {
     use Helper;
 
-    public function testIsFinal()
-    {
-        $this->assertClassIsFinal(Resource\PullRequest::class);
-    }
-
     public function testImplementsPullRequestInterface()
     {
         $this->assertClassImplementsInterface(Resource\PullRequestInterface::class, Resource\PullRequest::class);

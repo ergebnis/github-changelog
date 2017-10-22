@@ -21,11 +21,6 @@ final class CommitTest extends Framework\TestCase
 {
     use Helper;
 
-    public function testIsFinal()
-    {
-        $this->assertClassIsFinal(Resource\Commit::class);
-    }
-
     public function testImplementsAuthorInterface()
     {
         $this->assertClassImplementsInterface(Resource\CommitInterface::class, Resource\Commit::class);

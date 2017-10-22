@@ -24,11 +24,6 @@ final class CommitRepositoryTest extends Framework\TestCase
 {
     use Helper;
 
-    public function testIsFinal()
-    {
-        $this->assertClassIsFinal(Repository\CommitRepository::class);
-    }
-
     public function testImplementsCommitRepositoryInterface()
     {
         $this->assertClassImplementsInterface(Repository\CommitRepositoryInterface::class, Repository\CommitRepository::class);

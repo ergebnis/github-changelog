@@ -24,11 +24,6 @@ final class PullRequestRepositoryTest extends Framework\TestCase
 {
     use Helper;
 
-    public function testIsFinal()
-    {
-        $this->assertClassIsFinal(Repository\PullRequestRepository::class);
-    }
-
     public function testImplementsPullRequestRepositoryInterface()
     {
         $this->assertClassImplementsInterface(Repository\PullRequestRepositoryInterface::class, Repository\PullRequestRepository::class);

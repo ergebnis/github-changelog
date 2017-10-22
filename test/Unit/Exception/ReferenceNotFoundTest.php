@@ -22,11 +22,6 @@ final class ReferenceNotFoundTest extends Framework\TestCase
 {
     use Helper;
 
-    public function testIsFinal()
-    {
-        $this->assertClassIsFinal(ReferenceNotFound::class);
-    }
-
     public function testExtendsRuntimeException()
     {
         $this->assertClassExtends(\RuntimeException::class, ReferenceNotFound::class);
