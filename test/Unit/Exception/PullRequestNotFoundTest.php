@@ -15,31 +15,31 @@ namespace Localheinz\GitHub\ChangeLog\Test\Unit\Exception;
 
 use Localheinz\GitHub\ChangeLog\Exception\ExceptionInterface;
 use Localheinz\GitHub\ChangeLog\Exception\PullRequestNotFound;
+use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
-use Refinery29\Test\Util\TestHelper;
 
 final class PullRequestNotFoundTest extends Framework\TestCase
 {
-    use TestHelper;
+    use Helper;
 
     public function testIsFinal()
     {
-        $this->assertFinal(PullRequestNotFound::class);
+        $this->assertClassIsFinal(PullRequestNotFound::class);
     }
 
     public function testExtendsRuntimeException()
     {
-        $this->assertExtends(\RuntimeException::class, PullRequestNotFound::class);
+        $this->assertClassExtends(\RuntimeException::class, PullRequestNotFound::class);
     }
 
     public function testImplementsExceptionInterface()
     {
-        $this->assertImplements(ExceptionInterface::class, PullRequestNotFound::class);
+        $this->assertClassImplementsInterface(ExceptionInterface::class, PullRequestNotFound::class);
     }
 
     public function testFromOwnerRepositoryAndReferenceCreatesException()
     {
-        $faker = $this->getFaker();
+        $faker = $this->faker();
 
         $owner = $faker->userName;
         $name = $faker->slug();

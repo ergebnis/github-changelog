@@ -14,21 +14,21 @@ declare(strict_types=1);
 namespace Localheinz\GitHub\ChangeLog\Test\Unit\Resource;
 
 use Localheinz\GitHub\ChangeLog\Resource;
+use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
-use Refinery29\Test\Util\TestHelper;
 
 final class AuthorTest extends Framework\TestCase
 {
-    use TestHelper;
+    use Helper;
 
     public function testIsFinal()
     {
-        $this->assertFinal(Resource\Author::class);
+        $this->assertClassIsFinal(Resource\Author::class);
     }
 
     public function testImplementsAuthorInterface()
     {
-        $this->assertImplements(Resource\AuthorInterface::class, Resource\Author::class);
+        $this->assertClassImplementsInterface(Resource\AuthorInterface::class, Resource\Author::class);
     }
 
     /**
@@ -40,7 +40,7 @@ final class AuthorTest extends Framework\TestCase
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        $login = $this->getFaker()->userName;
+        $login = $this->faker()->userName;
 
         new Resource\Author(
             $login,
@@ -50,7 +50,7 @@ final class AuthorTest extends Framework\TestCase
 
     public function providerInvalidHtmlUrl(): \Generator
     {
-        $faker = $this->getFaker();
+        $faker = $this->faker();
 
         $values = [
             'string-path-only' => \implode('/', $faker->words),
@@ -66,7 +66,7 @@ final class AuthorTest extends Framework\TestCase
 
     public function testConstructorSetsLoginAndHtmlUrl()
     {
-        $faker = $this->getFaker();
+        $faker = $this->faker();
 
         $login = $faker->userName;
         $htmlUrl = $faker->url;

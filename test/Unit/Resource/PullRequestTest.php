@@ -14,21 +14,21 @@ declare(strict_types=1);
 namespace Localheinz\GitHub\ChangeLog\Test\Unit\Resource;
 
 use Localheinz\GitHub\ChangeLog\Resource;
+use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
-use Refinery29\Test\Util\TestHelper;
 
 final class PullRequestTest extends Framework\TestCase
 {
-    use TestHelper;
+    use Helper;
 
     public function testIsFinal()
     {
-        $this->assertFinal(Resource\PullRequest::class);
+        $this->assertClassIsFinal(Resource\PullRequest::class);
     }
 
     public function testImplementsPullRequestInterface()
     {
-        $this->assertImplements(Resource\PullRequestInterface::class, Resource\PullRequest::class);
+        $this->assertClassImplementsInterface(Resource\PullRequestInterface::class, Resource\PullRequest::class);
     }
 
     /**
@@ -40,7 +40,7 @@ final class PullRequestTest extends Framework\TestCase
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        $title = $this->getFaker()->sentence();
+        $title = $this->faker()->sentence();
 
         new Resource\PullRequest(
             $number,
@@ -51,7 +51,7 @@ final class PullRequestTest extends Framework\TestCase
     public function providerInvalidNumber(): \Generator
     {
         $values = [
-            'int-negative' => -1 * $this->getFaker()->numberBetween(1),
+            'int-negative' => -1 * $this->faker()->numberBetween(1),
             'int-zero' => 0,
         ];
 
@@ -64,7 +64,7 @@ final class PullRequestTest extends Framework\TestCase
 
     public function testConstructorSetsIdAndTitle()
     {
-        $faker = $this->getFaker();
+        $faker = $this->faker();
 
         $number = $faker->numberBetween(1);
         $title = $faker->sentence();

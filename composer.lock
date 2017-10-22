@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "272293b91bd3ef2db0f3b2cd0f02fa0b",
+    "content-hash": "b187626ecf566d3a63c1a9df4c8d9cc3",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1701,29 +1701,31 @@
         },
         {
             "name": "fzaninotto/faker",
-            "version": "v1.6.0",
+            "version": "v1.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "44f9a286a04b80c76a4e5fb7aad8bb539b920123"
+                "reference": "d3ed4cc37051c1ca52d22d76b437d14809fc7e0d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/44f9a286a04b80c76a4e5fb7aad8bb539b920123",
-                "reference": "44f9a286a04b80c76a4e5fb7aad8bb539b920123",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/d3ed4cc37051c1ca52d22d76b437d14809fc7e0d",
+                "reference": "d3ed4cc37051c1ca52d22d76b437d14809fc7e0d",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.3.3|^7.0"
+                "php": "^5.3.3 || ^7.0"
             },
             "require-dev": {
                 "ext-intl": "*",
-                "phpunit/phpunit": "~4.0",
-                "squizlabs/php_codesniffer": "~1.5"
+                "phpunit/phpunit": "^4.0 || ^5.0",
+                "squizlabs/php_codesniffer": "^1.5"
             },
             "type": "library",
             "extra": {
-                "branch-alias": []
+                "branch-alias": {
+                    "dev-master": "1.8-dev"
+                }
             },
             "autoload": {
                 "psr-4": {
@@ -1745,7 +1747,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2016-04-29T12:21:54+00:00"
+            "time": "2017-08-15T16:48:10+00:00"
         },
         {
             "name": "gecko-packages/gecko-php-unit",
@@ -1885,6 +1887,49 @@
             "time": "2014-01-28T22:29:15+00:00"
         },
         {
+            "name": "localheinz/classy",
+            "version": "0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/localheinz/classy.git",
+                "reference": "165395d7e62bc49cf8c8bdd6d4e452fa367dbb31"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/localheinz/classy/zipball/165395d7e62bc49cf8c8bdd6d4e452fa367dbb31",
+                "reference": "165395d7e62bc49cf8c8bdd6d4e452fa367dbb31",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "0.4.4",
+                "localheinz/php-cs-fixer-config": "~1.6.2",
+                "localheinz/test-util": "0.2.2",
+                "phpbench/phpbench": "0.13.0",
+                "phpunit/phpunit": "^6.4.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Localheinz\\Classy\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andreas Möller",
+                    "email": "am@localheinz.com"
+                }
+            ],
+            "description": "Provides a way to collect classy constructs from source or a directory.",
+            "time": "2017-10-10T06:43:55+00:00"
+        },
+        {
             "name": "localheinz/php-cs-fixer-config",
             "version": "1.6.2",
             "source": {
@@ -1924,6 +1969,55 @@
             ],
             "description": "Provides a configuration factory and multiple rule sets for friendsofphp/php-cs-fixer.",
             "time": "2017-10-02T12:24:21+00:00"
+        },
+        {
+            "name": "localheinz/test-util",
+            "version": "0.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/localheinz/test-util.git",
+                "reference": "491a9d125681ef398ab9dbf5eb8c74164f456f20"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/localheinz/test-util/zipball/491a9d125681ef398ab9dbf5eb8c74164f456f20",
+                "reference": "491a9d125681ef398ab9dbf5eb8c74164f456f20",
+                "shasum": ""
+            },
+            "require": {
+                "fzaninotto/faker": "^1.7.1",
+                "localheinz/classy": "0.2.0",
+                "php": "^7.0"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "0.4.4",
+                "localheinz/php-cs-fixer-config": "~1.6.2",
+                "phpunit/phpunit": "^6.3.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Localheinz\\Test\\Util\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andreas Möller",
+                    "email": "am@localheinz.com"
+                }
+            ],
+            "description": "Provides utilities for tests.",
+            "keywords": [
+                "assertion",
+                "faker",
+                "phpunit",
+                "test"
+            ],
+            "time": "2017-10-22T12:16:23+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -2874,62 +2968,6 @@
                 "xunit"
             ],
             "time": "2017-08-03T14:08:16+00:00"
-        },
-        {
-            "name": "refinery29/test-util",
-            "version": "0.9.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/refinery29/test-util.git",
-                "reference": "08d085b4248f763a9ec974526a16f72858960455"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/refinery29/test-util/zipball/08d085b4248f763a9ec974526a16f72858960455",
-                "reference": "08d085b4248f763a9ec974526a16f72858960455",
-                "shasum": ""
-            },
-            "require": {
-                "fzaninotto/faker": "^1.6.0",
-                "php": "^5.6 || ^7.0"
-            },
-            "require-dev": {
-                "beberlei/assert": "^2.6.5",
-                "codeclimate/php-test-reporter": "0.3.2",
-                "phpunit/phpunit": "^5.6.1",
-                "refinery29/php-cs-fixer-config": "0.6.1"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Refinery29\\Test\\Util\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Andreas Möller",
-                    "email": "andreas.moller@refinery29.com"
-                },
-                {
-                    "name": "R29 Product & Engineering",
-                    "email": "p.e@refinery29.com"
-                },
-                {
-                    "name": "Graham Daniels",
-                    "email": "graham.daniels@refinery29.com"
-                }
-            ],
-            "description": "Provides a test helper, generic data providers, and assertions.",
-            "keywords": [
-                "faker",
-                "test",
-                "util"
-            ],
-            "time": "2016-12-08T12:47:21+00:00"
         },
         {
             "name": "satooshi/php-coveralls",
