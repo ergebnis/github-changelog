@@ -50,6 +50,8 @@ final class RepositoryTest extends Framework\TestCase
         $faker = $this->faker();
 
         $values = [
+            'blank' => '  ',
+            'empty' => '',
             'starts-with-hyphen' => \sprintf(
                 '-%s',
                 $faker->word
@@ -164,6 +166,84 @@ final class RepositoryTest extends Framework\TestCase
         $values = [
             'blank' => '  ',
             'empty' => '',
+            'has-special-characters' => \implode('', $this->faker()->randomElements([
+                '/',
+                '\\',
+                ':',
+                'ä',
+                'ü',
+                'ö',
+                'ß',
+                '🤓',
+            ])),
+        ];
+
+        foreach ($values as $key => $value) {
+            yield $key => [
+                $value,
+            ];
+        }
+    }
+
+    /**
+     * @dataProvider providerValidName
+     *
+     * @param string $name
+     */
+    public function testConstructorSetsName(string $name)
+    {
+        $faker = $this->faker();
+
+        $owner = $faker->slug();
+
+        $repository = new Resource\Repository(
+            $owner,
+            $name
+        );
+
+        $this->assertSame($owner, $repository->owner());
+        $this->assertSame($name, $repository->name());
+    }
+
+    public function providerValidName(): \Generator
+    {
+        $faker = $this->faker();
+
+        $values = [
+            'digit' => $faker->randomDigitNotNull,
+            'letter' => $faker->randomLetter,
+            'word' => $faker->word,
+            'hyphen' => '-',
+            'hyphens' => '---',
+            'underscore' => '_',
+            'underscores' => '___',
+            'word-with-numbers' => \sprintf(
+                '%s%d',
+                $faker->word,
+                $faker->randomNumber()
+            ),
+            'words-separated-by-hyphen' => \implode(
+                '-',
+                $faker->words()
+            ),
+            'words-separated-by-underscore' => \implode(
+                '-',
+                $faker->words()
+            ),
+            'words-with-numbers-separated-by-hyphens' => \implode(
+                '-',
+                \array_merge($faker->words(), [
+                    $faker->randomNumber(),
+                    $faker->randomNumber(),
+                ])
+            ),
+            'words-with-numbers-separated-by-underscores' => \implode(
+                '_',
+                \array_merge($faker->words(), [
+                    $faker->randomNumber(),
+                    $faker->randomNumber(),
+                ])
+            ),
         ];
 
         foreach ($values as $key => $value) {
