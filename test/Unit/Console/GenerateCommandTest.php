@@ -316,8 +316,9 @@ final class GenerateCommandTest extends Framework\TestCase
 
         $expectedMessages = [
             \sprintf(
-                'Found %d pull requests',
-                \count($pullRequests)
+                'Found %d pull request%s',
+                $count,
+                1 === $count ? '' : 's'
             ),
         ];
 
@@ -376,8 +377,9 @@ final class GenerateCommandTest extends Framework\TestCase
         $pullRequests = $this->pullRequests($count);
 
         $expectedMessage = \sprintf(
-            'Found %d pull requests',
-            \count($pullRequests)
+            'Found %d pull request%s',
+            $count,
+            1 === $count ? '' : 's'
         );
 
         $pullRequestRepository = $this->createPullRequestRepositoryMock();
