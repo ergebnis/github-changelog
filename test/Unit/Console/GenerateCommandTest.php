@@ -43,7 +43,7 @@ final class GenerateCommandTest extends Framework\TestCase
             $this->createPullRequestRepositoryMock()
         );
 
-        $this->assertSame('Generates a changelog from information found between commit references', $command->getDescription());
+        $this->assertSame('Generates a changelog from merged pull requests found between commit references', $command->getDescription());
     }
 
     /**

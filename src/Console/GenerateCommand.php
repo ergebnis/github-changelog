@@ -54,7 +54,7 @@ final class GenerateCommand extends Command
     {
         $this
             ->setName('generate')
-            ->setDescription('Generates a changelog from information found between commit references')
+            ->setDescription('Generates a changelog from merged pull requests found between commit references')
             ->addArgument(
                 'owner',
                 Input\InputArgument::REQUIRED,
