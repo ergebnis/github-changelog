@@ -23,9 +23,7 @@ final class ProjectCodeTest extends Framework\TestCase
 
     public function testProductionClassesAreAbstractOrFinal()
     {
-        $this->assertClassesAreAbstractOrFinal(__DIR__ . '/../../src', [
-            ChangeLog\Console\GenerateCommand::class,
-        ]);
+        $this->assertClassesAreAbstractOrFinal(__DIR__ . '/../../src');
     }
 
     public function testProductionClassesHaveTests()
