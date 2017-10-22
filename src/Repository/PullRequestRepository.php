@@ -68,7 +68,7 @@ final class PullRequestRepository implements PullRequestRepositoryInterface
                 return;
             }
 
-            $number = $matches['number'];
+            $number = (int) $matches['number'];
 
             $pullRequest = $this->show(
                 $owner,
