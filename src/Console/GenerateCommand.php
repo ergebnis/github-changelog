@@ -171,7 +171,7 @@ class GenerateCommand extends Command
             $io->newLine();
 
             $io->success(\sprintf(
-                'Found %s pull request%s.',
+                'Found %d pull request%s.',
                 \count($pullRequests),
                 1 === \count($pullRequests) ? '' : 's'
             ));
