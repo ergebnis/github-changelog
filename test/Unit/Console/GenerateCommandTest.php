@@ -316,7 +316,7 @@ final class GenerateCommandTest extends Framework\TestCase
 
         $expectedMessages = [
             \sprintf(
-                'Found %s pull requests',
+                'Found %d pull requests',
                 \count($pullRequests)
             ),
         ];
@@ -376,7 +376,7 @@ final class GenerateCommandTest extends Framework\TestCase
         $pullRequests = $this->pullRequests($count);
 
         $expectedMessage = \sprintf(
-            'Found %s pull requests',
+            'Found %d pull requests',
             \count($pullRequests)
         );
 

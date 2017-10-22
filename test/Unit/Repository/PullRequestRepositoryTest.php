@@ -260,7 +260,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         $mergeCommit = new Resource\Commit(
             $faker->unique()->sha1,
             \sprintf(
-                'Merge pull request #%s from localheinz/fix/directory',
+                'Merge pull request #%d from localheinz/fix/directory',
                 $expectedItem->number
             )
         );
@@ -336,7 +336,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         $mergeCommit = new Resource\Commit(
             $faker->sha1,
             \sprintf(
-                'Merge pull request #%s from localheinz/fix/directory',
+                'Merge pull request #%d from localheinz/fix/directory',
                 $number
             )
         );
