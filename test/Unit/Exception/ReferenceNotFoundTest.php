@@ -36,7 +36,7 @@ final class ReferenceNotFoundTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $owner = $faker->userName;
+        $owner = $faker->slug();
         $name = $faker->slug();
         $reference = $faker->sha1;
 

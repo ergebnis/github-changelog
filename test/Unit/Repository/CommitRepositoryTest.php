@@ -33,7 +33,7 @@ final class CommitRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $owner = $faker->userName;
+        $owner = $faker->slug();
         $name = $faker->slug();
         $sha = $faker->sha1;
 
@@ -69,7 +69,7 @@ final class CommitRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $owner = $faker->userName;
+        $owner = $faker->slug();
         $name = $faker->slug();
         $sha = $faker->sha1;
 
@@ -100,7 +100,7 @@ final class CommitRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $owner = $faker->userName;
+        $owner = $faker->slug();
         $name = $faker->slug();
         $sha = $faker->sha1;
 
@@ -134,7 +134,7 @@ final class CommitRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $owner = $faker->userName;
+        $owner = $faker->slug();
         $name = $faker->slug();
         $sha = $faker->sha1;
 
@@ -167,7 +167,7 @@ final class CommitRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $owner = $faker->userName;
+        $owner = $faker->slug();
         $name = $faker->slug();
         $sha = $faker->sha1;
         $perPage = $faker->randomNumber();
@@ -202,7 +202,7 @@ final class CommitRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $owner = $faker->userName;
+        $owner = $faker->slug();
         $name = $faker->slug();
         $sha = $faker->sha1;
 
@@ -247,7 +247,7 @@ final class CommitRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $owner = $faker->userName;
+        $owner = $faker->slug();
         $name = $faker->slug();
         $startReference = $faker->sha1;
 
@@ -277,7 +277,7 @@ final class CommitRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $owner = $faker->userName;
+        $owner = $faker->slug();
         $name = $faker->slug();
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
@@ -316,7 +316,7 @@ final class CommitRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $owner = $faker->userName;
+        $owner = $faker->slug();
         $name = $faker->slug();
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
@@ -365,7 +365,7 @@ final class CommitRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $owner = $faker->userName;
+        $owner = $faker->slug();
         $name = $faker->slug();
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
@@ -419,7 +419,7 @@ final class CommitRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $owner = $faker->userName;
+        $owner = $faker->slug();
         $name = $faker->slug();
         $startReference = $faker->sha1;
 
@@ -459,7 +459,7 @@ final class CommitRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $owner = $faker->userName;
+        $owner = $faker->slug();
         $name = $faker->slug();
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
@@ -555,7 +555,7 @@ final class CommitRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $owner = $faker->userName;
+        $owner = $faker->slug();
         $name = $faker->slug();
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;

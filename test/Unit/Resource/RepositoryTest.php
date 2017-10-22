@@ -96,7 +96,7 @@ final class RepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $owner = $faker->userName();
+        $owner = $faker->slug();
 
         $this->expectException(\InvalidArgumentException::class);
 
