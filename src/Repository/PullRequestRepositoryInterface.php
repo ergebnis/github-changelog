@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Localheinz\GitHub\ChangeLog\Repository;
 
+use Localheinz\GitHub\ChangeLog\Exception;
 use Localheinz\GitHub\ChangeLog\Resource;
 
 interface PullRequestRepositoryInterface
@@ -22,7 +23,9 @@ interface PullRequestRepositoryInterface
      * @param string $name
      * @param string $number
      *
-     * @return null|Resource\PullRequestInterface
+     * @throws Exception\PullRequestNotFound
+     *
+     * @return Resource\PullRequestInterface
      */
     public function show($owner, $name, $number);
 
