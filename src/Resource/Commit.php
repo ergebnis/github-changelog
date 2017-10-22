@@ -33,26 +33,25 @@ final class Commit implements CommitInterface
      *
      * @throws \InvalidArgumentException
      */
-    public function __construct($sha, $message)
+    public function __construct(string $sha, string $message)
     {
-        Assert\that($sha)->string()->regex('/^[0-9a-f]{40}$/i');
-        Assert\that($message)->string();
+        Assert\that($sha)->regex('/^[0-9a-f]{40}$/i');
 
         $this->sha = $sha;
         $this->message = $message;
     }
 
-    public function sha()
+    public function sha(): string
     {
         return $this->sha;
     }
 
-    public function message()
+    public function message(): string
     {
         return $this->message;
     }
 
-    public function equals(CommitInterface $commit)
+    public function equals(CommitInterface $commit): bool
     {
         return $commit->sha() === $this->sha();
     }

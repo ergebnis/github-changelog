@@ -90,7 +90,7 @@ class GenerateCommand extends Command
             );
     }
 
-    protected function execute(Input\InputInterface $input, Output\OutputInterface $output)
+    protected function execute(Input\InputInterface $input, Output\OutputInterface $output): int
     {
         $this->stopwatch->start('changelog');
 
@@ -184,13 +184,7 @@ class GenerateCommand extends Command
         return 0;
     }
 
-    /**
-     * @param string $startReference
-     * @param string $endReference
-     *
-     * @return string
-     */
-    private function range($startReference, $endReference)
+    private function range(string $startReference, string $endReference = null): string
     {
         if (null === $endReference) {
             return \sprintf(
@@ -206,12 +200,7 @@ class GenerateCommand extends Command
         );
     }
 
-    /**
-     * @param StopwatchEvent $event
-     *
-     * @return string
-     */
-    private function formatStopwatchEvent(StopwatchEvent $event)
+    private function formatStopwatchEvent(StopwatchEvent $event): string
     {
         return \sprintf(
             'Time: %s, Memory: %s.',

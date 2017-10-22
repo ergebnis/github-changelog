@@ -15,7 +15,6 @@ namespace Localheinz\GitHub\ChangeLog\Test\Unit\Resource;
 
 use Localheinz\GitHub\ChangeLog\Resource;
 use PHPUnit\Framework;
-use Refinery29\Test\Util\DataProvider;
 use Refinery29\Test\Util\TestHelper;
 
 final class PullRequestTest extends Framework\TestCase
@@ -37,7 +36,7 @@ final class PullRequestTest extends Framework\TestCase
      *
      * @param mixed $number
      */
-    public function testConstructorRejectsInvalidNumber($number)
+    public function testConstructorRejectsInvalidNumber(int $number)
     {
         $this->expectException(\InvalidArgumentException::class);
 
@@ -51,30 +50,16 @@ final class PullRequestTest extends Framework\TestCase
 
     public function providerInvalidNumber(): \Generator
     {
-        return $this->provideDataFrom(
-            new DataProvider\InvalidInteger(),
-            new DataProvider\Elements([
-                0,
-                -1 * $this->getFaker()->numberBetween(1),
-            ])
-        );
-    }
+        $values = [
+            'int-negative' => -1 * $this->getFaker()->numberBetween(1),
+            'int-zero' => 0,
+        ];
 
-    /**
-     * @dataProvider \Refinery29\Test\Util\DataProvider\InvalidString::data()
-     *
-     * @param mixed $message
-     */
-    public function testConstructorRejectsInvalidTitle($message)
-    {
-        $this->expectException(\InvalidArgumentException::class);
-
-        $sha = \sha1($this->getFaker()->sentence());
-
-        new Resource\PullRequest(
-            $sha,
-            $message
-        );
+        foreach ($values as $key => $value) {
+            yield $key => [
+                $value,
+            ];
+        }
     }
 
     public function testConstructorSetsIdAndTitle()

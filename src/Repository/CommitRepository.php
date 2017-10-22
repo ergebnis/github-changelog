@@ -29,7 +29,7 @@ final class CommitRepository implements CommitRepositoryInterface
         $this->api = $api;
     }
 
-    public function items($owner, $name, $startReference, $endReference = null)
+    public function items(string $owner, string $name, string $startReference, string $endReference = null): Resource\RangeInterface
     {
         if ($startReference === $endReference) {
             return new Resource\Range();
@@ -96,7 +96,7 @@ final class CommitRepository implements CommitRepositoryInterface
         return $range;
     }
 
-    public function show($owner, $name, $sha)
+    public function show(string $owner, string $name, string $sha): Resource\CommitInterface
     {
         $response = $this->api->show(
             $owner,
@@ -118,7 +118,7 @@ final class CommitRepository implements CommitRepositoryInterface
         );
     }
 
-    public function all($owner, $name, array $params = [])
+    public function all(string $owner, string $name, array $params = []): Resource\RangeInterface
     {
         $range = new Resource\Range();
 

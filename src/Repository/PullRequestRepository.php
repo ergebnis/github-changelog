@@ -35,7 +35,7 @@ final class PullRequestRepository implements PullRequestRepositoryInterface
         $this->commitRepository = $commitRepository;
     }
 
-    public function show($owner, $name, $number)
+    public function show(string $owner, string $name, int $number): Resource\PullRequestInterface
     {
         $response = $this->api->show(
             $owner,
@@ -57,7 +57,7 @@ final class PullRequestRepository implements PullRequestRepositoryInterface
         );
     }
 
-    public function items($owner, $name, $startReference, $endReference = null)
+    public function items(string $owner, string $name, string $startReference, string $endReference = null): Resource\RangeInterface
     {
         $range = $this->commitRepository->items(
             $owner,

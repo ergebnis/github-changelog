@@ -400,7 +400,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
     /**
      * @return Api\PullRequest|\PHPUnit_Framework_MockObject_MockObject
      */
-    private function createPullRequestApiMock()
+    private function createPullRequestApiMock(): Api\PullRequest
     {
         return $this->createMock(Api\PullRequest::class);
     }
@@ -408,7 +408,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject|Repository\CommitRepositoryInterface
      */
-    private function createCommitRepositoryMock()
+    private function createCommitRepositoryMock(): Repository\CommitRepositoryInterface
     {
         return $this->createMock(Repository\CommitRepositoryInterface::class);
     }
@@ -416,15 +416,12 @@ final class PullRequestRepositoryTest extends Framework\TestCase
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject|Resource\RangeInterface
      */
-    private function createRangeMock()
+    private function createRangeMock(): Resource\RangeInterface
     {
         return $this->createMock(Resource\RangeInterface::class);
     }
 
-    /**
-     * @return \stdClass
-     */
-    private function pullRequestItem()
+    private function pullRequestItem(): \stdClass
     {
         $faker = $this->getFaker();
 
@@ -436,12 +433,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         return $item;
     }
 
-    /**
-     * @param \stdClass $item
-     *
-     * @return array
-     */
-    private function response(\stdClass $item)
+    private function response(\stdClass $item): array
     {
         $template = \file_get_contents(__DIR__ . '/_response/pull-request.json');
 

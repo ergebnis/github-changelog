@@ -679,18 +679,12 @@ final class CommitRepositoryTest extends Framework\TestCase
     /**
      * @return Api\Repository\Commits|\PHPUnit_Framework_MockObject_MockObject
      */
-    private function createCommitApiMock()
+    private function createCommitApiMock(): Api\Repository\Commits
     {
         return $this->createMock(Api\Repository\Commits::class);
     }
 
-    /**
-     * @param string $sha
-     * @param string $message
-     *
-     * @return \stdClass
-     */
-    private function commitItem($sha = null, $message = null)
+    private function commitItem(string $sha = null, string $message = null): \stdClass
     {
         $faker = $this->getFaker();
 
@@ -707,7 +701,7 @@ final class CommitRepositoryTest extends Framework\TestCase
      *
      * @return \stdClass[]
      */
-    private function commitItems($count)
+    private function commitItems(int $count): array
     {
         $items = [];
 
@@ -723,7 +717,7 @@ final class CommitRepositoryTest extends Framework\TestCase
      *
      * @return array
      */
-    private function response(\stdClass $item)
+    private function response(\stdClass $item): array
     {
         $template = \file_get_contents(__DIR__ . '/_response/commit.json');
 
@@ -750,7 +744,7 @@ final class CommitRepositoryTest extends Framework\TestCase
      *
      * @return array
      */
-    private function responseFromItems(array $commits)
+    private function responseFromItems(array $commits): array
     {
         $response = [];
 
@@ -762,13 +756,7 @@ final class CommitRepositoryTest extends Framework\TestCase
         return $response;
     }
 
-    /**
-     * @param string $key
-     * @param string $value
-     *
-     * @return \PHPUnit_Framework_Constraint_Callback
-     */
-    private function arrayHasKeyAndValue($key, $value)
+    private function arrayHasKeyAndValue(string $key, $value): Framework\Constraint\Callback
     {
         return $this->callback(function ($array) use ($key, $value) {
             if (\is_array($array)
@@ -782,12 +770,7 @@ final class CommitRepositoryTest extends Framework\TestCase
         });
     }
 
-    /**
-     * @param string $key
-     *
-     * @return \PHPUnit_Framework_Constraint_Callback
-     */
-    private function arrayNotHasKey($key)
+    private function arrayNotHasKey(string $key): Framework\Constraint\Callback
     {
         return $this->callback(function ($array) use ($key) {
             if (\is_array($array)

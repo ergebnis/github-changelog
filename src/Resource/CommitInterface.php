@@ -15,20 +15,9 @@ namespace Localheinz\GitHub\ChangeLog\Resource;
 
 interface CommitInterface
 {
-    /**
-     * @return string
-     */
-    public function sha();
+    public function sha(): string;
 
-    /**
-     * @return string
-     */
-    public function message();
+    public function message(): string;
 
-    /**
-     * @param CommitInterface $commit
-     *
-     * @return bool
-     */
-    public function equals(CommitInterface $commit);
+    public function equals(CommitInterface $commit): bool;
 }

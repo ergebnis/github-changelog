@@ -18,24 +18,24 @@ interface RangeInterface
     /**
      * @return CommitInterface[]
      */
-    public function commits();
+    public function commits(): array;
 
     /**
      * @return PullRequestInterface[]
      */
-    public function pullRequests();
+    public function pullRequests(): array;
 
     /**
      * @param CommitInterface $commit
      *
      * @return static
      */
-    public function withCommit(CommitInterface $commit);
+    public function withCommit(CommitInterface $commit): RangeInterface;
 
     /**
      * @param PullRequestInterface $pullRequest
      *
      * @return static
      */
-    public function withPullRequest(PullRequestInterface $pullRequest);
+    public function withPullRequest(PullRequestInterface $pullRequest): RangeInterface;
 }
