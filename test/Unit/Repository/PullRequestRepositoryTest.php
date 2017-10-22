@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Localheinz\GitHub\ChangeLog\Test\Unit\Repository;
 
 use Github\Api;
+use Localheinz\GitHub\ChangeLog\Exception;
 use Localheinz\GitHub\ChangeLog\Repository;
 use Localheinz\GitHub\ChangeLog\Resource;
 use PHPUnit\Framework;
@@ -71,7 +72,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         $this->assertSame($expectedItem->title, $pullRequest->title());
     }
 
-    public function testShowReturnsNullOnFailure()
+    public function testShowThrowsPullRequestNotFoundOnFailure()
     {
         $faker = $this->getFaker();
 
@@ -96,13 +97,19 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             $this->createCommitRepositoryMock()
         );
 
-        $pullRequest = $pullRequestRepository->show(
+        $this->expectException(Exception\PullRequestNotFound::class);
+        $this->expectExceptionMessage(\sprintf(
+            'Could not find pull request "%d" in "%s/%s".',
+            $number,
+            $owner,
+            $name
+        ));
+
+        $pullRequestRepository->show(
             $owner,
             $name,
             $number
         );
-
-        $this->assertNull($pullRequest);
     }
 
     public function testItemsDoesNotRequireAnEndReference()

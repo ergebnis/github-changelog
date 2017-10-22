@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Localheinz\GitHub\ChangeLog\Repository;
 
 use Github\Api;
+use Localheinz\GitHub\ChangeLog\Exception;
 use Localheinz\GitHub\ChangeLog\Resource;
 
 final class PullRequestRepository implements PullRequestRepositoryInterface
@@ -43,7 +44,11 @@ final class PullRequestRepository implements PullRequestRepositoryInterface
         );
 
         if (!\is_array($response)) {
-            return;
+            throw Exception\PullRequestNotFound::fromOwnerNameAndNumber(
+                $owner,
+                $name,
+                $number
+            );
         }
 
         return new Resource\PullRequest(
@@ -70,13 +75,13 @@ final class PullRequestRepository implements PullRequestRepositoryInterface
 
             $number = (int) $matches['number'];
 
-            $pullRequest = $this->show(
-                $owner,
-                $name,
-                $number
-            );
-
-            if (null === $pullRequest) {
+            try {
+                $pullRequest = $this->show(
+                    $owner,
+                    $name,
+                    $number
+                );
+            } catch (Exception\PullRequestNotFound $exception) {
                 return;
             }
 
