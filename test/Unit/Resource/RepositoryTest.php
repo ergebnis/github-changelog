@@ -88,44 +88,11 @@ final class RepositoryTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider providerInvalidName
-     *
-     * @param string $name
-     */
-    public function testConstructorRejectsInvalidName(string $name)
-    {
-        $faker = $this->faker();
-
-        $owner = $faker->slug();
-
-        $this->expectException(\InvalidArgumentException::class);
-
-        new Resource\Repository(
-            $owner,
-            $name
-        );
-    }
-
-    public function providerInvalidName(): \Generator
-    {
-        $values = [
-            'blank' => '  ',
-            'empty' => '',
-        ];
-
-        foreach ($values as $key => $value) {
-            yield $key => [
-                $value,
-            ];
-        }
-    }
-
-    /**
-     * @dataProvider providerValidName
+     * @dataProvider providerValidOwner
      *
      * @param string $owner
      */
-    public function testConstructorSetsValues(string $owner)
+    public function testConstructorSetsOwner(string $owner)
     {
         $faker = $this->faker();
 
@@ -140,7 +107,7 @@ final class RepositoryTest extends Framework\TestCase
         $this->assertSame($name, $repository->name());
     }
 
-    public function providerValidName(): \Generator
+    public function providerValidOwner(): \Generator
     {
         $faker = $this->faker();
 
@@ -164,6 +131,39 @@ final class RepositoryTest extends Framework\TestCase
                     $faker->randomNumber(),
                 ])
             ),
+        ];
+
+        foreach ($values as $key => $value) {
+            yield $key => [
+                $value,
+            ];
+        }
+    }
+
+    /**
+     * @dataProvider providerInvalidName
+     *
+     * @param string $name
+     */
+    public function testConstructorRejectsInvalidName(string $name)
+    {
+        $faker = $this->faker();
+
+        $owner = $faker->slug();
+
+        $this->expectException(\InvalidArgumentException::class);
+
+        new Resource\Repository(
+            $owner,
+            $name
+        );
+    }
+
+    public function providerInvalidName(): \Generator
+    {
+        $values = [
+            'blank' => '  ',
+            'empty' => '',
         ];
 
         foreach ($values as $key => $value) {
