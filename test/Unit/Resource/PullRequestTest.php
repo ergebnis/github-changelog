@@ -52,7 +52,7 @@ final class PullRequestTest extends Framework\TestCase
     public function providerInvalidNumber(): \Generator
     {
         return $this->provideDataFrom(
-            new DataProvider\InvalidIntegerish(),
+            new DataProvider\InvalidInteger(),
             new DataProvider\Elements([
                 0,
                 -1 * $this->getFaker()->numberBetween(1),

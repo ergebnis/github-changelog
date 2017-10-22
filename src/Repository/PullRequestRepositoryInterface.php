@@ -20,7 +20,7 @@ interface PullRequestRepositoryInterface
     /**
      * @param string $owner
      * @param string $name
-     * @param string $number
+     * @param int    $number
      *
      * @return null|Resource\PullRequestInterface
      */

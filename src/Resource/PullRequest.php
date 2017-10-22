@@ -18,7 +18,7 @@ use Assert;
 final class PullRequest implements PullRequestInterface
 {
     /**
-     * @var string
+     * @var int
      */
     private $number;
 
@@ -28,14 +28,14 @@ final class PullRequest implements PullRequestInterface
     private $title;
 
     /**
-     * @param string $number
+     * @param int    $number
      * @param string $title
      *
      * @throws \InvalidArgumentException
      */
     public function __construct($number, $title)
     {
-        Assert\that($number)->integerish()->greaterThan(0);
+        Assert\that($number)->integer()->greaterThan(0);
         Assert\that($title)->string();
 
         $this->number = $number;

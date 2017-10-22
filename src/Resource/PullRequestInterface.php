@@ -16,7 +16,7 @@ namespace Localheinz\GitHub\ChangeLog\Resource;
 interface PullRequestInterface
 {
     /**
-     * @return string
+     * @return int
      */
     public function number();
 
