@@ -212,7 +212,7 @@ final class GenerateCommandTest extends Framework\TestCase
                 $this->identicalTo($startReference),
                 $this->identicalTo($endReference)
             )
-            ->willReturn($this->createRangeMock([]));
+            ->willReturn($this->createRangeMock());
 
         $command = new Console\GenerateCommand(
             $this->createClientMock(),
