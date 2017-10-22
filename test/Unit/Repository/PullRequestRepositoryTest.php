@@ -33,7 +33,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $owner = $faker->userName;
+        $owner = $faker->slug();
         $name = $faker->slug();
 
         $api = $this->createPullRequestApiMock();
@@ -71,7 +71,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $owner = $faker->userName;
+        $owner = $faker->slug();
         $name = $faker->slug();
         $number = $faker->randomNumber();
 
@@ -111,7 +111,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $owner = $faker->userName;
+        $owner = $faker->slug();
         $name = $faker->slug();
         $startReference = $faker->sha1;
 
@@ -151,7 +151,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $owner = $faker->userName;
+        $owner = $faker->slug();
         $name = $faker->slug();
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
@@ -197,7 +197,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $owner = $faker->userName;
+        $owner = $faker->slug();
         $name = $faker->slug();
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
@@ -250,7 +250,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $owner = $faker->userName;
+        $owner = $faker->slug();
         $name = $faker->slug();
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
@@ -326,7 +326,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $owner = $faker->userName;
+        $owner = $faker->slug();
         $name = $faker->slug();
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;

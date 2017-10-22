@@ -196,7 +196,7 @@ final class GenerateCommandTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $owner = $faker->unique()->userName;
+        $owner = $faker->unique()->slug();
         $name = $faker->unique()->slug();
         $startReference = $faker->unique()->sha1;
         $endReference = $faker->unique()->sha1;
@@ -233,7 +233,7 @@ final class GenerateCommandTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $owner = $faker->userName;
+        $owner = $faker->slug();
         $name = $faker->slug();
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
@@ -269,7 +269,7 @@ final class GenerateCommandTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $owner = $faker->userName;
+        $owner = $faker->slug();
         $name = $faker->slug();
         $startReference = $faker->sha1;
 
@@ -304,7 +304,7 @@ final class GenerateCommandTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $owner = $faker->userName;
+        $owner = $faker->slug();
         $name = $faker->slug();
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
@@ -369,7 +369,7 @@ final class GenerateCommandTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $owner = $faker->userName;
+        $owner = $faker->slug();
         $name = $faker->slug();
         $startReference = $faker->sha1;
         $count = $faker->numberBetween(1, 5);
@@ -433,7 +433,7 @@ final class GenerateCommandTest extends Framework\TestCase
         $tester = new CommandTester($command);
 
         $exitCode = $tester->execute([
-            'owner' => $faker->unique()->userName,
+            'owner' => $faker->unique()->slug(),
             'repository' => $faker->unique()->slug(),
             'start-reference' => $faker->unique()->sha1,
             'end-reference' => $faker->unique()->sha1,

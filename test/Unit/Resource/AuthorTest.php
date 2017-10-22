@@ -35,7 +35,7 @@ final class AuthorTest extends Framework\TestCase
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        $login = $this->faker()->userName;
+        $login = $this->faker()->slug();
 
         new Resource\Author(
             $login,
@@ -63,7 +63,7 @@ final class AuthorTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $login = $faker->userName;
+        $login = $faker->slug();
         $htmlUrl = $faker->url;
 
         $author = new Resource\Author(
