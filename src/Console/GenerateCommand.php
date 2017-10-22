@@ -24,7 +24,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Stopwatch\Stopwatch;
 use Symfony\Component\Stopwatch\StopwatchEvent;
 
-class GenerateCommand extends Command
+final class GenerateCommand extends Command
 {
     /**
      * @var Client
