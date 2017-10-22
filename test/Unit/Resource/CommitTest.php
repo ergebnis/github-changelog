@@ -14,21 +14,21 @@ declare(strict_types=1);
 namespace Localheinz\GitHub\ChangeLog\Test\Unit\Resource;
 
 use Localheinz\GitHub\ChangeLog\Resource;
+use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
-use Refinery29\Test\Util\TestHelper;
 
 final class CommitTest extends Framework\TestCase
 {
-    use TestHelper;
+    use Helper;
 
     public function testIsFinal()
     {
-        $this->assertFinal(Resource\Commit::class);
+        $this->assertClassIsFinal(Resource\Commit::class);
     }
 
     public function testImplementsAuthorInterface()
     {
-        $this->assertImplements(Resource\CommitInterface::class, Resource\Commit::class);
+        $this->assertClassImplementsInterface(Resource\CommitInterface::class, Resource\Commit::class);
     }
 
     /**
@@ -40,7 +40,7 @@ final class CommitTest extends Framework\TestCase
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        $message = $this->getFaker()->sentence();
+        $message = $this->faker()->sentence();
 
         new Resource\Commit(
             $sha,
@@ -50,7 +50,7 @@ final class CommitTest extends Framework\TestCase
 
     public function providerInvalidSha(): \Generator
     {
-        $faker = $this->getFaker();
+        $faker = $this->faker();
 
         $values = [
             'md5' => $faker->md5,
@@ -68,7 +68,7 @@ final class CommitTest extends Framework\TestCase
 
     public function testConstructorSetsShaAndMessage()
     {
-        $faker = $this->getFaker();
+        $faker = $this->faker();
 
         $sha = $faker->sha1;
         $message = $faker->sentence();
@@ -84,7 +84,7 @@ final class CommitTest extends Framework\TestCase
 
     public function testEqualsReturnsFalseIfHashesAreDifferent()
     {
-        $faker = $this->getFaker();
+        $faker = $this->faker();
 
         $one = new Resource\Commit(
             $faker->unique()->sha1,
@@ -101,7 +101,7 @@ final class CommitTest extends Framework\TestCase
 
     public function testEqualsReturnsTrueIfHashesAreTheSame()
     {
-        $faker = $this->getFaker();
+        $faker = $this->faker();
 
         $sha = $faker->sha1;
 

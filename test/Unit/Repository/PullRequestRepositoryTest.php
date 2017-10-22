@@ -17,26 +17,26 @@ use Github\Api;
 use Localheinz\GitHub\ChangeLog\Exception;
 use Localheinz\GitHub\ChangeLog\Repository;
 use Localheinz\GitHub\ChangeLog\Resource;
+use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
-use Refinery29\Test\Util\TestHelper;
 
 final class PullRequestRepositoryTest extends Framework\TestCase
 {
-    use TestHelper;
+    use Helper;
 
     public function testIsFinal()
     {
-        $this->assertFinal(Repository\PullRequestRepository::class);
+        $this->assertClassIsFinal(Repository\PullRequestRepository::class);
     }
 
     public function testImplementsPullRequestRepositoryInterface()
     {
-        $this->assertImplements(Repository\PullRequestRepositoryInterface::class, Repository\PullRequestRepository::class);
+        $this->assertClassImplementsInterface(Repository\PullRequestRepositoryInterface::class, Repository\PullRequestRepository::class);
     }
 
     public function testShowReturnsPullRequestEntityWithIdAndTitleOnSuccess()
     {
-        $faker = $this->getFaker();
+        $faker = $this->faker();
 
         $owner = $faker->userName;
         $name = $faker->slug();
@@ -74,7 +74,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
 
     public function testShowThrowsPullRequestNotFoundOnFailure()
     {
-        $faker = $this->getFaker();
+        $faker = $this->faker();
 
         $owner = $faker->userName;
         $name = $faker->slug();
@@ -114,7 +114,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
 
     public function testItemsDoesNotRequireAnEndReference()
     {
-        $faker = $this->getFaker();
+        $faker = $this->faker();
 
         $owner = $faker->userName;
         $name = $faker->slug();
@@ -154,7 +154,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
 
     public function testItemsDoesNotTouchRangeIfNoCommitsWereFound()
     {
-        $faker = $this->getFaker();
+        $faker = $this->faker();
 
         $owner = $faker->userName;
         $name = $faker->slug();
@@ -200,7 +200,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
 
     public function testItemsDoesNotTouchRangeIfNoMergeCommitsWereFound()
     {
-        $faker = $this->getFaker();
+        $faker = $this->faker();
 
         $owner = $faker->userName;
         $name = $faker->slug();
@@ -253,7 +253,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
 
     public function testItemsFetchesPullRequestIfMergeCommitWasFound()
     {
-        $faker = $this->getFaker();
+        $faker = $this->faker();
 
         $owner = $faker->userName;
         $name = $faker->slug();
@@ -329,7 +329,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
 
     public function testItemsHandlesMergeCommitWherePullRequestWasNotFound()
     {
-        $faker = $this->getFaker();
+        $faker = $this->faker();
 
         $owner = $faker->userName;
         $name = $faker->slug();
@@ -423,7 +423,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
 
     private function pullRequestItem(): \stdClass
     {
-        $faker = $this->getFaker();
+        $faker = $this->faker();
 
         $item = new \stdClass();
 

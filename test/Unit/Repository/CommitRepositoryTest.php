@@ -17,26 +17,26 @@ use Github\Api;
 use Localheinz\GitHub\ChangeLog\Exception\ReferenceNotFound;
 use Localheinz\GitHub\ChangeLog\Repository;
 use Localheinz\GitHub\ChangeLog\Resource;
+use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
-use Refinery29\Test\Util\TestHelper;
 
 final class CommitRepositoryTest extends Framework\TestCase
 {
-    use TestHelper;
+    use Helper;
 
     public function testIsFinal()
     {
-        $this->assertFinal(Repository\CommitRepository::class);
+        $this->assertClassIsFinal(Repository\CommitRepository::class);
     }
 
     public function testImplementsCommitRepositoryInterface()
     {
-        $this->assertImplements(Repository\CommitRepositoryInterface::class, Repository\CommitRepository::class);
+        $this->assertClassImplementsInterface(Repository\CommitRepositoryInterface::class, Repository\CommitRepository::class);
     }
 
     public function testShowReturnsCommitEntityWithShaAndMessageOnSuccess()
     {
-        $faker = $this->getFaker();
+        $faker = $this->faker();
 
         $owner = $faker->userName;
         $name = $faker->slug();
@@ -72,7 +72,7 @@ final class CommitRepositoryTest extends Framework\TestCase
 
     public function testShowThrowsCommitNotFoundOnFailure()
     {
-        $faker = $this->getFaker();
+        $faker = $this->faker();
 
         $owner = $faker->userName;
         $name = $faker->slug();
@@ -103,7 +103,7 @@ final class CommitRepositoryTest extends Framework\TestCase
 
     public function testAllReturnsEmptyArrayOnFailure()
     {
-        $faker = $this->getFaker();
+        $faker = $this->faker();
 
         $owner = $faker->userName;
         $name = $faker->slug();
@@ -137,7 +137,7 @@ final class CommitRepositoryTest extends Framework\TestCase
 
     public function testAllSetsParamsPerPageTo250()
     {
-        $faker = $this->getFaker();
+        $faker = $this->faker();
 
         $owner = $faker->userName;
         $name = $faker->slug();
@@ -170,7 +170,7 @@ final class CommitRepositoryTest extends Framework\TestCase
 
     public function testAllStillAllowsSettingPerPage()
     {
-        $faker = $this->getFaker();
+        $faker = $this->faker();
 
         $owner = $faker->userName;
         $name = $faker->slug();
@@ -205,7 +205,7 @@ final class CommitRepositoryTest extends Framework\TestCase
 
     public function testAllReturnsRange()
     {
-        $faker = $this->getFaker();
+        $faker = $this->faker();
 
         $owner = $faker->userName;
         $name = $faker->slug();
@@ -250,7 +250,7 @@ final class CommitRepositoryTest extends Framework\TestCase
 
     public function testItemsDoesNotFetchCommitsIfStartAndEndReferencesAreTheSame()
     {
-        $faker = $this->getFaker();
+        $faker = $this->faker();
 
         $owner = $faker->userName;
         $name = $faker->slug();
@@ -280,7 +280,7 @@ final class CommitRepositoryTest extends Framework\TestCase
 
     public function testItemsDoesNotFetchCommitsIfStartCommitCouldNotBeFound()
     {
-        $faker = $this->getFaker();
+        $faker = $this->faker();
 
         $owner = $faker->userName;
         $name = $faker->slug();
@@ -319,7 +319,7 @@ final class CommitRepositoryTest extends Framework\TestCase
 
     public function testItemsDoesNotFetchCommitsIfEndCommitCouldNotBeFound()
     {
-        $faker = $this->getFaker();
+        $faker = $this->faker();
 
         $owner = $faker->userName;
         $name = $faker->slug();
@@ -368,7 +368,7 @@ final class CommitRepositoryTest extends Framework\TestCase
 
     public function testItemsFetchesCommitsUsingShaFromEndCommit()
     {
-        $faker = $this->getFaker();
+        $faker = $this->faker();
 
         $owner = $faker->userName;
         $name = $faker->slug();
@@ -422,7 +422,7 @@ final class CommitRepositoryTest extends Framework\TestCase
 
     public function testItemsFetchesCommitsIfEndReferenceIsNotGiven()
     {
-        $faker = $this->getFaker();
+        $faker = $this->faker();
 
         $owner = $faker->userName;
         $name = $faker->slug();
@@ -462,7 +462,7 @@ final class CommitRepositoryTest extends Framework\TestCase
 
     public function testItemsReturnsRangeOfCommitsFromEndToStartExcludingStart()
     {
-        $faker = $this->getFaker();
+        $faker = $this->faker();
 
         $owner = $faker->userName;
         $name = $faker->slug();
@@ -558,7 +558,7 @@ final class CommitRepositoryTest extends Framework\TestCase
 
     public function testItemsFetchesMoreCommitsIfEndIsNotContainedInFirstBatch()
     {
-        $faker = $this->getFaker();
+        $faker = $this->faker();
 
         $owner = $faker->userName;
         $name = $faker->slug();
@@ -686,7 +686,7 @@ final class CommitRepositoryTest extends Framework\TestCase
 
     private function commitItem(string $sha = null, string $message = null): \stdClass
     {
-        $faker = $this->getFaker();
+        $faker = $this->faker();
 
         $data = new \stdClass();
 

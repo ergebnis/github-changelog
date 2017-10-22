@@ -17,14 +17,14 @@ use Github\Client;
 use Localheinz\GitHub\ChangeLog\Console;
 use Localheinz\GitHub\ChangeLog\Repository;
 use Localheinz\GitHub\ChangeLog\Resource;
+use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
-use Refinery29\Test\Util\TestHelper;
 use Symfony\Component\Console\Input;
 use Symfony\Component\Console\Tester\CommandTester;
 
 final class GenerateCommandTest extends Framework\TestCase
 {
-    use TestHelper;
+    use Helper;
 
     public function testHasName()
     {
@@ -158,7 +158,7 @@ final class GenerateCommandTest extends Framework\TestCase
 
     public function testExecuteAuthenticatesIfTokenOptionIsGiven()
     {
-        $authToken = $this->getFaker()->password();
+        $authToken = $this->faker()->password();
 
         $client = $this->createClientMock();
 
@@ -194,7 +194,7 @@ final class GenerateCommandTest extends Framework\TestCase
 
     public function testExecuteDelegatesToPullRequestRepository()
     {
-        $faker = $this->getFaker();
+        $faker = $this->faker();
 
         $owner = $faker->unique()->userName;
         $name = $faker->unique()->slug();
@@ -231,7 +231,7 @@ final class GenerateCommandTest extends Framework\TestCase
 
     public function testExecuteRendersMessageIfNoPullRequestsWereFound()
     {
-        $faker = $this->getFaker();
+        $faker = $this->faker();
 
         $owner = $faker->userName;
         $name = $faker->slug();
@@ -267,7 +267,7 @@ final class GenerateCommandTest extends Framework\TestCase
 
     public function testExecuteRendersDifferentMessageIfNoPullRequestsWereFoundAndNoEndReferenceWasGiven()
     {
-        $faker = $this->getFaker();
+        $faker = $this->faker();
 
         $owner = $faker->userName;
         $name = $faker->slug();
@@ -302,7 +302,7 @@ final class GenerateCommandTest extends Framework\TestCase
 
     public function testExecuteRendersPullRequestsWithTemplate()
     {
-        $faker = $this->getFaker();
+        $faker = $this->faker();
 
         $owner = $faker->userName;
         $name = $faker->slug();
@@ -366,7 +366,7 @@ final class GenerateCommandTest extends Framework\TestCase
 
     public function testExecuteRendersDifferentMessageWhenNoEndReferenceWasGiven()
     {
-        $faker = $this->getFaker();
+        $faker = $this->faker();
 
         $owner = $faker->userName;
         $name = $faker->slug();
@@ -407,7 +407,7 @@ final class GenerateCommandTest extends Framework\TestCase
 
     public function testExecuteHandlesExceptionsThrownWhenFetchingPullRequests()
     {
-        $faker = $this->getFaker();
+        $faker = $this->faker();
 
         $exception = new \Exception('Wait, this should not happen!');
 
@@ -476,7 +476,7 @@ final class GenerateCommandTest extends Framework\TestCase
 
     private function pullRequest(): Resource\PullRequestInterface
     {
-        $faker = $this->getFaker();
+        $faker = $this->faker();
 
         $number = $faker->unique()->numberBetween(1);
         $title = $faker->unique()->sentence();

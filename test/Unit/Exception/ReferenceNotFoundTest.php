@@ -15,31 +15,31 @@ namespace Localheinz\GitHub\ChangeLog\Test\Unit\Exception;
 
 use Localheinz\GitHub\ChangeLog\Exception\ExceptionInterface;
 use Localheinz\GitHub\ChangeLog\Exception\ReferenceNotFound;
+use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
-use Refinery29\Test\Util\TestHelper;
 
 final class ReferenceNotFoundTest extends Framework\TestCase
 {
-    use TestHelper;
+    use Helper;
 
     public function testIsFinal()
     {
-        $this->assertFinal(ReferenceNotFound::class);
+        $this->assertClassIsFinal(ReferenceNotFound::class);
     }
 
     public function testExtendsRuntimeException()
     {
-        $this->assertExtends(\RuntimeException::class, ReferenceNotFound::class);
+        $this->assertClassExtends(\RuntimeException::class, ReferenceNotFound::class);
     }
 
     public function testImplementsExceptionInterface()
     {
-        $this->assertImplements(ExceptionInterface::class, ReferenceNotFound::class);
+        $this->assertClassImplementsInterface(ExceptionInterface::class, ReferenceNotFound::class);
     }
 
     public function testFromOwnerRepositoryAndReferenceCreatesException()
     {
-        $faker = $this->getFaker();
+        $faker = $this->faker();
 
         $owner = $faker->userName;
         $name = $faker->slug();

@@ -14,21 +14,21 @@ declare(strict_types=1);
 namespace Localheinz\GitHub\ChangeLog\Test\Unit\Resource;
 
 use Localheinz\GitHub\ChangeLog\Resource;
+use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
-use Refinery29\Test\Util\TestHelper;
 
 final class RangeTest extends Framework\TestCase
 {
-    use TestHelper;
+    use Helper;
 
     public function testIsFinal()
     {
-        $this->assertFinal(Resource\Range::class);
+        $this->assertClassIsFinal(Resource\Range::class);
     }
 
     public function testImplementsRangeInterface()
     {
-        $this->assertImplements(Resource\RangeInterface::class, Resource\Range::class);
+        $this->assertClassImplementsInterface(Resource\RangeInterface::class, Resource\Range::class);
     }
 
     public function testDefaults()
