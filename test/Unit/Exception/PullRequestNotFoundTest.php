@@ -22,11 +22,6 @@ final class PullRequestNotFoundTest extends Framework\TestCase
 {
     use Helper;
 
-    public function testIsFinal()
-    {
-        $this->assertClassIsFinal(PullRequestNotFound::class);
-    }
-
     public function testExtendsRuntimeException()
     {
         $this->assertClassExtends(\RuntimeException::class, PullRequestNotFound::class);

@@ -21,11 +21,6 @@ final class AuthorTest extends Framework\TestCase
 {
     use Helper;
 
-    public function testIsFinal()
-    {
-        $this->assertClassIsFinal(Resource\Author::class);
-    }
-
     public function testImplementsAuthorInterface()
     {
         $this->assertClassImplementsInterface(Resource\AuthorInterface::class, Resource\Author::class);

@@ -21,11 +21,6 @@ final class RangeTest extends Framework\TestCase
 {
     use Helper;
 
-    public function testIsFinal()
-    {
-        $this->assertClassIsFinal(Resource\Range::class);
-    }
-
     public function testImplementsRangeInterface()
     {
         $this->assertClassImplementsInterface(Resource\RangeInterface::class, Resource\Range::class);
