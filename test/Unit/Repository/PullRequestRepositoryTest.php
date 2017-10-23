@@ -33,7 +33,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $repository = new Resource\Repository(
+        $repository = Resource\Repository::fromOwnerAndName(
             $faker->slug(),
             $faker->slug()
         );
@@ -74,7 +74,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
 
         $number = $faker->numberBetween(1);
 
-        $repository = new Resource\Repository(
+        $repository = Resource\Repository::fromOwnerAndName(
             $faker->slug(),
             $faker->slug()
         );
@@ -113,7 +113,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $repository = new Resource\Repository(
+        $repository = Resource\Repository::fromOwnerAndName(
             $faker->slug(),
             $faker->slug()
         );
@@ -154,7 +154,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $repository = new Resource\Repository(
+        $repository = Resource\Repository::fromOwnerAndName(
             $faker->slug(),
             $faker->slug()
         );
@@ -201,7 +201,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $repository = new Resource\Repository(
+        $repository = Resource\Repository::fromOwnerAndName(
             $faker->slug(),
             $faker->slug()
         );
@@ -255,7 +255,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $repository = new Resource\Repository(
+        $repository = Resource\Repository::fromOwnerAndName(
             $faker->slug(),
             $faker->slug()
         );
@@ -332,7 +332,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $repository = new Resource\Repository(
+        $repository = Resource\Repository::fromOwnerAndName(
             $faker->slug(),
             $faker->slug()
         );

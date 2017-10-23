@@ -33,7 +33,7 @@ final class CommitRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $repository = new Resource\Repository(
+        $repository = Resource\Repository::fromOwnerAndName(
             $faker->slug(),
             $faker->slug()
         );
@@ -71,7 +71,7 @@ final class CommitRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $repository = new Resource\Repository(
+        $repository = Resource\Repository::fromOwnerAndName(
             $faker->slug(),
             $faker->slug()
         );
@@ -104,7 +104,7 @@ final class CommitRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $repository = new Resource\Repository(
+        $repository = Resource\Repository::fromOwnerAndName(
             $faker->slug(),
             $faker->slug()
         );
@@ -137,7 +137,7 @@ final class CommitRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $repository = new Resource\Repository(
+        $repository = Resource\Repository::fromOwnerAndName(
             $faker->slug(),
             $faker->slug()
         );
@@ -169,7 +169,7 @@ final class CommitRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $repository = new Resource\Repository(
+        $repository = Resource\Repository::fromOwnerAndName(
             $faker->slug(),
             $faker->slug()
         );
@@ -203,7 +203,7 @@ final class CommitRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $repository = new Resource\Repository(
+        $repository = Resource\Repository::fromOwnerAndName(
             $faker->slug(),
             $faker->slug()
         );
@@ -251,7 +251,7 @@ final class CommitRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $repository = new Resource\Repository(
+        $repository = Resource\Repository::fromOwnerAndName(
             $faker->slug(),
             $faker->slug()
         );
@@ -283,7 +283,7 @@ final class CommitRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $repository = new Resource\Repository(
+        $repository = Resource\Repository::fromOwnerAndName(
             $faker->slug(),
             $faker->slug()
         );
@@ -324,7 +324,7 @@ final class CommitRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $repository = new Resource\Repository(
+        $repository = Resource\Repository::fromOwnerAndName(
             $faker->slug(),
             $faker->slug()
         );
@@ -375,7 +375,7 @@ final class CommitRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $repository = new Resource\Repository(
+        $repository = Resource\Repository::fromOwnerAndName(
             $faker->slug(),
             $faker->slug()
         );
@@ -431,7 +431,7 @@ final class CommitRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $repository = new Resource\Repository(
+        $repository = Resource\Repository::fromOwnerAndName(
             $faker->slug(),
             $faker->slug()
         );
@@ -473,7 +473,7 @@ final class CommitRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $repository = new Resource\Repository(
+        $repository = Resource\Repository::fromOwnerAndName(
             $faker->slug(),
             $faker->slug()
         );
@@ -571,7 +571,7 @@ final class CommitRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $repository = new Resource\Repository(
+        $repository = Resource\Repository::fromOwnerAndName(
             $faker->slug(),
             $faker->slug()
         );

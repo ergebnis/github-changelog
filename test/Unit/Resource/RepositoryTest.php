@@ -31,7 +31,7 @@ final class RepositoryTest extends Framework\TestCase
      *
      * @param string $owner
      */
-    public function testConstructorRejectsInvalidOwner(string $owner)
+    public function testFromOwnerAndNameRejectsInvalidOwner(string $owner)
     {
         $faker = $this->faker();
 
@@ -39,7 +39,7 @@ final class RepositoryTest extends Framework\TestCase
 
         $this->expectException(\InvalidArgumentException::class);
 
-        new Resource\Repository(
+        Resource\Repository::fromOwnerAndName(
             $owner,
             $name
         );
@@ -59,7 +59,7 @@ final class RepositoryTest extends Framework\TestCase
      *
      * @param string $name
      */
-    public function testConstructorRejectsInvalidName(string $name)
+    public function testFromOwnerAndNameRejectsInvalidName(string $name)
     {
         $faker = $this->faker();
 
@@ -67,7 +67,7 @@ final class RepositoryTest extends Framework\TestCase
 
         $this->expectException(\InvalidArgumentException::class);
 
-        new Resource\Repository(
+        Resource\Repository::fromOwnerAndName(
             $owner,
             $name
         );
@@ -88,13 +88,14 @@ final class RepositoryTest extends Framework\TestCase
      * @param string $owner
      * @param string $name
      */
-    public function testConstructorSetsValues(string $owner, string $name)
+    public function testFromOwnerAndNameReturnsRepository(string $owner, string $name)
     {
-        $repository = new Resource\Repository(
+        $repository = Resource\Repository::fromOwnerAndName(
             $owner,
             $name
         );
 
+        $this->assertInstanceOf(Resource\RepositoryInterface::class, $repository);
         $this->assertSame($owner, $repository->owner());
         $this->assertSame($name, $repository->name());
     }
@@ -106,7 +107,7 @@ final class RepositoryTest extends Framework\TestCase
         $owner = $faker->slug();
         $name = $faker->slug();
 
-        $repository = new Resource\Repository(
+        $repository = Resource\Repository::fromOwnerAndName(
             $owner,
             $name
         );

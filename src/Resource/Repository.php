@@ -27,17 +27,8 @@ final class Repository implements RepositoryInterface
      */
     private $name;
 
-    /**
-     * @param string $owner
-     * @param string $name
-     *
-     * @throws \InvalidArgumentException
-     */
-    public function __construct(string $owner, string $name)
+    private function __construct(string $owner, string $name)
     {
-        Assert\that($owner)->regex(self::ownerRegEx());
-        Assert\that($name)->regex(self::nameRegEx());
-
         $this->owner = $owner;
         $this->name = $name;
     }
@@ -52,11 +43,30 @@ final class Repository implements RepositoryInterface
     }
 
     /**
+     * @param string $owner
+     * @param string $name
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return self
+     */
+    public static function fromOwnerAndName(string $owner, string $name): self
+    {
+        Assert\that($owner)->regex(self::ownerRegEx());
+        Assert\that($name)->regex(self::nameRegEx());
+
+        return new self(
+            $owner,
+            $name
+        );
+    }
+
+    /**
      * @param string $string
      *
      * @throws \InvalidArgumentException
      *
-     * @return Repository
+     * @return self
      */
     public static function fromString(string $string): self
     {
