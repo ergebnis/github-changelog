@@ -42,6 +42,15 @@ final class Repository implements RepositoryInterface
         $this->name = $name;
     }
 
+    public function __toString(): string
+    {
+        return \sprintf(
+            '%s/%s',
+            $this->owner,
+            $this->name
+        );
+    }
+
     /**
      * @param string $string
      *

@@ -99,6 +99,27 @@ final class RepositoryTest extends Framework\TestCase
         $this->assertSame($name, $repository->name());
     }
 
+    public function testToStringReturnsStringRepresentation()
+    {
+        $faker = $this->faker();
+
+        $owner = $faker->slug();
+        $name = $faker->slug();
+
+        $repository = new Resource\Repository(
+            $owner,
+            $name
+        );
+
+        $expected = \sprintf(
+            '%s/%s',
+            $owner,
+            $name
+        );
+
+        $this->assertSame($expected, $repository->__toString());
+    }
+
     /**
      * @dataProvider providerInvalidString
      *

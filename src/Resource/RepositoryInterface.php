@@ -15,6 +15,8 @@ namespace Localheinz\GitHub\ChangeLog\Resource;
 
 interface RepositoryInterface
 {
+    public function __toString(): string;
+
     public function owner(): string;
 
     public function name(): string;
