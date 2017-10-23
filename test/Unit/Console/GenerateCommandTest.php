@@ -129,13 +129,13 @@ final class GenerateCommandTest extends Framework\TestCase
         $options = [
             'auth-token' => [
                 'a',
-                false,
+                true,
                 'The GitHub token',
                 null,
             ],
             'template' => [
                 't',
-                false,
+                true,
                 'The template to use for rendering a pull request',
                 '- %title% (#%number%)',
             ],
