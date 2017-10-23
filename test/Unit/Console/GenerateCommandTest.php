@@ -73,13 +73,9 @@ final class GenerateCommandTest extends Framework\TestCase
     public function providerArgument(): \Generator
     {
         $arguments = [
-            'owner' => [
-                true,
-                'The owner, e.g., "localheinz"',
-            ],
             'repository' => [
                 true,
-                'The repository, e.g. "github-changelog"',
+                'The repository, e.g. "localheinz/github-changelog"',
             ],
             'start-reference' => [
                 true,
@@ -185,21 +181,21 @@ final class GenerateCommandTest extends Framework\TestCase
         $tester = new CommandTester($command);
 
         $tester->execute([
-            'owner' => 'localheinz',
-            'repository' => 'github-changelog',
+            'repository' => 'localheinz/github-changelog',
             'start-reference' => '0.1.0',
             '--auth-token' => $authToken,
         ]);
     }
 
-    public function testExecuteFailsIfOwnerAndRepositoryAreInvalid()
+    public function testExecuteFailsIfRepositoryIsInvalid()
     {
-        $owner = '🤓';
-        $repository = '🤣';
+        $repository = $this->repositoryFrom(
+            '🤓',
+            '🤣'
+        );
 
         $expectedMessage = \sprintf(
-            'Owner "%s" and repository "%s" appear to be invalid.',
-            $owner,
+            'Repository "%s" appears to be invalid.',
             $repository
         );
 
@@ -211,7 +207,6 @@ final class GenerateCommandTest extends Framework\TestCase
         $tester = new CommandTester($command);
 
         $exitCode = $tester->execute([
-            'owner' => $owner,
             'repository' => $repository,
             'start-reference' => '0.1.0',
         ]);
@@ -226,8 +221,8 @@ final class GenerateCommandTest extends Framework\TestCase
 
         $owner = $faker->slug();
         $name = $faker->slug();
-        $startReference = $faker->unique()->sha1;
-        $endReference = $faker->unique()->sha1;
+        $startReference = $faker->sha1;
+        $endReference = $faker->sha1;
 
         $pullRequestRepository = $this->createPullRequestRepositoryMock();
 
@@ -255,8 +250,10 @@ final class GenerateCommandTest extends Framework\TestCase
         $tester = new CommandTester($command);
 
         $tester->execute([
-            'owner' => $owner,
-            'repository' => $name,
+            'repository' => $this->repositoryFrom(
+                $owner,
+                $name
+            ),
             'start-reference' => $startReference,
             'end-reference' => $endReference,
         ]);
@@ -265,11 +262,6 @@ final class GenerateCommandTest extends Framework\TestCase
     public function testExecuteRendersMessageIfNoPullRequestsWereFound()
     {
         $faker = $this->faker();
-
-        $owner = $faker->slug();
-        $name = $faker->slug();
-        $startReference = $faker->sha1;
-        $endReference = $faker->sha1;
 
         $expectedMessage = 'Could not find any pull requests';
 
@@ -288,10 +280,12 @@ final class GenerateCommandTest extends Framework\TestCase
         $tester = new CommandTester($command);
 
         $exitCode = $tester->execute([
-            'owner' => $owner,
-            'repository' => $name,
-            'start-reference' => $startReference,
-            'end-reference' => $endReference,
+            'repository' => $this->repositoryFrom(
+                $faker->slug(),
+                $faker->slug()
+            ),
+            'start-reference' => $faker->sha1,
+            'end-reference' => $faker->sha1,
         ]);
 
         $this->assertSame(0, $exitCode);
@@ -302,10 +296,6 @@ final class GenerateCommandTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $owner = $faker->slug();
-        $name = $faker->slug();
-        $startReference = $faker->sha1;
-
         $expectedMessage = 'Could not find any pull requests';
 
         $pullRequestRepository = $this->createPullRequestRepositoryMock();
@@ -323,9 +313,11 @@ final class GenerateCommandTest extends Framework\TestCase
         $tester = new CommandTester($command);
 
         $exitCode = $tester->execute([
-            'owner' => $owner,
-            'repository' => $name,
-            'start-reference' => $startReference,
+            'repository' => $this->repositoryFrom(
+                $faker->slug(),
+                $faker->slug()
+            ),
+            'start-reference' => $faker->sha1,
             'end-reference' => null,
         ]);
 
@@ -337,10 +329,6 @@ final class GenerateCommandTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $owner = $faker->slug();
-        $name = $faker->slug();
-        $startReference = $faker->sha1;
-        $endReference = $faker->sha1;
         $count = $faker->numberBetween(1, 5);
 
         $pullRequests = $this->pullRequests($count);
@@ -384,10 +372,12 @@ final class GenerateCommandTest extends Framework\TestCase
         $tester = new CommandTester($command);
 
         $exitCode = $tester->execute([
-            'owner' => $owner,
-            'repository' => $name,
-            'start-reference' => $startReference,
-            'end-reference' => $endReference,
+            'repository' => $this->repositoryFrom(
+                $faker->slug(),
+                $faker->slug()
+            ),
+            'start-reference' => $faker->sha1,
+            'end-reference' => $faker->sha1,
             '--template' => $template,
         ]);
 
@@ -402,9 +392,6 @@ final class GenerateCommandTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $owner = $faker->slug();
-        $name = $faker->slug();
-        $startReference = $faker->sha1;
         $count = $faker->numberBetween(1, 5);
 
         $pullRequests = $this->pullRequests($count);
@@ -430,9 +417,11 @@ final class GenerateCommandTest extends Framework\TestCase
         $tester = new CommandTester($command);
 
         $exitCode = $tester->execute([
-            'owner' => $owner,
-            'repository' => $name,
-            'start-reference' => $startReference,
+            'repository' => $this->repositoryFrom(
+                $faker->slug(),
+                $faker->slug()
+            ),
+            'start-reference' => $faker->sha1,
             'end-reference' => null,
         ]);
 
@@ -466,10 +455,12 @@ final class GenerateCommandTest extends Framework\TestCase
         $tester = new CommandTester($command);
 
         $exitCode = $tester->execute([
-            'owner' => $faker->unique()->slug(),
-            'repository' => $faker->unique()->slug(),
-            'start-reference' => $faker->unique()->sha1,
-            'end-reference' => $faker->unique()->sha1,
+            'repository' => $this->repositoryFrom(
+                $faker->slug(),
+                $faker->slug()
+            ),
+            'start-reference' => $faker->sha1,
+            'end-reference' => $faker->sha1,
         ]);
 
         $this->assertSame(1, $exitCode);
@@ -536,5 +527,14 @@ final class GenerateCommandTest extends Framework\TestCase
         }
 
         return $pullRequests;
+    }
+
+    private function repositoryFrom(string $owner, string $name): string
+    {
+        return \sprintf(
+            '%s/%s',
+            $owner,
+            $name
+        );
     }
 }

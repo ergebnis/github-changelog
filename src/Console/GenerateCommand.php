@@ -56,14 +56,9 @@ final class GenerateCommand extends Command
             ->setName('generate')
             ->setDescription('Generates a changelog from merged pull requests found between commit references')
             ->addArgument(
-                'owner',
-                Input\InputArgument::REQUIRED,
-                'The owner, e.g., "localheinz"'
-            )
-            ->addArgument(
                 'repository',
                 Input\InputArgument::REQUIRED,
-                'The repository, e.g. "github-changelog"'
+                'The repository, e.g. "localheinz/github-changelog"'
             )
             ->addArgument(
                 'start-reference',
@@ -111,14 +106,10 @@ final class GenerateCommand extends Command
         }
 
         try {
-            $repository = new Resource\Repository(
-                $input->getArgument('owner'),
-                $input->getArgument('repository')
-            );
+            $repository = Resource\Repository::fromString($input->getArgument('repository'));
         } catch (\InvalidArgumentException $exception) {
             $io->error(\sprintf(
-                'Owner "%s" and repository "%s" appear to be invalid.',
-                $input->getArgument('owner'),
+                'Repository "%s" appears to be invalid.',
                 $input->getArgument('repository')
             ));
 
