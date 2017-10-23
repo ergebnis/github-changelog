@@ -170,7 +170,7 @@ final class CommitRepositoryTest extends Framework\TestCase
         $owner = $faker->slug();
         $name = $faker->slug();
         $sha = $faker->sha1;
-        $perPage = $faker->randomNumber();
+        $perPage = $faker->numberBetween(1);
 
         $commitApi = $this->createCommitApiMock();
 

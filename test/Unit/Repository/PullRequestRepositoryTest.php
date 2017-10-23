@@ -73,7 +73,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
 
         $owner = $faker->slug();
         $name = $faker->slug();
-        $number = $faker->randomNumber();
+        $number = $faker->numberBetween(1);
 
         $api = $this->createPullRequestApiMock();
 
@@ -422,7 +422,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
 
         $item = new \stdClass();
 
-        $item->number = $faker->unique()->randomNumber();
+        $item->number = $faker->unique()->numberBetween(1);
         $item->title = $faker->unique()->sentence();
 
         return $item;
