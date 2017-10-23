@@ -47,6 +47,188 @@ final class RepositoryTest extends Framework\TestCase
 
     public function providerInvalidOwner(): \Generator
     {
+        foreach ($this->invalidOwners() as $key => $value) {
+            yield $key => [
+                $value,
+            ];
+        }
+    }
+
+    /**
+     * @dataProvider providerValidOwner
+     *
+     * @param string $owner
+     */
+    public function testConstructorSetsOwner(string $owner)
+    {
+        $faker = $this->faker();
+
+        $name = $faker->slug();
+
+        $repository = new Resource\Repository(
+            $owner,
+            $name
+        );
+
+        $this->assertSame($owner, $repository->owner());
+        $this->assertSame($name, $repository->name());
+    }
+
+    public function providerValidOwner(): \Generator
+    {
+        foreach ($this->validOwners() as $key => $value) {
+            yield $key => [
+                $value,
+            ];
+        }
+    }
+
+    /**
+     * @dataProvider providerInvalidName
+     *
+     * @param string $name
+     */
+    public function testConstructorRejectsInvalidName(string $name)
+    {
+        $faker = $this->faker();
+
+        $owner = $faker->slug();
+
+        $this->expectException(\InvalidArgumentException::class);
+
+        new Resource\Repository(
+            $owner,
+            $name
+        );
+    }
+
+    public function providerInvalidName(): \Generator
+    {
+        foreach ($this->invalidNames() as $key => $value) {
+            yield $key => [
+                $value,
+            ];
+        }
+    }
+
+    /**
+     * @dataProvider providerValidName
+     *
+     * @param string $name
+     */
+    public function testConstructorSetsName(string $name)
+    {
+        $faker = $this->faker();
+
+        $owner = $faker->slug();
+
+        $repository = new Resource\Repository(
+            $owner,
+            $name
+        );
+
+        $this->assertSame($owner, $repository->owner());
+        $this->assertSame($name, $repository->name());
+    }
+
+    public function providerValidName(): \Generator
+    {
+        foreach ($this->validNames() as $key => $value) {
+            yield $key => [
+                $value,
+            ];
+        }
+    }
+
+    /**
+     * @dataProvider providerInvalidString
+     *
+     * @param string $string
+     */
+    public function testFromStringRejectsInvalidStrings(string $string)
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        Resource\Repository::fromString($string);
+    }
+
+    public function providerInvalidString(): \Generator
+    {
+        foreach ($this->invalidOwners() as $keyOne => $owner) {
+            foreach ($this->invalidNames() as $keyTwo => $name) {
+                $key = \sprintf(
+                    '%s/%s',
+                    $keyOne,
+                    $keyTwo
+                );
+
+                yield $key => [
+                    \sprintf(
+                        '%s/%s',
+                        $owner,
+                        $name
+                    ),
+                ];
+            }
+        }
+
+        foreach ($this->validOwners() as $key => $owner) {
+            yield $key => [
+                $owner,
+            ];
+        }
+
+        foreach ($this->validNames()  as $key => $name) {
+            yield $key => [
+                $name,
+            ];
+        }
+    }
+
+    /**
+     * @dataProvider providerValidOwnerAndName
+     *
+     * @param string $owner
+     * @param string $name
+     */
+    public function testFromStringReturnsRepository(string $owner, string $name)
+    {
+        $string = \sprintf(
+            '%s/%s',
+            $owner,
+            $name
+        );
+
+        $repository = Resource\Repository::fromString($string);
+
+        $this->assertInstanceOf(Resource\RepositoryInterface::class, $repository);
+        $this->assertSame($owner, $repository->owner());
+        $this->assertSame($name, $repository->name());
+    }
+
+    public function providerValidOwnerAndName(): \Generator
+    {
+        foreach ($this->validOwners() as $keyOne => $owner) {
+            foreach ($this->validNames() as $keyTwo => $name) {
+                $key = \sprintf(
+                    '%s/%s',
+                    $keyOne,
+                    $keyTwo
+                );
+
+                yield $key => [
+                    $owner,
+                    $name,
+                ];
+            }
+        }
+    }
+
+    /**
+     * @return string[]
+     */
+    private function invalidOwners(): array
+    {
         $faker = $this->faker();
 
         $values = [
@@ -82,38 +264,17 @@ final class RepositoryTest extends Framework\TestCase
             ])),
         ];
 
-        foreach ($values as $key => $value) {
-            yield $key => [
-                $value,
-            ];
-        }
+        return $values;
     }
 
     /**
-     * @dataProvider providerValidOwner
-     *
-     * @param string $owner
+     * @return string[]
      */
-    public function testConstructorSetsOwner(string $owner)
+    private function validOwners(): array
     {
         $faker = $this->faker();
 
-        $name = $faker->slug();
-
-        $repository = new Resource\Repository(
-            $owner,
-            $name
-        );
-
-        $this->assertSame($owner, $repository->owner());
-        $this->assertSame($name, $repository->name());
-    }
-
-    public function providerValidOwner(): \Generator
-    {
-        $faker = $this->faker();
-
-        $values = [
+        return [
             'digit' => $faker->randomDigitNotNull,
             'letter' => $faker->randomLetter,
             'word' => $faker->word,
@@ -134,36 +295,14 @@ final class RepositoryTest extends Framework\TestCase
                 ])
             ),
         ];
-
-        foreach ($values as $key => $value) {
-            yield $key => [
-                $value,
-            ];
-        }
     }
 
     /**
-     * @dataProvider providerInvalidName
-     *
-     * @param string $name
+     * @return string[]
      */
-    public function testConstructorRejectsInvalidName(string $name)
+    private function invalidNames(): array
     {
-        $faker = $this->faker();
-
-        $owner = $faker->slug();
-
-        $this->expectException(\InvalidArgumentException::class);
-
-        new Resource\Repository(
-            $owner,
-            $name
-        );
-    }
-
-    public function providerInvalidName(): \Generator
-    {
-        $values = [
+        return [
             'blank' => '  ',
             'empty' => '',
             'has-special-characters' => \implode('', $this->faker()->randomElements([
@@ -177,39 +316,13 @@ final class RepositoryTest extends Framework\TestCase
                 '🤓',
             ])),
         ];
-
-        foreach ($values as $key => $value) {
-            yield $key => [
-                $value,
-            ];
-        }
     }
 
-    /**
-     * @dataProvider providerValidName
-     *
-     * @param string $name
-     */
-    public function testConstructorSetsName(string $name)
+    private function validNames(): array
     {
         $faker = $this->faker();
 
-        $owner = $faker->slug();
-
-        $repository = new Resource\Repository(
-            $owner,
-            $name
-        );
-
-        $this->assertSame($owner, $repository->owner());
-        $this->assertSame($name, $repository->name());
-    }
-
-    public function providerValidName(): \Generator
-    {
-        $faker = $this->faker();
-
-        $values = [
+        return [
             'digit' => $faker->randomDigitNotNull,
             'letter' => $faker->randomLetter,
             'word' => $faker->word,
@@ -245,11 +358,5 @@ final class RepositoryTest extends Framework\TestCase
                 ])
             ),
         ];
-
-        foreach ($values as $key => $value) {
-            yield $key => [
-                $value,
-            ];
-        }
     }
 }

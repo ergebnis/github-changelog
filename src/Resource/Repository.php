@@ -35,11 +35,32 @@ final class Repository implements RepositoryInterface
      */
     public function __construct(string $owner, string $name)
     {
-        Assert\that($owner)->regex('/^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$/');
-        Assert\that($name)->regex('/^[a-zA-Z0-9-_]+$/');
+        Assert\that($owner)->regex(self::ownerRegEx());
+        Assert\that($name)->regex(self::nameRegEx());
 
         $this->owner = $owner;
         $this->name = $name;
+    }
+
+    /**
+     * @param string $string
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return Repository
+     */
+    public static function fromString(string $string): self
+    {
+        $regEx = self::stringRegex();
+
+        Assert\that($string)->regex($regEx);
+
+        \preg_match($regEx, $string, $matches);
+
+        return new self(
+            $matches['owner'],
+            $matches['name']
+        );
     }
 
     public function owner(): string
@@ -50,5 +71,44 @@ final class Repository implements RepositoryInterface
     public function name(): string
     {
         return $this->name;
+    }
+
+    private static function ownerRegEx(bool $asPartial = false): string
+    {
+        $regEx = '(?P<owner>[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*)';
+
+        if (true === $asPartial) {
+            return $regEx;
+        }
+
+        return self::fullMatch($regEx);
+    }
+
+    private static function nameRegEx(bool $asPartial = false): string
+    {
+        $regEx = '(?P<name>[a-zA-Z0-9-_]+)';
+
+        if (true === $asPartial) {
+            return $regEx;
+        }
+
+        return self::fullMatch($regEx);
+    }
+
+    private static function stringRegex(): string
+    {
+        return self::fullMatch(\sprintf(
+            '%s\/%s',
+            self::ownerRegEx(true),
+            self::nameRegEx(true)
+        ));
+    }
+
+    private static function fullMatch(string $regEx): string
+    {
+        return \sprintf(
+            '/^%s$/',
+            $regEx
+        );
     }
 }
