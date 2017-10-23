@@ -55,35 +55,6 @@ final class RepositoryTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider providerValidOwner
-     *
-     * @param string $owner
-     */
-    public function testConstructorSetsOwner(string $owner)
-    {
-        $faker = $this->faker();
-
-        $name = $faker->slug();
-
-        $repository = new Resource\Repository(
-            $owner,
-            $name
-        );
-
-        $this->assertSame($owner, $repository->owner());
-        $this->assertSame($name, $repository->name());
-    }
-
-    public function providerValidOwner(): \Generator
-    {
-        foreach ($this->validOwners() as $key => $value) {
-            yield $key => [
-                $value,
-            ];
-        }
-    }
-
-    /**
      * @dataProvider providerInvalidName
      *
      * @param string $name
@@ -112,16 +83,13 @@ final class RepositoryTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider providerValidName
+     * @dataProvider providerValidOwnerAndName
      *
+     * @param string $owner
      * @param string $name
      */
-    public function testConstructorSetsName(string $name)
+    public function testConstructorSetsValues(string $owner, string $name)
     {
-        $faker = $this->faker();
-
-        $owner = $faker->slug();
-
         $repository = new Resource\Repository(
             $owner,
             $name
@@ -129,15 +97,6 @@ final class RepositoryTest extends Framework\TestCase
 
         $this->assertSame($owner, $repository->owner());
         $this->assertSame($name, $repository->name());
-    }
-
-    public function providerValidName(): \Generator
-    {
-        foreach ($this->validNames() as $key => $value) {
-            yield $key => [
-                $value,
-            ];
-        }
     }
 
     /**
