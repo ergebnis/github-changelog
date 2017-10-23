@@ -29,7 +29,7 @@ final class CommitRepository implements CommitRepositoryInterface
         $this->api = $api;
     }
 
-    public function items(string $owner, string $name, string $startReference, string $endReference = null): Resource\RangeInterface
+    public function items(Resource\RepositoryInterface $repository, string $startReference, string $endReference = null): Resource\RangeInterface
     {
         if ($startReference === $endReference) {
             return new Resource\Range();
@@ -37,8 +37,7 @@ final class CommitRepository implements CommitRepositoryInterface
 
         try {
             $start = $this->show(
-                $owner,
-                $name,
+                $repository,
                 $startReference
             );
         } catch (Exception\ReferenceNotFound $exception) {
@@ -50,8 +49,7 @@ final class CommitRepository implements CommitRepositoryInterface
         if (null !== $endReference) {
             try {
                 $end = $this->show(
-                    $owner,
-                    $name,
+                    $repository,
                     $endReference
                 );
             } catch (Exception\ReferenceNotFound $exception) {
@@ -63,7 +61,7 @@ final class CommitRepository implements CommitRepositoryInterface
             ];
         }
 
-        $commits = $this->all($owner, $name, $params)->commits();
+        $commits = $this->all($repository, $params)->commits();
 
         $range = new Resource\Range();
 
@@ -89,25 +87,24 @@ final class CommitRepository implements CommitRepositoryInterface
                     'sha' => $tail->sha(),
                 ];
 
-                $commits = $this->all($owner, $name, $params)->commits();
+                $commits = $this->all($repository, $params)->commits();
             }
         }
 
         return $range;
     }
 
-    public function show(string $owner, string $name, string $sha): Resource\CommitInterface
+    public function show(Resource\RepositoryInterface $repository, string $sha): Resource\CommitInterface
     {
         $response = $this->api->show(
-            $owner,
-            $name,
+            $repository->owner(),
+            $repository->name(),
             $sha
         );
 
         if (!\is_array($response)) {
-            throw Exception\ReferenceNotFound::fromOwnerNameAndReference(
-                $owner,
-                $name,
+            throw Exception\ReferenceNotFound::fromRepositoryAndReference(
+                $repository,
                 $sha
             );
         }
@@ -118,7 +115,7 @@ final class CommitRepository implements CommitRepositoryInterface
         );
     }
 
-    public function all(string $owner, string $name, array $params = []): Resource\RangeInterface
+    public function all(Resource\RepositoryInterface $repository, array $params = []): Resource\RangeInterface
     {
         $range = new Resource\Range();
 
@@ -127,8 +124,8 @@ final class CommitRepository implements CommitRepositoryInterface
         }
 
         $response = $this->api->all(
-            $owner,
-            $name,
+            $repository->owner(),
+            $repository->name(),
             $params
         );
 

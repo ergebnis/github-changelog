@@ -110,8 +110,21 @@ final class GenerateCommand extends Command
             );
         }
 
-        $owner = $input->getArgument('owner');
-        $name = $input->getArgument('repository');
+        try {
+            $repository = new Resource\Repository(
+                $input->getArgument('owner'),
+                $input->getArgument('repository')
+            );
+        } catch (\InvalidArgumentException $exception) {
+            $io->error(\sprintf(
+                'Owner "%s" and repository "%s" appear to be invalid.',
+                $input->getArgument('owner'),
+                $input->getArgument('repository')
+            ));
+
+            return 1;
+        }
+
         $startReference = $input->getArgument('start-reference');
         $endReference = $input->getArgument('end-reference');
 
@@ -121,16 +134,14 @@ final class GenerateCommand extends Command
         );
 
         $io->section(\sprintf(
-            'Pull Requests for %s/%s %s',
-            $owner,
-            $name,
+            'Pull Requests for %s %s',
+            $repository,
             $range
         ));
 
         try {
             $range = $this->pullRequestRepository->items(
-                $owner,
-                $name,
+                $repository,
                 $startReference,
                 $endReference
             );

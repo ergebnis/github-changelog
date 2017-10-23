@@ -19,32 +19,29 @@ use Localheinz\GitHub\ChangeLog\Resource;
 interface CommitRepositoryInterface
 {
     /**
-     * @param string      $owner
-     * @param string      $name
-     * @param string      $startReference
-     * @param null|string $endReference
+     * @param Resource\RepositoryInterface $repository
+     * @param string                       $startReference
+     * @param null|string                  $endReference
      *
      * @return Resource\RangeInterface
      */
-    public function items(string $owner, string $name, string $startReference, string $endReference = null): Resource\RangeInterface;
+    public function items(Resource\RepositoryInterface $repository, string $startReference, string $endReference = null): Resource\RangeInterface;
 
     /**
-     * @param string $owner
-     * @param string $name
-     * @param string $sha
+     * @param Resource\RepositoryInterface $repository
+     * @param string                       $sha
      *
      * @throws Exception\ReferenceNotFound
      *
      * @return Resource\CommitInterface
      */
-    public function show(string $owner, string $name, string $sha): Resource\CommitInterface;
+    public function show(Resource\RepositoryInterface $repository, string $sha): Resource\CommitInterface;
 
     /**
-     * @param string $owner
-     * @param string $name
-     * @param array  $params
+     * @param Resource\RepositoryInterface $repository
+     * @param array                        $params
      *
      * @return Resource\RangeInterface
      */
-    public function all(string $owner, string $name, array $params = []): Resource\RangeInterface;
+    public function all(Resource\RepositoryInterface $repository, array $params = []): Resource\RangeInterface;
 }

@@ -19,23 +19,21 @@ use Localheinz\GitHub\ChangeLog\Resource;
 interface PullRequestRepositoryInterface
 {
     /**
-     * @param string $owner
-     * @param string $name
-     * @param int    $number
+     * @param Resource\RepositoryInterface$repository
+     * @param int $number
      *
      * @throws Exception\PullRequestNotFound
      *
      * @return Resource\PullRequestInterface
      */
-    public function show(string $owner, string $name, int $number): Resource\PullRequestInterface;
+    public function show(Resource\RepositoryInterface $repository, int $number): Resource\PullRequestInterface;
 
     /**
-     * @param string      $owner
-     * @param string      $name
+     * @param Resource\RepositoryInterface$repository
      * @param string      $startReference
      * @param null|string $endReference
      *
      * @return Resource\RangeInterface
      */
-    public function items(string $owner, string $name, string $startReference, string $endReference = null): Resource\RangeInterface;
+    public function items(Resource\RepositoryInterface $repository, string $startReference, string $endReference = null): Resource\RangeInterface;
 }
