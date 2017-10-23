@@ -38,7 +38,7 @@ final class PullRequestNotFoundTest extends Framework\TestCase
 
         $owner = $faker->slug();
         $name = $faker->slug();
-        $number = $faker->randomNumber();
+        $number = $faker->numberBetween(1);
 
         $exception = PullRequestNotFound::fromOwnerNameAndNumber(
             $owner,

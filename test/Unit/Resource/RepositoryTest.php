@@ -261,7 +261,7 @@ final class RepositoryTest extends Framework\TestCase
             'word-with-numbers' => \sprintf(
                 '%s%d',
                 $faker->word,
-                $faker->randomNumber()
+                $faker->numberBetween(1)
             ),
             'words-separated-by-hyphen' => \implode(
                 '-',
@@ -270,8 +270,8 @@ final class RepositoryTest extends Framework\TestCase
             'words-with-numbers-separated-by-hyphens' => \implode(
                 '-',
                 \array_merge($faker->words(), [
-                    $faker->randomNumber(),
-                    $faker->randomNumber(),
+                    $faker->numberBetween(1),
+                    $faker->numberBetween(1),
                 ])
             ),
         ];
@@ -313,7 +313,7 @@ final class RepositoryTest extends Framework\TestCase
             'word-with-numbers' => \sprintf(
                 '%s%d',
                 $faker->word,
-                $faker->randomNumber()
+                $faker->numberBetween(1)
             ),
             'words-separated-by-hyphen' => \implode(
                 '-',
@@ -326,15 +326,15 @@ final class RepositoryTest extends Framework\TestCase
             'words-with-numbers-separated-by-hyphens' => \implode(
                 '-',
                 \array_merge($faker->words(), [
-                    $faker->randomNumber(),
-                    $faker->randomNumber(),
+                    $faker->numberBetween(1),
+                    $faker->numberBetween(1),
                 ])
             ),
             'words-with-numbers-separated-by-underscores' => \implode(
                 '_',
                 \array_merge($faker->words(), [
-                    $faker->randomNumber(),
-                    $faker->randomNumber(),
+                    $faker->numberBetween(1),
+                    $faker->numberBetween(1),
                 ])
             ),
         ];
