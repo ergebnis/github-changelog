@@ -39,7 +39,7 @@ final class PullRequestNotFoundTest extends Framework\TestCase
 
         $number = $faker->numberBetween(1);
 
-        $repository = new Resource\Repository(
+        $repository = Resource\Repository::fromOwnerAndName(
             $faker->slug(),
             $faker->slug()
         );
