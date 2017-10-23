@@ -13,15 +13,16 @@ declare(strict_types=1);
 
 namespace Localheinz\GitHub\ChangeLog\Exception;
 
+use Localheinz\GitHub\ChangeLog\Resource;
+
 final class PullRequestNotFound extends \RuntimeException implements ExceptionInterface
 {
-    public static function fromOwnerNameAndNumber(string $owner, string $name, int $number): self
+    public static function fromRepositoryAndNumber(Resource\RepositoryInterface $repository, int $number): self
     {
         return new self(\sprintf(
-            'Could not find pull request "%d" in "%s/%s".',
+            'Could not find pull request "%d" in "%s".',
             $number,
-            $owner,
-            $name
+            $repository
         ));
     }
 }

@@ -15,6 +15,7 @@ namespace Localheinz\GitHub\ChangeLog\Test\Unit\Exception;
 
 use Localheinz\GitHub\ChangeLog\Exception\ExceptionInterface;
 use Localheinz\GitHub\ChangeLog\Exception\PullRequestNotFound;
+use Localheinz\GitHub\ChangeLog\Resource;
 use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
 
@@ -32,27 +33,28 @@ final class PullRequestNotFoundTest extends Framework\TestCase
         $this->assertClassImplementsInterface(ExceptionInterface::class, PullRequestNotFound::class);
     }
 
-    public function testFromOwnerRepositoryAndReferenceCreatesException()
+    public function testFromRepositoryAndNumberCreatesException()
     {
         $faker = $this->faker();
 
-        $owner = $faker->slug();
-        $name = $faker->slug();
         $number = $faker->numberBetween(1);
 
-        $exception = PullRequestNotFound::fromOwnerNameAndNumber(
-            $owner,
-            $name,
+        $repository = new Resource\Repository(
+            $faker->slug(),
+            $faker->slug()
+        );
+
+        $exception = PullRequestNotFound::fromRepositoryAndNumber(
+            $repository,
             $number
         );
 
         $this->assertInstanceOf(PullRequestNotFound::class, $exception);
 
         $message = \sprintf(
-            'Could not find pull request "%s" in "%s/%s".',
+            'Could not find pull request "%s" in "%s".',
             $number,
-            $owner,
-            $name
+            $repository
         );
 
         $this->assertSame($message, $exception->getMessage());

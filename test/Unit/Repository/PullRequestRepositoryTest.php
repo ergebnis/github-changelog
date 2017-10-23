@@ -33,8 +33,10 @@ final class PullRequestRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $owner = $faker->slug();
-        $name = $faker->slug();
+        $repository = new Resource\Repository(
+            $faker->slug(),
+            $faker->slug()
+        );
 
         $api = $this->createPullRequestApiMock();
 
@@ -44,8 +46,8 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             ->expects($this->once())
             ->method('show')
             ->with(
-                $this->identicalTo($owner),
-                $this->identicalTo($name),
+                $this->identicalTo($repository->owner()),
+                $this->identicalTo($repository->name()),
                 $this->identicalTo($expectedItem->number)
             )
             ->willReturn($this->response($expectedItem));
@@ -56,8 +58,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         );
 
         $pullRequest = $pullRequestRepository->show(
-            $owner,
-            $name,
+            $repository,
             $expectedItem->number
         );
 
@@ -71,9 +72,12 @@ final class PullRequestRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $owner = $faker->slug();
-        $name = $faker->slug();
         $number = $faker->numberBetween(1);
+
+        $repository = new Resource\Repository(
+            $faker->slug(),
+            $faker->slug()
+        );
 
         $api = $this->createPullRequestApiMock();
 
@@ -81,8 +85,8 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             ->expects($this->once())
             ->method('show')
             ->with(
-                $this->identicalTo($owner),
-                $this->identicalTo($name),
+                $this->identicalTo($repository->owner()),
+                $this->identicalTo($repository->name()),
                 $this->identicalTo($number)
             )
             ->willReturn('snafu');
@@ -94,15 +98,13 @@ final class PullRequestRepositoryTest extends Framework\TestCase
 
         $this->expectException(Exception\PullRequestNotFound::class);
         $this->expectExceptionMessage(\sprintf(
-            'Could not find pull request "%d" in "%s/%s".',
+            'Could not find pull request "%d" in "%s".',
             $number,
-            $owner,
-            $name
+            $repository
         ));
 
         $pullRequestRepository->show(
-            $owner,
-            $name,
+            $repository,
             $number
         );
     }
@@ -111,8 +113,11 @@ final class PullRequestRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $owner = $faker->slug();
-        $name = $faker->slug();
+        $repository = new Resource\Repository(
+            $faker->slug(),
+            $faker->slug()
+        );
+
         $startReference = $faker->sha1;
 
         $commitRepository = $this->createCommitRepositoryMock();
@@ -128,21 +133,19 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             ->expects($this->once())
             ->method('items')
             ->with(
-                $this->identicalTo($owner),
-                $this->identicalTo($name),
+                $this->identicalTo($repository),
                 $this->identicalTo($startReference),
                 $this->identicalTo(null)
             )
             ->willReturn($range);
 
-        $repository = new Repository\PullRequestRepository(
+        $pullRequestRepository = new Repository\PullRequestRepository(
             $this->createPullRequestApiMock(),
             $commitRepository
         );
 
-        $repository->items(
-            $owner,
-            $name,
+        $pullRequestRepository->items(
+            $repository,
             $startReference
         );
     }
@@ -151,8 +154,11 @@ final class PullRequestRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $owner = $faker->slug();
-        $name = $faker->slug();
+        $repository = new Resource\Repository(
+            $faker->slug(),
+            $faker->slug()
+        );
+
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
@@ -173,21 +179,19 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             ->expects($this->once())
             ->method('items')
             ->with(
-                $this->identicalTo($owner),
-                $this->identicalTo($name),
+                $this->identicalTo($repository),
                 $this->identicalTo($startReference),
                 $this->identicalTo($endReference)
             )
             ->willReturn($range);
 
-        $repository = new Repository\PullRequestRepository(
+        $pullRequestRepository = new Repository\PullRequestRepository(
             $this->createPullRequestApiMock(),
             $commitRepository
         );
 
-        $repository->items(
-            $owner,
-            $name,
+        $pullRequestRepository->items(
+            $repository,
             $startReference,
             $endReference
         );
@@ -197,8 +201,11 @@ final class PullRequestRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $owner = $faker->slug();
-        $name = $faker->slug();
+        $repository = new Resource\Repository(
+            $faker->slug(),
+            $faker->slug()
+        );
+
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
@@ -226,21 +233,19 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             ->expects($this->once())
             ->method('items')
             ->with(
-                $this->identicalTo($owner),
-                $this->identicalTo($name),
+                $this->identicalTo($repository),
                 $this->identicalTo($startReference),
                 $this->identicalTo($endReference)
             )
             ->willReturn($range);
 
-        $repository = new Repository\PullRequestRepository(
+        $pullRequestRepository = new Repository\PullRequestRepository(
             $this->createPullRequestApiMock(),
             $commitRepository
         );
 
-        $repository->items(
-            $owner,
-            $name,
+        $pullRequestRepository->items(
+            $repository,
             $startReference,
             $endReference
         );
@@ -250,8 +255,11 @@ final class PullRequestRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $owner = $faker->slug();
-        $name = $faker->slug();
+        $repository = new Resource\Repository(
+            $faker->slug(),
+            $faker->slug()
+        );
+
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
@@ -288,8 +296,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             ->expects($this->once())
             ->method('items')
             ->with(
-                $this->identicalTo($owner),
-                $this->identicalTo($name),
+                $this->identicalTo($repository),
                 $this->identicalTo($startReference),
                 $this->identicalTo($endReference)
             )
@@ -301,20 +308,19 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             ->expects($this->once())
             ->method('show')
             ->with(
-                $this->identicalTo($owner),
-                $this->identicalTo($name),
+                $this->identicalTo($repository->owner()),
+                $this->identicalTo($repository->name()),
                 $this->identicalTo($expectedItem->number)
             )
             ->willReturn($this->response($expectedItem));
 
-        $repository = new Repository\PullRequestRepository(
+        $pullRequestRepository = new Repository\PullRequestRepository(
             $api,
             $commitRepository
         );
 
-        $actualRange = $repository->items(
-            $owner,
-            $name,
+        $actualRange = $pullRequestRepository->items(
+            $repository,
             $startReference,
             $endReference
         );
@@ -326,8 +332,11 @@ final class PullRequestRepositoryTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $owner = $faker->slug();
-        $name = $faker->slug();
+        $repository = new Resource\Repository(
+            $faker->slug(),
+            $faker->slug()
+        );
+
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
@@ -360,8 +369,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             ->expects($this->once())
             ->method('items')
             ->with(
-                $this->identicalTo($owner),
-                $this->identicalTo($name),
+                $this->identicalTo($repository),
                 $this->identicalTo($startReference),
                 $this->identicalTo($endReference)
             )
@@ -373,8 +381,8 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             ->expects($this->once())
             ->method('show')
             ->with(
-                $this->identicalTo($owner),
-                $this->identicalTo($name),
+                $this->identicalTo($repository->owner()),
+                $this->identicalTo($repository->name()),
                 $this->identicalTo($number)
             )
             ->willReturn(null);
@@ -385,8 +393,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         );
 
         $pullRequestRepository->items(
-            $owner,
-            $name,
+            $repository,
             $startReference,
             $endReference
         );

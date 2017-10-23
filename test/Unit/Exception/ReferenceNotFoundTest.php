@@ -15,6 +15,7 @@ namespace Localheinz\GitHub\ChangeLog\Test\Unit\Exception;
 
 use Localheinz\GitHub\ChangeLog\Exception\ExceptionInterface;
 use Localheinz\GitHub\ChangeLog\Exception\ReferenceNotFound;
+use Localheinz\GitHub\ChangeLog\Resource;
 use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
 
@@ -32,27 +33,28 @@ final class ReferenceNotFoundTest extends Framework\TestCase
         $this->assertClassImplementsInterface(ExceptionInterface::class, ReferenceNotFound::class);
     }
 
-    public function testFromOwnerRepositoryAndReferenceCreatesException()
+    public function testFromRepositoryAndReferenceCreatesException()
     {
         $faker = $this->faker();
 
-        $owner = $faker->slug();
-        $name = $faker->slug();
+        $repository = new Resource\Repository(
+            $faker->slug(),
+            $faker->slug()
+        );
+
         $reference = $faker->sha1;
 
-        $exception = ReferenceNotFound::fromOwnerNameAndReference(
-            $owner,
-            $name,
+        $exception = ReferenceNotFound::fromRepositoryAndReference(
+            $repository,
             $reference
         );
 
         $this->assertInstanceOf(ReferenceNotFound::class, $exception);
 
         $message = \sprintf(
-            'Could not find reference "%s" in "%s/%s".',
+            'Could not find reference "%s" in "%s".',
             $reference,
-            $owner,
-            $name
+            $repository
         );
 
         $this->assertSame($message, $exception->getMessage());

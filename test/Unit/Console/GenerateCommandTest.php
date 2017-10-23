@@ -192,12 +192,40 @@ final class GenerateCommandTest extends Framework\TestCase
         ]);
     }
 
+    public function testExecuteFailsIfOwnerAndRepositoryAreInvalid()
+    {
+        $owner = '🤓';
+        $repository = '🤣';
+
+        $expectedMessage = \sprintf(
+            'Owner "%s" and repository "%s" appear to be invalid.',
+            $owner,
+            $repository
+        );
+
+        $command = new Console\GenerateCommand(
+            $this->createClientMock(),
+            $this->createPullRequestRepositoryMock()
+        );
+
+        $tester = new CommandTester($command);
+
+        $exitCode = $tester->execute([
+            'owner' => $owner,
+            'repository' => $repository,
+            'start-reference' => '0.1.0',
+        ]);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertContains($expectedMessage, $tester->getDisplay());
+    }
+
     public function testExecuteDelegatesToPullRequestRepository()
     {
         $faker = $this->faker();
 
-        $owner = $faker->unique()->slug();
-        $name = $faker->unique()->slug();
+        $owner = $faker->slug();
+        $name = $faker->slug();
         $startReference = $faker->unique()->sha1;
         $endReference = $faker->unique()->sha1;
 
@@ -207,8 +235,13 @@ final class GenerateCommandTest extends Framework\TestCase
             ->expects($this->once())
             ->method('items')
             ->with(
-                $this->identicalTo($owner),
-                $this->identicalTo($name),
+                $this->logicalAnd(
+                    $this->isInstanceOf(Resource\RepositoryInterface::class),
+                    $this->callback(function (Resource\RepositoryInterface $repository) use ($owner, $name) {
+                        return $repository->owner() === $owner
+                            && $repository->name() === $name;
+                    })
+                ),
                 $this->identicalTo($startReference),
                 $this->identicalTo($endReference)
             )

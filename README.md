@@ -121,15 +121,14 @@ $client->authenticate(
     Client::AUTH_HTTP_TOKEN
 );
 
-$repository = new Repository\PullRequestRepository(
+$pullRequestRepository = new Repository\PullRequestRepository(
     $client->pullRequests(),
     new Repository\CommitRepository($client->repositories()->commits())
 );
 
 /* @var Resource\RangeInterface $range */
 $range = $repository->items(
-    'localheinz',
-    'github-changelog',
+    Resource\Repository::fromString('localheinz/github-changelog'),
     '0.1.1',
     '0.1.2'
 );
@@ -138,7 +137,7 @@ $pullRequests = $range->pullRequests();
 
 array_walk($pullRequests, function (Resource\PullRequestInterface $pullRequest) {
     echo sprintf(
-        '- %s (#%s)' . PHP_EOL,
+        '- %s (#%d)' . PHP_EOL,
         $pullRequest->title(),
         $pullRequest->number()
     );

@@ -13,15 +13,16 @@ declare(strict_types=1);
 
 namespace Localheinz\GitHub\ChangeLog\Exception;
 
+use Localheinz\GitHub\ChangeLog\Resource;
+
 final class ReferenceNotFound extends \RuntimeException implements ExceptionInterface
 {
-    public static function fromOwnerNameAndReference(string $owner, string $name, string $reference): self
+    public static function fromRepositoryAndReference(Resource\RepositoryInterface $repository, string $reference): self
     {
         return new self(\sprintf(
-            'Could not find reference "%s" in "%s/%s".',
+            'Could not find reference "%s" in "%s".',
             $reference,
-            $owner,
-            $name
+            $repository
         ));
     }
 }

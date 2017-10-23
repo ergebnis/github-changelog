@@ -35,18 +35,17 @@ final class PullRequestRepository implements PullRequestRepositoryInterface
         $this->commitRepository = $commitRepository;
     }
 
-    public function show(string $owner, string $name, int $number): Resource\PullRequestInterface
+    public function show(Resource\RepositoryInterface $repository, int $number): Resource\PullRequestInterface
     {
         $response = $this->api->show(
-            $owner,
-            $name,
+            $repository->owner(),
+            $repository->name(),
             $number
         );
 
         if (!\is_array($response)) {
-            throw Exception\PullRequestNotFound::fromOwnerNameAndNumber(
-                $owner,
-                $name,
+            throw Exception\PullRequestNotFound::fromRepositoryAndNumber(
+                $repository,
                 $number
             );
         }
@@ -57,18 +56,17 @@ final class PullRequestRepository implements PullRequestRepositoryInterface
         );
     }
 
-    public function items(string $owner, string $name, string $startReference, string $endReference = null): Resource\RangeInterface
+    public function items(Resource\RepositoryInterface $repository, string $startReference, string $endReference = null): Resource\RangeInterface
     {
         $range = $this->commitRepository->items(
-            $owner,
-            $name,
+            $repository,
             $startReference,
             $endReference
         );
 
         $commits = $range->commits();
 
-        \array_walk($commits, function (Resource\CommitInterface $commit) use (&$range, $owner, $name) {
+        \array_walk($commits, function (Resource\CommitInterface $commit) use (&$range, $repository) {
             if (0 === \preg_match('/^Merge pull request #(?P<number>\d+)/', $commit->message(), $matches)) {
                 return;
             }
@@ -77,8 +75,7 @@ final class PullRequestRepository implements PullRequestRepositoryInterface
 
             try {
                 $pullRequest = $this->show(
-                    $owner,
-                    $name,
+                    $repository,
                     $number
                 );
             } catch (Exception\PullRequestNotFound $exception) {
