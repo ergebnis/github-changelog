@@ -72,57 +72,6 @@ final class Repository implements RepositoryInterface
         );
     }
 
-    /**
-     * @param string $remoteName
-     *
-     * @throws Exception\InvalidArgumentException
-     * @throws Exception\RuntimeException
-     *
-     * @return self
-     */
-    public static function fromRemoteName(string $remoteName): self
-    {
-        if (1 !== \preg_match(self::remoteNameRegEx(), $remoteName)) {
-            throw new Exception\InvalidArgumentException(\sprintf(
-                'Remote name "%s" appears to be invalid.',
-                $remoteName
-            ));
-        }
-
-        \exec(
-            'git remote',
-            $remoteNames,
-            $returnValue
-        );
-
-        if (!\in_array($remoteName, $remoteNames, true)) {
-            throw new Exception\RuntimeException(\sprintf(
-                'Remote with name "%s" does not exist.',
-                $remoteName
-            ));
-        }
-
-        \exec(
-            \sprintf(
-                'git remote get-url %s',
-                $remoteName
-            ),
-            $remoteUrls,
-            $returnValue
-        );
-
-        if (0 !== $returnValue || 0 === \count($remoteUrls)) {
-            throw new Exception\RuntimeException(\sprintf(
-                'Unable to determine url for remote with name "%s"',
-                $remoteName
-            ));
-        }
-
-        $remoteUrl = \array_shift($remoteUrls);
-
-        return self::fromRemoteUrl($remoteUrl);
-    }
-
     public static function fromRemoteUrl(string $remoteUrl)
     {
         $regEx = self::remoteUrlRegEx();
@@ -172,11 +121,6 @@ final class Repository implements RepositoryInterface
         return $this->name;
     }
 
-    private static function remoteNameRegEx()
-    {
-        return '/^\w+(-\w+)*$/';
-    }
-
     private static function ownerRegEx(bool $asPartial = false): string
     {
         $regEx = '(?P<owner>[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*)';
@@ -208,19 +152,13 @@ final class Repository implements RepositoryInterface
         ));
     }
 
-    private static function stringRegex(bool $asPartial = false): string
+    private static function stringRegex(): string
     {
-        $regEx = \sprintf(
+        return self::fullMatch(\sprintf(
             '%s\/%s',
             self::ownerRegEx(true),
             self::nameRegEx(true)
-        );
-
-        if (true === $asPartial) {
-            return $regEx;
-        }
-
-        return self::fullMatch($regEx);
+        ));
     }
 
     private static function fullMatch(string $regEx): string

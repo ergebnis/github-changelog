@@ -242,44 +242,6 @@ final class DataProvider
         }
     }
 
-    public function providerInvalidRemoteName(): \Generator
-    {
-        $faker = $this->faker();
-
-        $values = [
-            'blank' => '  ',
-            'empty' => '',
-            'starts-with-hyphen' => \sprintf(
-                '-%s',
-                $faker->word
-            ),
-            'ends-with-hyphen' => \sprintf(
-                '%s-',
-                $faker->word
-            ),
-            'contains-dots' => \sprintf(
-                '%s.%s',
-                $faker->word,
-                $faker->word
-            ),
-            'has-special-characters' => \implode('', $faker->randomElements([
-                '.',
-                ':',
-                'ä',
-                'ü',
-                'ö',
-                'ß',
-                '🤓',
-            ])),
-        ];
-
-        foreach ($values as $key => $value) {
-            yield $key => [
-                $value,
-            ];
-        }
-    }
-
     /**
      * @return string[]
      */
