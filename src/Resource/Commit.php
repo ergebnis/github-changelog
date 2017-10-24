@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Localheinz\GitHub\ChangeLog\Resource;
 
-use Assert;
+use Localheinz\GitHub\ChangeLog\Exception;
 
 final class Commit implements CommitInterface
 {
@@ -31,11 +31,16 @@ final class Commit implements CommitInterface
      * @param string $sha
      * @param string $message
      *
-     * @throws \InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct(string $sha, string $message)
     {
-        Assert\that($sha)->regex('/^[0-9a-f]{40}$/i');
+        if (1 !== \preg_match('/^[0-9a-f]{40}$/i', $sha)) {
+            throw new Exception\InvalidArgumentException(\sprintf(
+                'Sha "%s" does not appear to be a valid sha1 hash.',
+                $sha
+            ));
+        }
 
         $this->sha = $sha;
         $this->message = $message;

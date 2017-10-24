@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Localheinz\GitHub\ChangeLog\Console;
 
 use Github\Client;
+use Localheinz\GitHub\ChangeLog\Exception;
 use Localheinz\GitHub\ChangeLog\Repository;
 use Localheinz\GitHub\ChangeLog\Resource;
 use Symfony\Component\Console\Command\Command;
@@ -107,7 +108,7 @@ final class GenerateCommand extends Command
 
         try {
             $repository = Resource\Repository::fromString($input->getArgument('repository'));
-        } catch (\InvalidArgumentException $exception) {
+        } catch (Exception\InvalidArgumentException $exception) {
             $io->error(\sprintf(
                 'Repository "%s" appears to be invalid.',
                 $input->getArgument('repository')

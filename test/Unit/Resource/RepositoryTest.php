@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Localheinz\GitHub\ChangeLog\Test\Unit\Resource;
 
+use Localheinz\GitHub\ChangeLog\Exception;
 use Localheinz\GitHub\ChangeLog\Resource;
 use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
@@ -37,7 +38,11 @@ final class RepositoryTest extends Framework\TestCase
 
         $name = $faker->slug();
 
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(Exception\InvalidArgumentException::class);
+        $this->expectExceptionMessage(\sprintf(
+            'Owner "%s" does not appear to be a valid owner.',
+            $owner
+        ));
 
         Resource\Repository::fromOwnerAndName(
             $owner,
@@ -65,7 +70,11 @@ final class RepositoryTest extends Framework\TestCase
 
         $owner = $faker->slug();
 
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(Exception\InvalidArgumentException::class);
+        $this->expectExceptionMessage(\sprintf(
+            'Name "%s" does not appear to be a valid name.',
+            $name
+        ));
 
         Resource\Repository::fromOwnerAndName(
             $owner,
@@ -128,7 +137,11 @@ final class RepositoryTest extends Framework\TestCase
      */
     public function testFromStringRejectsInvalidStrings(string $string)
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(Exception\InvalidArgumentException::class);
+        $this->expectExceptionMessage(\sprintf(
+            'String "%s" does not appear to be a valid string.',
+            $string
+        ));
 
         Resource\Repository::fromString($string);
     }
