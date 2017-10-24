@@ -53,10 +53,18 @@ Install globally:
 $ composer global require localheinz/github-changelog
 ```
 
-Create your changelogs anywhere:
+Create your changelogs from within a Git repository:
 
 ```bash
-$ github-changelog generate localheinz/github-changelog 0.1.1 0.1.2
+$ git clone git@github.com:localheinz/github-changelog.git
+$ cd github-changelog
+$ github-changelog generate 0.1.1 0.1.2
+```
+
+Create your changelogs from anywhere, specifying the repository using the `--repository` option: 
+
+```bash
+$ github-changelog generate --repository localheinz/github-changelog 0.1.1 0.1.2
 ```
 
 Enjoy the changelog:

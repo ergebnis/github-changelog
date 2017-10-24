@@ -35,7 +35,8 @@ $application->add(new ChangeLog\Console\GenerateCommand(
     new ChangeLog\Repository\PullRequestRepository(
         new Api\PullRequest($client),
         new ChangeLog\Repository\CommitRepository(new Api\Repository\Commits($client))
-    )
+    ),
+    new ChangeLog\Util\RepositoryResolver(new ChangeLog\Util\Git())
 ));
 
 $application->run();
