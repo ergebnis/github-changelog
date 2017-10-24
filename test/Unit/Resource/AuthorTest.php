@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Localheinz\GitHub\ChangeLog\Test\Unit\Resource;
 
+use Localheinz\GitHub\ChangeLog\Exception;
 use Localheinz\GitHub\ChangeLog\Resource;
 use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
@@ -33,7 +34,11 @@ final class AuthorTest extends Framework\TestCase
      */
     public function testConstructorRejectsInvalidHtmlUrl(string $htmlUrl)
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(Exception\InvalidArgumentException::class);
+        $this->expectExceptionMessage(\sprintf(
+            'URL "%s" does not appear to be a valid URL.',
+            $htmlUrl
+        ));
 
         $login = $this->faker()->slug();
 

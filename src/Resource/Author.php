@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Localheinz\GitHub\ChangeLog\Resource;
 
 use Assert;
+use Localheinz\GitHub\ChangeLog\Exception;
 
 final class Author implements AuthorInterface
 {
@@ -31,11 +32,18 @@ final class Author implements AuthorInterface
      * @param string $login
      * @param string $htmlUrl
      *
-     * @throws \InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct(string $login, string $htmlUrl)
     {
-        Assert\that($htmlUrl)->url();
+        try {
+            Assert\that($htmlUrl)->url();
+        } catch (\InvalidArgumentException $exception) {
+            throw new Exception\InvalidArgumentException(\sprintf(
+                'URL "%s" does not appear to be a valid URL.',
+                $htmlUrl
+            ));
+        }
 
         $this->login = $login;
         $this->htmlUrl = $htmlUrl;

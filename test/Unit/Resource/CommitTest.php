@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Localheinz\GitHub\ChangeLog\Test\Unit\Resource;
 
+use Localheinz\GitHub\ChangeLog\Exception;
 use Localheinz\GitHub\ChangeLog\Resource;
 use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
@@ -29,11 +30,15 @@ final class CommitTest extends Framework\TestCase
     /**
      * @dataProvider providerInvalidSha
      *
-     * @param mixed $sha
+     * @param string $sha
      */
-    public function testConstructorRejectsInvalidSha($sha)
+    public function testConstructorRejectsInvalidSha(string $sha)
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(Exception\InvalidArgumentException::class);
+        $this->expectExceptionMessage(\sprintf(
+            'Sha "%s" does not appear to be a valid sha1 hash.',
+            $sha
+        ));
 
         $message = $this->faker()->sentence();
 

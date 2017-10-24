@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Localheinz\GitHub\ChangeLog\Resource;
 
-use Assert;
+use Localheinz\GitHub\ChangeLog\Exception;
 
 final class PullRequest implements PullRequestInterface
 {
@@ -31,11 +31,16 @@ final class PullRequest implements PullRequestInterface
      * @param int    $number
      * @param string $title
      *
-     * @throws \InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct(int $number, string $title)
     {
-        Assert\that($number)->greaterThan(0);
+        if (1 > $number) {
+            throw new Exception\InvalidArgumentException(\sprintf(
+                'Number "%d" does not appear to be a valid pull request number.',
+                $number
+            ));
+        }
 
         $this->number = $number;
         $this->title = $title;

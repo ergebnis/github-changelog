@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Localheinz\GitHub\ChangeLog\Resource;
 
-use Assert;
+use Localheinz\GitHub\ChangeLog\Exception;
 
 final class Repository implements RepositoryInterface
 {
@@ -46,14 +46,25 @@ final class Repository implements RepositoryInterface
      * @param string $owner
      * @param string $name
      *
-     * @throws \InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      *
      * @return self
      */
     public static function fromOwnerAndName(string $owner, string $name): self
     {
-        Assert\that($owner)->regex(self::ownerRegEx());
-        Assert\that($name)->regex(self::nameRegEx());
+        if (1 !== \preg_match(self::ownerRegEx(), $owner)) {
+            throw new Exception\InvalidArgumentException(\sprintf(
+                'Owner "%s" does not appear to be a valid owner.',
+                $owner
+            ));
+        }
+
+        if (1 !== \preg_match(self::nameRegEx(), $name)) {
+            throw new Exception\InvalidArgumentException(\sprintf(
+                'Name "%s" does not appear to be a valid name.',
+                $name
+            ));
+        }
 
         return new self(
             $owner,
@@ -64,17 +75,18 @@ final class Repository implements RepositoryInterface
     /**
      * @param string $string
      *
-     * @throws \InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      *
      * @return self
      */
     public static function fromString(string $string): self
     {
-        $regEx = self::stringRegex();
-
-        Assert\that($string)->regex($regEx);
-
-        \preg_match($regEx, $string, $matches);
+        if (1 !== \preg_match(self::stringRegex(), $string, $matches)) {
+            throw new Exception\InvalidArgumentException(\sprintf(
+                'String "%s" does not appear to be a valid string.',
+                $string
+            ));
+        }
 
         return new self(
             $matches['owner'],
