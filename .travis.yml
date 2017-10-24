@@ -5,7 +5,6 @@ sudo: false
 env:
   global:
     - secure: "QQEDmMEd9FctVNUHuuNnZaNPCQuQrVGF4hJbfBdkw2GhgqegIrTK47G0FaHl2y/lez82N3Jpuf/mpTO2jnw1aA+bIAJVo5NcY+0bTrm23SBS1lyyUs3TgTmkw6ByfLk3bmZ4TpRj8kAQdPK+aDWoK3Va0XdZt7swA39MugGYxvQ="
-    - secure: "vLO6MNtynfHTrTM76rq13lnwPqm8ULyTjFysYSCDIgUBidi4PMbmNjTf72LTrG9NboqWJNzItuiK5aQQCaJaDCr+603Getv2bKSpsPn1wnr51zYPGDsvKFL3e040JuDLs/4TslVtZbnsU9QxSwnixWEIOPF5ECBwMVk31+E+ak0="
 
 cache:
   directories:
@@ -58,7 +57,7 @@ jobs:
         - if [[ "$WITH_COVERAGE" == "true" ]]; then xdebug-disable; fi
 
       after_success:
-        - if [[ "$WITH_COVERAGE" == "true" && -n "$CODECLIMATE_REPO_TOKEN" ]]; then vendor/bin/test-reporter --coverage-report=build/logs/clover.xml; fi
+        - if [[ "$WITH_COVERAGE" == "true" ]]; then bash <(curl -s https://codecov.io/bash); fi
 
     - <<: *TEST
 
