@@ -47,7 +47,7 @@ final class GenerateCommandTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider providerArgument
+     * @dataProvider \Localheinz\GitHub\ChangeLog\Test\Util\DataProvider::providerGenerateCommandArgument
      *
      * @param string $name
      * @param bool   $isRequired
@@ -97,7 +97,7 @@ final class GenerateCommandTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider providerOption
+     * @dataProvider \Localheinz\GitHub\ChangeLog\Test\Util\DataProvider::providerGenerateCommandOption
      *
      * @param string $name
      * @param string $shortcut
@@ -122,34 +122,6 @@ final class GenerateCommandTest extends Framework\TestCase
         $this->assertSame($isValueRequired, $option->isValueRequired());
         $this->assertSame($description, $option->getDescription());
         $this->assertSame($default, $option->getDefault());
-    }
-
-    public function providerOption(): \Generator
-    {
-        $options = [
-            'auth-token' => [
-                'a',
-                true,
-                'The GitHub token',
-                null,
-            ],
-            'template' => [
-                't',
-                true,
-                'The template to use for rendering a pull request',
-                '- %title% (#%number%)',
-            ],
-        ];
-
-        foreach ($options as $name => list($shortcut, $isValueRequired, $description, $default)) {
-            yield $name => [
-                $name,
-                $shortcut,
-                $isValueRequired,
-                $description,
-                $default,
-            ];
-        }
     }
 
     public function testExecuteAuthenticatesIfTokenOptionIsGiven()

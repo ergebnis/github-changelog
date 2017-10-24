@@ -28,7 +28,7 @@ final class CommitTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider providerInvalidSha
+     * @dataProvider \Localheinz\GitHub\ChangeLog\Test\Util\DataProvider::providerInvalidSha
      *
      * @param string $sha
      */
@@ -46,24 +46,6 @@ final class CommitTest extends Framework\TestCase
             $sha,
             $message
         );
-    }
-
-    public function providerInvalidSha(): \Generator
-    {
-        $faker = $this->faker();
-
-        $values = [
-            'md5' => $faker->md5,
-            'sentence' => $faker->sentence(),
-            'sha256' => $faker->sha256,
-            'word' => $faker->word,
-        ];
-
-        foreach ($values as $key => $value) {
-            yield $key => [
-                $value,
-            ];
-        }
     }
 
     public function testConstructorSetsShaAndMessage()
