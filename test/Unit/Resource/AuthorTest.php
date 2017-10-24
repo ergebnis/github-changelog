@@ -28,7 +28,7 @@ final class AuthorTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider providerInvalidHtmlUrl
+     * @dataProvider \Localheinz\GitHub\ChangeLog\Test\Util\DataProvider::providerInvalidUrl
      *
      * @param mixed $htmlUrl
      */
@@ -46,22 +46,6 @@ final class AuthorTest extends Framework\TestCase
             $login,
             $htmlUrl
         );
-    }
-
-    public function providerInvalidHtmlUrl(): \Generator
-    {
-        $faker = $this->faker();
-
-        $values = [
-            'string-path-only' => \implode('/', $faker->words),
-            'string-word-only' => $faker->word,
-        ];
-
-        foreach ($values as $key => $value) {
-            yield $key => [
-                $value,
-            ];
-        }
     }
 
     public function testConstructorSetsLoginAndHtmlUrl()

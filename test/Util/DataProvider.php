@@ -1,0 +1,331 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * Copyright (c) 2017 Andreas Möller.
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @link https://github.com/localheinz/github-changelog
+ */
+
+namespace Localheinz\GitHub\ChangeLog\Test\Util;
+
+use Localheinz\Test\Util\Helper;
+
+final class DataProvider
+{
+    use Helper;
+
+    public function providerGenerateCommandArgument(): \Generator
+    {
+        $arguments = [
+            'repository' => [
+                true,
+                'The repository, e.g. "localheinz/github-changelog"',
+            ],
+            'start-reference' => [
+                true,
+                'The start reference, e.g. "1.0.0"',
+            ],
+            'end-reference' => [
+                false,
+                'The end reference, e.g. "1.1.0"',
+            ],
+        ];
+
+        foreach ($arguments as $name => list($isRequired, $description)) {
+            yield $name => [
+                $name,
+                $isRequired,
+                $description,
+            ];
+        }
+    }
+
+    public function providerGenerateCommandOption(): \Generator
+    {
+        $options = [
+            'auth-token' => [
+                'a',
+                true,
+                'The GitHub token',
+                null,
+            ],
+            'template' => [
+                't',
+                true,
+                'The template to use for rendering a pull request',
+                '- %title% (#%number%)',
+            ],
+        ];
+
+        foreach ($options as $name => list($shortcut, $isValueRequired, $description, $default)) {
+            yield $name => [
+                $name,
+                $shortcut,
+                $isValueRequired,
+                $description,
+                $default,
+            ];
+        }
+    }
+
+    public function providerInvalidRepositoryOwner(): \Generator
+    {
+        foreach ($this->invalidRepositoryOwners() as $key => $value) {
+            yield $key => [
+                $value,
+            ];
+        }
+    }
+
+    public function providerInvalidRepositoryName(): \Generator
+    {
+        foreach ($this->invalidRepositoryNames() as $key => $value) {
+            yield $key => [
+                $value,
+            ];
+        }
+    }
+
+    public function providerInvalidRepositoryString(): \Generator
+    {
+        foreach ($this->invalidRepositoryOwners() as $keyOne => $owner) {
+            foreach ($this->invalidRepositoryNames() as $keyTwo => $name) {
+                $key = \sprintf(
+                    '%s/%s',
+                    $keyOne,
+                    $keyTwo
+                );
+
+                yield $key => [
+                    \sprintf(
+                        '%s/%s',
+                        $owner,
+                        $name
+                    ),
+                ];
+            }
+        }
+
+        foreach ($this->validRepositoryOwners() as $key => $owner) {
+            yield $key => [
+                $owner,
+            ];
+        }
+
+        foreach ($this->validRepositoryNames() as $key => $name) {
+            yield $key => [
+                $name,
+            ];
+        }
+    }
+
+    public function providerValidRepositoryOwnerAndName(): \Generator
+    {
+        foreach ($this->validRepositoryOwners() as $keyOne => $owner) {
+            foreach ($this->validRepositoryNames() as $keyTwo => $name) {
+                $key = \sprintf(
+                    '%s/%s',
+                    $keyOne,
+                    $keyTwo
+                );
+
+                yield $key => [
+                    $owner,
+                    $name,
+                ];
+            }
+        }
+    }
+
+    public function providerInvalidUrl(): \Generator
+    {
+        $faker = $this->faker();
+
+        $values = [
+            'string-path-only' => \implode('/', $faker->words),
+            'string-word-only' => $faker->word,
+        ];
+
+        foreach ($values as $key => $value) {
+            yield $key => [
+                $value,
+            ];
+        }
+    }
+
+    public function providerInvalidSha(): \Generator
+    {
+        $faker = $this->faker();
+
+        $values = [
+            'md5' => $faker->md5,
+            'sentence' => $faker->sentence(),
+            'sha256' => $faker->sha256,
+            'word' => $faker->word,
+        ];
+
+        foreach ($values as $key => $value) {
+            yield $key => [
+                $value,
+            ];
+        }
+    }
+
+    public function providerInvalidPullRequestNumber(): \Generator
+    {
+        $values = [
+            'int-negative' => -1 * $this->faker()->numberBetween(1),
+            'int-zero' => 0,
+        ];
+
+        foreach ($values as $key => $value) {
+            yield $key => [
+                $value,
+            ];
+        }
+    }
+
+    /**
+     * @return string[]
+     */
+    private function invalidRepositoryOwners(): array
+    {
+        $faker = $this->faker();
+
+        $values = [
+            'blank' => '  ',
+            'empty' => '',
+            'starts-with-hyphen' => \sprintf(
+                '-%s',
+                $faker->word
+            ),
+            'ends-with-hyphen' => \sprintf(
+                '%s-',
+                $faker->word
+            ),
+            'has-multiple-successive-hyphens' => \sprintf(
+                '%s--%s',
+                $faker->word,
+                $faker->word
+            ),
+            'has-underscores' => \sprintf(
+                '%s_%s',
+                $faker->word,
+                $faker->word
+            ),
+            'has-special-characters' => \implode('', $faker->randomElements([
+                '.',
+                '_',
+                ':',
+                'ä',
+                'ü',
+                'ö',
+                'ß',
+                '🤓',
+            ])),
+        ];
+
+        return $values;
+    }
+
+    /**
+     * @return string[]
+     */
+    private function validRepositoryOwners(): array
+    {
+        $faker = $this->faker();
+
+        return [
+            'digit' => $faker->randomDigitNotNull,
+            'letter' => $faker->randomLetter,
+            'word' => $faker->word,
+            'word-with-numbers' => \sprintf(
+                '%s%d',
+                $faker->word,
+                $faker->numberBetween(1)
+            ),
+            'words-separated-by-hyphen' => \implode(
+                '-',
+                $faker->words()
+            ),
+            'words-with-numbers-separated-by-hyphens' => \implode(
+                '-',
+                \array_merge($faker->words(), [
+                    $faker->numberBetween(1),
+                    $faker->numberBetween(1),
+                ])
+            ),
+        ];
+    }
+
+    /**
+     * @return string[]
+     */
+    private function invalidRepositoryNames(): array
+    {
+        return [
+            'blank' => '  ',
+            'empty' => '',
+            'has-special-characters' => \implode('', $this->faker()->randomElements([
+                '/',
+                '\\',
+                ':',
+                'ä',
+                'ü',
+                'ö',
+                'ß',
+                '🤓',
+            ])),
+        ];
+    }
+
+    /**
+     * @return string[]
+     */
+    private function validRepositoryNames(): array
+    {
+        $faker = $this->faker();
+
+        return [
+            'digit' => $faker->randomDigitNotNull,
+            'letter' => $faker->randomLetter,
+            'word' => $faker->word,
+            'hyphen' => '-',
+            'hyphens' => '---',
+            'underscore' => '_',
+            'underscores' => '___',
+            'word-with-numbers' => \sprintf(
+                '%s%d',
+                $faker->word,
+                $faker->numberBetween(1)
+            ),
+            'words-separated-by-hyphen' => \implode(
+                '-',
+                $faker->words()
+            ),
+            'words-separated-by-underscore' => \implode(
+                '-',
+                $faker->words()
+            ),
+            'words-with-numbers-separated-by-hyphens' => \implode(
+                '-',
+                \array_merge($faker->words(), [
+                    $faker->numberBetween(1),
+                    $faker->numberBetween(1),
+                ])
+            ),
+            'words-with-numbers-separated-by-underscores' => \implode(
+                '_',
+                \array_merge($faker->words(), [
+                    $faker->numberBetween(1),
+                    $faker->numberBetween(1),
+                ])
+            ),
+        ];
+    }
+}

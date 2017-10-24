@@ -28,7 +28,7 @@ final class PullRequestTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider providerInvalidNumber
+     * @dataProvider \Localheinz\GitHub\ChangeLog\Test\Util\DataProvider::providerInvalidPullRequestNumber
      *
      * @param mixed $number
      */
@@ -46,20 +46,6 @@ final class PullRequestTest extends Framework\TestCase
             $number,
             $title
         );
-    }
-
-    public function providerInvalidNumber(): \Generator
-    {
-        $values = [
-            'int-negative' => -1 * $this->faker()->numberBetween(1),
-            'int-zero' => 0,
-        ];
-
-        foreach ($values as $key => $value) {
-            yield $key => [
-                $value,
-            ];
-        }
     }
 
     public function testConstructorSetsIdAndTitle()
