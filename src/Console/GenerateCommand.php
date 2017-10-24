@@ -73,13 +73,13 @@ final class GenerateCommand extends Command
             ->addOption(
                 'auth-token',
                 'a',
-                Input\InputOption::VALUE_OPTIONAL,
+                Input\InputOption::VALUE_REQUIRED,
                 'The GitHub token'
             )
             ->addOption(
                 'template',
                 't',
-                Input\InputOption::VALUE_OPTIONAL,
+                Input\InputOption::VALUE_REQUIRED,
                 'The template to use for rendering a pull request',
                 '- %title% (#%number%)'
             );
