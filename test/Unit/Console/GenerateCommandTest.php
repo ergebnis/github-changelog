@@ -401,7 +401,7 @@ final class GenerateCommandTest extends Framework\TestCase
 
         $pullRequests = $this->pullRequests($count);
 
-        $template = '- %title% (#%number%)';
+        $template = '- %pullrequest.title% (#pullrequest.%number%), submitted by [%pullrequest.author.login%](%pullrequest.author.htmlUrl%)';
 
         $expectedMessages = [
             \sprintf(
@@ -414,12 +414,16 @@ final class GenerateCommandTest extends Framework\TestCase
         \array_walk($pullRequests, function (Resource\PullRequestInterface $pullRequest) use (&$expectedMessages, $template) {
             $expectedMessages[] = \str_replace(
                 [
-                    '%title%',
-                    '%number%',
+                    '%pullrequest.title%',
+                    '%pullrequest.number%',
+                    '%pullrequest.author.login%',
+                    '%pullrequest.author.htmlUrl%',
                 ],
                 [
                     $pullRequest->title(),
                     $pullRequest->number(),
+                    $pullRequest->author()->login(),
+                    $pullRequest->author()->htmlUrl(),
                 ],
                 $template
             );
