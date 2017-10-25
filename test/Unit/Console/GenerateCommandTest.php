@@ -585,10 +585,12 @@ final class GenerateCommandTest extends Framework\TestCase
 
         $number = $faker->unique()->numberBetween(1);
         $title = $faker->unique()->sentence();
+        $author = new Resource\User($faker->slug());
 
         return new Resource\PullRequest(
             $number,
-            $title
+            $title,
+            $author
         );
     }
 

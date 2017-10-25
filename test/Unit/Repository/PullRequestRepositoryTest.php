@@ -29,7 +29,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         $this->assertClassImplementsInterface(Repository\PullRequestRepositoryInterface::class, Repository\PullRequestRepository::class);
     }
 
-    public function testShowReturnsPullRequestEntityWithIdAndTitleOnSuccess()
+    public function testShowReturnsPullRequestEntityWithNumberTitleAndAuthorOnSuccess()
     {
         $faker = $this->faker();
 
@@ -66,6 +66,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
 
         $this->assertSame($expectedItem['number'], $pullRequest->number());
         $this->assertSame($expectedItem['title'], $pullRequest->title());
+        $this->assertSame($expectedItem['user']['login'], $pullRequest->author()->login());
     }
 
     public function testShowThrowsPullRequestNotFoundOnFailure()
@@ -430,6 +431,9 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         return [
             'number' => $faker->unique()->numberBetween(1),
             'title' => $faker->unique()->sentence(),
+            'user' => [
+                'login' => $faker->slug(),
+            ],
         ];
     }
 }

@@ -18,4 +18,6 @@ interface PullRequestInterface
     public function number(): int;
 
     public function title(): string;
+
+    public function author(): UserInterface;
 }
