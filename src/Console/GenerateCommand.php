@@ -152,7 +152,7 @@ final class GenerateCommand extends Command
         );
 
         $io->section(\sprintf(
-            'Pull Requests for %s %s',
+            'Pull Requests merged in %s %s',
             $repository,
             $range
         ));
