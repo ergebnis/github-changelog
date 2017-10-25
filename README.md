@@ -70,8 +70,8 @@ $ github-changelog generate --repository localheinz/github-changelog 0.1.1 0.1.2
 Enjoy the changelog:
 
 ```
-- Fix: Catch exceptions in command (#37)
-- Fix: Request 250 instead of 30 commits (#38)
+- Fix: Catch exceptions in command (#37), by @localheinz
+- Fix: Request 250 instead of 30 commits (#38), by @localheinz
 ```
 
 ### Local installation
@@ -91,14 +91,14 @@ $ vendor/bin/github-changelog generate localheinz/github-changelog ae63248 maste
 Enjoy the changelog:
 
 ```
-- Enhancement: Create ChangeLog command (#31)
-- Fix: Assert exit code is set to 0 (#32)
-- Enhancement: Add console application (#33)
-- Fix: Readme (#34)
-- Fix: Autoloading for console script (#35)
-- Fix: Version foo with rebasing and whatnot (#36)
-- Fix: Catch exceptions in command (#37)
-- Fix: Request 250 instead of 30 commits (#38)
+- Enhancement: Create ChangeLog command (#31), by @localheinz
+- Fix: Assert exit code is set to 0 (#32), by @localheinz
+- Enhancement: Add console application (#33), by @localheinz
+- Fix: Readme (#34), by @localheinz
+- Fix: Autoloading for console script (#35), by @localheinz
+- Fix: Version foo with rebasing and whatnot (#36), by @localheinz
+- Fix: Catch exceptions in command (#37), by @localheinz
+- Fix: Request 250 instead of 30 commits (#38), by @localheinz
 ```
 
 ## Userland Code
@@ -143,9 +143,10 @@ $pullRequests = $range->pullRequests();
 
 array_walk($pullRequests, function (Resource\PullRequestInterface $pullRequest) {
     echo sprintf(
-        '- %s (#%d)' . PHP_EOL,
+        '- %s (#%d), submitted by @%s' . PHP_EOL,
         $pullRequest->title(),
-        $pullRequest->number()
+        $pullRequest->number(),
+        $pullRequest->author()->login(),
     );
 });
 
@@ -154,8 +155,8 @@ array_walk($pullRequests, function (Resource\PullRequestInterface $pullRequest) 
 Enjoy the changelog:
 
 ```
-- Fix: Catch exceptions in command (#37)
-- Fix: Request 250 instead of 30 commits (#38)
+- Fix: Catch exceptions in command (#37), submitted by @localheinz
+- Fix: Request 250 instead of 30 commits (#38), submitted by @localheinz
 ```
 
 ## Hints

@@ -40,27 +40,34 @@ final class PullRequestTest extends Framework\TestCase
             $number
         ));
 
-        $title = $this->faker()->sentence();
+        $faker = $this->faker();
+
+        $title = $faker->sentence();
+        $author = new Resource\User($faker->slug());
 
         new Resource\PullRequest(
             $number,
-            $title
+            $title,
+            $author
         );
     }
 
-    public function testConstructorSetsIdAndTitle()
+    public function testConstructorSetsValues()
     {
         $faker = $this->faker();
 
         $number = $faker->numberBetween(1);
         $title = $faker->sentence();
+        $author = new Resource\User($faker->slug());
 
         $pullRequest = new Resource\PullRequest(
             $number,
-            $title
+            $title,
+            $author
         );
 
         $this->assertSame($number, $pullRequest->number());
         $this->assertSame($title, $pullRequest->title());
+        $this->assertSame($author, $pullRequest->author());
     }
 }

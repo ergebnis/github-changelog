@@ -93,7 +93,7 @@ final class GenerateCommand extends Command
                 't',
                 Input\InputOption::VALUE_REQUIRED,
                 'The template to use for rendering a pull request',
-                '- %title% (#%number%)'
+                '- %title% (#%number%), by @%author%'
             );
     }
 
@@ -186,10 +186,12 @@ final class GenerateCommand extends Command
                     [
                         '%title%',
                         '%number%',
+                        '%author%',
                     ],
                     [
                         $pullRequest->title(),
                         $pullRequest->number(),
+                        $pullRequest->author()->login(),
                     ],
                     $template
                 );

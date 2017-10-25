@@ -52,7 +52,8 @@ final class PullRequestRepository implements PullRequestRepositoryInterface
 
         return new Resource\PullRequest(
             $response['number'],
-            $response['title']
+            $response['title'],
+            new Resource\User($response['user']['login'])
         );
     }
 

@@ -26,14 +26,19 @@ final class PullRequest implements PullRequestInterface
      * @var string
      */
     private $title;
+    /**
+     * @var UserInterface
+     */
+    private $author;
 
     /**
-     * @param int    $number
-     * @param string $title
+     * @param int           $number
+     * @param string        $title
+     * @param UserInterface $author
      *
      * @throws Exception\InvalidArgumentException
      */
-    public function __construct(int $number, string $title)
+    public function __construct(int $number, string $title, UserInterface $author)
     {
         if (1 > $number) {
             throw new Exception\InvalidArgumentException(\sprintf(
@@ -44,6 +49,7 @@ final class PullRequest implements PullRequestInterface
 
         $this->number = $number;
         $this->title = $title;
+        $this->author = $author;
     }
 
     public function number(): int
@@ -54,5 +60,10 @@ final class PullRequest implements PullRequestInterface
     public function title(): string
     {
         return $this->title;
+    }
+
+    public function author(): UserInterface
+    {
+        return $this->author;
     }
 }
