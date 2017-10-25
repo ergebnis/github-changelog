@@ -93,7 +93,7 @@ final class GenerateCommand extends Command
                 't',
                 Input\InputOption::VALUE_REQUIRED,
                 'The template to use for rendering a pull request',
-                '- %title% (#%number%), by @%author%'
+                '- %pullrequest.title% (#%pullrequest.number%), by @%pullrequest.author.login%'
             );
     }
 
@@ -184,14 +184,16 @@ final class GenerateCommand extends Command
             \array_walk($pullRequests, function (Resource\PullRequestInterface $pullRequest) use ($output, $template) {
                 $message = \str_replace(
                     [
-                        '%title%',
-                        '%number%',
-                        '%author%',
+                        '%pullrequest.title%',
+                        '%pullrequest.number%',
+                        '%pullrequest.author.login%',
+                        '%pullrequest.author.htmlUrl%',
                     ],
                     [
                         $pullRequest->title(),
                         $pullRequest->number(),
                         $pullRequest->author()->login(),
+                        $pullRequest->author()->htmlUrl(),
                     ],
                     $template
                 );

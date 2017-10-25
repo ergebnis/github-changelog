@@ -60,7 +60,7 @@ final class DataProvider
                 't',
                 true,
                 'The template to use for rendering a pull request',
-                '- %title% (#%number%), by @%author%',
+                '- %pullrequest.title% (#%pullrequest.number%), by @%pullrequest.author.login%',
             ],
         ];
 
