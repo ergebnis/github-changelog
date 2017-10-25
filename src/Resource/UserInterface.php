@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Localheinz\GitHub\ChangeLog\Resource;
 
-interface AuthorInterface
+interface UserInterface
 {
     public function login(): string;
 
