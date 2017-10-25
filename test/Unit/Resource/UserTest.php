@@ -18,13 +18,13 @@ use Localheinz\GitHub\ChangeLog\Resource;
 use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
 
-final class AuthorTest extends Framework\TestCase
+final class UserTest extends Framework\TestCase
 {
     use Helper;
 
     public function testImplementsAuthorInterface()
     {
-        $this->assertClassImplementsInterface(Resource\AuthorInterface::class, Resource\Author::class);
+        $this->assertClassImplementsInterface(Resource\UserInterface::class, Resource\User::class);
     }
 
     /**
@@ -42,7 +42,7 @@ final class AuthorTest extends Framework\TestCase
 
         $login = $this->faker()->slug();
 
-        new Resource\Author(
+        new Resource\User(
             $login,
             $htmlUrl
         );
@@ -55,7 +55,7 @@ final class AuthorTest extends Framework\TestCase
         $login = $faker->slug();
         $htmlUrl = $faker->url;
 
-        $author = new Resource\Author(
+        $author = new Resource\User(
             $login,
             $htmlUrl
         );

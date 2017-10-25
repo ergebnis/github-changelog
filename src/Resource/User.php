@@ -16,7 +16,7 @@ namespace Localheinz\GitHub\ChangeLog\Resource;
 use Assert;
 use Localheinz\GitHub\ChangeLog\Exception;
 
-final class Author implements AuthorInterface
+final class User implements UserInterface
 {
     /**
      * @var string
