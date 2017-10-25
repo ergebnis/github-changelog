@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Localheinz\GitHub\ChangeLog\Test\Unit\Resource;
 
-use Localheinz\GitHub\ChangeLog\Exception;
 use Localheinz\GitHub\ChangeLog\Resource;
 use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
@@ -27,40 +26,19 @@ final class UserTest extends Framework\TestCase
         $this->assertClassImplementsInterface(Resource\UserInterface::class, Resource\User::class);
     }
 
-    /**
-     * @dataProvider \Localheinz\GitHub\ChangeLog\Test\Util\DataProvider::providerInvalidUrl
-     *
-     * @param mixed $htmlUrl
-     */
-    public function testConstructorRejectsInvalidHtmlUrl(string $htmlUrl)
+    public function testConstructorSetsLogin()
     {
-        $this->expectException(Exception\InvalidArgumentException::class);
-        $this->expectExceptionMessage(\sprintf(
-            'URL "%s" does not appear to be a valid URL.',
-            $htmlUrl
-        ));
-
         $login = $this->faker()->slug();
 
-        new Resource\User(
-            $login,
-            $htmlUrl
-        );
-    }
+        $user = new Resource\User($login);
 
-    public function testConstructorSetsLoginAndHtmlUrl()
-    {
-        $faker = $this->faker();
+        $this->assertSame($login, $user->login());
 
-        $login = $faker->slug();
-        $htmlUrl = $faker->url;
-
-        $author = new Resource\User(
-            $login,
-            $htmlUrl
+        $expectedHtmlUrl = \sprintf(
+            'https://github.com/%s',
+            $login
         );
 
-        $this->assertSame($login, $author->login());
-        $this->assertSame($htmlUrl, $author->htmlUrl());
+        $this->assertSame($expectedHtmlUrl, $user->htmlUrl());
     }
 }
