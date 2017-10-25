@@ -40,7 +40,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
 
         $api = $this->createPullRequestApiMock();
 
-        $expectedItem = $this->pullRequestItem();
+        $data = $this->pullRequestData();
 
         $api
             ->expects($this->once())
@@ -48,9 +48,9 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             ->with(
                 $this->identicalTo($repository->owner()),
                 $this->identicalTo($repository->name()),
-                $this->identicalTo($expectedItem->number)
+                $this->identicalTo($data['number'])
             )
-            ->willReturn($this->response($expectedItem));
+            ->willReturn($data);
 
         $pullRequestRepository = new Repository\PullRequestRepository(
             $api,
@@ -59,13 +59,13 @@ final class PullRequestRepositoryTest extends Framework\TestCase
 
         $pullRequest = $pullRequestRepository->show(
             $repository,
-            $expectedItem->number
+            $data['number']
         );
 
         $this->assertInstanceOf(Resource\PullRequestInterface::class, $pullRequest);
 
-        $this->assertSame($expectedItem->number, $pullRequest->number());
-        $this->assertSame($expectedItem->title, $pullRequest->title());
+        $this->assertSame($data['number'], $pullRequest->number());
+        $this->assertSame($data['title'], $pullRequest->title());
     }
 
     public function testShowThrowsPullRequestNotFoundOnFailure()
@@ -265,13 +265,13 @@ final class PullRequestRepositoryTest extends Framework\TestCase
 
         $commitRepository = $this->createCommitRepositoryMock();
 
-        $expectedItem = $this->pullRequestItem();
+        $data = $this->pullRequestData();
 
         $mergeCommit = new Resource\Commit(
             $faker->unique()->sha1,
             \sprintf(
                 'Merge pull request #%d from localheinz/fix/directory',
-                $expectedItem->number
+                $data['number']
             )
         );
 
@@ -310,9 +310,9 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             ->with(
                 $this->identicalTo($repository->owner()),
                 $this->identicalTo($repository->name()),
-                $this->identicalTo($expectedItem->number)
+                $this->identicalTo($data['number'])
             )
-            ->willReturn($this->response($expectedItem));
+            ->willReturn($data);
 
         $pullRequestRepository = new Repository\PullRequestRepository(
             $api,
@@ -423,37 +423,13 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         return $this->createMock(Resource\RangeInterface::class);
     }
 
-    private function pullRequestItem(): \stdClass
+    private function pullRequestData(): array
     {
         $faker = $this->faker();
 
-        $item = new \stdClass();
-
-        $item->number = $faker->unique()->numberBetween(1);
-        $item->title = $faker->unique()->sentence();
-
-        return $item;
-    }
-
-    private function response(\stdClass $item): array
-    {
-        $template = \file_get_contents(__DIR__ . '/_response/pull-request.json');
-
-        $body = \str_replace(
-            [
-                '%number%',
-                '%title%',
-            ],
-            [
-                $item->number,
-                $item->title,
-            ],
-            $template
-        );
-
-        return \json_decode(
-            $body,
-            true
-        );
+        return [
+            'number' => $faker->unique()->numberBetween(1),
+            'title' => $faker->unique()->sentence(),
+        ];
     }
 }
