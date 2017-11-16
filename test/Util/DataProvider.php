@@ -356,6 +356,10 @@ final class DataProvider
                 $faker->word,
                 $faker->numberBetween(1)
             ),
+            'words-separated-by-dots' => \implode(
+                '.',
+                $faker->words()
+            ),
             'words-separated-by-hyphen' => \implode(
                 '-',
                 $faker->words()
@@ -363,6 +367,13 @@ final class DataProvider
             'words-separated-by-underscore' => \implode(
                 '-',
                 $faker->words()
+            ),
+            'words-with-numbers-separated-by-dots' => \implode(
+                '.',
+                \array_merge($faker->words(), [
+                    $faker->numberBetween(1),
+                    $faker->numberBetween(1),
+                ])
             ),
             'words-with-numbers-separated-by-hyphens' => \implode(
                 '-',
