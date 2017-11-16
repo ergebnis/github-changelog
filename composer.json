@@ -21,7 +21,7 @@
         "symfony/stopwatch": "^3.1.5"
     },
     "require-dev": {
-        "localheinz/php-cs-fixer-config": "~1.6.2",
+        "localheinz/php-cs-fixer-config": "~1.7.1",
         "localheinz/test-util": "0.4.0",
         "phpunit/phpunit": "^6.4.1"
     },
