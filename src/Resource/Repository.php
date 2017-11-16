@@ -134,7 +134,7 @@ final class Repository implements RepositoryInterface
 
     private static function nameRegEx(bool $asPartial = false): string
     {
-        $regEx = '(?P<name>[a-zA-Z0-9-_]+)';
+        $regEx = '(?P<name>[a-zA-Z0-9-_.]+)';
 
         if (true === $asPartial) {
             return $regEx;
