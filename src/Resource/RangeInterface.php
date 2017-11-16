@@ -30,12 +30,12 @@ interface RangeInterface
      *
      * @return static
      */
-    public function withCommit(CommitInterface $commit): RangeInterface;
+    public function withCommit(CommitInterface $commit): self;
 
     /**
      * @param PullRequestInterface $pullRequest
      *
      * @return static
      */
-    public function withPullRequest(PullRequestInterface $pullRequest): RangeInterface;
+    public function withPullRequest(PullRequestInterface $pullRequest): self;
 }
