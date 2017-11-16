@@ -19,5 +19,5 @@ interface CommitInterface
 
     public function message(): string;
 
-    public function equals(CommitInterface $commit): bool;
+    public function equals(self $commit): bool;
 }
