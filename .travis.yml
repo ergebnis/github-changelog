@@ -69,5 +69,24 @@ jobs:
 
       php: 7.2
 
+    - stage: Infection
+
+      php: 7.1
+
+      before_install:
+        - source .travis/xdebug.sh
+        - xdebug-disable
+        - composer validate
+        - if [[ -n "$GITHUB_TOKEN" ]]; then composer config github-oauth.github.com $GITHUB_TOKEN; fi
+
+      install:
+        - composer install
+
+      before_script:
+        - xdebug-enable
+
+      script:
+        - vendor/bin/infection --min-covered-msi=80 --min-msi=80
+
 notifications:
   email: false
