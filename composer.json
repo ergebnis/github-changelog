@@ -1,17 +1,13 @@
 {
     "name": "localheinz/github-changelog",
     "description": "Provides a script that generates a changelog based on titles of pull requests merged between specified references.",
+    "license": "MIT",
     "authors": [
         {
             "name": "Andreas Möller",
             "email": "am@localheinz.com"
         }
     ],
-    "license": "MIT",
-    "config": {
-        "preferred-install": "dist",
-        "sort-packages": true
-    },
     "require": {
         "php": "^7.0",
         "knplabs/github-api": "^2.5.0",
@@ -25,6 +21,10 @@
         "localheinz/php-cs-fixer-config": "~1.8.0",
         "localheinz/test-util": "0.5.0",
         "phpunit/phpunit": "^6.5.5"
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true
     },
     "autoload": {
         "psr-4": {
