@@ -24,6 +24,9 @@ use PHPUnit\Framework;
 use Symfony\Component\Console\Input;
 use Symfony\Component\Console\Tester\CommandTester;
 
+/**
+ * @internal
+ */
 final class GenerateCommandTest extends Framework\TestCase
 {
     use Helper;
@@ -67,7 +70,7 @@ final class GenerateCommandTest extends Framework\TestCase
 
         $this->assertTrue($command->getDefinition()->hasArgument($name));
 
-        /* @var Input\InputArgument $argument */
+        /** @var Input\InputArgument $argument */
         $argument = $command->getDefinition()->getArgument($name);
 
         $this->assertSame($name, $argument->getName());
@@ -116,7 +119,7 @@ final class GenerateCommandTest extends Framework\TestCase
 
         $this->assertTrue($command->getDefinition()->hasOption($name));
 
-        /* @var Input\InputOption $option */
+        /** @var Input\InputOption $option */
         $option = $command->getDefinition()->getOption($name);
 
         $this->assertSame($name, $option->getName());

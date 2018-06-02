@@ -68,7 +68,7 @@ final class CommitRepository implements CommitRepositoryInterface
         $tail = null;
 
         while (\count($commits)) {
-            /* @var Resource\CommitInterface $commit */
+            /** @var Resource\CommitInterface $commit */
             $commit = \array_shift($commits);
 
             if ($tail instanceof Resource\CommitInterface && $commit->equals($tail)) {

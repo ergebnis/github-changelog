@@ -21,6 +21,9 @@ use Localheinz\GitHub\ChangeLog\Util\RepositoryResolverInterface;
 use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
 
+/**
+ * @internal
+ */
 final class RepositoryResolverTest extends Framework\TestCase
 {
     use Helper;

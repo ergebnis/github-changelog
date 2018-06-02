@@ -18,6 +18,9 @@ use Localheinz\GitHub\ChangeLog\Util\GitInterface;
 use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
 
+/**
+ * @internal
+ */
 final class GitTest extends Framework\TestCase
 {
     use Helper;
@@ -44,7 +47,7 @@ final class GitTest extends Framework\TestCase
             );
         }
 
-        unset($this->remoteUrls);
+        $this->remoteUrls = null;
     }
 
     public function testImplementsGitInterface()
