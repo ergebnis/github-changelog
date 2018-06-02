@@ -18,6 +18,9 @@ use Localheinz\GitHub\ChangeLog\Exception\InvalidArgumentException;
 use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
 
+/**
+ * @internal
+ */
 final class InvalidArgumentExceptionTest extends Framework\TestCase
 {
     use Helper;

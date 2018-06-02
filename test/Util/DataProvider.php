@@ -249,7 +249,7 @@ final class DataProvider
     {
         $faker = $this->faker();
 
-        $values = [
+        return [
             'blank' => '  ',
             'empty' => '',
             'starts-with-hyphen' => \sprintf(
@@ -281,8 +281,6 @@ final class DataProvider
                 '🤓',
             ])),
         ];
-
-        return $values;
     }
 
     /**

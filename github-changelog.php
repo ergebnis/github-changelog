@@ -10,7 +10,6 @@ declare(strict_types=1);
  *
  * @see https://github.com/localheinz/github-changelog
  */
-
 use Github\Api;
 use Github\Client;
 use Localheinz\GitHub\ChangeLog;

@@ -18,6 +18,9 @@ use Localheinz\GitHub\ChangeLog\Exception\RuntimeException;
 use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
 
+/**
+ * @internal
+ */
 final class RuntimeExceptionTest extends Framework\TestCase
 {
     use Helper;

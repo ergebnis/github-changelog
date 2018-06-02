@@ -19,6 +19,9 @@ use Localheinz\GitHub\ChangeLog\Resource;
 use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
 
+/**
+ * @internal
+ */
 final class ReferenceNotFoundTest extends Framework\TestCase
 {
     use Helper;

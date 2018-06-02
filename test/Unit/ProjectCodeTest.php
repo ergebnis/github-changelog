@@ -13,10 +13,12 @@ declare(strict_types=1);
 
 namespace Localheinz\GitHub\ChangeLog\Test\Unit;
 
-use Localheinz\GitHub\ChangeLog;
 use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
 
+/**
+ * @internal
+ */
 final class ProjectCodeTest extends Framework\TestCase
 {
     use Helper;
