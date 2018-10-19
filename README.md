@@ -1,6 +1,6 @@
 # github-changelog
 
-[![Build Status](https://travis-ci.org/localheinz/github-changelog.svg?branch=master)](https://travis-ci.org/localheinz/github-changelog)
+[![Build Status](https://travis-ci.com/localheinz/github-changelog.svg?branch=master)](https://travis-ci.com/localheinz/github-changelog)
 [![Test Coverage](https://codecov.io/gh/localheinz/github-changelog/branch/master/graph/badge.svg)](https://codecov.io/gh/localheinz/github-changelog)
 [![Latest Stable Version](https://poser.pugx.org/localheinz/github-changelog/v/stable)](https://packagist.org/packages/localheinz/github-changelog)
 [![Total Downloads](https://poser.pugx.org/localheinz/github-changelog/downloads)](https://packagist.org/packages/localheinz/github-changelog)
