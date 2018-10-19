@@ -11,13 +11,13 @@ Provides a script that generates a changelog based on titles of pull requests me
 
 Probably not. There are a range of other tools that probably do a better job.
 
-Take a look at 
+Take a look at
 
 * https://packagist.org/?q=changelog
 * https://www.npmjs.com/search?q=changelog
 * https://pypi.python.org/pypi?%3Aaction=search&term=changelog
 
-Nonetheless, for me and my projects, it's the second best thing after *manually* 
+Nonetheless, for me and my projects, it's the second best thing after *manually*
 keeping a changelog as suggested at http://keepachangelog.com.
 
 ## When will it work for me?
@@ -61,7 +61,7 @@ $ cd github-changelog
 $ github-changelog generate 0.1.1 0.1.2
 ```
 
-Create your changelogs from anywhere, specifying the repository using the `--repository` option: 
+Create your changelogs from anywhere, specifying the repository using the `--repository` option:
 
 ```bash
 $ github-changelog generate --repository localheinz/github-changelog 0.1.1 0.1.2
@@ -166,6 +166,10 @@ Enjoy the changelog:
 ## Contributing
 
 Please have a look at [`CONTRIBUTING.md`](.github/CONTRIBUTING.md).
+
+## Code of Conduct
+
+Please have a look at [`CODE_OF_CONDUCT.md`](.github/CODE_OF_CONDUCT.md).
 
 ## License
 
