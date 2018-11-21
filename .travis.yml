@@ -1,7 +1,5 @@
 language: php
 
-sudo: false
-
 env:
   global:
     - secure: "pGWBU1bRpl4avYeEd6txA32oPlM/IZUo01PITYudXiwxQ4H8B4BSmSs4uFPZAMvE7IXWm7h+U8GkQFP6leAwre51Xcvlhp1ZdV1HggSkcqZmsL9UDDfz048GxCzobKZn3WSC2qs4cE8a0iL3xnWICfmjzI8LiYOS2xHrkI3sqYs="
