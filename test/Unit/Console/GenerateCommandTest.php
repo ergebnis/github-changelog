@@ -91,7 +91,7 @@ final class GenerateCommandTest extends Framework\TestCase
             ],
         ];
 
-        foreach ($arguments as $name => list($isRequired, $description)) {
+        foreach ($arguments as $name => [$isRequired, $description]) {
             yield $name => [
                 $name,
                 $isRequired,

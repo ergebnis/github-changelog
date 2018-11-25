@@ -32,7 +32,7 @@ final class DataProvider
             ],
         ];
 
-        foreach ($arguments as $name => list($isRequired, $description)) {
+        foreach ($arguments as $name => [$isRequired, $description]) {
             yield $name => [
                 $name,
                 $isRequired,
@@ -64,7 +64,7 @@ final class DataProvider
             ],
         ];
 
-        foreach ($options as $name => list($shortcut, $isValueRequired, $description, $default)) {
+        foreach ($options as $name => [$shortcut, $isValueRequired, $description, $default]) {
             yield $name => [
                 $name,
                 $shortcut,
