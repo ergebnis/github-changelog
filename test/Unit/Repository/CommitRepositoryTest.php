@@ -48,12 +48,12 @@ final class CommitRepositoryTest extends Framework\TestCase
         $expectedItem = $this->commitItem();
 
         $commitApi
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('show')
             ->with(
-                $this->identicalTo($repository->owner()),
-                $this->identicalTo($repository->name()),
-                $this->identicalTo($sha)
+                self::identicalTo($repository->owner()),
+                self::identicalTo($repository->name()),
+                self::identicalTo($sha)
             )
             ->willReturn($expectedItem);
 
@@ -64,10 +64,10 @@ final class CommitRepositoryTest extends Framework\TestCase
             $sha
         );
 
-        $this->assertInstanceOf(Resource\CommitInterface::class, $commit);
+        self::assertInstanceOf(Resource\CommitInterface::class, $commit);
 
-        $this->assertSame($expectedItem['sha'], $commit->sha());
-        $this->assertSame($expectedItem['commit']['message'], $commit->message());
+        self::assertSame($expectedItem['sha'], $commit->sha());
+        self::assertSame($expectedItem['commit']['message'], $commit->message());
     }
 
     public function testShowThrowsCommitNotFoundOnFailure()
@@ -84,12 +84,12 @@ final class CommitRepositoryTest extends Framework\TestCase
         $api = $this->createCommitApiMock();
 
         $api
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('show')
             ->with(
-                $this->identicalTo($repository->owner()),
-                $this->identicalTo($repository->name()),
-                $this->identicalTo($sha)
+                self::identicalTo($repository->owner()),
+                self::identicalTo($repository->name()),
+                self::identicalTo($sha)
             )
             ->willReturn('failure');
 
@@ -117,11 +117,11 @@ final class CommitRepositoryTest extends Framework\TestCase
         $commitApi = $this->createCommitApiMock();
 
         $commitApi
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('all')
             ->with(
-                $this->identicalTo($repository->owner()),
-                $this->identicalTo($repository->name()),
+                self::identicalTo($repository->owner()),
+                self::identicalTo($repository->name()),
                 $this->arrayHasKeyAndValue('sha', $sha)
             )
             ->willReturn('snafu');
@@ -132,8 +132,8 @@ final class CommitRepositoryTest extends Framework\TestCase
             'sha' => $sha,
         ]);
 
-        $this->assertInstanceOf(Resource\Range::class, $range);
-        $this->assertCount(0, $range->commits());
+        self::assertInstanceOf(Resource\Range::class, $range);
+        self::assertCount(0, $range->commits());
     }
 
     public function testAllSetsParamsPerPageTo250()
@@ -152,11 +152,11 @@ final class CommitRepositoryTest extends Framework\TestCase
         $expectedItems = $this->commitItems(15);
 
         $commitApi
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('all')
             ->with(
-                $this->identicalTo($repository->owner()),
-                $this->identicalTo($repository->name()),
+                self::identicalTo($repository->owner()),
+                self::identicalTo($repository->name()),
                 $this->arrayHasKeyAndValue('per_page', 250)
             )
             ->willReturn($this->reverse($expectedItems));
@@ -185,11 +185,11 @@ final class CommitRepositoryTest extends Framework\TestCase
         $expectedItems = $this->commitItems(15);
 
         $commitApi
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('all')
             ->with(
-                $this->identicalTo($repository->owner()),
-                $this->identicalTo($repository->name()),
+                self::identicalTo($repository->owner()),
+                self::identicalTo($repository->name()),
                 $this->arrayHasKeyAndValue('per_page', $perPage)
             )
             ->willReturn($this->reverse($expectedItems));
@@ -218,11 +218,11 @@ final class CommitRepositoryTest extends Framework\TestCase
         $expectedItems = $this->commitItems(15);
 
         $commitApi
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('all')
             ->with(
-                $this->identicalTo($repository->owner()),
-                $this->identicalTo($repository->name()),
+                self::identicalTo($repository->owner()),
+                self::identicalTo($repository->name()),
                 $this->arrayHasKeyAndValue('sha', $sha)
             )
             ->willReturn($this->reverse($expectedItems));
@@ -233,20 +233,20 @@ final class CommitRepositoryTest extends Framework\TestCase
             'sha' => $sha,
         ]);
 
-        $this->assertInstanceOf(Resource\Range::class, $range);
+        self::assertInstanceOf(Resource\Range::class, $range);
 
         $commits = $range->commits();
 
-        $this->assertCount(\count($expectedItems), $commits);
+        self::assertCount(\count($expectedItems), $commits);
 
-        \array_walk($commits, function (Resource\CommitInterface $commit) use (&$expectedItems) {
+        \array_walk($commits, static function (Resource\CommitInterface $commit) use (&$expectedItems) {
             /*
              * API returns commits in reverse order
              */
             $expectedItem = \array_pop($expectedItems);
 
-            $this->assertSame($expectedItem['sha'], $commit->sha());
-            $this->assertSame($expectedItem['commit']['message'], $commit->message());
+            self::assertSame($expectedItem['sha'], $commit->sha());
+            self::assertSame($expectedItem['commit']['message'], $commit->message());
         });
     }
 
@@ -266,8 +266,8 @@ final class CommitRepositoryTest extends Framework\TestCase
         $commitApi = $this->createCommitApiMock();
 
         $commitApi
-            ->expects($this->never())
-            ->method($this->anything());
+            ->expects(self::never())
+            ->method(self::anything());
 
         $commitRepository = new Repository\CommitRepository($commitApi);
 
@@ -277,9 +277,9 @@ final class CommitRepositoryTest extends Framework\TestCase
             $endReference
         );
 
-        $this->assertInstanceOf(Resource\RangeInterface::class, $range);
-        $this->assertEmpty($range->commits());
-        $this->assertEmpty($range->pullRequests());
+        self::assertInstanceOf(Resource\RangeInterface::class, $range);
+        self::assertEmpty($range->commits());
+        self::assertEmpty($range->pullRequests());
     }
 
     public function testItemsDoesNotFetchCommitsIfStartCommitCouldNotBeFound()
@@ -297,17 +297,17 @@ final class CommitRepositoryTest extends Framework\TestCase
         $commitApi = $this->createCommitApiMock();
 
         $commitApi
-            ->expects($this->at(0))
+            ->expects(self::at(0))
             ->method('show')
             ->with(
-                $this->identicalTo($repository->owner()),
-                $this->identicalTo($repository->name()),
-                $this->identicalTo($startReference)
+                self::identicalTo($repository->owner()),
+                self::identicalTo($repository->name()),
+                self::identicalTo($startReference)
             )
             ->willReturn(null);
 
         $commitApi
-            ->expects($this->never())
+            ->expects(self::never())
             ->method('all');
 
         $commitRepository = new Repository\CommitRepository($commitApi);
@@ -318,9 +318,9 @@ final class CommitRepositoryTest extends Framework\TestCase
             $endReference
         );
 
-        $this->assertInstanceOf(Resource\RangeInterface::class, $range);
-        $this->assertEmpty($range->commits());
-        $this->assertEmpty($range->pullRequests());
+        self::assertInstanceOf(Resource\RangeInterface::class, $range);
+        self::assertEmpty($range->commits());
+        self::assertEmpty($range->pullRequests());
     }
 
     public function testItemsDoesNotFetchCommitsIfEndCommitCouldNotBeFound()
@@ -338,27 +338,27 @@ final class CommitRepositoryTest extends Framework\TestCase
         $commitApi = $this->createCommitApiMock();
 
         $commitApi
-            ->expects($this->at(0))
+            ->expects(self::at(0))
             ->method('show')
             ->with(
-                $this->identicalTo($repository->owner()),
-                $this->identicalTo($repository->name()),
-                $this->identicalTo($startReference)
+                self::identicalTo($repository->owner()),
+                self::identicalTo($repository->name()),
+                self::identicalTo($startReference)
             )
             ->willReturn($this->commitItem());
 
         $commitApi
-            ->expects($this->at(1))
+            ->expects(self::at(1))
             ->method('show')
             ->with(
-                $this->identicalTo($repository->owner()),
-                $this->identicalTo($repository->name()),
-                $this->identicalTo($endReference)
+                self::identicalTo($repository->owner()),
+                self::identicalTo($repository->name()),
+                self::identicalTo($endReference)
             )
             ->willReturn(null);
 
         $commitApi
-            ->expects($this->never())
+            ->expects(self::never())
             ->method('all');
 
         $commitRepository = new Repository\CommitRepository($commitApi);
@@ -369,9 +369,9 @@ final class CommitRepositoryTest extends Framework\TestCase
             $endReference
         );
 
-        $this->assertInstanceOf(Resource\RangeInterface::class, $range);
-        $this->assertEmpty($range->commits());
-        $this->assertEmpty($range->pullRequests());
+        self::assertInstanceOf(Resource\RangeInterface::class, $range);
+        self::assertEmpty($range->commits());
+        self::assertEmpty($range->pullRequests());
     }
 
     public function testItemsFetchesCommitsUsingShaFromEndCommit()
@@ -391,33 +391,33 @@ final class CommitRepositoryTest extends Framework\TestCase
         $startCommit = $this->commitItem();
 
         $commitApi
-            ->expects($this->at(0))
+            ->expects(self::at(0))
             ->method('show')
             ->with(
-                $this->identicalTo($repository->owner()),
-                $this->identicalTo($repository->name()),
-                $this->identicalTo($startReference)
+                self::identicalTo($repository->owner()),
+                self::identicalTo($repository->name()),
+                self::identicalTo($startReference)
             )
             ->willReturn($startCommit);
 
         $endCommit = $this->commitItem();
 
         $commitApi
-            ->expects($this->at(1))
+            ->expects(self::at(1))
             ->method('show')
             ->with(
-                $this->identicalTo($repository->owner()),
-                $this->identicalTo($repository->name()),
-                $this->identicalTo($endReference)
+                self::identicalTo($repository->owner()),
+                self::identicalTo($repository->name()),
+                self::identicalTo($endReference)
             )
             ->willReturn($endCommit);
 
         $commitApi
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('all')
             ->with(
-                $this->identicalTo($repository->owner()),
-                $this->identicalTo($repository->name()),
+                self::identicalTo($repository->owner()),
+                self::identicalTo($repository->name()),
                 $this->arrayHasKeyAndValue('sha', $endCommit['sha'])
             );
 
@@ -446,21 +446,21 @@ final class CommitRepositoryTest extends Framework\TestCase
         $startCommit = $this->commitItem();
 
         $commitApi
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('show')
             ->with(
-                $this->identicalTo($repository->owner()),
-                $this->identicalTo($repository->name()),
-                $this->identicalTo($startReference)
+                self::identicalTo($repository->owner()),
+                self::identicalTo($repository->name()),
+                self::identicalTo($startReference)
             )
             ->willReturn($startCommit);
 
         $commitApi
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('all')
             ->with(
-                $this->identicalTo($repository->owner()),
-                $this->identicalTo($repository->name()),
+                self::identicalTo($repository->owner()),
+                self::identicalTo($repository->name()),
                 $this->arrayNotHasKey('sha')
             );
 
@@ -489,24 +489,24 @@ final class CommitRepositoryTest extends Framework\TestCase
         $startCommit = $this->commitItem($faker->sha1);
 
         $commitApi
-            ->expects($this->at(0))
+            ->expects(self::at(0))
             ->method('show')
             ->with(
-                $this->identicalTo($repository->owner()),
-                $this->identicalTo($repository->name()),
-                $this->identicalTo($startReference)
+                self::identicalTo($repository->owner()),
+                self::identicalTo($repository->name()),
+                self::identicalTo($startReference)
             )
             ->willReturn($startCommit);
 
         $endCommit = $this->commitItem($faker->sha1);
 
         $commitApi
-            ->expects($this->at(1))
+            ->expects(self::at(1))
             ->method('show')
             ->with(
-                $this->identicalTo($repository->owner()),
-                $this->identicalTo($repository->name()),
-                $this->identicalTo($endReference)
+                self::identicalTo($repository->owner()),
+                self::identicalTo($repository->name()),
+                self::identicalTo($endReference)
             )
             ->willReturn($endCommit);
 
@@ -531,11 +531,11 @@ final class CommitRepositoryTest extends Framework\TestCase
         );
 
         $commitApi
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('all')
             ->with(
-                $this->identicalTo($repository->owner()),
-                $this->identicalTo($repository->name()),
+                self::identicalTo($repository->owner()),
+                self::identicalTo($repository->name()),
                 $this->arrayHasKeyAndValue('sha', $endCommit['sha'])
             )
             ->willReturn($this->reverse($segment));
@@ -548,23 +548,23 @@ final class CommitRepositoryTest extends Framework\TestCase
             $endReference
         );
 
-        $this->assertInstanceOf(Resource\RangeInterface::class, $range);
+        self::assertInstanceOf(Resource\RangeInterface::class, $range);
 
         $commits = $range->commits();
 
-        $this->assertCount(\count($expectedItems), $commits);
+        self::assertCount(\count($expectedItems), $commits);
 
-        \array_walk($commits, function ($commit) use (&$expectedItems) {
+        \array_walk($commits, static function ($commit) use (&$expectedItems) {
             /*
              * API returns items in reverse order
              */
             $expectedItem = \array_pop($expectedItems);
 
-            $this->assertInstanceOf(Resource\CommitInterface::class, $commit);
+            self::assertInstanceOf(Resource\CommitInterface::class, $commit);
 
             /* @var Resource\CommitInterface $commit */
-            $this->assertSame($expectedItem['sha'], $commit->sha());
-            $this->assertSame($expectedItem['commit']['message'], $commit->message());
+            self::assertSame($expectedItem['sha'], $commit->sha());
+            self::assertSame($expectedItem['commit']['message'], $commit->message());
         });
     }
 
@@ -585,24 +585,24 @@ final class CommitRepositoryTest extends Framework\TestCase
         $startCommit = $this->commitItem($faker->sha1);
 
         $commitApi
-            ->expects($this->at(0))
+            ->expects(self::at(0))
             ->method('show')
             ->with(
-                $this->identicalTo($repository->owner()),
-                $this->identicalTo($repository->name()),
-                $this->identicalTo($startReference)
+                self::identicalTo($repository->owner()),
+                self::identicalTo($repository->name()),
+                self::identicalTo($startReference)
             )
             ->willReturn($startCommit);
 
         $endCommit = $this->commitItem($faker->sha1);
 
         $commitApi
-            ->expects($this->at(1))
+            ->expects(self::at(1))
             ->method('show')
             ->with(
-                $this->identicalTo($repository->owner()),
-                $this->identicalTo($repository->name()),
-                $this->identicalTo($endReference)
+                self::identicalTo($repository->owner()),
+                self::identicalTo($repository->name()),
+                self::identicalTo($endReference)
             )
             ->willReturn($endCommit);
 
@@ -641,21 +641,21 @@ final class CommitRepositoryTest extends Framework\TestCase
         );
 
         $commitApi
-            ->expects($this->at(2))
+            ->expects(self::at(2))
             ->method('all')
             ->with(
-                $this->identicalTo($repository->owner()),
-                $this->identicalTo($repository->name()),
+                self::identicalTo($repository->owner()),
+                self::identicalTo($repository->name()),
                 $this->arrayHasKeyAndValue('sha', $endCommit['sha'])
             )
             ->willReturn($this->reverse($firstSegment));
 
         $commitApi
-            ->expects($this->at(3))
+            ->expects(self::at(3))
             ->method('all')
             ->with(
-                $this->identicalTo($repository->owner()),
-                $this->identicalTo($repository->name()),
+                self::identicalTo($repository->owner()),
+                self::identicalTo($repository->name()),
                 $this->arrayHasKeyAndValue('sha', $firstCommitFromFirstSegment['sha'])
             )
             ->willReturn($this->reverse($secondSegment));
@@ -668,23 +668,23 @@ final class CommitRepositoryTest extends Framework\TestCase
             $endReference
         );
 
-        $this->assertInstanceOf(Resource\RangeInterface::class, $range);
+        self::assertInstanceOf(Resource\RangeInterface::class, $range);
 
         $commits = $range->commits();
 
-        $this->assertCount(\count($expectedItems), $commits);
+        self::assertCount(\count($expectedItems), $commits);
 
-        \array_walk($commits, function ($commit) use (&$expectedItems) {
+        \array_walk($commits, static function ($commit) use (&$expectedItems) {
             /*
              * API returns items in reverse order
              */
             $expectedItem = \array_pop($expectedItems);
 
-            $this->assertInstanceOf(Resource\CommitInterface::class, $commit);
+            self::assertInstanceOf(Resource\CommitInterface::class, $commit);
 
             /* @var Resource\CommitInterface $commit */
-            $this->assertSame($expectedItem['sha'], $commit->sha());
-            $this->assertSame($expectedItem['commit']['message'], $commit->message());
+            self::assertSame($expectedItem['sha'], $commit->sha());
+            self::assertSame($expectedItem['commit']['message'], $commit->message());
         });
     }
 
@@ -738,7 +738,7 @@ final class CommitRepositoryTest extends Framework\TestCase
 
     private function arrayHasKeyAndValue(string $key, $value): Framework\Constraint\Callback
     {
-        return $this->callback(function ($array) use ($key, $value) {
+        return self::callback(static function ($array) use ($key, $value) {
             if (\is_array($array)
                 && \array_key_exists($key, $array)
                 && $value === $array[$key]
@@ -752,7 +752,7 @@ final class CommitRepositoryTest extends Framework\TestCase
 
     private function arrayNotHasKey(string $key): Framework\Constraint\Callback
     {
-        return $this->callback(function ($array) use ($key) {
+        return self::callback(static function ($array) use ($key) {
             if (\is_array($array)
                 && !\array_key_exists($key, $array)
             ) {

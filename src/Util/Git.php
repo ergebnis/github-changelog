@@ -31,7 +31,7 @@ final class Git implements GitInterface
 
         return \array_filter(\array_combine(
             $remoteNames,
-            \array_map(function (string $remoteName) {
+            \array_map(static function (string $remoteName) {
                 \exec(
                     \sprintf(
                         'git remote get-url %s',

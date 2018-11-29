@@ -33,8 +33,8 @@ final class RangeTest extends Framework\TestCase
     {
         $range = new Resource\Range();
 
-        $this->assertSame([], $range->commits());
-        $this->assertSame([], $range->pullRequests());
+        self::assertSame([], $range->commits());
+        self::assertSame([], $range->pullRequests());
     }
 
     public function testWithCommitClonesRangeAndAddsCommit()
@@ -45,11 +45,11 @@ final class RangeTest extends Framework\TestCase
 
         $mutated = $range->withCommit($commit);
 
-        $this->assertInstanceOf(Resource\Range::class, $mutated);
-        $this->assertNotSame($range, $mutated);
-        $this->assertCount(0, $range->commits());
-        $this->assertCount(1, $mutated->commits());
-        $this->assertContains($commit, $mutated->commits());
+        self::assertInstanceOf(Resource\Range::class, $mutated);
+        self::assertNotSame($range, $mutated);
+        self::assertCount(0, $range->commits());
+        self::assertCount(1, $mutated->commits());
+        self::assertContains($commit, $mutated->commits());
     }
 
     public function testWithPullRequestClonesRangeAndAddsPullRequest()
@@ -60,11 +60,11 @@ final class RangeTest extends Framework\TestCase
 
         $mutated = $range->withPullRequest($pullRequest);
 
-        $this->assertInstanceOf(Resource\Range::class, $mutated);
-        $this->assertNotSame($range, $mutated);
-        $this->assertCount(0, $range->pullRequests());
-        $this->assertCount(1, $mutated->pullRequests());
-        $this->assertContains($pullRequest, $mutated->pullRequests());
+        self::assertInstanceOf(Resource\Range::class, $mutated);
+        self::assertNotSame($range, $mutated);
+        self::assertCount(0, $range->pullRequests());
+        self::assertCount(1, $mutated->pullRequests());
+        self::assertContains($pullRequest, $mutated->pullRequests());
     }
 
     /**

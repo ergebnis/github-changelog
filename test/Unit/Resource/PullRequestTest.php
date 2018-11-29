@@ -69,8 +69,8 @@ final class PullRequestTest extends Framework\TestCase
             $author
         );
 
-        $this->assertSame($number, $pullRequest->number());
-        $this->assertSame($title, $pullRequest->title());
-        $this->assertSame($author, $pullRequest->author());
+        self::assertSame($number, $pullRequest->number());
+        self::assertSame($title, $pullRequest->title());
+        self::assertSame($author, $pullRequest->author());
     }
 }

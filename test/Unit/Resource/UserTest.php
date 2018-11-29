@@ -35,13 +35,13 @@ final class UserTest extends Framework\TestCase
 
         $user = new Resource\User($login);
 
-        $this->assertSame($login, $user->login());
+        self::assertSame($login, $user->login());
 
         $expectedHtmlUrl = \sprintf(
             'https://github.com/%s',
             $login
         );
 
-        $this->assertSame($expectedHtmlUrl, $user->htmlUrl());
+        self::assertSame($expectedHtmlUrl, $user->htmlUrl());
     }
 }

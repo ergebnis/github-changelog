@@ -89,9 +89,9 @@ final class RepositoryTest extends Framework\TestCase
             $name
         );
 
-        $this->assertInstanceOf(Resource\RepositoryInterface::class, $repository);
-        $this->assertSame($owner, $repository->owner());
-        $this->assertSame($name, $repository->name());
+        self::assertInstanceOf(Resource\RepositoryInterface::class, $repository);
+        self::assertSame($owner, $repository->owner());
+        self::assertSame($name, $repository->name());
     }
 
     /**
@@ -121,9 +121,9 @@ final class RepositoryTest extends Framework\TestCase
     {
         $repository = Resource\Repository::fromRemoteUrl($remoteUrl);
 
-        $this->assertInstanceOf(Resource\RepositoryInterface::class, $repository);
-        $this->assertSame($owner, $repository->owner());
-        $this->assertSame($name, $repository->name());
+        self::assertInstanceOf(Resource\RepositoryInterface::class, $repository);
+        self::assertSame($owner, $repository->owner());
+        self::assertSame($name, $repository->name());
     }
 
     public function testToStringReturnsStringRepresentation()
@@ -144,7 +144,7 @@ final class RepositoryTest extends Framework\TestCase
             $name
         );
 
-        $this->assertSame($expected, $repository->__toString());
+        self::assertSame($expected, $repository->__toString());
     }
 
     /**
@@ -179,8 +179,8 @@ final class RepositoryTest extends Framework\TestCase
 
         $repository = Resource\Repository::fromString($string);
 
-        $this->assertInstanceOf(Resource\RepositoryInterface::class, $repository);
-        $this->assertSame($owner, $repository->owner());
-        $this->assertSame($name, $repository->name());
+        self::assertInstanceOf(Resource\RepositoryInterface::class, $repository);
+        self::assertSame($owner, $repository->owner());
+        self::assertSame($name, $repository->name());
     }
 }

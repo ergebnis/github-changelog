@@ -38,7 +38,7 @@ final class RepositoryResolverTest extends Framework\TestCase
         $git = $this->createGitMock();
 
         $git
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('remoteUrls')
             ->willThrowException(new Exception\RuntimeException());
 
@@ -57,7 +57,7 @@ final class RepositoryResolverTest extends Framework\TestCase
         $git = $this->createGitMock();
 
         $git
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('remoteUrls')
             ->willReturn($remoteUrls);
 
@@ -92,7 +92,7 @@ final class RepositoryResolverTest extends Framework\TestCase
         $git = $this->createGitMock();
 
         $git
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('remoteUrls')
             ->willReturn($remoteUrls);
 
@@ -119,7 +119,7 @@ final class RepositoryResolverTest extends Framework\TestCase
 
         $remoteUrls = \array_combine(
             $remoteNames,
-            \array_map(function () use ($faker) {
+            \array_map(static function () use ($faker) {
                 return $faker->sentence();
             }, $remoteNames)
         );
@@ -131,7 +131,7 @@ final class RepositoryResolverTest extends Framework\TestCase
         $git = $this->createGitMock();
 
         $git
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('remoteUrls')
             ->willReturn($remoteUrls);
 
@@ -139,9 +139,9 @@ final class RepositoryResolverTest extends Framework\TestCase
 
         $repository = $resolver->resolve();
 
-        $this->assertInstanceOf(Resource\RepositoryInterface::class, $repository);
-        $this->assertSame($owner, $repository->owner());
-        $this->assertSame($name, $repository->name());
+        self::assertInstanceOf(Resource\RepositoryInterface::class, $repository);
+        self::assertSame($owner, $repository->owner());
+        self::assertSame($name, $repository->name());
     }
 
     public function testResolveWithFromRemoteNamesThrowsRuntimeExceptionIfNoValidRemoteUrlsCanBeConsidered()
@@ -168,7 +168,7 @@ final class RepositoryResolverTest extends Framework\TestCase
         $git = $this->createGitMock();
 
         $git
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('remoteUrls')
             ->willReturn($remoteUrls);
 
@@ -217,7 +217,7 @@ final class RepositoryResolverTest extends Framework\TestCase
         $git = $this->createGitMock();
 
         $git
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('remoteUrls')
             ->willReturn($remoteUrls);
 
@@ -225,9 +225,9 @@ final class RepositoryResolverTest extends Framework\TestCase
 
         $repository = $resolver->resolve(...$fromRemoteNames);
 
-        $this->assertInstanceOf(Resource\RepositoryInterface::class, $repository);
-        $this->assertSame($owner, $repository->owner());
-        $this->assertSame($name, $repository->name());
+        self::assertInstanceOf(Resource\RepositoryInterface::class, $repository);
+        self::assertSame($owner, $repository->owner());
+        self::assertSame($name, $repository->name());
     }
 
     /**

@@ -52,7 +52,7 @@ final class ReferenceNotFoundTest extends Framework\TestCase
             $reference
         );
 
-        $this->assertInstanceOf(ReferenceNotFound::class, $exception);
+        self::assertInstanceOf(ReferenceNotFound::class, $exception);
 
         $message = \sprintf(
             'Could not find reference "%s" in "%s".',
@@ -60,7 +60,7 @@ final class ReferenceNotFoundTest extends Framework\TestCase
             $repository
         );
 
-        $this->assertSame($message, $exception->getMessage());
-        $this->assertSame(0, $exception->getCode());
+        self::assertSame($message, $exception->getMessage());
+        self::assertSame(0, $exception->getCode());
     }
 }

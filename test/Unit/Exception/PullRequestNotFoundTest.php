@@ -52,7 +52,7 @@ final class PullRequestNotFoundTest extends Framework\TestCase
             $number
         );
 
-        $this->assertInstanceOf(PullRequestNotFound::class, $exception);
+        self::assertInstanceOf(PullRequestNotFound::class, $exception);
 
         $message = \sprintf(
             'Could not find pull request "%s" in "%s".',
@@ -60,7 +60,7 @@ final class PullRequestNotFoundTest extends Framework\TestCase
             $repository
         );
 
-        $this->assertSame($message, $exception->getMessage());
-        $this->assertSame(0, $exception->getCode());
+        self::assertSame($message, $exception->getMessage());
+        self::assertSame(0, $exception->getCode());
     }
 }

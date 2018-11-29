@@ -50,7 +50,7 @@ final class RepositoryResolver implements RepositoryResolverInterface
             );
         }
 
-        $repositories = \array_filter(\array_map(function (string $remoteUrl) {
+        $repositories = \array_filter(\array_map(static function (string $remoteUrl) {
             try {
                 $repository = Resource\Repository::fromRemoteUrl($remoteUrl);
             } catch (Exception\InvalidArgumentException $exception) {
