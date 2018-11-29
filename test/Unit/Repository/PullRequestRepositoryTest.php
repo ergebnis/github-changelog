@@ -46,12 +46,12 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         $expectedItem = $this->pullRequestItem();
 
         $api
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('show')
             ->with(
-                $this->identicalTo($repository->owner()),
-                $this->identicalTo($repository->name()),
-                $this->identicalTo($expectedItem['number'])
+                self::identicalTo($repository->owner()),
+                self::identicalTo($repository->name()),
+                self::identicalTo($expectedItem['number'])
             )
             ->willReturn($expectedItem);
 
@@ -65,11 +65,11 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             $expectedItem['number']
         );
 
-        $this->assertInstanceOf(Resource\PullRequestInterface::class, $pullRequest);
+        self::assertInstanceOf(Resource\PullRequestInterface::class, $pullRequest);
 
-        $this->assertSame($expectedItem['number'], $pullRequest->number());
-        $this->assertSame($expectedItem['title'], $pullRequest->title());
-        $this->assertSame($expectedItem['user']['login'], $pullRequest->author()->login());
+        self::assertSame($expectedItem['number'], $pullRequest->number());
+        self::assertSame($expectedItem['title'], $pullRequest->title());
+        self::assertSame($expectedItem['user']['login'], $pullRequest->author()->login());
     }
 
     public function testShowThrowsPullRequestNotFoundOnFailure()
@@ -86,12 +86,12 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         $api = $this->createPullRequestApiMock();
 
         $api
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('show')
             ->with(
-                $this->identicalTo($repository->owner()),
-                $this->identicalTo($repository->name()),
-                $this->identicalTo($number)
+                self::identicalTo($repository->owner()),
+                self::identicalTo($repository->name()),
+                self::identicalTo($number)
             )
             ->willReturn('snafu');
 
@@ -129,17 +129,17 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         $range = $this->createRangeMock();
 
         $range
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('commits')
             ->willReturn([]);
 
         $commitRepository
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('items')
             ->with(
-                $this->identicalTo($repository),
-                $this->identicalTo($startReference),
-                $this->identicalTo(null)
+                self::identicalTo($repository),
+                self::identicalTo($startReference),
+                self::identicalTo(null)
             )
             ->willReturn($range);
 
@@ -169,23 +169,23 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         $range = $this->createRangeMock();
 
         $range
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('commits')
             ->willReturn([]);
 
         $range
-            ->expects($this->never())
+            ->expects(self::never())
             ->method('withPullRequest');
 
         $commitRepository = $this->createCommitRepositoryMock();
 
         $commitRepository
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('items')
             ->with(
-                $this->identicalTo($repository),
-                $this->identicalTo($startReference),
-                $this->identicalTo($endReference)
+                self::identicalTo($repository),
+                self::identicalTo($startReference),
+                self::identicalTo($endReference)
             )
             ->willReturn($range);
 
@@ -223,23 +223,23 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         $range = $this->createRangeMock();
 
         $range
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('commits')
             ->willReturn([
                 $commit,
             ]);
 
         $range
-            ->expects($this->never())
+            ->expects(self::never())
             ->method('withPullRequest');
 
         $commitRepository
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('items')
             ->with(
-                $this->identicalTo($repository),
-                $this->identicalTo($startReference),
-                $this->identicalTo($endReference)
+                self::identicalTo($repository),
+                self::identicalTo($startReference),
+                self::identicalTo($endReference)
             )
             ->willReturn($range);
 
@@ -284,37 +284,37 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         $range = $this->createRangeMock();
 
         $range
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('commits')
             ->willReturn([
                 $mergeCommit,
             ]);
 
         $range
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('withPullRequest')
-            ->with($this->isInstanceOf(Resource\PullRequestInterface::class))
+            ->with(self::isInstanceOf(Resource\PullRequestInterface::class))
             ->willReturn($mutatedRange);
 
         $commitRepository
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('items')
             ->with(
-                $this->identicalTo($repository),
-                $this->identicalTo($startReference),
-                $this->identicalTo($endReference)
+                self::identicalTo($repository),
+                self::identicalTo($startReference),
+                self::identicalTo($endReference)
             )
             ->willReturn($range);
 
         $api = $this->createPullRequestApiMock();
 
         $api
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('show')
             ->with(
-                $this->identicalTo($repository->owner()),
-                $this->identicalTo($repository->name()),
-                $this->identicalTo($expectedItem['number'])
+                self::identicalTo($repository->owner()),
+                self::identicalTo($repository->name()),
+                self::identicalTo($expectedItem['number'])
             )
             ->willReturn($expectedItem);
 
@@ -329,7 +329,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             $endReference
         );
 
-        $this->assertSame($mutatedRange, $actualRange);
+        self::assertSame($mutatedRange, $actualRange);
     }
 
     public function testItemsHandlesMergeCommitWherePullRequestWasNotFound()
@@ -359,35 +359,35 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         $range = $this->createRangeMock();
 
         $range
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('commits')
             ->willReturn([
                 $mergeCommit,
             ]);
 
         $range
-            ->expects($this->never())
+            ->expects(self::never())
             ->method('withPullRequest');
 
         $commitRepository
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('items')
             ->with(
-                $this->identicalTo($repository),
-                $this->identicalTo($startReference),
-                $this->identicalTo($endReference)
+                self::identicalTo($repository),
+                self::identicalTo($startReference),
+                self::identicalTo($endReference)
             )
             ->willReturn($range);
 
         $pullRequestApi = $this->createPullRequestApiMock();
 
         $pullRequestApi
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('show')
             ->with(
-                $this->identicalTo($repository->owner()),
-                $this->identicalTo($repository->name()),
-                $this->identicalTo($number)
+                self::identicalTo($repository->owner()),
+                self::identicalTo($repository->name()),
+                self::identicalTo($number)
             )
             ->willReturn(null);
 

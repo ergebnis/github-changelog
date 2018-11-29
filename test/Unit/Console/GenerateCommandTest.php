@@ -39,7 +39,7 @@ final class GenerateCommandTest extends Framework\TestCase
             $this->createRepositoryResolverMock()
         );
 
-        $this->assertSame('generate', $command->getName());
+        self::assertSame('generate', $command->getName());
     }
 
     public function testHasDescription()
@@ -50,7 +50,7 @@ final class GenerateCommandTest extends Framework\TestCase
             $this->createRepositoryResolverMock()
         );
 
-        $this->assertSame('Generates a changelog from merged pull requests found between commit references', $command->getDescription());
+        self::assertSame('Generates a changelog from merged pull requests found between commit references', $command->getDescription());
     }
 
     /**
@@ -68,14 +68,14 @@ final class GenerateCommandTest extends Framework\TestCase
             $this->createRepositoryResolverMock()
         );
 
-        $this->assertTrue($command->getDefinition()->hasArgument($name));
+        self::assertTrue($command->getDefinition()->hasArgument($name));
 
         /** @var Input\InputArgument $argument */
         $argument = $command->getDefinition()->getArgument($name);
 
-        $this->assertSame($name, $argument->getName());
-        $this->assertSame($isRequired, $argument->isRequired());
-        $this->assertSame($description, $argument->getDescription());
+        self::assertSame($name, $argument->getName());
+        self::assertSame($isRequired, $argument->isRequired());
+        self::assertSame($description, $argument->getDescription());
     }
 
     public function providerArgument(): \Generator
@@ -117,16 +117,16 @@ final class GenerateCommandTest extends Framework\TestCase
             $this->createRepositoryResolverMock()
         );
 
-        $this->assertTrue($command->getDefinition()->hasOption($name));
+        self::assertTrue($command->getDefinition()->hasOption($name));
 
         /** @var Input\InputOption $option */
         $option = $command->getDefinition()->getOption($name);
 
-        $this->assertSame($name, $option->getName());
-        $this->assertSame($shortcut, $option->getShortcut());
-        $this->assertSame($isValueRequired, $option->isValueRequired());
-        $this->assertSame($description, $option->getDescription());
-        $this->assertSame($default, $option->getDefault());
+        self::assertSame($name, $option->getName());
+        self::assertSame($shortcut, $option->getShortcut());
+        self::assertSame($isValueRequired, $option->isValueRequired());
+        self::assertSame($description, $option->getDescription());
+        self::assertSame($default, $option->getDefault());
     }
 
     public function testExecuteAuthenticatesIfTokenOptionIsGiven()
@@ -136,17 +136,17 @@ final class GenerateCommandTest extends Framework\TestCase
         $client = $this->createClientMock();
 
         $client
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('authenticate')
             ->with(
-                $this->identicalTo($authToken),
-                $this->identicalTo(Client::AUTH_HTTP_TOKEN)
+                self::identicalTo($authToken),
+                self::identicalTo(Client::AUTH_HTTP_TOKEN)
             );
 
         $pullRequestRepository = $this->createPullRequestRepositoryMock();
 
         $pullRequestRepository
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('items')
             ->willReturn($this->createRangeMock());
 
@@ -190,8 +190,8 @@ final class GenerateCommandTest extends Framework\TestCase
             '--repository' => $repository,
         ]);
 
-        $this->assertSame(1, $exitCode);
-        $this->assertContains($expectedMessage, $tester->getDisplay());
+        self::assertSame(1, $exitCode);
+        self::assertContains($expectedMessage, $tester->getDisplay());
     }
 
     public function testExecuteFailsIfRepositoryCannotBeResolved()
@@ -199,11 +199,11 @@ final class GenerateCommandTest extends Framework\TestCase
         $repositoryResolver = $this->createRepositoryResolverMock();
 
         $repositoryResolver
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('resolve')
             ->with(
-                $this->identicalTo('upstream'),
-                $this->identicalTo('origin')
+                self::identicalTo('upstream'),
+                self::identicalTo('origin')
             )
             ->willThrowException(new Exception\RuntimeException());
 
@@ -221,8 +221,8 @@ final class GenerateCommandTest extends Framework\TestCase
             'start-reference' => '0.1.0',
         ]);
 
-        $this->assertSame(1, $exitCode);
-        $this->assertContains($expectedMessage, $tester->getDisplay());
+        self::assertSame(1, $exitCode);
+        self::assertContains($expectedMessage, $tester->getDisplay());
     }
 
     public function testExecuteDelegatesToPullRequestRepositoryUsingRepositoryResolvedFromGitMetaData()
@@ -243,23 +243,23 @@ final class GenerateCommandTest extends Framework\TestCase
         $pullRequestRepository = $this->createPullRequestRepositoryMock();
 
         $pullRequestRepository
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('items')
             ->with(
-                $this->identicalTo($repository),
-                $this->identicalTo($startReference),
-                $this->identicalTo($endReference)
+                self::identicalTo($repository),
+                self::identicalTo($startReference),
+                self::identicalTo($endReference)
             )
             ->willReturn($this->createRangeMock());
 
         $repositoryResolver = $this->createRepositoryResolverMock();
 
         $repositoryResolver
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('resolve')
             ->with(
-                $this->identicalTo('upstream'),
-                $this->identicalTo('origin')
+                self::identicalTo('upstream'),
+                self::identicalTo('origin')
             )
             ->willReturn($repository);
 
@@ -289,26 +289,26 @@ final class GenerateCommandTest extends Framework\TestCase
         $pullRequestRepository = $this->createPullRequestRepositoryMock();
 
         $pullRequestRepository
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('items')
             ->with(
-                $this->logicalAnd(
-                    $this->isInstanceOf(Resource\RepositoryInterface::class),
-                    $this->callback(function (Resource\RepositoryInterface $repository) use ($owner, $name) {
+                self::logicalAnd(
+                    self::isInstanceOf(Resource\RepositoryInterface::class),
+                    self::callback(static function (Resource\RepositoryInterface $repository) use ($owner, $name) {
                         return $repository->owner() === $owner
                             && $repository->name() === $name;
                     })
                 ),
-                $this->identicalTo($startReference),
-                $this->identicalTo($endReference)
+                self::identicalTo($startReference),
+                self::identicalTo($endReference)
             )
             ->willReturn($this->createRangeMock());
 
         $repositoryResolver = $this->createRepositoryResolverMock();
 
         $repositoryResolver
-            ->expects($this->never())
-            ->method($this->anything());
+            ->expects(self::never())
+            ->method(self::anything());
 
         $command = new Console\GenerateCommand(
             $this->createClientMock(),
@@ -337,7 +337,7 @@ final class GenerateCommandTest extends Framework\TestCase
         $pullRequestRepository = $this->createPullRequestRepositoryMock();
 
         $pullRequestRepository
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('items')
             ->willReturn($this->createRangeMock());
 
@@ -358,8 +358,8 @@ final class GenerateCommandTest extends Framework\TestCase
             ),
         ]);
 
-        $this->assertSame(0, $exitCode);
-        $this->assertRegExp('@' . $expectedMessage . '@', $tester->getDisplay());
+        self::assertSame(0, $exitCode);
+        self::assertRegExp('@' . $expectedMessage . '@', $tester->getDisplay());
     }
 
     public function testExecuteRendersDifferentMessageIfNoPullRequestsWereFoundAndNoEndReferenceWasGiven()
@@ -371,7 +371,7 @@ final class GenerateCommandTest extends Framework\TestCase
         $pullRequestRepository = $this->createPullRequestRepositoryMock();
 
         $pullRequestRepository
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('items')
             ->willReturn($this->createRangeMock());
 
@@ -392,8 +392,8 @@ final class GenerateCommandTest extends Framework\TestCase
             ),
         ]);
 
-        $this->assertSame(0, $exitCode);
-        $this->assertContains($expectedMessage, $tester->getDisplay());
+        self::assertSame(0, $exitCode);
+        self::assertContains($expectedMessage, $tester->getDisplay());
     }
 
     public function testExecuteRendersPullRequestsWithTemplate()
@@ -414,7 +414,7 @@ final class GenerateCommandTest extends Framework\TestCase
             ),
         ];
 
-        \array_walk($pullRequests, function (Resource\PullRequestInterface $pullRequest) use (&$expectedMessages, $template) {
+        \array_walk($pullRequests, static function (Resource\PullRequestInterface $pullRequest) use (&$expectedMessages, $template) {
             $expectedMessages[] = \str_replace(
                 [
                     '%pullrequest.title%',
@@ -435,7 +435,7 @@ final class GenerateCommandTest extends Framework\TestCase
         $pullRequestRepository = $this->createPullRequestRepositoryMock();
 
         $pullRequestRepository
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('items')
             ->willReturn($this->createRangeMock($pullRequests));
 
@@ -457,10 +457,10 @@ final class GenerateCommandTest extends Framework\TestCase
             '--template' => $template,
         ]);
 
-        $this->assertSame(0, $exitCode);
+        self::assertSame(0, $exitCode);
 
         foreach ($expectedMessages as $expectedMessage) {
-            $this->assertContains($expectedMessage, $tester->getDisplay());
+            self::assertContains($expectedMessage, $tester->getDisplay());
         }
     }
 
@@ -481,7 +481,7 @@ final class GenerateCommandTest extends Framework\TestCase
         $pullRequestRepository = $this->createPullRequestRepositoryMock();
 
         $pullRequestRepository
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('items')
             ->willReturn($this->createRangeMock($pullRequests));
 
@@ -502,8 +502,8 @@ final class GenerateCommandTest extends Framework\TestCase
             ),
         ]);
 
-        $this->assertSame(0, $exitCode);
-        $this->assertContains($expectedMessage, $tester->getDisplay());
+        self::assertSame(0, $exitCode);
+        self::assertContains($expectedMessage, $tester->getDisplay());
     }
 
     public function testExecuteHandlesExceptionsThrownWhenFetchingPullRequests()
@@ -515,7 +515,7 @@ final class GenerateCommandTest extends Framework\TestCase
         $pullRequestRepository = $this->createPullRequestRepositoryMock();
 
         $pullRequestRepository
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('items')
             ->willThrowException($exception);
 
@@ -541,8 +541,8 @@ final class GenerateCommandTest extends Framework\TestCase
             ),
         ]);
 
-        $this->assertSame(1, $exitCode);
-        $this->assertContains($expectedMessage, $tester->getDisplay());
+        self::assertSame(1, $exitCode);
+        self::assertContains($expectedMessage, $tester->getDisplay());
     }
 
     /**
@@ -579,7 +579,7 @@ final class GenerateCommandTest extends Framework\TestCase
         $range = $this->createMock(Resource\RangeInterface::class);
 
         $range
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('pullRequests')
             ->willReturn($pullRequests);
 

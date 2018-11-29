@@ -63,8 +63,8 @@ final class CommitTest extends Framework\TestCase
             $message
         );
 
-        $this->assertSame($sha, $commit->sha());
-        $this->assertSame($message, $commit->message());
+        self::assertSame($sha, $commit->sha());
+        self::assertSame($message, $commit->message());
     }
 
     public function testEqualsReturnsFalseIfHashesAreDifferent()
@@ -81,7 +81,7 @@ final class CommitTest extends Framework\TestCase
             $faker->unique()->sentence()
         );
 
-        $this->assertFalse($one->equals($two));
+        self::assertFalse($one->equals($two));
     }
 
     public function testEqualsReturnsTrueIfHashesAreTheSame()
@@ -100,6 +100,6 @@ final class CommitTest extends Framework\TestCase
             $faker->unique()->sentence()
         );
 
-        $this->assertTrue($one->equals($two));
+        self::assertTrue($one->equals($two));
     }
 }

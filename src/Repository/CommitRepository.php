@@ -133,7 +133,7 @@ final class CommitRepository implements CommitRepositoryInterface
             return $range;
         }
 
-        \array_walk($response, function ($data) use (&$range) {
+        \array_walk($response, static function ($data) use (&$range) {
             $commit = new Resource\Commit(
                 $data['sha'],
                 $data['commit']['message']

@@ -64,7 +64,7 @@ final class GitTest extends Framework\TestCase
         );
 
         if (0 !== $returnValue) {
-            $this->markTestSkipped('Unable to determine existing git remotes.');
+            self::markTestSkipped('Unable to determine existing git remotes.');
         }
 
         $faker = $this->faker();
@@ -96,7 +96,7 @@ final class GitTest extends Framework\TestCase
             );
 
             if (0 !== $returnValue) {
-                $this->markTestSkipped(\sprintf(
+                self::markTestSkipped(\sprintf(
                     'Unable to add remote "%s" with URL "%s".',
                     $remoteName,
                     $remoteUrl
@@ -106,6 +106,6 @@ final class GitTest extends Framework\TestCase
 
         $git = new Git();
 
-        $this->assertArraySubset($this->remoteUrls, $git->remoteUrls());
+        self::assertArraySubset($this->remoteUrls, $git->remoteUrls());
     }
 }

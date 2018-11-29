@@ -181,7 +181,7 @@ final class GenerateCommand extends Command
 
             $pullRequests = \array_reverse($pullRequests);
 
-            \array_walk($pullRequests, function (Resource\PullRequestInterface $pullRequest) use ($output, $template) {
+            \array_walk($pullRequests, static function (Resource\PullRequestInterface $pullRequest) use ($output, $template) {
                 $message = \str_replace(
                     [
                         '%pullrequest.title%',
