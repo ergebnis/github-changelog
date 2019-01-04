@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Copyright (c) 2017 Andreas Möller.
+ * Copyright (c) 2017 Andreas Möller
  *
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
@@ -30,7 +30,7 @@ final class GitTest extends Framework\TestCase
      */
     private $remoteUrls = [];
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         if (!\count($this->remoteUrls)) {
             return;
@@ -50,12 +50,12 @@ final class GitTest extends Framework\TestCase
         $this->remoteUrls = null;
     }
 
-    public function testImplementsGitInterface()
+    public function testImplementsGitInterface(): void
     {
         $this->assertClassImplementsInterface(GitInterface::class, Git::class);
     }
 
-    public function testRemoteUrlsReturnsRemoteUrls()
+    public function testRemoteUrlsReturnsRemoteUrls(): void
     {
         \exec(
             'git remote',

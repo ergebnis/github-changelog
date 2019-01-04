@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Copyright (c) 2017 Andreas Möller.
+ * Copyright (c) 2017 Andreas Möller
  *
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
@@ -24,12 +24,12 @@ final class UserTest extends Framework\TestCase
 {
     use Helper;
 
-    public function testImplementsAuthorInterface()
+    public function testImplementsAuthorInterface(): void
     {
         $this->assertClassImplementsInterface(Resource\UserInterface::class, Resource\User::class);
     }
 
-    public function testConstructorSetsLogin()
+    public function testConstructorSetsLogin(): void
     {
         $login = $this->faker()->slug();
 

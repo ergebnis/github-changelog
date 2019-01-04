@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Copyright (c) 2017 Andreas Möller.
+ * Copyright (c) 2017 Andreas Möller
  *
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
@@ -25,12 +25,12 @@ final class RuntimeExceptionTest extends Framework\TestCase
 {
     use Helper;
 
-    public function testExtendsRuntimeException()
+    public function testExtendsRuntimeException(): void
     {
         $this->assertClassExtends(\RuntimeException::class, RuntimeException::class);
     }
 
-    public function testImplementsExceptionInterface()
+    public function testImplementsExceptionInterface(): void
     {
         $this->assertClassImplementsInterface(ExceptionInterface::class, RuntimeException::class);
     }

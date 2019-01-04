@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Copyright (c) 2017 Andreas Möller.
+ * Copyright (c) 2017 Andreas Möller
  *
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
@@ -31,7 +31,7 @@ final class GenerateCommandTest extends Framework\TestCase
 {
     use Helper;
 
-    public function testHasName()
+    public function testHasName(): void
     {
         $command = new Console\GenerateCommand(
             $this->createClientMock(),
@@ -42,7 +42,7 @@ final class GenerateCommandTest extends Framework\TestCase
         self::assertSame('generate', $command->getName());
     }
 
-    public function testHasDescription()
+    public function testHasDescription(): void
     {
         $command = new Console\GenerateCommand(
             $this->createClientMock(),
@@ -60,7 +60,7 @@ final class GenerateCommandTest extends Framework\TestCase
      * @param bool   $isRequired
      * @param string $description
      */
-    public function testArgument(string $name, bool $isRequired, string $description)
+    public function testArgument(string $name, bool $isRequired, string $description): void
     {
         $command = new Console\GenerateCommand(
             $this->createClientMock(),
@@ -109,7 +109,7 @@ final class GenerateCommandTest extends Framework\TestCase
      * @param string $description
      * @param mixed  $default
      */
-    public function testOption(string $name, string $shortcut, bool $isValueRequired, string $description, $default)
+    public function testOption(string $name, string $shortcut, bool $isValueRequired, string $description, $default): void
     {
         $command = new Console\GenerateCommand(
             $this->createClientMock(),
@@ -129,7 +129,7 @@ final class GenerateCommandTest extends Framework\TestCase
         self::assertSame($default, $option->getDefault());
     }
 
-    public function testExecuteAuthenticatesIfTokenOptionIsGiven()
+    public function testExecuteAuthenticatesIfTokenOptionIsGiven(): void
     {
         $authToken = $this->faker()->password();
 
@@ -165,7 +165,7 @@ final class GenerateCommandTest extends Framework\TestCase
         ]);
     }
 
-    public function testExecuteFailsIfRepositoryIsInvalid()
+    public function testExecuteFailsIfRepositoryIsInvalid(): void
     {
         $repository = $this->repositoryFrom(
             '🤓',
@@ -194,7 +194,7 @@ final class GenerateCommandTest extends Framework\TestCase
         self::assertContains($expectedMessage, $tester->getDisplay());
     }
 
-    public function testExecuteFailsIfRepositoryCannotBeResolved()
+    public function testExecuteFailsIfRepositoryCannotBeResolved(): void
     {
         $repositoryResolver = $this->createRepositoryResolverMock();
 
@@ -225,7 +225,7 @@ final class GenerateCommandTest extends Framework\TestCase
         self::assertContains($expectedMessage, $tester->getDisplay());
     }
 
-    public function testExecuteDelegatesToPullRequestRepositoryUsingRepositoryResolvedFromGitMetaData()
+    public function testExecuteDelegatesToPullRequestRepositoryUsingRepositoryResolvedFromGitMetaData(): void
     {
         $faker = $this->faker();
 
@@ -277,7 +277,7 @@ final class GenerateCommandTest extends Framework\TestCase
         ]);
     }
 
-    public function testExecuteDelegatesToPullRequestRepositoryUsingRepositorySpecifiedInOptions()
+    public function testExecuteDelegatesToPullRequestRepositoryUsingRepositorySpecifiedInOptions(): void
     {
         $faker = $this->faker();
 
@@ -328,7 +328,7 @@ final class GenerateCommandTest extends Framework\TestCase
         ]);
     }
 
-    public function testExecuteRendersMessageIfNoPullRequestsWereFound()
+    public function testExecuteRendersMessageIfNoPullRequestsWereFound(): void
     {
         $faker = $this->faker();
 
@@ -362,7 +362,7 @@ final class GenerateCommandTest extends Framework\TestCase
         self::assertRegExp('@' . $expectedMessage . '@', $tester->getDisplay());
     }
 
-    public function testExecuteRendersDifferentMessageIfNoPullRequestsWereFoundAndNoEndReferenceWasGiven()
+    public function testExecuteRendersDifferentMessageIfNoPullRequestsWereFoundAndNoEndReferenceWasGiven(): void
     {
         $faker = $this->faker();
 
@@ -396,7 +396,7 @@ final class GenerateCommandTest extends Framework\TestCase
         self::assertContains($expectedMessage, $tester->getDisplay());
     }
 
-    public function testExecuteRendersPullRequestsWithTemplate()
+    public function testExecuteRendersPullRequestsWithTemplate(): void
     {
         $faker = $this->faker();
 
@@ -414,7 +414,7 @@ final class GenerateCommandTest extends Framework\TestCase
             ),
         ];
 
-        \array_walk($pullRequests, static function (Resource\PullRequestInterface $pullRequest) use (&$expectedMessages, $template) {
+        \array_walk($pullRequests, static function (Resource\PullRequestInterface $pullRequest) use (&$expectedMessages, $template): void {
             $expectedMessages[] = \str_replace(
                 [
                     '%pullrequest.title%',
@@ -464,7 +464,7 @@ final class GenerateCommandTest extends Framework\TestCase
         }
     }
 
-    public function testExecuteRendersDifferentMessageWhenNoEndReferenceWasGiven()
+    public function testExecuteRendersDifferentMessageWhenNoEndReferenceWasGiven(): void
     {
         $faker = $this->faker();
 
@@ -506,7 +506,7 @@ final class GenerateCommandTest extends Framework\TestCase
         self::assertContains($expectedMessage, $tester->getDisplay());
     }
 
-    public function testExecuteHandlesExceptionsThrownWhenFetchingPullRequests()
+    public function testExecuteHandlesExceptionsThrownWhenFetchingPullRequests(): void
     {
         $faker = $this->faker();
 

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Copyright (c) 2017 Andreas Möller.
+ * Copyright (c) 2017 Andreas Möller
  *
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
@@ -27,12 +27,12 @@ final class CommitRepositoryTest extends Framework\TestCase
 {
     use Helper;
 
-    public function testImplementsCommitRepositoryInterface()
+    public function testImplementsCommitRepositoryInterface(): void
     {
         $this->assertClassImplementsInterface(Repository\CommitRepositoryInterface::class, Repository\CommitRepository::class);
     }
 
-    public function testShowReturnsCommitEntityWithShaAndMessageOnSuccess()
+    public function testShowReturnsCommitEntityWithShaAndMessageOnSuccess(): void
     {
         $faker = $this->faker();
 
@@ -70,7 +70,7 @@ final class CommitRepositoryTest extends Framework\TestCase
         self::assertSame($expectedItem['commit']['message'], $commit->message());
     }
 
-    public function testShowThrowsCommitNotFoundOnFailure()
+    public function testShowThrowsCommitNotFoundOnFailure(): void
     {
         $faker = $this->faker();
 
@@ -103,7 +103,7 @@ final class CommitRepositoryTest extends Framework\TestCase
         );
     }
 
-    public function testAllReturnsEmptyArrayOnFailure()
+    public function testAllReturnsEmptyArrayOnFailure(): void
     {
         $faker = $this->faker();
 
@@ -136,7 +136,7 @@ final class CommitRepositoryTest extends Framework\TestCase
         self::assertCount(0, $range->commits());
     }
 
-    public function testAllSetsParamsPerPageTo250()
+    public function testAllSetsParamsPerPageTo250(): void
     {
         $faker = $this->faker();
 
@@ -168,7 +168,7 @@ final class CommitRepositoryTest extends Framework\TestCase
         ]);
     }
 
-    public function testAllStillAllowsSettingPerPage()
+    public function testAllStillAllowsSettingPerPage(): void
     {
         $faker = $this->faker();
 
@@ -202,7 +202,7 @@ final class CommitRepositoryTest extends Framework\TestCase
         ]);
     }
 
-    public function testAllReturnsRange()
+    public function testAllReturnsRange(): void
     {
         $faker = $this->faker();
 
@@ -239,7 +239,7 @@ final class CommitRepositoryTest extends Framework\TestCase
 
         self::assertCount(\count($expectedItems), $commits);
 
-        \array_walk($commits, static function (Resource\CommitInterface $commit) use (&$expectedItems) {
+        \array_walk($commits, static function (Resource\CommitInterface $commit) use (&$expectedItems): void {
             /*
              * API returns commits in reverse order
              */
@@ -250,7 +250,7 @@ final class CommitRepositoryTest extends Framework\TestCase
         });
     }
 
-    public function testItemsDoesNotFetchCommitsIfStartAndEndReferencesAreTheSame()
+    public function testItemsDoesNotFetchCommitsIfStartAndEndReferencesAreTheSame(): void
     {
         $faker = $this->faker();
 
@@ -282,7 +282,7 @@ final class CommitRepositoryTest extends Framework\TestCase
         self::assertEmpty($range->pullRequests());
     }
 
-    public function testItemsDoesNotFetchCommitsIfStartCommitCouldNotBeFound()
+    public function testItemsDoesNotFetchCommitsIfStartCommitCouldNotBeFound(): void
     {
         $faker = $this->faker();
 
@@ -323,7 +323,7 @@ final class CommitRepositoryTest extends Framework\TestCase
         self::assertEmpty($range->pullRequests());
     }
 
-    public function testItemsDoesNotFetchCommitsIfEndCommitCouldNotBeFound()
+    public function testItemsDoesNotFetchCommitsIfEndCommitCouldNotBeFound(): void
     {
         $faker = $this->faker();
 
@@ -374,7 +374,7 @@ final class CommitRepositoryTest extends Framework\TestCase
         self::assertEmpty($range->pullRequests());
     }
 
-    public function testItemsFetchesCommitsUsingShaFromEndCommit()
+    public function testItemsFetchesCommitsUsingShaFromEndCommit(): void
     {
         $faker = $this->faker();
 
@@ -430,7 +430,7 @@ final class CommitRepositoryTest extends Framework\TestCase
         );
     }
 
-    public function testItemsFetchesCommitsIfEndReferenceIsNotGiven()
+    public function testItemsFetchesCommitsIfEndReferenceIsNotGiven(): void
     {
         $faker = $this->faker();
 
@@ -472,7 +472,7 @@ final class CommitRepositoryTest extends Framework\TestCase
         );
     }
 
-    public function testItemsReturnsRangeOfCommitsFromEndToStartExcludingStart()
+    public function testItemsReturnsRangeOfCommitsFromEndToStartExcludingStart(): void
     {
         $faker = $this->faker();
 
@@ -554,7 +554,7 @@ final class CommitRepositoryTest extends Framework\TestCase
 
         self::assertCount(\count($expectedItems), $commits);
 
-        \array_walk($commits, static function ($commit) use (&$expectedItems) {
+        \array_walk($commits, static function ($commit) use (&$expectedItems): void {
             /*
              * API returns items in reverse order
              */
@@ -568,7 +568,7 @@ final class CommitRepositoryTest extends Framework\TestCase
         });
     }
 
-    public function testItemsFetchesMoreCommitsIfEndIsNotContainedInFirstBatch()
+    public function testItemsFetchesMoreCommitsIfEndIsNotContainedInFirstBatch(): void
     {
         $faker = $this->faker();
 
@@ -674,7 +674,7 @@ final class CommitRepositoryTest extends Framework\TestCase
 
         self::assertCount(\count($expectedItems), $commits);
 
-        \array_walk($commits, static function ($commit) use (&$expectedItems) {
+        \array_walk($commits, static function ($commit) use (&$expectedItems): void {
             /*
              * API returns items in reverse order
              */

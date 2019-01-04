@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Copyright (c) 2017 Andreas Möller.
+ * Copyright (c) 2017 Andreas Möller
  *
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
@@ -25,7 +25,7 @@ final class PullRequestTest extends Framework\TestCase
 {
     use Helper;
 
-    public function testImplementsPullRequestInterface()
+    public function testImplementsPullRequestInterface(): void
     {
         $this->assertClassImplementsInterface(Resource\PullRequestInterface::class, Resource\PullRequest::class);
     }
@@ -35,7 +35,7 @@ final class PullRequestTest extends Framework\TestCase
      *
      * @param mixed $number
      */
-    public function testConstructorRejectsInvalidNumber(int $number)
+    public function testConstructorRejectsInvalidNumber(int $number): void
     {
         $this->expectException(Exception\InvalidArgumentException::class);
         $this->expectExceptionMessage(\sprintf(
@@ -55,7 +55,7 @@ final class PullRequestTest extends Framework\TestCase
         );
     }
 
-    public function testConstructorSetsValues()
+    public function testConstructorSetsValues(): void
     {
         $faker = $this->faker();
 
