@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Copyright (c) 2017 Andreas Möller.
+ * Copyright (c) 2017 Andreas Möller
  *
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
@@ -25,7 +25,7 @@ final class CommitTest extends Framework\TestCase
 {
     use Helper;
 
-    public function testImplementsAuthorInterface()
+    public function testImplementsAuthorInterface(): void
     {
         $this->assertClassImplementsInterface(Resource\CommitInterface::class, Resource\Commit::class);
     }
@@ -35,7 +35,7 @@ final class CommitTest extends Framework\TestCase
      *
      * @param string $sha
      */
-    public function testConstructorRejectsInvalidSha(string $sha)
+    public function testConstructorRejectsInvalidSha(string $sha): void
     {
         $this->expectException(Exception\InvalidArgumentException::class);
         $this->expectExceptionMessage(\sprintf(
@@ -51,7 +51,7 @@ final class CommitTest extends Framework\TestCase
         );
     }
 
-    public function testConstructorSetsShaAndMessage()
+    public function testConstructorSetsShaAndMessage(): void
     {
         $faker = $this->faker();
 
@@ -67,7 +67,7 @@ final class CommitTest extends Framework\TestCase
         self::assertSame($message, $commit->message());
     }
 
-    public function testEqualsReturnsFalseIfHashesAreDifferent()
+    public function testEqualsReturnsFalseIfHashesAreDifferent(): void
     {
         $faker = $this->faker();
 
@@ -84,7 +84,7 @@ final class CommitTest extends Framework\TestCase
         self::assertFalse($one->equals($two));
     }
 
-    public function testEqualsReturnsTrueIfHashesAreTheSame()
+    public function testEqualsReturnsTrueIfHashesAreTheSame(): void
     {
         $faker = $this->faker();
 

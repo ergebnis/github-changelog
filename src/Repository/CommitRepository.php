@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Copyright (c) 2017 Andreas Möller.
+ * Copyright (c) 2017 Andreas Möller
  *
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
@@ -133,7 +133,7 @@ final class CommitRepository implements CommitRepositoryInterface
             return $range;
         }
 
-        \array_walk($response, static function ($data) use (&$range) {
+        \array_walk($response, static function ($data) use (&$range): void {
             $commit = new Resource\Commit(
                 $data['sha'],
                 $data['commit']['message']

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Copyright (c) 2017 Andreas Möller.
+ * Copyright (c) 2017 Andreas Möller
  *
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
@@ -26,17 +26,17 @@ final class PullRequestNotFoundTest extends Framework\TestCase
 {
     use Helper;
 
-    public function testExtendsRuntimeException()
+    public function testExtendsRuntimeException(): void
     {
         $this->assertClassExtends(\RuntimeException::class, PullRequestNotFound::class);
     }
 
-    public function testImplementsExceptionInterface()
+    public function testImplementsExceptionInterface(): void
     {
         $this->assertClassImplementsInterface(ExceptionInterface::class, PullRequestNotFound::class);
     }
 
-    public function testFromRepositoryAndNumberCreatesException()
+    public function testFromRepositoryAndNumberCreatesException(): void
     {
         $faker = $this->faker();
 

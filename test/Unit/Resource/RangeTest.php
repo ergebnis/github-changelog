@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Copyright (c) 2017 Andreas Möller.
+ * Copyright (c) 2017 Andreas Möller
  *
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
@@ -24,12 +24,12 @@ final class RangeTest extends Framework\TestCase
 {
     use Helper;
 
-    public function testImplementsRangeInterface()
+    public function testImplementsRangeInterface(): void
     {
         $this->assertClassImplementsInterface(Resource\RangeInterface::class, Resource\Range::class);
     }
 
-    public function testDefaults()
+    public function testDefaults(): void
     {
         $range = new Resource\Range();
 
@@ -37,7 +37,7 @@ final class RangeTest extends Framework\TestCase
         self::assertSame([], $range->pullRequests());
     }
 
-    public function testWithCommitClonesRangeAndAddsCommit()
+    public function testWithCommitClonesRangeAndAddsCommit(): void
     {
         $commit = $this->createCommitMock();
 
@@ -52,7 +52,7 @@ final class RangeTest extends Framework\TestCase
         self::assertContains($commit, $mutated->commits());
     }
 
-    public function testWithPullRequestClonesRangeAndAddsPullRequest()
+    public function testWithPullRequestClonesRangeAndAddsPullRequest(): void
     {
         $pullRequest = $this->createPullRequestMock();
 

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Copyright (c) 2017 Andreas Möller.
+ * Copyright (c) 2017 Andreas Möller
  *
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
@@ -67,7 +67,7 @@ final class PullRequestRepository implements PullRequestRepositoryInterface
 
         $commits = $range->commits();
 
-        \array_walk($commits, function (Resource\CommitInterface $commit) use (&$range, $repository) {
+        \array_walk($commits, function (Resource\CommitInterface $commit) use (&$range, $repository): void {
             if (0 === \preg_match('/^Merge pull request #(?P<number>\d+)/', $commit->message(), $matches)) {
                 return;
             }

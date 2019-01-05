@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Copyright (c) 2017 Andreas Möller.
+ * Copyright (c) 2017 Andreas Möller
  *
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
@@ -27,12 +27,12 @@ final class PullRequestRepositoryTest extends Framework\TestCase
 {
     use Helper;
 
-    public function testImplementsPullRequestRepositoryInterface()
+    public function testImplementsPullRequestRepositoryInterface(): void
     {
         $this->assertClassImplementsInterface(Repository\PullRequestRepositoryInterface::class, Repository\PullRequestRepository::class);
     }
 
-    public function testShowReturnsPullRequestEntityWithNumberTitleAndAuthorOnSuccess()
+    public function testShowReturnsPullRequestEntityWithNumberTitleAndAuthorOnSuccess(): void
     {
         $faker = $this->faker();
 
@@ -72,7 +72,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         self::assertSame($expectedItem['user']['login'], $pullRequest->author()->login());
     }
 
-    public function testShowThrowsPullRequestNotFoundOnFailure()
+    public function testShowThrowsPullRequestNotFoundOnFailure(): void
     {
         $faker = $this->faker();
 
@@ -113,7 +113,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         );
     }
 
-    public function testItemsDoesNotRequireAnEndReference()
+    public function testItemsDoesNotRequireAnEndReference(): void
     {
         $faker = $this->faker();
 
@@ -154,7 +154,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         );
     }
 
-    public function testItemsDoesNotTouchRangeIfNoCommitsWereFound()
+    public function testItemsDoesNotTouchRangeIfNoCommitsWereFound(): void
     {
         $faker = $this->faker();
 
@@ -201,7 +201,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         );
     }
 
-    public function testItemsDoesNotTouchRangeIfNoMergeCommitsWereFound()
+    public function testItemsDoesNotTouchRangeIfNoMergeCommitsWereFound(): void
     {
         $faker = $this->faker();
 
@@ -255,7 +255,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         );
     }
 
-    public function testItemsFetchesPullRequestIfMergeCommitWasFound()
+    public function testItemsFetchesPullRequestIfMergeCommitWasFound(): void
     {
         $faker = $this->faker();
 
@@ -332,7 +332,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         self::assertSame($mutatedRange, $actualRange);
     }
 
-    public function testItemsHandlesMergeCommitWherePullRequestWasNotFound()
+    public function testItemsHandlesMergeCommitWherePullRequestWasNotFound(): void
     {
         $faker = $this->faker();
 

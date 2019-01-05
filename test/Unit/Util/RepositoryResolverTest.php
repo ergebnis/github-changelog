@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Copyright (c) 2017 Andreas Möller.
+ * Copyright (c) 2017 Andreas Möller
  *
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
@@ -28,12 +28,12 @@ final class RepositoryResolverTest extends Framework\TestCase
 {
     use Helper;
 
-    public function testImplementsRepositoryResolverInterface()
+    public function testImplementsRepositoryResolverInterface(): void
     {
         $this->assertClassImplementsInterface(RepositoryResolverInterface::class, RepositoryResolver::class);
     }
 
-    public function testResolveThrowsRuntimeExceptionIfUnableToDetermineRemoteUrls()
+    public function testResolveThrowsRuntimeExceptionIfUnableToDetermineRemoteUrls(): void
     {
         $git = $this->createGitMock();
 
@@ -50,7 +50,7 @@ final class RepositoryResolverTest extends Framework\TestCase
         $resolver->resolve();
     }
 
-    public function testResolveThrowsRuntimeExceptionIfNoRemoteUrlsHaveBeenFound()
+    public function testResolveThrowsRuntimeExceptionIfNoRemoteUrlsHaveBeenFound(): void
     {
         $remoteUrls = [];
 
@@ -74,7 +74,7 @@ final class RepositoryResolverTest extends Framework\TestCase
      *
      * @param string $remoteUrl
      */
-    public function testResolveThrowsRuntimeExceptionIfNoValidRemoteUrlsCouldBeFound(string $remoteUrl)
+    public function testResolveThrowsRuntimeExceptionIfNoValidRemoteUrlsCouldBeFound(string $remoteUrl): void
     {
         $faker = $this->faker();
 
@@ -104,7 +104,7 @@ final class RepositoryResolverTest extends Framework\TestCase
         $resolver->resolve();
     }
 
-    public function testResolveWithoutFromRemoteNamesReturnsRepositoryUsingFirstFoundValidRemoteUrl()
+    public function testResolveWithoutFromRemoteNamesReturnsRepositoryUsingFirstFoundValidRemoteUrl(): void
     {
         $faker = $this->faker();
 
@@ -144,7 +144,7 @@ final class RepositoryResolverTest extends Framework\TestCase
         self::assertSame($name, $repository->name());
     }
 
-    public function testResolveWithFromRemoteNamesThrowsRuntimeExceptionIfNoValidRemoteUrlsCanBeConsidered()
+    public function testResolveWithFromRemoteNamesThrowsRuntimeExceptionIfNoValidRemoteUrlsCanBeConsidered(): void
     {
         $faker = $this->faker();
 
@@ -183,7 +183,7 @@ final class RepositoryResolverTest extends Framework\TestCase
         $resolver->resolve(...$fromRemoteNames);
     }
 
-    public function testResolveWithFromRemoteNamesReturnsRepositoryUsingFirstFoundValidRemoteUrlIfItCanBeConsidered()
+    public function testResolveWithFromRemoteNamesReturnsRepositoryUsingFirstFoundValidRemoteUrlIfItCanBeConsidered(): void
     {
         $faker = $this->faker();
 

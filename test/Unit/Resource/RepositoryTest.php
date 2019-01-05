@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Copyright (c) 2017 Andreas Möller.
+ * Copyright (c) 2017 Andreas Möller
  *
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
@@ -25,7 +25,7 @@ final class RepositoryTest extends Framework\TestCase
 {
     use Helper;
 
-    public function testImplementsRepositoryInterface()
+    public function testImplementsRepositoryInterface(): void
     {
         $this->assertClassImplementsInterface(Resource\RepositoryInterface::class, Resource\Repository::class);
     }
@@ -35,7 +35,7 @@ final class RepositoryTest extends Framework\TestCase
      *
      * @param string $owner
      */
-    public function testFromOwnerAndNameRejectsInvalidOwner(string $owner)
+    public function testFromOwnerAndNameRejectsInvalidOwner(string $owner): void
     {
         $faker = $this->faker();
 
@@ -58,7 +58,7 @@ final class RepositoryTest extends Framework\TestCase
      *
      * @param string $name
      */
-    public function testFromOwnerAndNameRejectsInvalidName(string $name)
+    public function testFromOwnerAndNameRejectsInvalidName(string $name): void
     {
         $faker = $this->faker();
 
@@ -82,7 +82,7 @@ final class RepositoryTest extends Framework\TestCase
      * @param string $owner
      * @param string $name
      */
-    public function testFromOwnerAndNameReturnsRepository(string $owner, string $name)
+    public function testFromOwnerAndNameReturnsRepository(string $owner, string $name): void
     {
         $repository = Resource\Repository::fromOwnerAndName(
             $owner,
@@ -99,7 +99,7 @@ final class RepositoryTest extends Framework\TestCase
      *
      * @param string $remoteUrl
      */
-    public function testFromRemoteUrlRejectsInvalidRemoteUrl(string $remoteUrl)
+    public function testFromRemoteUrlRejectsInvalidRemoteUrl(string $remoteUrl): void
     {
         $this->expectException(Exception\InvalidArgumentException::class);
         $this->expectExceptionMessage(\sprintf(\sprintf(
@@ -117,7 +117,7 @@ final class RepositoryTest extends Framework\TestCase
      * @param string $owner
      * @param string $name
      */
-    public function testFromRemoteUrlReturnsRepository(string $remoteUrl, string $owner, string $name)
+    public function testFromRemoteUrlReturnsRepository(string $remoteUrl, string $owner, string $name): void
     {
         $repository = Resource\Repository::fromRemoteUrl($remoteUrl);
 
@@ -126,7 +126,7 @@ final class RepositoryTest extends Framework\TestCase
         self::assertSame($name, $repository->name());
     }
 
-    public function testToStringReturnsStringRepresentation()
+    public function testToStringReturnsStringRepresentation(): void
     {
         $faker = $this->faker();
 
@@ -152,7 +152,7 @@ final class RepositoryTest extends Framework\TestCase
      *
      * @param string $string
      */
-    public function testFromStringRejectsInvalidStrings(string $string)
+    public function testFromStringRejectsInvalidStrings(string $string): void
     {
         $this->expectException(Exception\InvalidArgumentException::class);
         $this->expectExceptionMessage(\sprintf(
@@ -169,7 +169,7 @@ final class RepositoryTest extends Framework\TestCase
      * @param string $owner
      * @param string $name
      */
-    public function testFromStringReturnsRepository(string $owner, string $name)
+    public function testFromStringReturnsRepository(string $owner, string $name): void
     {
         $string = \sprintf(
             '%s/%s',
