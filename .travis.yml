@@ -8,9 +8,11 @@ cache:
   directories:
     - $HOME/.composer/cache
     - $HOME/.php-cs-fixer
+    - .build/phpstan
 
 stages:
   - style
+  - stan
   - test
 
 jobs:
@@ -34,6 +36,25 @@ jobs:
       script:
         - composer normalize --dry-run
         - vendor/bin/php-cs-fixer fix --config=.php_cs --diff --dry-run --verbose
+        -
+    - stage: Stan
+
+      php: 7.3
+
+      before_install:
+        - source .travis/xdebug.sh
+        - xdebug-disable
+        - composer validate
+        - if [[ -n "$GITHUB_TOKEN" ]]; then composer config github-oauth.github.com $GITHUB_TOKEN; fi
+
+      install:
+        - composer install
+
+      before_script:
+        - mkdir -p .build/phpstan
+
+      script:
+        - vendor/bin/phpstan analyse --configuration=phpstan.neon
 
     - &TEST
 

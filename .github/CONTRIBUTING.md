@@ -13,6 +13,18 @@ $ make cs
 
 to ensure your changes to not break the build.
 
+## Static Code Analysis
+
+We are using [`phpstan/phpstan`](https://github.com/phpstan/phpstan) to statically analyze the code.
+
+Run
+
+```
+$ make stan
+```
+
+to run a static code analysis.
+
 ## Tests
 
 This project uses [`phpunit/phpunit`](https://github.com/sebastianbergmann/phpunit) to drive the development using tests.
