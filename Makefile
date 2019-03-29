@@ -9,7 +9,7 @@ cs: vendor
 	vendor/bin/php-cs-fixer fix --config=.php_cs --diff --verbose
 
 infection: vendor
-	vendor/bin/infection --min-covered-msi=78 --min-msi=77
+	vendor/bin/infection --min-covered-msi=90 --min-msi=89
 
 test: vendor
 	vendor/bin/phpunit --configuration=test/Unit/phpunit.xml
