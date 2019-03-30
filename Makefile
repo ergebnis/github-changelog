@@ -9,7 +9,7 @@ cs: vendor
 	vendor/bin/php-cs-fixer fix --config=.php_cs --diff --verbose
 
 infection: vendor
-	vendor/bin/infection --min-covered-msi=90 --min-msi=89
+	vendor/bin/infection --min-covered-msi=89 --min-msi=88
 
 stan: vendor
 	mkdir -p .build/phpstan

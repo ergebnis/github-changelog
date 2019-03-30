@@ -177,7 +177,7 @@ final class GenerateCommand extends Command
 
         $pullRequests = $range->pullRequests();
 
-        if (!\count($pullRequests)) {
+        if (0 === \count($pullRequests)) {
             $io->warning('Could not find any pull requests');
         } else {
             /** @var string $template */

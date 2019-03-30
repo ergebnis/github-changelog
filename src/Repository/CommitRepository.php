@@ -81,7 +81,7 @@ final class CommitRepository implements CommitRepositoryInterface
 
             $range = $range->withCommit($commit);
 
-            if (!\count($commits)) {
+            if (0 === \count($commits)) {
                 $tail = $commit;
                 $params = [
                     'sha' => $tail->sha(),
