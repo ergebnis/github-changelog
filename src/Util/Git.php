@@ -29,7 +29,8 @@ final class Git implements GitInterface
             throw new Exception\RuntimeException('Unable to determine git remote names.');
         }
 
-        return \array_filter(\array_combine(
+        /** @var string[] $remoteUrls */
+        $remoteUrls = \array_combine(
             $remoteNames,
             \array_map(static function (string $remoteName) {
                 \exec(
@@ -47,6 +48,8 @@ final class Git implements GitInterface
 
                 return \array_shift($remoteUrls);
             }, $remoteNames)
-        ));
+        );
+
+        return \array_filter($remoteUrls);
     }
 }
