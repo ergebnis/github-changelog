@@ -47,7 +47,7 @@ final class GitTest extends Framework\TestCase
             );
         }
 
-        $this->remoteUrls = null;
+        $this->remoteUrls = [];
     }
 
     public function testImplementsGitInterface(): void
