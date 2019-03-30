@@ -612,7 +612,7 @@ final class GenerateCommandTest extends Framework\TestCase
     /**
      * @param int $count
      *
-     * @return Resource\PullRequest[]
+     * @return Resource\PullRequestInterface[]
      */
     private function pullRequests(int $count): array
     {
