@@ -719,6 +719,12 @@ final class CommitRepositoryTest extends Framework\TestCase
         return \array_reverse($commits);
     }
 
+    /**
+     * @param string $key
+     * @param mixed  $value
+     *
+     * @return Framework\Constraint\Callback
+     */
     private function arrayHasKeyAndValue(string $key, $value): Framework\Constraint\Callback
     {
         return self::callback(static function ($array) use ($key, $value) {
