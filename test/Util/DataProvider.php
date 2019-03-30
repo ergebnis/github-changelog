@@ -291,7 +291,7 @@ final class DataProvider
         $faker = $this->faker();
 
         return [
-            'digit' => $faker->randomDigitNotNull,
+            'digit' => (string) $faker->randomDigitNotNull,
             'letter' => $faker->randomLetter,
             'word' => $faker->word,
             'word-with-numbers' => \sprintf(
@@ -342,7 +342,7 @@ final class DataProvider
         $faker = $this->faker();
 
         return [
-            'digit' => $faker->randomDigitNotNull,
+            'digit' => (string) $faker->randomDigitNotNull,
             'letter' => $faker->randomLetter,
             'word' => $faker->word,
             'hyphen' => '-',
