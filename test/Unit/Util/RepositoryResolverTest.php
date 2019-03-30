@@ -78,7 +78,8 @@ final class RepositoryResolverTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $remoteNames = \array_unique($faker->words);
+        /** @var string[] $remoteNames */
+        $remoteNames = $faker->unique()->words;
 
         $remoteUrls = \array_combine(
             $remoteNames,
@@ -115,8 +116,10 @@ final class RepositoryResolverTest extends Framework\TestCase
             $name
         );
 
-        $remoteNames = \array_unique($faker->words);
+        /** @var string[] $remoteNames */
+        $remoteNames = $faker->unique()->words;
 
+        /** @var string[] $remoteUrls */
         $remoteUrls = \array_combine(
             $remoteNames,
             \array_map(static function () use ($faker) {
@@ -148,7 +151,8 @@ final class RepositoryResolverTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
-        $remoteNames = \array_unique($faker->words);
+        /** @var string[] $remoteNames */
+        $remoteNames = $faker->unique()->words;
 
         $remoteUrls = \array_combine(
             $remoteNames,
@@ -163,7 +167,8 @@ final class RepositoryResolverTest extends Framework\TestCase
             }, $remoteNames)
         );
 
-        $fromRemoteNames = \array_unique($faker->words);
+        /** @var string[] $fromRemoteNames */
+        $fromRemoteNames = $faker->unique()->words;
 
         $git = $this->createMock(GitInterface::class);
 
@@ -194,9 +199,11 @@ final class RepositoryResolverTest extends Framework\TestCase
             $name
         );
 
+        /** @var string[] $remoteNames */
         $remoteNames = $faker->unique()->words(10);
         $fromRemoteNames = $faker->randomElements($remoteNames, 3);
 
+        /** @var string[] $remoteUrls */
         $remoteUrls = \array_combine(
             $remoteNames,
             \array_map(function () use ($faker) {

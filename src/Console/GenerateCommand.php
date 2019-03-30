@@ -110,22 +110,22 @@ final class GenerateCommand extends Command
 
         $authToken = $input->getOption('auth-token');
 
-        if (null !== $authToken) {
+        if (\is_string($authToken)) {
             $this->client->authenticate(
                 $authToken,
                 Client::AUTH_HTTP_TOKEN
             );
         }
 
-        $repository = $input->getOption('repository');
+        $repositoryName = $input->getOption('repository');
 
-        if (null !== $repository) {
+        if (\is_string($repositoryName)) {
             try {
-                $repository = Resource\Repository::fromString($repository);
+                $repository = Resource\Repository::fromString($repositoryName);
             } catch (Exception\InvalidArgumentException $exception) {
                 $io->error(\sprintf(
                     'Repository "%s" appears to be invalid.',
-                    $repository
+                    $repositoryName
                 ));
 
                 return 1;
@@ -143,7 +143,10 @@ final class GenerateCommand extends Command
             }
         }
 
+        /** @var string $startReference */
         $startReference = $input->getArgument('start-reference');
+
+        /** @var string $endReference */
         $endReference = $input->getArgument('end-reference');
 
         $range = $this->range(
@@ -177,6 +180,7 @@ final class GenerateCommand extends Command
         if (!\count($pullRequests)) {
             $io->warning('Could not find any pull requests');
         } else {
+            /** @var string $template */
             $template = $input->getOption('template');
 
             $pullRequests = \array_reverse($pullRequests);

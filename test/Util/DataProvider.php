@@ -148,8 +148,14 @@ final class DataProvider
     {
         $faker = $this->faker();
 
+        /** @var string[] $words */
+        $words = $faker->words;
+
         $values = [
-            'string-path-only' => \implode('/', $faker->words),
+            'string-path-only' => \implode(
+                '/',
+                $words
+            ),
             'string-word-only' => $faker->word,
         ];
 
@@ -290,6 +296,9 @@ final class DataProvider
     {
         $faker = $this->faker();
 
+        /** @var string[] $words */
+        $words = $faker->words();
+
         return [
             'digit' => (string) $faker->randomDigitNotNull,
             'letter' => $faker->randomLetter,
@@ -301,11 +310,11 @@ final class DataProvider
             ),
             'words-separated-by-hyphen' => \implode(
                 '-',
-                $faker->words()
+                $words
             ),
             'words-with-numbers-separated-by-hyphens' => \implode(
                 '-',
-                \array_merge($faker->words(), [
+                \array_merge($words, [
                     $faker->numberBetween(1),
                     $faker->numberBetween(1),
                 ])
@@ -341,6 +350,9 @@ final class DataProvider
     {
         $faker = $this->faker();
 
+        /** @var string[] $words */
+        $words = $faker->words;
+
         return [
             'digit' => (string) $faker->randomDigitNotNull,
             'letter' => $faker->randomLetter,
@@ -356,33 +368,33 @@ final class DataProvider
             ),
             'words-separated-by-dots' => \implode(
                 '.',
-                $faker->words()
+                $words
             ),
             'words-separated-by-hyphen' => \implode(
                 '-',
-                $faker->words()
+                $words
             ),
             'words-separated-by-underscore' => \implode(
                 '-',
-                $faker->words()
+                $words
             ),
             'words-with-numbers-separated-by-dots' => \implode(
                 '.',
-                \array_merge($faker->words(), [
+                \array_merge($words, [
                     $faker->numberBetween(1),
                     $faker->numberBetween(1),
                 ])
             ),
             'words-with-numbers-separated-by-hyphens' => \implode(
                 '-',
-                \array_merge($faker->words(), [
+                \array_merge($words, [
                     $faker->numberBetween(1),
                     $faker->numberBetween(1),
                 ])
             ),
             'words-with-numbers-separated-by-underscores' => \implode(
                 '_',
-                \array_merge($faker->words(), [
+                \array_merge($words, [
                     $faker->numberBetween(1),
                     $faker->numberBetween(1),
                 ])
