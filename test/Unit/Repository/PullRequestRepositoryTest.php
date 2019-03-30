@@ -51,7 +51,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             ->with(
                 self::identicalTo($repository->owner()),
                 self::identicalTo($repository->name()),
-                self::identicalTo($expectedItem['number'])
+                self::identicalTo((string) $expectedItem['number'])
             )
             ->willReturn($expectedItem);
 
@@ -91,7 +91,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             ->with(
                 self::identicalTo($repository->owner()),
                 self::identicalTo($repository->name()),
-                self::identicalTo($number)
+                self::identicalTo((string) $number)
             )
             ->willReturn('snafu');
 
@@ -314,7 +314,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             ->with(
                 self::identicalTo($repository->owner()),
                 self::identicalTo($repository->name()),
-                self::identicalTo($expectedItem['number'])
+                self::identicalTo((string) $expectedItem['number'])
             )
             ->willReturn($expectedItem);
 
@@ -387,7 +387,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             ->with(
                 self::identicalTo($repository->owner()),
                 self::identicalTo($repository->name()),
-                self::identicalTo($number)
+                self::identicalTo((string) $number)
             )
             ->willReturn(null);
 
