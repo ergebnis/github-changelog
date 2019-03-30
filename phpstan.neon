@@ -1,6 +1,6 @@
 includes:
 	- vendor/phpstan/phpstan-phpunit/extension.neon
-	- vendor/phpstan/phpstan/conf/config.level6.neon
+	- vendor/phpstan/phpstan/conf/config.level7.neon
 
 parameters:
 	paths:
