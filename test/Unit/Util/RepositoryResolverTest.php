@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Localheinz\GitHub\ChangeLog\Test\Unit\Util;
 
 use Localheinz\GitHub\ChangeLog\Exception;
-use Localheinz\GitHub\ChangeLog\Resource;
 use Localheinz\GitHub\ChangeLog\Util\GitInterface;
 use Localheinz\GitHub\ChangeLog\Util\RepositoryResolver;
 use Localheinz\GitHub\ChangeLog\Util\RepositoryResolverInterface;
@@ -142,7 +141,6 @@ final class RepositoryResolverTest extends Framework\TestCase
 
         $repository = $resolver->resolve();
 
-        self::assertInstanceOf(Resource\RepositoryInterface::class, $repository);
         self::assertSame($owner, $repository->owner());
         self::assertSame($name, $repository->name());
     }
@@ -232,7 +230,6 @@ final class RepositoryResolverTest extends Framework\TestCase
 
         $repository = $resolver->resolve(...$fromRemoteNames);
 
-        self::assertInstanceOf(Resource\RepositoryInterface::class, $repository);
         self::assertSame($owner, $repository->owner());
         self::assertSame($name, $repository->name());
     }

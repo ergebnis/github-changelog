@@ -52,8 +52,6 @@ final class ReferenceNotFoundTest extends Framework\TestCase
             $reference
         );
 
-        self::assertInstanceOf(ReferenceNotFound::class, $exception);
-
         $message = \sprintf(
             'Could not find reference "%s" in "%s".',
             $reference,

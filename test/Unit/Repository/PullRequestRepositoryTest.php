@@ -65,8 +65,6 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             $expectedItem['number']
         );
 
-        self::assertInstanceOf(Resource\PullRequestInterface::class, $pullRequest);
-
         self::assertSame($expectedItem['number'], $pullRequest->number());
         self::assertSame($expectedItem['title'], $pullRequest->title());
         self::assertSame($expectedItem['user']['login'], $pullRequest->author()->login());

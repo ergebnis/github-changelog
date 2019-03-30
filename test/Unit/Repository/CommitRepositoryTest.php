@@ -64,8 +64,6 @@ final class CommitRepositoryTest extends Framework\TestCase
             $sha
         );
 
-        self::assertInstanceOf(Resource\CommitInterface::class, $commit);
-
         self::assertSame($expectedItem['sha'], $commit->sha());
         self::assertSame($expectedItem['commit']['message'], $commit->message());
     }
@@ -277,7 +275,6 @@ final class CommitRepositoryTest extends Framework\TestCase
             $endReference
         );
 
-        self::assertInstanceOf(Resource\RangeInterface::class, $range);
         self::assertEmpty($range->commits());
         self::assertEmpty($range->pullRequests());
     }
@@ -318,7 +315,6 @@ final class CommitRepositoryTest extends Framework\TestCase
             $endReference
         );
 
-        self::assertInstanceOf(Resource\RangeInterface::class, $range);
         self::assertEmpty($range->commits());
         self::assertEmpty($range->pullRequests());
     }
@@ -369,7 +365,6 @@ final class CommitRepositoryTest extends Framework\TestCase
             $endReference
         );
 
-        self::assertInstanceOf(Resource\RangeInterface::class, $range);
         self::assertEmpty($range->commits());
         self::assertEmpty($range->pullRequests());
     }
@@ -548,8 +543,6 @@ final class CommitRepositoryTest extends Framework\TestCase
             $endReference
         );
 
-        self::assertInstanceOf(Resource\RangeInterface::class, $range);
-
         $commits = $range->commits();
 
         self::assertCount(\count($expectedItems), $commits);
@@ -667,8 +660,6 @@ final class CommitRepositoryTest extends Framework\TestCase
             $startReference,
             $endReference
         );
-
-        self::assertInstanceOf(Resource\RangeInterface::class, $range);
 
         $commits = $range->commits();
 

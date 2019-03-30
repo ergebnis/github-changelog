@@ -45,7 +45,6 @@ final class RangeTest extends Framework\TestCase
 
         $mutated = $range->withCommit($commit);
 
-        self::assertInstanceOf(Resource\Range::class, $mutated);
         self::assertNotSame($range, $mutated);
         self::assertCount(0, $range->commits());
         self::assertCount(1, $mutated->commits());
@@ -60,7 +59,6 @@ final class RangeTest extends Framework\TestCase
 
         $mutated = $range->withPullRequest($pullRequest);
 
-        self::assertInstanceOf(Resource\Range::class, $mutated);
         self::assertNotSame($range, $mutated);
         self::assertCount(0, $range->pullRequests());
         self::assertCount(1, $mutated->pullRequests());
