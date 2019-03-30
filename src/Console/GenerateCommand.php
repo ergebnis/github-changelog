@@ -117,15 +117,15 @@ final class GenerateCommand extends Command
             );
         }
 
-        $repository = $input->getOption('repository');
+        $repositoryName = $input->getOption('repository');
 
-        if (null !== $repository) {
+        if (null !== $repositoryName) {
             try {
-                $repository = Resource\Repository::fromString($repository);
+                $repository = Resource\Repository::fromString($repositoryName);
             } catch (Exception\InvalidArgumentException $exception) {
                 $io->error(\sprintf(
                     'Repository "%s" appears to be invalid.',
-                    $repository
+                    $repositoryName
                 ));
 
                 return 1;
