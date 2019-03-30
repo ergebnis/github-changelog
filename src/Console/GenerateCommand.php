@@ -143,7 +143,10 @@ final class GenerateCommand extends Command
             }
         }
 
+        /** @var string $startReference */
         $startReference = $input->getArgument('start-reference');
+
+        /** @var string $endReference */
         $endReference = $input->getArgument('end-reference');
 
         $range = $this->range(
@@ -177,6 +180,7 @@ final class GenerateCommand extends Command
         if (!\count($pullRequests)) {
             $io->warning('Could not find any pull requests');
         } else {
+            /** @var string $template */
             $template = $input->getOption('template');
 
             $pullRequests = \array_reverse($pullRequests);
