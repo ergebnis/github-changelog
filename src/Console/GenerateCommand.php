@@ -110,7 +110,7 @@ final class GenerateCommand extends Command
 
         $authToken = $input->getOption('auth-token');
 
-        if (null !== $authToken) {
+        if (\is_string($authToken)) {
             $this->client->authenticate(
                 $authToken,
                 Client::AUTH_HTTP_TOKEN
@@ -119,7 +119,7 @@ final class GenerateCommand extends Command
 
         $repositoryName = $input->getOption('repository');
 
-        if (null !== $repositoryName) {
+        if (\is_string($repositoryName)) {
             try {
                 $repository = Resource\Repository::fromString($repositoryName);
             } catch (Exception\InvalidArgumentException $exception) {
