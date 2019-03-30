@@ -33,7 +33,7 @@ final class PullRequestTest extends Framework\TestCase
     /**
      * @dataProvider \Localheinz\GitHub\ChangeLog\Test\Util\DataProvider::providerInvalidPullRequestNumber
      *
-     * @param mixed $number
+     * @param int $number
      */
     public function testConstructorRejectsInvalidNumber(int $number): void
     {
