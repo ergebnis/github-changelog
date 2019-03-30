@@ -1,5 +1,5 @@
 includes:
-	- vendor/phpstan/phpstan/conf/config.level1.neon
+	- vendor/phpstan/phpstan/conf/config.level2.neon
 
 parameters:
 	paths:
