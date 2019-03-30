@@ -34,9 +34,9 @@ final class GenerateCommandTest extends Framework\TestCase
     public function testHasName(): void
     {
         $command = new Console\GenerateCommand(
-            $this->createClientMock(),
-            $this->createPullRequestRepositoryMock(),
-            $this->createRepositoryResolverMock()
+            $this->createMock(Client::class),
+            $this->createMock(Repository\PullRequestRepositoryInterface::class),
+            $this->createMock(Util\RepositoryResolverInterface::class)
         );
 
         self::assertSame('generate', $command->getName());
@@ -45,9 +45,9 @@ final class GenerateCommandTest extends Framework\TestCase
     public function testHasDescription(): void
     {
         $command = new Console\GenerateCommand(
-            $this->createClientMock(),
-            $this->createPullRequestRepositoryMock(),
-            $this->createRepositoryResolverMock()
+            $this->createMock(Client::class),
+            $this->createMock(Repository\PullRequestRepositoryInterface::class),
+            $this->createMock(Util\RepositoryResolverInterface::class)
         );
 
         self::assertSame('Generates a changelog from merged pull requests found between commit references', $command->getDescription());
@@ -63,9 +63,9 @@ final class GenerateCommandTest extends Framework\TestCase
     public function testArgument(string $name, bool $isRequired, string $description): void
     {
         $command = new Console\GenerateCommand(
-            $this->createClientMock(),
-            $this->createPullRequestRepositoryMock(),
-            $this->createRepositoryResolverMock()
+            $this->createMock(Client::class),
+            $this->createMock(Repository\PullRequestRepositoryInterface::class),
+            $this->createMock(Util\RepositoryResolverInterface::class)
         );
 
         self::assertTrue($command->getDefinition()->hasArgument($name));
@@ -112,9 +112,9 @@ final class GenerateCommandTest extends Framework\TestCase
     public function testOption(string $name, string $shortcut, bool $isValueRequired, string $description, $default): void
     {
         $command = new Console\GenerateCommand(
-            $this->createClientMock(),
-            $this->createPullRequestRepositoryMock(),
-            $this->createRepositoryResolverMock()
+            $this->createMock(Client::class),
+            $this->createMock(Repository\PullRequestRepositoryInterface::class),
+            $this->createMock(Util\RepositoryResolverInterface::class)
         );
 
         self::assertTrue($command->getDefinition()->hasOption($name));
@@ -133,7 +133,7 @@ final class GenerateCommandTest extends Framework\TestCase
     {
         $authToken = $this->faker()->password();
 
-        $client = $this->createClientMock();
+        $client = $this->createMock(Client::class);
 
         $client
             ->expects(self::once())
@@ -143,17 +143,24 @@ final class GenerateCommandTest extends Framework\TestCase
                 self::identicalTo(Client::AUTH_HTTP_TOKEN)
             );
 
-        $pullRequestRepository = $this->createPullRequestRepositoryMock();
+        $range = $this->createMock(Resource\RangeInterface::class);
+
+        $range
+            ->expects(self::any())
+            ->method('pullRequests')
+            ->willReturn([]);
+
+        $pullRequestRepository = $this->createMock(Repository\PullRequestRepositoryInterface::class);
 
         $pullRequestRepository
             ->expects(self::any())
             ->method('items')
-            ->willReturn($this->createRangeMock());
+            ->willReturn($range);
 
         $command = new Console\GenerateCommand(
             $client,
             $pullRequestRepository,
-            $this->createRepositoryResolverMock()
+            $this->createMock(Util\RepositoryResolverInterface::class)
         );
 
         $tester = new CommandTester($command);
@@ -178,9 +185,9 @@ final class GenerateCommandTest extends Framework\TestCase
         );
 
         $command = new Console\GenerateCommand(
-            $this->createClientMock(),
-            $this->createPullRequestRepositoryMock(),
-            $this->createRepositoryResolverMock()
+            $this->createMock(Client::class),
+            $this->createMock(Repository\PullRequestRepositoryInterface::class),
+            $this->createMock(Util\RepositoryResolverInterface::class)
         );
 
         $tester = new CommandTester($command);
@@ -196,7 +203,7 @@ final class GenerateCommandTest extends Framework\TestCase
 
     public function testExecuteFailsIfRepositoryCannotBeResolved(): void
     {
-        $repositoryResolver = $this->createRepositoryResolverMock();
+        $repositoryResolver = $this->createMock(Util\RepositoryResolverInterface::class);
 
         $repositoryResolver
             ->expects(self::once())
@@ -210,8 +217,8 @@ final class GenerateCommandTest extends Framework\TestCase
         $expectedMessage = 'Unable to resolve repository, please specify using --repository option.';
 
         $command = new Console\GenerateCommand(
-            $this->createClientMock(),
-            $this->createPullRequestRepositoryMock(),
+            $this->createMock(Client::class),
+            $this->createMock(Repository\PullRequestRepositoryInterface::class),
             $repositoryResolver
         );
 
@@ -240,7 +247,14 @@ final class GenerateCommandTest extends Framework\TestCase
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
-        $pullRequestRepository = $this->createPullRequestRepositoryMock();
+        $range = $this->createMock(Resource\RangeInterface::class);
+
+        $range
+            ->expects(self::any())
+            ->method('pullRequests')
+            ->willReturn([]);
+
+        $pullRequestRepository = $this->createMock(Repository\PullRequestRepositoryInterface::class);
 
         $pullRequestRepository
             ->expects(self::once())
@@ -250,9 +264,9 @@ final class GenerateCommandTest extends Framework\TestCase
                 self::identicalTo($startReference),
                 self::identicalTo($endReference)
             )
-            ->willReturn($this->createRangeMock());
+            ->willReturn($range);
 
-        $repositoryResolver = $this->createRepositoryResolverMock();
+        $repositoryResolver = $this->createMock(Util\RepositoryResolverInterface::class);
 
         $repositoryResolver
             ->expects(self::once())
@@ -264,7 +278,7 @@ final class GenerateCommandTest extends Framework\TestCase
             ->willReturn($repository);
 
         $command = new Console\GenerateCommand(
-            $this->createClientMock(),
+            $this->createMock(Client::class),
             $pullRequestRepository,
             $repositoryResolver
         );
@@ -286,7 +300,14 @@ final class GenerateCommandTest extends Framework\TestCase
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
-        $pullRequestRepository = $this->createPullRequestRepositoryMock();
+        $range = $this->createMock(Resource\RangeInterface::class);
+
+        $range
+            ->expects(self::any())
+            ->method('pullRequests')
+            ->willReturn([]);
+
+        $pullRequestRepository = $this->createMock(Repository\PullRequestRepositoryInterface::class);
 
         $pullRequestRepository
             ->expects(self::once())
@@ -302,16 +323,16 @@ final class GenerateCommandTest extends Framework\TestCase
                 self::identicalTo($startReference),
                 self::identicalTo($endReference)
             )
-            ->willReturn($this->createRangeMock());
+            ->willReturn($range);
 
-        $repositoryResolver = $this->createRepositoryResolverMock();
+        $repositoryResolver = $this->createMock(Util\RepositoryResolverInterface::class);
 
         $repositoryResolver
             ->expects(self::never())
             ->method(self::anything());
 
         $command = new Console\GenerateCommand(
-            $this->createClientMock(),
+            $this->createMock(Client::class),
             $pullRequestRepository,
             $repositoryResolver
         );
@@ -334,17 +355,24 @@ final class GenerateCommandTest extends Framework\TestCase
 
         $expectedMessage = 'Could not find any pull requests';
 
-        $pullRequestRepository = $this->createPullRequestRepositoryMock();
+        $range = $this->createMock(Resource\RangeInterface::class);
+
+        $range
+            ->expects(self::any())
+            ->method('pullRequests')
+            ->willReturn([]);
+
+        $pullRequestRepository = $this->createMock(Repository\PullRequestRepositoryInterface::class);
 
         $pullRequestRepository
             ->expects(self::any())
             ->method('items')
-            ->willReturn($this->createRangeMock());
+            ->willReturn($range);
 
         $command = new Console\GenerateCommand(
-            $this->createClientMock(),
+            $this->createMock(Client::class),
             $pullRequestRepository,
-            $this->createRepositoryResolverMock()
+            $this->createMock(Util\RepositoryResolverInterface::class)
         );
 
         $tester = new CommandTester($command);
@@ -368,17 +396,24 @@ final class GenerateCommandTest extends Framework\TestCase
 
         $expectedMessage = 'Could not find any pull requests';
 
-        $pullRequestRepository = $this->createPullRequestRepositoryMock();
+        $range = $this->createMock(Resource\RangeInterface::class);
+
+        $range
+            ->expects(self::any())
+            ->method('pullRequests')
+            ->willReturn([]);
+
+        $pullRequestRepository = $this->createMock(Repository\PullRequestRepositoryInterface::class);
 
         $pullRequestRepository
             ->expects(self::any())
             ->method('items')
-            ->willReturn($this->createRangeMock());
+            ->willReturn($range);
 
         $command = new Console\GenerateCommand(
-            $this->createClientMock(),
+            $this->createMock(Client::class),
             $pullRequestRepository,
-            $this->createRepositoryResolverMock()
+            $this->createMock(Util\RepositoryResolverInterface::class)
         );
 
         $tester = new CommandTester($command);
@@ -432,17 +467,24 @@ final class GenerateCommandTest extends Framework\TestCase
             );
         });
 
-        $pullRequestRepository = $this->createPullRequestRepositoryMock();
+        $range = $this->createMock(Resource\RangeInterface::class);
+
+        $range
+            ->expects(self::any())
+            ->method('pullRequests')
+            ->willReturn($pullRequests);
+
+        $pullRequestRepository = $this->createMock(Repository\PullRequestRepositoryInterface::class);
 
         $pullRequestRepository
             ->expects(self::any())
             ->method('items')
-            ->willReturn($this->createRangeMock($pullRequests));
+            ->willReturn($range);
 
         $command = new Console\GenerateCommand(
-            $this->createClientMock(),
+            $this->createMock(Client::class),
             $pullRequestRepository,
-            $this->createRepositoryResolverMock()
+            $this->createMock(Util\RepositoryResolverInterface::class)
         );
 
         $tester = new CommandTester($command);
@@ -478,17 +520,24 @@ final class GenerateCommandTest extends Framework\TestCase
             1 === $count ? '' : 's'
         );
 
-        $pullRequestRepository = $this->createPullRequestRepositoryMock();
+        $range = $this->createMock(Resource\RangeInterface::class);
+
+        $range
+            ->expects(self::any())
+            ->method('pullRequests')
+            ->willReturn($pullRequests);
+
+        $pullRequestRepository = $this->createMock(Repository\PullRequestRepositoryInterface::class);
 
         $pullRequestRepository
             ->expects(self::any())
             ->method('items')
-            ->willReturn($this->createRangeMock($pullRequests));
+            ->willReturn($range);
 
         $command = new Console\GenerateCommand(
-            $this->createClientMock(),
+            $this->createMock(Client::class),
             $pullRequestRepository,
-            $this->createRepositoryResolverMock()
+            $this->createMock(Util\RepositoryResolverInterface::class)
         );
 
         $tester = new CommandTester($command);
@@ -512,7 +561,7 @@ final class GenerateCommandTest extends Framework\TestCase
 
         $exception = new \Exception('Wait, this should not happen!');
 
-        $pullRequestRepository = $this->createPullRequestRepositoryMock();
+        $pullRequestRepository = $this->createMock(Repository\PullRequestRepositoryInterface::class);
 
         $pullRequestRepository
             ->expects(self::any())
@@ -525,9 +574,9 @@ final class GenerateCommandTest extends Framework\TestCase
         );
 
         $command = new Console\GenerateCommand(
-            $this->createClientMock(),
+            $this->createMock(Client::class),
             $pullRequestRepository,
-            $this->createRepositoryResolverMock()
+            $this->createMock(Util\RepositoryResolverInterface::class)
         );
 
         $tester = new CommandTester($command);
@@ -543,47 +592,6 @@ final class GenerateCommandTest extends Framework\TestCase
 
         self::assertSame(1, $exitCode);
         self::assertContains($expectedMessage, $tester->getDisplay());
-    }
-
-    /**
-     * @return Client|\PHPUnit_Framework_MockObject_MockObject
-     */
-    private function createClientMock(): Client
-    {
-        return $this->createMock(Client::class);
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|Repository\PullRequestRepositoryInterface
-     */
-    private function createPullRequestRepositoryMock(): Repository\PullRequestRepositoryInterface
-    {
-        return $this->createMock(Repository\PullRequestRepositoryInterface::class);
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|Util\RepositoryResolverInterface
-     */
-    private function createRepositoryResolverMock(): Util\RepositoryResolverInterface
-    {
-        return $this->createMock(Util\RepositoryResolverInterface::class);
-    }
-
-    /**
-     * @param array $pullRequests
-     *
-     * @return \PHPUnit_Framework_MockObject_MockObject|Resource\RangeInterface
-     */
-    private function createRangeMock(array $pullRequests = []): Resource\RangeInterface
-    {
-        $range = $this->createMock(Resource\RangeInterface::class);
-
-        $range
-            ->expects(self::any())
-            ->method('pullRequests')
-            ->willReturn($pullRequests);
-
-        return $range;
     }
 
     private function pullRequest(): Resource\PullRequestInterface

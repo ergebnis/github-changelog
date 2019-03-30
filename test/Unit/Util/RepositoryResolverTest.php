@@ -35,7 +35,7 @@ final class RepositoryResolverTest extends Framework\TestCase
 
     public function testResolveThrowsRuntimeExceptionIfUnableToDetermineRemoteUrls(): void
     {
-        $git = $this->createGitMock();
+        $git = $this->createMock(GitInterface::class);
 
         $git
             ->expects(self::once())
@@ -54,7 +54,7 @@ final class RepositoryResolverTest extends Framework\TestCase
     {
         $remoteUrls = [];
 
-        $git = $this->createGitMock();
+        $git = $this->createMock(GitInterface::class);
 
         $git
             ->expects(self::once())
@@ -89,7 +89,7 @@ final class RepositoryResolverTest extends Framework\TestCase
             )
         );
 
-        $git = $this->createGitMock();
+        $git = $this->createMock(GitInterface::class);
 
         $git
             ->expects(self::once())
@@ -128,7 +128,7 @@ final class RepositoryResolverTest extends Framework\TestCase
 
         $remoteUrls[$remoteName] = $remoteUrl;
 
-        $git = $this->createGitMock();
+        $git = $this->createMock(GitInterface::class);
 
         $git
             ->expects(self::once())
@@ -165,7 +165,7 @@ final class RepositoryResolverTest extends Framework\TestCase
 
         $fromRemoteNames = \array_unique($faker->words);
 
-        $git = $this->createGitMock();
+        $git = $this->createMock(GitInterface::class);
 
         $git
             ->expects(self::once())
@@ -214,7 +214,7 @@ final class RepositoryResolverTest extends Framework\TestCase
 
         $remoteUrls[$remoteName] = $remoteUrl;
 
-        $git = $this->createGitMock();
+        $git = $this->createMock(GitInterface::class);
 
         $git
             ->expects(self::once())
@@ -228,14 +228,6 @@ final class RepositoryResolverTest extends Framework\TestCase
         self::assertInstanceOf(Resource\RepositoryInterface::class, $repository);
         self::assertSame($owner, $repository->owner());
         self::assertSame($name, $repository->name());
-    }
-
-    /**
-     * @return GitInterface|\PHPUnit_Framework_MockObject_MockObject
-     */
-    private function createGitMock(): GitInterface
-    {
-        return $this->createMock(GitInterface::class);
     }
 
     private function remoteUrlFromOwnerAndName(string $owner, string $name): string

@@ -39,7 +39,7 @@ final class RangeTest extends Framework\TestCase
 
     public function testWithCommitClonesRangeAndAddsCommit(): void
     {
-        $commit = $this->createCommitMock();
+        $commit = $this->createMock(Resource\CommitInterface::class);
 
         $range = new Resource\Range();
 
@@ -54,7 +54,7 @@ final class RangeTest extends Framework\TestCase
 
     public function testWithPullRequestClonesRangeAndAddsPullRequest(): void
     {
-        $pullRequest = $this->createPullRequestMock();
+        $pullRequest = $this->createMock(Resource\PullRequestInterface::class);
 
         $range = new Resource\Range();
 
@@ -65,21 +65,5 @@ final class RangeTest extends Framework\TestCase
         self::assertCount(0, $range->pullRequests());
         self::assertCount(1, $mutated->pullRequests());
         self::assertContains($pullRequest, $mutated->pullRequests());
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|Resource\CommitInterface
-     */
-    private function createCommitMock(): Resource\CommitInterface
-    {
-        return $this->createMock(Resource\CommitInterface::class);
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|Resource\PullRequestInterface
-     */
-    private function createPullRequestMock(): Resource\PullRequestInterface
-    {
-        return $this->createMock(Resource\PullRequestInterface::class);
     }
 }
