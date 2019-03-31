@@ -104,6 +104,7 @@ jobs:
         - composer install
 
       before_script:
+        - mkdir -p .build/infection
         - xdebug-enable
 
       script:

@@ -2,4 +2,3 @@
 /data/
 /vendor/
 .php_cs.cache
-/infection-log.txt
