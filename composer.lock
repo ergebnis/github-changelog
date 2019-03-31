@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a16279b91a72d210d80ae1955c3598f0",
+    "content-hash": "4c9903e876b5ba7f58e87f69e494480f",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -1823,6 +1823,52 @@
                 "unit testing"
             ],
             "time": "2019-01-13T06:56:41+00:00"
+        },
+        {
+            "name": "jangregor/phpstan-prophecy",
+            "version": "0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Jan0707/phpstan-prophecy.git",
+                "reference": "a1bfe3c3920829d4004240fb68ed85ab6dd18b14"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Jan0707/phpstan-prophecy/zipball/a1bfe3c3920829d4004240fb68ed85ab6dd18b14",
+                "reference": "a1bfe3c3920829d4004240fb68ed85ab6dd18b14",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1",
+                "phpstan/phpstan": "^0.10.0 || ^0.11.0"
+            },
+            "conflict": {
+                "phpspec/prophecy": "<1.7, >=2.0",
+                "phpunit/phpunit": "<6.0, >=8.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.13.1",
+                "phpspec/prophecy": "^1.7",
+                "phpunit/phpunit": "^6.0||^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "JanGregor\\Prophecy\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jan Gregor Emge-Triebel",
+                    "email": "jan@jangregor.me"
+                }
+            ],
+            "description": "Provides a phpstan/phpstan extension for phpspec/prophecy",
+            "time": "2019-01-18T13:44:45+00:00"
         },
         {
             "name": "jean85/pretty-package-versions",
