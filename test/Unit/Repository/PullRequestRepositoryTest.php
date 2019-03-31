@@ -34,6 +34,11 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         $this->assertClassImplementsInterface(Repository\PullRequestRepositoryInterface::class, Repository\PullRequestRepository::class);
     }
 
+    /**
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\PullRequest
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\User
+     */
     public function testShowReturnsPullRequestEntityWithNumberTitleAndAuthorOnSuccess(): void
     {
         $faker = $this->faker();
@@ -72,6 +77,10 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         self::assertSame($expectedItem['user']['login'], $pullRequest->author()->login());
     }
 
+    /**
+     * @uses \Localheinz\GitHub\ChangeLog\Exception\PullRequestNotFound
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     */
     public function testShowThrowsPullRequestNotFoundOnFailure(): void
     {
         $faker = $this->faker();
@@ -113,6 +122,9 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         );
     }
 
+    /**
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     */
     public function testItemsDoesNotRequireAnEndReference(): void
     {
         $faker = $this->faker();
@@ -154,6 +166,9 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         );
     }
 
+    /**
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     */
     public function testItemsDoesNotTouchRangeIfNoCommitsWereFound(): void
     {
         $faker = $this->faker();
@@ -201,6 +216,10 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         );
     }
 
+    /**
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Commit
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     */
     public function testItemsDoesNotTouchRangeIfNoMergeCommitsWereFound(): void
     {
         $faker = $this->faker();
@@ -255,6 +274,12 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         );
     }
 
+    /**
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Commit
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\PullRequest
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\User
+     */
     public function testItemsFetchesPullRequestIfMergeCommitWasFound(): void
     {
         $faker = $this->faker();
@@ -332,6 +357,12 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         self::assertSame($mutatedRange, $actualRange);
     }
 
+    /**
+     * @uses \Localheinz\GitHub\ChangeLog\Exception\PullRequestNotFound
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Commit
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\PullRequest
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     */
     public function testItemsHandlesMergeCommitWherePullRequestWasNotFound(): void
     {
         $faker = $this->faker();

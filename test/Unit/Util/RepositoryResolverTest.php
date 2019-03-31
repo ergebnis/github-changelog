@@ -71,6 +71,8 @@ final class RepositoryResolverTest extends Framework\TestCase
     }
 
     /**
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     *
      * @dataProvider \Localheinz\GitHub\ChangeLog\Test\Util\DataProvider::providerInvalidRemoteUrl
      *
      * @param string $remoteUrl
@@ -106,6 +108,9 @@ final class RepositoryResolverTest extends Framework\TestCase
         $resolver->resolve();
     }
 
+    /**
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     */
     public function testResolveWithoutFromRemoteNamesReturnsRepositoryUsingFirstFoundValidRemoteUrl(): void
     {
         $faker = $this->faker();
@@ -147,6 +152,9 @@ final class RepositoryResolverTest extends Framework\TestCase
         self::assertSame($name, $repository->name());
     }
 
+    /**
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     */
     public function testResolveWithFromRemoteNamesThrowsRuntimeExceptionIfNoValidRemoteUrlsCanBeConsidered(): void
     {
         $faker = $this->faker();
@@ -188,6 +196,9 @@ final class RepositoryResolverTest extends Framework\TestCase
         $resolver->resolve(...$fromRemoteNames);
     }
 
+    /**
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     */
     public function testResolveWithFromRemoteNamesReturnsRepositoryUsingFirstFoundValidRemoteUrlIfItCanBeConsidered(): void
     {
         $faker = $this->faker();

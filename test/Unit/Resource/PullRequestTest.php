@@ -33,6 +33,8 @@ final class PullRequestTest extends Framework\TestCase
     }
 
     /**
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\User
+     *
      * @dataProvider \Localheinz\GitHub\ChangeLog\Test\Util\DataProvider::providerInvalidPullRequestNumber
      *
      * @param int $number
@@ -57,6 +59,9 @@ final class PullRequestTest extends Framework\TestCase
         );
     }
 
+    /**
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\User
+     */
     public function testConstructorSetsValues(): void
     {
         $faker = $this->faker();

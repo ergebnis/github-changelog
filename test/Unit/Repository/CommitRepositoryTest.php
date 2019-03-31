@@ -34,6 +34,10 @@ final class CommitRepositoryTest extends Framework\TestCase
         $this->assertClassImplementsInterface(Repository\CommitRepositoryInterface::class, Repository\CommitRepository::class);
     }
 
+    /**
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Commit
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     */
     public function testShowReturnsCommitEntityWithShaAndMessageOnSuccess(): void
     {
         $faker = $this->faker();
@@ -70,6 +74,10 @@ final class CommitRepositoryTest extends Framework\TestCase
         self::assertSame($expectedItem['commit']['message'], $commit->message());
     }
 
+    /**
+     * @uses \Localheinz\GitHub\ChangeLog\Exception\ReferenceNotFound
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     */
     public function testShowThrowsCommitNotFoundOnFailure(): void
     {
         $faker = $this->faker();
@@ -103,6 +111,10 @@ final class CommitRepositoryTest extends Framework\TestCase
         );
     }
 
+    /**
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Range
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     */
     public function testAllReturnsEmptyArrayOnFailure(): void
     {
         $faker = $this->faker();
@@ -136,6 +148,11 @@ final class CommitRepositoryTest extends Framework\TestCase
         self::assertCount(0, $range->commits());
     }
 
+    /**
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Commit
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Range
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     */
     public function testAllSetsParamsPerPageTo250(): void
     {
         $faker = $this->faker();
@@ -168,6 +185,11 @@ final class CommitRepositoryTest extends Framework\TestCase
         ]);
     }
 
+    /**
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Commit
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Range
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     */
     public function testAllStillAllowsSettingPerPage(): void
     {
         $faker = $this->faker();
@@ -202,6 +224,11 @@ final class CommitRepositoryTest extends Framework\TestCase
         ]);
     }
 
+    /**
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Commit
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Range
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     */
     public function testAllReturnsRange(): void
     {
         $faker = $this->faker();
@@ -250,6 +277,10 @@ final class CommitRepositoryTest extends Framework\TestCase
         });
     }
 
+    /**
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Range
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     */
     public function testItemsDoesNotFetchCommitsIfStartAndEndReferencesAreTheSame(): void
     {
         $faker = $this->faker();
@@ -281,6 +312,11 @@ final class CommitRepositoryTest extends Framework\TestCase
         self::assertEmpty($range->pullRequests());
     }
 
+    /**
+     * @uses \Localheinz\GitHub\ChangeLog\Exception\ReferenceNotFound
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Range
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     */
     public function testItemsDoesNotFetchCommitsIfStartCommitCouldNotBeFound(): void
     {
         $faker = $this->faker();
@@ -321,6 +357,12 @@ final class CommitRepositoryTest extends Framework\TestCase
         self::assertEmpty($range->pullRequests());
     }
 
+    /**
+     * @uses \Localheinz\GitHub\ChangeLog\Exception\ReferenceNotFound
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Commit
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Range
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     */
     public function testItemsDoesNotFetchCommitsIfEndCommitCouldNotBeFound(): void
     {
         $faker = $this->faker();
@@ -371,6 +413,11 @@ final class CommitRepositoryTest extends Framework\TestCase
         self::assertEmpty($range->pullRequests());
     }
 
+    /**
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Commit
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Range
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     */
     public function testItemsFetchesCommitsUsingShaFromEndCommit(): void
     {
         $faker = $this->faker();
@@ -427,6 +474,11 @@ final class CommitRepositoryTest extends Framework\TestCase
         );
     }
 
+    /**
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Commit
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Range
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     */
     public function testItemsFetchesCommitsIfEndReferenceIsNotGiven(): void
     {
         $faker = $this->faker();
@@ -469,6 +521,11 @@ final class CommitRepositoryTest extends Framework\TestCase
         );
     }
 
+    /**
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Commit
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Range
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     */
     public function testItemsReturnsRangeOfCommitsFromEndToStartExcludingStart(): void
     {
         $faker = $this->faker();
@@ -563,6 +620,11 @@ final class CommitRepositoryTest extends Framework\TestCase
         });
     }
 
+    /**
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Commit
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Range
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     */
     public function testItemsFetchesMoreCommitsIfEndIsNotContainedInFirstBatch(): void
     {
         $faker = $this->faker();
