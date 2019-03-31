@@ -20,7 +20,7 @@ use PHPUnit\Framework;
 /**
  * @internal
  *
- * @covers \Localheinz\GitHub\ChangeLog\Resource\Rangenge
+ * @covers \Localheinz\GitHub\ChangeLog\Resource\Range
  */
 final class RangeTest extends Framework\TestCase
 {
