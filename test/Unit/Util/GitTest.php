@@ -32,7 +32,7 @@ final class GitTest extends Framework\TestCase
 
     protected function tearDown(): void
     {
-        if (!\count($this->remoteUrls)) {
+        if (0 === \count($this->remoteUrls)) {
             return;
         }
 

@@ -36,11 +36,11 @@ final class RepositoryResolver implements RepositoryResolverInterface
             throw new Exception\RuntimeException('Unable to resolve repository using git meta data.');
         }
 
-        if (!\count($remoteUrls)) {
+        if (0 === \count($remoteUrls)) {
             throw new Exception\RuntimeException('Could not find any remote URLs.');
         }
 
-        if (\count($fromRemoteNames)) {
+        if (0 < \count($fromRemoteNames)) {
             $remoteUrls = \array_replace(
                 \array_flip($fromRemoteNames),
                 \array_intersect_key(
@@ -60,8 +60,8 @@ final class RepositoryResolver implements RepositoryResolverInterface
             return $repository;
         }, $remoteUrls));
 
-        if (!\count($repositories)) {
-            if (\count($fromRemoteNames)) {
+        if (0 === \count($repositories)) {
+            if (0 < \count($fromRemoteNames)) {
                 throw new Exception\RuntimeException(\sprintf(
                     'Could not find a valid remote URL for remotes "%s".',
                     \implode('", "', $fromRemoteNames)

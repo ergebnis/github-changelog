@@ -89,7 +89,6 @@ final class RepositoryTest extends Framework\TestCase
             $name
         );
 
-        self::assertInstanceOf(Resource\RepositoryInterface::class, $repository);
         self::assertSame($owner, $repository->owner());
         self::assertSame($name, $repository->name());
     }
@@ -121,7 +120,6 @@ final class RepositoryTest extends Framework\TestCase
     {
         $repository = Resource\Repository::fromRemoteUrl($remoteUrl);
 
-        self::assertInstanceOf(Resource\RepositoryInterface::class, $repository);
         self::assertSame($owner, $repository->owner());
         self::assertSame($name, $repository->name());
     }
@@ -179,7 +177,6 @@ final class RepositoryTest extends Framework\TestCase
 
         $repository = Resource\Repository::fromString($string);
 
-        self::assertInstanceOf(Resource\RepositoryInterface::class, $repository);
         self::assertSame($owner, $repository->owner());
         self::assertSame($name, $repository->name());
     }

@@ -72,7 +72,7 @@ final class Repository implements RepositoryInterface
         );
     }
 
-    public static function fromRemoteUrl(string $remoteUrl)
+    public static function fromRemoteUrl(string $remoteUrl): self
     {
         $regEx = self::remoteUrlRegEx();
 

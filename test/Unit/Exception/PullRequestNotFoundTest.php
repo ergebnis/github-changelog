@@ -52,8 +52,6 @@ final class PullRequestNotFoundTest extends Framework\TestCase
             $number
         );
 
-        self::assertInstanceOf(PullRequestNotFound::class, $exception);
-
         $message = \sprintf(
             'Could not find pull request "%s" in "%s".',
             $number,

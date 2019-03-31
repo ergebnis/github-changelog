@@ -1,8 +1,13 @@
 includes:
 	- vendor/phpstan/phpstan-phpunit/extension.neon
+	- vendor/phpstan/phpstan-strict-rules/rules.neon
 	- vendor/phpstan/phpstan/conf/config.level7.neon
 
 parameters:
+	ignoreErrors:
+		-
+			message: '#Call to function is_array\(\) with array will always evaluate to true.#'
+			path: %currentWorkingDirectory%/src/Repository/PullRequestRepository.php
 	paths:
 		- src
 		- test
