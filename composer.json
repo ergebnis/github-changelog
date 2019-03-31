@@ -1,6 +1,6 @@
 {
     "name": "localheinz/github-changelog",
-    "description": "Provides a script that generates a changelog based on titles of pull requests merged between specified references.",
+    "description": "Provides a console command that generates a changelog based on titles of pull requests merged between specified references.",
     "homepage": "https://github.com/localheinz/github-changelog",
     "license": "MIT",
     "authors": [
