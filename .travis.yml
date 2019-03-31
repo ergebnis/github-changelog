@@ -14,6 +14,7 @@ stages:
   - style
   - stan
   - test
+  - infection
 
 jobs:
   include:
