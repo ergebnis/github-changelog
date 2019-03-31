@@ -21,26 +21,21 @@ use PHPUnit\Framework;
  *
  * @coversNothing
  */
-final class ProjectCodeTest extends Framework\TestCase
+final class SrcCodeTest extends Framework\TestCase
 {
     use Helper;
 
-    public function testProductionClassesAreAbstractOrFinal(): void
+    public function testSrcClassesAreAbstractOrFinal(): void
     {
         $this->assertClassesAreAbstractOrFinal(__DIR__ . '/../../src');
     }
 
-    public function testProductionClassesHaveTests(): void
+    public function testSrcClassesHaveUnitTests(): void
     {
         $this->assertClassesHaveTests(
             __DIR__ . '/../../src',
             'Localheinz\\GitHub\\ChangeLog\\',
             'Localheinz\\GitHub\\ChangeLog\\Test\\Unit\\'
         );
-    }
-
-    public function testTestClassesAreAbstractOrFinal(): void
-    {
-        $this->assertClassesAreAbstractOrFinal(__DIR__ . '/..');
     }
 }
