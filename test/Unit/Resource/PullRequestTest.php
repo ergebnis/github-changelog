@@ -20,6 +20,8 @@ use PHPUnit\Framework;
 
 /**
  * @internal
+ *
+ * @covers \Localheinz\GitHub\ChangeLog\Resource\PullRequest
  */
 final class PullRequestTest extends Framework\TestCase
 {

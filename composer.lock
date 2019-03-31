@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4c9903e876b5ba7f58e87f69e494480f",
+    "content-hash": "251da39c56d481497f6b90488067c7e4",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -2250,16 +2250,16 @@
         },
         {
             "name": "localheinz/php-cs-fixer-config",
-            "version": "1.19.2",
+            "version": "1.20.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/localheinz/php-cs-fixer-config.git",
-                "reference": "5271e571da9861a60f558bb6652a421dde62d48b"
+                "reference": "17150988bef165e89525bde8a62bb21883201dd9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/localheinz/php-cs-fixer-config/zipball/5271e571da9861a60f558bb6652a421dde62d48b",
-                "reference": "5271e571da9861a60f558bb6652a421dde62d48b",
+                "url": "https://api.github.com/repos/localheinz/php-cs-fixer-config/zipball/17150988bef165e89525bde8a62bb21883201dd9",
+                "reference": "17150988bef165e89525bde8a62bb21883201dd9",
                 "shasum": ""
             },
             "require": {
@@ -2287,7 +2287,7 @@
             ],
             "description": "Provides a configuration factory and multiple rule sets for friendsofphp/php-cs-fixer.",
             "homepage": "https://github.com/localheinz/php-cs-fixer-config",
-            "time": "2019-02-18T06:19:11+00:00"
+            "time": "2019-03-31T12:40:54+00:00"
         },
         {
             "name": "localheinz/test-util",

@@ -20,6 +20,8 @@ use PHPUnit\Framework;
 
 /**
  * @internal
+ *
+ * @covers \Localheinz\GitHub\ChangeLog\Exception\InvalidArgumentException
  */
 final class InvalidArgumentExceptionTest extends Framework\TestCase
 {

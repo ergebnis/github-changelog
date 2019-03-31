@@ -20,6 +20,8 @@ use PHPUnit\Framework;
 
 /**
  * @internal
+ *
+ * @covers \Localheinz\GitHub\ChangeLog\Resource\Repository
  */
 final class RepositoryTest extends Framework\TestCase
 {

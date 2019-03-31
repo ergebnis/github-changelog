@@ -20,6 +20,8 @@ use PHPUnit\Framework;
 
 /**
  * @internal
+ *
+ * @covers \Localheinz\GitHub\ChangeLog\Resource\Commit
  */
 final class CommitTest extends Framework\TestCase
 {

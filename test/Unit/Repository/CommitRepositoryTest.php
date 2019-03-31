@@ -22,6 +22,8 @@ use PHPUnit\Framework;
 
 /**
  * @internal
+ *
+ * @covers \Localheinz\GitHub\ChangeLog\Repository\CommitRepository
  */
 final class CommitRepositoryTest extends Framework\TestCase
 {

@@ -20,6 +20,8 @@ use PHPUnit\Framework;
 
 /**
  * @internal
+ *
+ * @covers \Localheinz\GitHub\ChangeLog\Exception\RuntimeException
  */
 final class RuntimeExceptionTest extends Framework\TestCase
 {

@@ -19,6 +19,8 @@ use PHPUnit\Framework;
 
 /**
  * @internal
+ *
+ * @covers \Localheinz\GitHub\ChangeLog\Resource\User
  */
 final class UserTest extends Framework\TestCase
 {

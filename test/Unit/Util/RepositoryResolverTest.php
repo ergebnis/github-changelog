@@ -22,6 +22,8 @@ use PHPUnit\Framework;
 
 /**
  * @internal
+ *
+ * @covers \Localheinz\GitHub\ChangeLog\Util\RepositoryResolver
  */
 final class RepositoryResolverTest extends Framework\TestCase
 {
