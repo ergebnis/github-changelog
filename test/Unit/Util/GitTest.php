@@ -108,6 +108,11 @@ final class GitTest extends Framework\TestCase
 
         $git = new Git();
 
-        self::assertArraySubset($this->remoteUrls, $git->remoteUrls());
+        $remoteUrls = $git->remoteUrls();
+
+        foreach ($this->remoteUrls as $remoteName => $remoteUrl) {
+            self::assertArrayHasKey($remoteName, $remoteUrls);
+            self::assertSame($remoteUrl, $remoteUrls[$remoteName]);
+        }
     }
 }
