@@ -11,7 +11,7 @@ declare(strict_types=1);
  * @see https://github.com/localheinz/github-changelog
  */
 
-namespace Localheinz\GitHub\ChangeLog\Test\Unit;
+namespace Localheinz\GitHub\ChangeLog\Test\AutoReview;
 
 use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
