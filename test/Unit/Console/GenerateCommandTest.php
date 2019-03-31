@@ -21,6 +21,7 @@ use Localheinz\GitHub\ChangeLog\Resource;
 use Localheinz\GitHub\ChangeLog\Util;
 use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
+use Prophecy\Argument;
 use Symfony\Component\Console\Input;
 use Symfony\Component\Console\Tester\CommandTester;
 
@@ -36,9 +37,9 @@ final class GenerateCommandTest extends Framework\TestCase
     public function testHasName(): void
     {
         $command = new Console\GenerateCommand(
-            $this->createMock(Client::class),
-            $this->createMock(Repository\PullRequestRepositoryInterface::class),
-            $this->createMock(Util\RepositoryResolverInterface::class)
+            $this->prophesize(Client::class)->reveal(),
+            $this->prophesize(Repository\PullRequestRepositoryInterface::class)->reveal(),
+            $this->prophesize(Util\RepositoryResolverInterface::class)->reveal()
         );
 
         self::assertSame('generate', $command->getName());
@@ -47,9 +48,9 @@ final class GenerateCommandTest extends Framework\TestCase
     public function testHasDescription(): void
     {
         $command = new Console\GenerateCommand(
-            $this->createMock(Client::class),
-            $this->createMock(Repository\PullRequestRepositoryInterface::class),
-            $this->createMock(Util\RepositoryResolverInterface::class)
+            $this->prophesize(Client::class)->reveal(),
+            $this->prophesize(Repository\PullRequestRepositoryInterface::class)->reveal(),
+            $this->prophesize(Util\RepositoryResolverInterface::class)->reveal()
         );
 
         self::assertSame('Generates a changelog from merged pull requests found between commit references', $command->getDescription());
@@ -65,9 +66,9 @@ final class GenerateCommandTest extends Framework\TestCase
     public function testArgument(string $name, bool $isRequired, string $description): void
     {
         $command = new Console\GenerateCommand(
-            $this->createMock(Client::class),
-            $this->createMock(Repository\PullRequestRepositoryInterface::class),
-            $this->createMock(Util\RepositoryResolverInterface::class)
+            $this->prophesize(Client::class)->reveal(),
+            $this->prophesize(Repository\PullRequestRepositoryInterface::class)->reveal(),
+            $this->prophesize(Util\RepositoryResolverInterface::class)->reveal()
         );
 
         self::assertTrue($command->getDefinition()->hasArgument($name));
@@ -114,9 +115,9 @@ final class GenerateCommandTest extends Framework\TestCase
     public function testOption(string $name, string $shortcut, bool $isValueRequired, string $description, $default): void
     {
         $command = new Console\GenerateCommand(
-            $this->createMock(Client::class),
-            $this->createMock(Repository\PullRequestRepositoryInterface::class),
-            $this->createMock(Util\RepositoryResolverInterface::class)
+            $this->prophesize(Client::class)->reveal(),
+            $this->prophesize(Repository\PullRequestRepositoryInterface::class)->reveal(),
+            $this->prophesize(Util\RepositoryResolverInterface::class)->reveal()
         );
 
         self::assertTrue($command->getDefinition()->hasOption($name));
@@ -136,45 +137,63 @@ final class GenerateCommandTest extends Framework\TestCase
      */
     public function testExecuteAuthenticatesIfTokenOptionIsGiven(): void
     {
-        $authToken = $this->faker()->password();
+        $faker = $this->faker();
 
-        $client = $this->createMock(Client::class);
+        $startReference = $faker->sha1;
+        $endReference = null;
+        $owner = $faker->slug;
+        $name = $faker->slug;
+
+        $authToken = $faker->password();
+
+        $client = $this->prophesize(Client::class);
 
         $client
-            ->expects(self::once())
-            ->method('authenticate')
-            ->with(
-                self::identicalTo($authToken),
-                self::identicalTo(Client::AUTH_HTTP_TOKEN)
-            );
+            ->authenticate(
+                Argument::is($authToken),
+                Argument::is(Client::AUTH_HTTP_TOKEN)
+            )
+            ->shouldBeCalled();
 
-        $range = $this->createMock(Resource\RangeInterface::class);
+        $range = $this->prophesize(Resource\RangeInterface::class);
 
         $range
-            ->expects(self::any())
-            ->method('pullRequests')
+            ->pullRequests()
+            ->shouldBeCalled()
             ->willReturn([]);
 
-        $pullRequestRepository = $this->createMock(Repository\PullRequestRepositoryInterface::class);
+        $pullRequestRepository = $this->prophesize(Repository\PullRequestRepositoryInterface::class);
 
         $pullRequestRepository
-            ->expects(self::any())
-            ->method('items')
-            ->willReturn($range);
+            ->items(
+                Argument::that(static function (Resource\Repository $repository) use ($owner, $name) {
+                    return $repository->owner() === $owner
+                        && $repository->name() === $name;
+                }),
+                Argument::is($startReference),
+                Argument::is($endReference)
+            )
+            ->shouldBeCalled()
+            ->willReturn($range->reveal());
 
         $command = new Console\GenerateCommand(
-            $client,
-            $pullRequestRepository,
-            $this->createMock(Util\RepositoryResolverInterface::class)
+            $client->reveal(),
+            $pullRequestRepository->reveal(),
+            $this->prophesize(Util\RepositoryResolverInterface::class)->reveal()
         );
 
         $tester = new CommandTester($command);
 
-        $tester->execute([
-            'start-reference' => '0.1.0',
+        $exitCode = $tester->execute([
+            'start-reference' => $startReference,
             '--auth-token' => $authToken,
-            '--repository' => 'localheinz/github-changelog',
+            '--repository' => $this->repositoryFrom(
+                $owner,
+                $name
+            ),
         ]);
+
+        self::assertSame(0, $exitCode);
     }
 
     /**
@@ -193,9 +212,9 @@ final class GenerateCommandTest extends Framework\TestCase
         );
 
         $command = new Console\GenerateCommand(
-            $this->createMock(Client::class),
-            $this->createMock(Repository\PullRequestRepositoryInterface::class),
-            $this->createMock(Util\RepositoryResolverInterface::class)
+            $this->prophesize(Client::class)->reveal(),
+            $this->prophesize(Repository\PullRequestRepositoryInterface::class)->reveal(),
+            $this->prophesize(Util\RepositoryResolverInterface::class)->reveal()
         );
 
         $tester = new CommandTester($command);
@@ -211,23 +230,22 @@ final class GenerateCommandTest extends Framework\TestCase
 
     public function testExecuteFailsIfRepositoryCannotBeResolved(): void
     {
-        $repositoryResolver = $this->createMock(Util\RepositoryResolverInterface::class);
+        $repositoryResolver = $this->prophesize(Util\RepositoryResolverInterface::class);
 
         $repositoryResolver
-            ->expects(self::once())
-            ->method('resolve')
-            ->with(
-                self::identicalTo('upstream'),
-                self::identicalTo('origin')
+            ->resolve(
+                Argument::is('upstream'),
+                Argument::is('origin')
             )
-            ->willThrowException(new Exception\RuntimeException());
+            ->shouldBeCalled()
+            ->willThrow(new Exception\RuntimeException());
 
         $expectedMessage = 'Unable to resolve repository, please specify using --repository option.';
 
         $command = new Console\GenerateCommand(
-            $this->createMock(Client::class),
-            $this->createMock(Repository\PullRequestRepositoryInterface::class),
-            $repositoryResolver
+            $this->prophesize(Client::class)->reveal(),
+            $this->prophesize(Repository\PullRequestRepositoryInterface::class)->reveal(),
+            $repositoryResolver->reveal()
         );
 
         $tester = new CommandTester($command);
@@ -258,40 +276,38 @@ final class GenerateCommandTest extends Framework\TestCase
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
-        $range = $this->createMock(Resource\RangeInterface::class);
+        $range = $this->prophesize(Resource\RangeInterface::class);
 
         $range
-            ->expects(self::any())
-            ->method('pullRequests')
+            ->pullRequests()
+            ->shouldBeCalled()
             ->willReturn([]);
 
-        $pullRequestRepository = $this->createMock(Repository\PullRequestRepositoryInterface::class);
+        $pullRequestRepository = $this->prophesize(Repository\PullRequestRepositoryInterface::class);
 
         $pullRequestRepository
-            ->expects(self::once())
-            ->method('items')
-            ->with(
-                self::identicalTo($repository),
-                self::identicalTo($startReference),
-                self::identicalTo($endReference)
+            ->items(
+                Argument::is($repository),
+                Argument::is($startReference),
+                Argument::is($endReference)
             )
-            ->willReturn($range);
+            ->shouldBeCalled()
+            ->willReturn($range->reveal());
 
-        $repositoryResolver = $this->createMock(Util\RepositoryResolverInterface::class);
+        $repositoryResolver = $this->prophesize(Util\RepositoryResolverInterface::class);
 
         $repositoryResolver
-            ->expects(self::once())
-            ->method('resolve')
-            ->with(
-                self::identicalTo('upstream'),
-                self::identicalTo('origin')
+            ->resolve(
+                Argument::is('upstream'),
+                Argument::is('origin')
             )
+            ->shouldBeCalled()
             ->willReturn($repository);
 
         $command = new Console\GenerateCommand(
-            $this->createMock(Client::class),
-            $pullRequestRepository,
-            $repositoryResolver
+            $this->prophesize(Client::class)->reveal(),
+            $pullRequestRepository->reveal(),
+            $repositoryResolver->reveal()
         );
 
         $tester = new CommandTester($command);
@@ -314,41 +330,37 @@ final class GenerateCommandTest extends Framework\TestCase
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
-        $range = $this->createMock(Resource\RangeInterface::class);
+        $range = $this->prophesize(Resource\RangeInterface::class);
 
         $range
-            ->expects(self::any())
-            ->method('pullRequests')
+            ->pullRequests()
+            ->shouldBeCalled()
             ->willReturn([]);
 
-        $pullRequestRepository = $this->createMock(Repository\PullRequestRepositoryInterface::class);
+        $pullRequestRepository = $this->prophesize(Repository\PullRequestRepositoryInterface::class);
 
         $pullRequestRepository
-            ->expects(self::once())
-            ->method('items')
-            ->with(
-                self::logicalAnd(
-                    self::isInstanceOf(Resource\RepositoryInterface::class),
-                    self::callback(static function (Resource\RepositoryInterface $repository) use ($owner, $name) {
-                        return $repository->owner() === $owner
-                            && $repository->name() === $name;
-                    })
-                ),
-                self::identicalTo($startReference),
-                self::identicalTo($endReference)
+            ->items(
+                Argument::that(static function (Resource\Repository $repository) use ($owner, $name) {
+                    return $repository->owner() === $owner
+                        && $repository->name() === $name;
+                }),
+                Argument::is($startReference),
+                Argument::is($endReference)
             )
-            ->willReturn($range);
+            ->shouldBeCalled()
+            ->willReturn($range->reveal());
 
-        $repositoryResolver = $this->createMock(Util\RepositoryResolverInterface::class);
+        $repositoryResolver = $this->prophesize(Util\RepositoryResolverInterface::class);
 
         $repositoryResolver
-            ->expects(self::never())
-            ->method(self::anything());
+            ->resolve()
+            ->shouldNotBeCalled();
 
         $command = new Console\GenerateCommand(
-            $this->createMock(Client::class),
-            $pullRequestRepository,
-            $repositoryResolver
+            $this->prophesize(Client::class)->reveal(),
+            $pullRequestRepository->reveal(),
+            $repositoryResolver->reveal()
         );
 
         $tester = new CommandTester($command);
@@ -370,36 +382,48 @@ final class GenerateCommandTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
+        $owner = $faker->slug();
+        $name = $faker->slug();
+        $startReference = $faker->sha1;
+        $endReference = $faker->sha1;
+
         $expectedMessage = 'Could not find any pull requests';
 
-        $range = $this->createMock(Resource\RangeInterface::class);
+        $range = $this->prophesize(Resource\RangeInterface::class);
 
         $range
-            ->expects(self::any())
-            ->method('pullRequests')
+            ->pullRequests()
+            ->shouldBeCalled()
             ->willReturn([]);
 
-        $pullRequestRepository = $this->createMock(Repository\PullRequestRepositoryInterface::class);
+        $pullRequestRepository = $this->prophesize(Repository\PullRequestRepositoryInterface::class);
 
         $pullRequestRepository
-            ->expects(self::any())
-            ->method('items')
-            ->willReturn($range);
+            ->items(
+                Argument::that(static function (Resource\Repository $repository) use ($owner, $name) {
+                    return $repository->owner() === $owner
+                        && $repository->name() === $name;
+                }),
+                Argument::is($startReference),
+                Argument::is($endReference)
+            )
+            ->shouldBeCalled()
+            ->willReturn($range->reveal());
 
         $command = new Console\GenerateCommand(
-            $this->createMock(Client::class),
-            $pullRequestRepository,
-            $this->createMock(Util\RepositoryResolverInterface::class)
+            $this->prophesize(Client::class)->reveal(),
+            $pullRequestRepository->reveal(),
+            $this->prophesize(Util\RepositoryResolverInterface::class)->reveal()
         );
 
         $tester = new CommandTester($command);
 
         $exitCode = $tester->execute([
-            'start-reference' => $faker->sha1,
-            'end-reference' => $faker->sha1,
+            'start-reference' => $startReference,
+            'end-reference' => $endReference,
             '--repository' => $this->repositoryFrom(
-                $faker->slug(),
-                $faker->slug()
+                $owner,
+                $name
             ),
         ]);
 
@@ -414,36 +438,48 @@ final class GenerateCommandTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
+        $owner = $faker->slug();
+        $name = $faker->slug();
+        $startReference = $faker->sha1;
+        $endReference = null;
+
         $expectedMessage = 'Could not find any pull requests';
 
-        $range = $this->createMock(Resource\RangeInterface::class);
+        $range = $this->prophesize(Resource\RangeInterface::class);
 
         $range
-            ->expects(self::any())
-            ->method('pullRequests')
+            ->pullRequests()
+            ->shouldBeCalled()
             ->willReturn([]);
 
-        $pullRequestRepository = $this->createMock(Repository\PullRequestRepositoryInterface::class);
+        $pullRequestRepository = $this->prophesize(Repository\PullRequestRepositoryInterface::class);
 
         $pullRequestRepository
-            ->expects(self::any())
-            ->method('items')
-            ->willReturn($range);
+            ->items(
+                Argument::that(static function (Resource\Repository $repository) use ($owner, $name) {
+                    return $repository->owner() === $owner
+                        && $repository->name() === $name;
+                }),
+                Argument::is($startReference),
+                Argument::is($endReference)
+            )
+            ->shouldBeCalled()
+            ->willReturn($range->reveal());
 
         $command = new Console\GenerateCommand(
-            $this->createMock(Client::class),
-            $pullRequestRepository,
-            $this->createMock(Util\RepositoryResolverInterface::class)
+            $this->prophesize(Client::class)->reveal(),
+            $pullRequestRepository->reveal(),
+            $this->prophesize(Util\RepositoryResolverInterface::class)->reveal()
         );
 
         $tester = new CommandTester($command);
 
         $exitCode = $tester->execute([
-            'start-reference' => $faker->sha1,
-            'end-reference' => null,
+            'start-reference' => $startReference,
+            'end-reference' => $endReference,
             '--repository' => $this->repositoryFrom(
-                $faker->slug(),
-                $faker->slug()
+                $owner,
+                $name
             ),
         ]);
 
@@ -459,6 +495,11 @@ final class GenerateCommandTest extends Framework\TestCase
     public function testExecuteRendersPullRequestsWithTemplate(): void
     {
         $faker = $this->faker();
+
+        $owner = $faker->slug();
+        $name = $faker->slug();
+        $startReference = $faker->sha1;
+        $endReference = $faker->sha1;
 
         $count = $faker->numberBetween(1, 5);
 
@@ -492,34 +533,41 @@ final class GenerateCommandTest extends Framework\TestCase
             );
         });
 
-        $range = $this->createMock(Resource\RangeInterface::class);
+        $range = $this->prophesize(Resource\RangeInterface::class);
 
         $range
-            ->expects(self::any())
-            ->method('pullRequests')
+            ->pullRequests()
+            ->shouldBeCalled()
             ->willReturn($pullRequests);
 
-        $pullRequestRepository = $this->createMock(Repository\PullRequestRepositoryInterface::class);
+        $pullRequestRepository = $this->prophesize(Repository\PullRequestRepositoryInterface::class);
 
         $pullRequestRepository
-            ->expects(self::any())
-            ->method('items')
-            ->willReturn($range);
+            ->items(
+                Argument::that(static function (Resource\Repository $repository) use ($owner, $name) {
+                    return $repository->owner() === $owner
+                        && $repository->name() === $name;
+                }),
+                Argument::is($startReference),
+                Argument::is($endReference)
+            )
+            ->shouldBeCalled()
+            ->willReturn($range->reveal());
 
         $command = new Console\GenerateCommand(
-            $this->createMock(Client::class),
-            $pullRequestRepository,
-            $this->createMock(Util\RepositoryResolverInterface::class)
+            $this->prophesize(Client::class)->reveal(),
+            $pullRequestRepository->reveal(),
+            $this->prophesize(Util\RepositoryResolverInterface::class)->reveal()
         );
 
         $tester = new CommandTester($command);
 
         $exitCode = $tester->execute([
-            'start-reference' => $faker->sha1,
-            'end-reference' => $faker->sha1,
+            'start-reference' => $startReference,
+            'end-reference' => $endReference,
             '--repository' => $this->repositoryFrom(
-                $faker->slug(),
-                $faker->slug()
+                $owner,
+                $name
             ),
             '--template' => $template,
         ]);
@@ -540,6 +588,11 @@ final class GenerateCommandTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
+        $owner = $faker->slug();
+        $name = $faker->slug();
+        $startReference = $faker->sha1;
+        $endReference = null;
+
         $count = $faker->numberBetween(1, 5);
 
         $pullRequests = $this->pullRequests($count);
@@ -550,34 +603,41 @@ final class GenerateCommandTest extends Framework\TestCase
             1 === $count ? '' : 's'
         );
 
-        $range = $this->createMock(Resource\RangeInterface::class);
+        $range = $this->prophesize(Resource\RangeInterface::class);
 
         $range
-            ->expects(self::any())
-            ->method('pullRequests')
+            ->pullRequests()
+            ->shouldBeCalled()
             ->willReturn($pullRequests);
 
-        $pullRequestRepository = $this->createMock(Repository\PullRequestRepositoryInterface::class);
+        $pullRequestRepository = $this->prophesize(Repository\PullRequestRepositoryInterface::class);
 
         $pullRequestRepository
-            ->expects(self::any())
-            ->method('items')
-            ->willReturn($range);
+            ->items(
+                Argument::that(static function (Resource\Repository $repository) use ($owner, $name) {
+                    return $repository->owner() === $owner
+                        && $repository->name() === $name;
+                }),
+                Argument::is($startReference),
+                Argument::is($endReference)
+            )
+            ->shouldBeCalled()
+            ->willReturn($range->reveal());
 
         $command = new Console\GenerateCommand(
-            $this->createMock(Client::class),
-            $pullRequestRepository,
-            $this->createMock(Util\RepositoryResolverInterface::class)
+            $this->prophesize(Client::class)->reveal(),
+            $pullRequestRepository->reveal(),
+            $this->prophesize(Util\RepositoryResolverInterface::class)->reveal()
         );
 
         $tester = new CommandTester($command);
 
         $exitCode = $tester->execute([
-            'start-reference' => $faker->sha1,
-            'end-reference' => null,
+            'start-reference' => $startReference,
+            'end-reference' => $endReference,
             '--repository' => $this->repositoryFrom(
-                $faker->slug(),
-                $faker->slug()
+                $owner,
+                $name
             ),
         ]);
 
@@ -592,14 +652,26 @@ final class GenerateCommandTest extends Framework\TestCase
     {
         $faker = $this->faker();
 
+        $owner = $faker->slug();
+        $name = $faker->slug();
+        $startReference = $faker->sha1;
+        $endReference = $faker->sha1;
+
         $exception = new \Exception('Wait, this should not happen!');
 
-        $pullRequestRepository = $this->createMock(Repository\PullRequestRepositoryInterface::class);
+        $pullRequestRepository = $this->prophesize(Repository\PullRequestRepositoryInterface::class);
 
         $pullRequestRepository
-            ->expects(self::any())
-            ->method('items')
-            ->willThrowException($exception);
+            ->items(
+                Argument::that(static function (Resource\Repository $repository) use ($owner, $name) {
+                    return $repository->owner() === $owner
+                        && $repository->name() === $name;
+                }),
+                Argument::is($startReference),
+                Argument::is($endReference)
+            )
+            ->shouldBeCalled()
+            ->willThrow($exception);
 
         $expectedMessage = \sprintf(
             'An error occurred: %s',
@@ -607,19 +679,19 @@ final class GenerateCommandTest extends Framework\TestCase
         );
 
         $command = new Console\GenerateCommand(
-            $this->createMock(Client::class),
-            $pullRequestRepository,
-            $this->createMock(Util\RepositoryResolverInterface::class)
+            $this->prophesize(Client::class)->reveal(),
+            $pullRequestRepository->reveal(),
+            $this->prophesize(Util\RepositoryResolverInterface::class)->reveal()
         );
 
         $tester = new CommandTester($command);
 
         $exitCode = $tester->execute([
-            'start-reference' => $faker->sha1,
-            'end-reference' => $faker->sha1,
+            'start-reference' => $startReference,
+            'end-reference' => $endReference,
             '--repository' => $this->repositoryFrom(
-                $faker->slug(),
-                $faker->slug()
+                $owner,
+                $name
             ),
         ]);
 
