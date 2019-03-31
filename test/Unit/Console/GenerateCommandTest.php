@@ -26,6 +26,8 @@ use Symfony\Component\Console\Tester\CommandTester;
 
 /**
  * @internal
+ *
+ * @covers \Localheinz\GitHub\ChangeLog\Console\GenerateCommand
  */
 final class GenerateCommandTest extends Framework\TestCase
 {

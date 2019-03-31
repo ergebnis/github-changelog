@@ -21,6 +21,8 @@ use PHPUnit\Framework;
 
 /**
  * @internal
+ *
+ * @covers \Localheinz\GitHub\ChangeLog\Exception\PullRequestNotFound
  */
 final class PullRequestNotFoundTest extends Framework\TestCase
 {

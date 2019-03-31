@@ -19,6 +19,8 @@ use PHPUnit\Framework;
 
 /**
  * @internal
+ *
+ * @covers \Localheinz\GitHub\ChangeLog\Resource\Rangenge
  */
 final class RangeTest extends Framework\TestCase
 {

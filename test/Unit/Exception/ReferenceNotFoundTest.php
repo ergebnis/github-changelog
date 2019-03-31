@@ -21,6 +21,8 @@ use PHPUnit\Framework;
 
 /**
  * @internal
+ *
+ * @covers \Localheinz\GitHub\ChangeLog\Exception\ReferenceNotFound
  */
 final class ReferenceNotFoundTest extends Framework\TestCase
 {

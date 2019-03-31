@@ -22,6 +22,8 @@ use PHPUnit\Framework;
 
 /**
  * @internal
+ *
+ * @covers \Localheinz\GitHub\ChangeLog\Repository\PullRequestRepository
  */
 final class PullRequestRepositoryTest extends Framework\TestCase
 {
