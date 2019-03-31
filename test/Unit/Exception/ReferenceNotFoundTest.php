@@ -38,6 +38,9 @@ final class ReferenceNotFoundTest extends Framework\TestCase
         $this->assertClassImplementsInterface(ExceptionInterface::class, ReferenceNotFound::class);
     }
 
+    /**
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     */
     public function testFromRepositoryAndReferenceCreatesException(): void
     {
         $faker = $this->faker();

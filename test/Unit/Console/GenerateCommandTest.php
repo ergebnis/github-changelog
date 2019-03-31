@@ -131,6 +131,9 @@ final class GenerateCommandTest extends Framework\TestCase
         self::assertSame($default, $option->getDefault());
     }
 
+    /**
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     */
     public function testExecuteAuthenticatesIfTokenOptionIsGiven(): void
     {
         $authToken = $this->faker()->password();
@@ -174,6 +177,9 @@ final class GenerateCommandTest extends Framework\TestCase
         ]);
     }
 
+    /**
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     */
     public function testExecuteFailsIfRepositoryIsInvalid(): void
     {
         $repository = $this->repositoryFrom(
@@ -234,6 +240,9 @@ final class GenerateCommandTest extends Framework\TestCase
         self::assertContains($expectedMessage, $tester->getDisplay());
     }
 
+    /**
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     */
     public function testExecuteDelegatesToPullRequestRepositoryUsingRepositoryResolvedFromGitMetaData(): void
     {
         $faker = $this->faker();
@@ -293,6 +302,9 @@ final class GenerateCommandTest extends Framework\TestCase
         ]);
     }
 
+    /**
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     */
     public function testExecuteDelegatesToPullRequestRepositoryUsingRepositorySpecifiedInOptions(): void
     {
         $faker = $this->faker();
@@ -351,6 +363,9 @@ final class GenerateCommandTest extends Framework\TestCase
         ]);
     }
 
+    /**
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     */
     public function testExecuteRendersMessageIfNoPullRequestsWereFound(): void
     {
         $faker = $this->faker();
@@ -392,6 +407,9 @@ final class GenerateCommandTest extends Framework\TestCase
         self::assertRegExp('@' . $expectedMessage . '@', $tester->getDisplay());
     }
 
+    /**
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     */
     public function testExecuteRendersDifferentMessageIfNoPullRequestsWereFoundAndNoEndReferenceWasGiven(): void
     {
         $faker = $this->faker();
@@ -433,6 +451,11 @@ final class GenerateCommandTest extends Framework\TestCase
         self::assertContains($expectedMessage, $tester->getDisplay());
     }
 
+    /**
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\PullRequest
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\User
+     */
     public function testExecuteRendersPullRequestsWithTemplate(): void
     {
         $faker = $this->faker();
@@ -508,6 +531,11 @@ final class GenerateCommandTest extends Framework\TestCase
         }
     }
 
+    /**
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\PullRequest
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\User
+     */
     public function testExecuteRendersDifferentMessageWhenNoEndReferenceWasGiven(): void
     {
         $faker = $this->faker();
@@ -557,6 +585,9 @@ final class GenerateCommandTest extends Framework\TestCase
         self::assertContains($expectedMessage, $tester->getDisplay());
     }
 
+    /**
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     */
     public function testExecuteHandlesExceptionsThrownWhenFetchingPullRequests(): void
     {
         $faker = $this->faker();

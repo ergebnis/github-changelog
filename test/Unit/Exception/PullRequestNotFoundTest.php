@@ -38,6 +38,9 @@ final class PullRequestNotFoundTest extends Framework\TestCase
         $this->assertClassImplementsInterface(ExceptionInterface::class, PullRequestNotFound::class);
     }
 
+    /**
+     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     */
     public function testFromRepositoryAndNumberCreatesException(): void
     {
         $faker = $this->faker();
