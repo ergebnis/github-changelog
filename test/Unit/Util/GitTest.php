@@ -72,7 +72,9 @@ final class GitTest extends Framework\TestCase
         while (3 > \count($this->remoteUrls)) {
             do {
                 $remoteName = $faker->unique()->word;
-            } while (\in_array($remoteName, \array_merge($remoteNames, $this->remoteUrls), true));
+            } while (\in_array($remoteName, $remoteNames, true));
+
+            $remoteNames[] = $remoteName;
 
             $owner = $faker->unique()->word;
             $name = $faker->unique()->word;
