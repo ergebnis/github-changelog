@@ -41,29 +41,29 @@ final class RangeTest extends Framework\TestCase
 
     public function testWithCommitClonesRangeAndAddsCommit(): void
     {
-        $commit = $this->createMock(Resource\CommitInterface::class);
+        $commit = $this->prophesize(Resource\CommitInterface::class);
 
         $range = new Resource\Range();
 
-        $mutated = $range->withCommit($commit);
+        $mutated = $range->withCommit($commit->reveal());
 
         self::assertNotSame($range, $mutated);
         self::assertCount(0, $range->commits());
         self::assertCount(1, $mutated->commits());
-        self::assertContains($commit, $mutated->commits());
+        self::assertContains($commit->reveal(), $mutated->commits());
     }
 
     public function testWithPullRequestClonesRangeAndAddsPullRequest(): void
     {
-        $pullRequest = $this->createMock(Resource\PullRequestInterface::class);
+        $pullRequest = $this->prophesize(Resource\PullRequestInterface::class);
 
         $range = new Resource\Range();
 
-        $mutated = $range->withPullRequest($pullRequest);
+        $mutated = $range->withPullRequest($pullRequest->reveal());
 
         self::assertNotSame($range, $mutated);
         self::assertCount(0, $range->pullRequests());
         self::assertCount(1, $mutated->pullRequests());
-        self::assertContains($pullRequest, $mutated->pullRequests());
+        self::assertContains($pullRequest->reveal(), $mutated->pullRequests());
     }
 }

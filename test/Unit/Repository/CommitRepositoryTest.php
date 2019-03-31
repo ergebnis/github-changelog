@@ -19,6 +19,7 @@ use Localheinz\GitHub\ChangeLog\Repository;
 use Localheinz\GitHub\ChangeLog\Resource;
 use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
+use Prophecy\Argument;
 
 /**
  * @internal
@@ -49,21 +50,20 @@ final class CommitRepositoryTest extends Framework\TestCase
 
         $sha = $faker->sha1;
 
-        $commitApi = $this->createMock(Api\Repository\Commits::class);
+        $commitApi = $this->prophesize(Api\Repository\Commits::class);
 
         $expectedItem = $this->commitItem();
 
         $commitApi
-            ->expects(self::once())
-            ->method('show')
-            ->with(
-                self::identicalTo($repository->owner()),
-                self::identicalTo($repository->name()),
-                self::identicalTo($sha)
+            ->show(
+                Argument::is($repository->owner()),
+                Argument::is($repository->name()),
+                Argument::is($sha)
             )
+            ->shouldBeCalled()
             ->willReturn($expectedItem);
 
-        $commitRepository = new Repository\CommitRepository($commitApi);
+        $commitRepository = new Repository\CommitRepository($commitApi->reveal());
 
         $commit = $commitRepository->show(
             $repository,
@@ -89,19 +89,18 @@ final class CommitRepositoryTest extends Framework\TestCase
 
         $sha = $faker->sha1;
 
-        $api = $this->createMock(Api\Repository\Commits::class);
+        $api = $this->prophesize(Api\Repository\Commits::class);
 
         $api
-            ->expects(self::once())
-            ->method('show')
-            ->with(
-                self::identicalTo($repository->owner()),
-                self::identicalTo($repository->name()),
-                self::identicalTo($sha)
+            ->show(
+                Argument::is($repository->owner()),
+                Argument::is($repository->name()),
+                Argument::is($sha)
             )
+            ->shouldBeCalled()
             ->willReturn('failure');
 
-        $commitRepository = new Repository\CommitRepository($api);
+        $commitRepository = new Repository\CommitRepository($api->reveal());
 
         $this->expectException(Exception\ReferenceNotFound::class);
 
@@ -126,19 +125,18 @@ final class CommitRepositoryTest extends Framework\TestCase
 
         $sha = $faker->sha1;
 
-        $commitApi = $this->createMock(Api\Repository\Commits::class);
+        $commitApi = $this->prophesize(Api\Repository\Commits::class);
 
         $commitApi
-            ->expects(self::once())
-            ->method('all')
-            ->with(
-                self::identicalTo($repository->owner()),
-                self::identicalTo($repository->name()),
-                $this->arrayHasKeyAndValue('sha', $sha)
+            ->all(
+                Argument::is($repository->owner()),
+                Argument::is($repository->name()),
+                Argument::withEntry('sha', $sha)
             )
+            ->shouldBeCalled()
             ->willReturn('snafu');
 
-        $commitRepository = new Repository\CommitRepository($commitApi);
+        $commitRepository = new Repository\CommitRepository($commitApi->reveal());
 
         $range = $commitRepository->all($repository, [
             'sha' => $sha,
@@ -164,21 +162,20 @@ final class CommitRepositoryTest extends Framework\TestCase
 
         $sha = $faker->sha1;
 
-        $commitApi = $this->createMock(Api\Repository\Commits::class);
+        $commitApi = $this->prophesize(Api\Repository\Commits::class);
 
         $expectedItems = $this->commitItems(15);
 
         $commitApi
-            ->expects(self::once())
-            ->method('all')
-            ->with(
-                self::identicalTo($repository->owner()),
-                self::identicalTo($repository->name()),
-                $this->arrayHasKeyAndValue('per_page', 250)
+            ->all(
+                Argument::is($repository->owner()),
+                Argument::is($repository->name()),
+                Argument::withEntry('per_page', 250)
             )
+            ->shouldBeCalled()
             ->willReturn($this->reverse($expectedItems));
 
-        $commitRepository = new Repository\CommitRepository($commitApi);
+        $commitRepository = new Repository\CommitRepository($commitApi->reveal());
 
         $commitRepository->all($repository, [
             'sha' => $sha,
@@ -202,21 +199,20 @@ final class CommitRepositoryTest extends Framework\TestCase
         $sha = $faker->sha1;
         $perPage = $faker->numberBetween(1);
 
-        $commitApi = $this->createMock(Api\Repository\Commits::class);
+        $commitApi = $this->prophesize(Api\Repository\Commits::class);
 
         $expectedItems = $this->commitItems(15);
 
         $commitApi
-            ->expects(self::once())
-            ->method('all')
-            ->with(
-                self::identicalTo($repository->owner()),
-                self::identicalTo($repository->name()),
-                $this->arrayHasKeyAndValue('per_page', $perPage)
+            ->all(
+                Argument::is($repository->owner()),
+                Argument::is($repository->name()),
+                Argument::withEntry('per_page', $perPage)
             )
+            ->shouldBeCalled()
             ->willReturn($this->reverse($expectedItems));
 
-        $commitRepository = new Repository\CommitRepository($commitApi);
+        $commitRepository = new Repository\CommitRepository($commitApi->reveal());
 
         $commitRepository->all($repository, [
             'sha' => $sha,
@@ -240,21 +236,20 @@ final class CommitRepositoryTest extends Framework\TestCase
 
         $sha = $faker->sha1;
 
-        $commitApi = $this->createMock(Api\Repository\Commits::class);
+        $commitApi = $this->prophesize(Api\Repository\Commits::class);
 
         $expectedItems = $this->commitItems(15);
 
         $commitApi
-            ->expects(self::once())
-            ->method('all')
-            ->with(
-                self::identicalTo($repository->owner()),
-                self::identicalTo($repository->name()),
-                $this->arrayHasKeyAndValue('sha', $sha)
+            ->all(
+                Argument::is($repository->owner()),
+                Argument::is($repository->name()),
+                Argument::withEntry('sha', $sha)
             )
+            ->shouldBeCalled()
             ->willReturn($this->reverse($expectedItems));
 
-        $commitRepository = new Repository\CommitRepository($commitApi);
+        $commitRepository = new Repository\CommitRepository($commitApi->reveal());
 
         $range = $commitRepository->all($repository, [
             'sha' => $sha,
@@ -294,13 +289,7 @@ final class CommitRepositoryTest extends Framework\TestCase
 
         $endReference = $startReference;
 
-        $commitApi = $this->createMock(Api\Repository\Commits::class);
-
-        $commitApi
-            ->expects(self::never())
-            ->method(self::anything());
-
-        $commitRepository = new Repository\CommitRepository($commitApi);
+        $commitRepository = new Repository\CommitRepository($this->prophesize(Api\Repository\Commits::class)->reveal());
 
         $range = $commitRepository->items(
             $repository,
@@ -329,23 +318,22 @@ final class CommitRepositoryTest extends Framework\TestCase
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
-        $commitApi = $this->createMock(Api\Repository\Commits::class);
+        $commitApi = $this->prophesize(Api\Repository\Commits::class);
 
         $commitApi
-            ->expects(self::at(0))
-            ->method('show')
-            ->with(
-                self::identicalTo($repository->owner()),
-                self::identicalTo($repository->name()),
-                self::identicalTo($startReference)
+            ->show(
+                Argument::is($repository->owner()),
+                Argument::is($repository->name()),
+                Argument::is($startReference)
             )
+            ->shouldBeCalled()
             ->willReturn(null);
 
         $commitApi
-            ->expects(self::never())
-            ->method('all');
+            ->all()
+            ->shouldNotBeCalled();
 
-        $commitRepository = new Repository\CommitRepository($commitApi);
+        $commitRepository = new Repository\CommitRepository($commitApi->reveal());
 
         $range = $commitRepository->items(
             $repository,
@@ -375,33 +363,31 @@ final class CommitRepositoryTest extends Framework\TestCase
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
-        $commitApi = $this->createMock(Api\Repository\Commits::class);
+        $commitApi = $this->prophesize(Api\Repository\Commits::class);
 
         $commitApi
-            ->expects(self::at(0))
-            ->method('show')
-            ->with(
-                self::identicalTo($repository->owner()),
-                self::identicalTo($repository->name()),
-                self::identicalTo($startReference)
+            ->show(
+                Argument::is($repository->owner()),
+                Argument::is($repository->name()),
+                Argument::is($startReference)
             )
+            ->shouldBeCalled()
             ->willReturn($this->commitItem());
 
         $commitApi
-            ->expects(self::at(1))
-            ->method('show')
-            ->with(
-                self::identicalTo($repository->owner()),
-                self::identicalTo($repository->name()),
-                self::identicalTo($endReference)
+            ->show(
+                Argument::is($repository->owner()),
+                Argument::is($repository->name()),
+                Argument::is($endReference)
             )
+            ->shouldBeCalled()
             ->willReturn(null);
 
         $commitApi
-            ->expects(self::never())
-            ->method('all');
+            ->all()
+            ->shouldNotBeCalled();
 
-        $commitRepository = new Repository\CommitRepository($commitApi);
+        $commitRepository = new Repository\CommitRepository($commitApi->reveal());
 
         $range = $commitRepository->items(
             $repository,
@@ -430,42 +416,39 @@ final class CommitRepositoryTest extends Framework\TestCase
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
-        $commitApi = $this->createMock(Api\Repository\Commits::class);
+        $commitApi = $this->prophesize(Api\Repository\Commits::class);
 
         $startCommit = $this->commitItem();
 
         $commitApi
-            ->expects(self::at(0))
-            ->method('show')
-            ->with(
-                self::identicalTo($repository->owner()),
-                self::identicalTo($repository->name()),
-                self::identicalTo($startReference)
+            ->show(
+                Argument::is($repository->owner()),
+                Argument::is($repository->name()),
+                Argument::is($startReference)
             )
+            ->shouldBeCalled()
             ->willReturn($startCommit);
 
         $endCommit = $this->commitItem();
 
         $commitApi
-            ->expects(self::at(1))
-            ->method('show')
-            ->with(
-                self::identicalTo($repository->owner()),
-                self::identicalTo($repository->name()),
-                self::identicalTo($endReference)
+            ->show(
+                Argument::is($repository->owner()),
+                Argument::is($repository->name()),
+                Argument::is($endReference)
             )
+            ->shouldBeCalled()
             ->willReturn($endCommit);
 
         $commitApi
-            ->expects(self::once())
-            ->method('all')
-            ->with(
-                self::identicalTo($repository->owner()),
-                self::identicalTo($repository->name()),
-                $this->arrayHasKeyAndValue('sha', $endCommit['sha'])
-            );
+            ->all(
+                Argument::is($repository->owner()),
+                Argument::is($repository->name()),
+                Argument::withEntry('sha', $endCommit['sha'])
+            )
+            ->shouldBeCalled();
 
-        $commitRepository = new Repository\CommitRepository($commitApi);
+        $commitRepository = new Repository\CommitRepository($commitApi->reveal());
 
         $commitRepository->items(
             $repository,
@@ -490,30 +473,28 @@ final class CommitRepositoryTest extends Framework\TestCase
 
         $startReference = $faker->sha1;
 
-        $commitApi = $this->createMock(Api\Repository\Commits::class);
+        $commitApi = $this->prophesize(Api\Repository\Commits::class);
 
         $startCommit = $this->commitItem();
 
         $commitApi
-            ->expects(self::once())
-            ->method('show')
-            ->with(
-                self::identicalTo($repository->owner()),
-                self::identicalTo($repository->name()),
-                self::identicalTo($startReference)
+            ->show(
+                Argument::is($repository->owner()),
+                Argument::is($repository->name()),
+                Argument::is($startReference)
             )
+            ->shouldBeCalled()
             ->willReturn($startCommit);
 
         $commitApi
-            ->expects(self::once())
-            ->method('all')
-            ->with(
-                self::identicalTo($repository->owner()),
-                self::identicalTo($repository->name()),
-                $this->arrayNotHasKey('sha')
-            );
+            ->all(
+                Argument::is($repository->owner()),
+                Argument::is($repository->name()),
+                Argument::not(Argument::withKey('sha'))
+            )
+            ->shouldBeCalled();
 
-        $commitRepository = new Repository\CommitRepository($commitApi);
+        $commitRepository = new Repository\CommitRepository($commitApi->reveal());
 
         $commitRepository->items(
             $repository,
@@ -538,30 +519,28 @@ final class CommitRepositoryTest extends Framework\TestCase
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
-        $commitApi = $this->createMock(Api\Repository\Commits::class);
+        $commitApi = $this->prophesize(Api\Repository\Commits::class);
 
         $startCommit = $this->commitItem($faker->sha1);
 
         $commitApi
-            ->expects(self::at(0))
-            ->method('show')
-            ->with(
-                self::identicalTo($repository->owner()),
-                self::identicalTo($repository->name()),
-                self::identicalTo($startReference)
+            ->show(
+                Argument::is($repository->owner()),
+                Argument::is($repository->name()),
+                Argument::is($startReference)
             )
+            ->shouldBeCalled()
             ->willReturn($startCommit);
 
         $endCommit = $this->commitItem($faker->sha1);
 
         $commitApi
-            ->expects(self::at(1))
-            ->method('show')
-            ->with(
-                self::identicalTo($repository->owner()),
-                self::identicalTo($repository->name()),
-                self::identicalTo($endReference)
+            ->show(
+                Argument::is($repository->owner()),
+                Argument::is($repository->name()),
+                Argument::is($endReference)
             )
+            ->shouldBeCalled()
             ->willReturn($endCommit);
 
         $countBetween = 9;
@@ -585,16 +564,15 @@ final class CommitRepositoryTest extends Framework\TestCase
         );
 
         $commitApi
-            ->expects(self::once())
-            ->method('all')
-            ->with(
-                self::identicalTo($repository->owner()),
-                self::identicalTo($repository->name()),
-                $this->arrayHasKeyAndValue('sha', $endCommit['sha'])
+            ->all(
+                Argument::is($repository->owner()),
+                Argument::is($repository->name()),
+                Argument::withEntry('sha', $endCommit['sha'])
             )
+            ->shouldBeCalled()
             ->willReturn($this->reverse($segment));
 
-        $commitRepository = new Repository\CommitRepository($commitApi);
+        $commitRepository = new Repository\CommitRepository($commitApi->reveal());
 
         $range = $commitRepository->items(
             $repository,
@@ -637,30 +615,28 @@ final class CommitRepositoryTest extends Framework\TestCase
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
-        $commitApi = $this->createMock(Api\Repository\Commits::class);
+        $commitApi = $this->prophesize(Api\Repository\Commits::class);
 
         $startCommit = $this->commitItem($faker->sha1);
 
         $commitApi
-            ->expects(self::at(0))
-            ->method('show')
-            ->with(
-                self::identicalTo($repository->owner()),
-                self::identicalTo($repository->name()),
-                self::identicalTo($startReference)
+            ->show(
+                Argument::is($repository->owner()),
+                Argument::is($repository->name()),
+                Argument::is($startReference)
             )
+            ->shouldBeCalled()
             ->willReturn($startCommit);
 
         $endCommit = $this->commitItem($faker->sha1);
 
         $commitApi
-            ->expects(self::at(1))
-            ->method('show')
-            ->with(
-                self::identicalTo($repository->owner()),
-                self::identicalTo($repository->name()),
-                self::identicalTo($endReference)
+            ->show(
+                Argument::is($repository->owner()),
+                Argument::is($repository->name()),
+                Argument::is($endReference)
             )
+            ->shouldBeCalled()
             ->willReturn($endCommit);
 
         $countBetweenFirstSegment = 4;
@@ -698,26 +674,24 @@ final class CommitRepositoryTest extends Framework\TestCase
         );
 
         $commitApi
-            ->expects(self::at(2))
-            ->method('all')
-            ->with(
-                self::identicalTo($repository->owner()),
-                self::identicalTo($repository->name()),
-                $this->arrayHasKeyAndValue('sha', $endCommit['sha'])
+            ->all(
+                Argument::is($repository->owner()),
+                Argument::is($repository->name()),
+                Argument::withEntry('sha', $endCommit['sha'])
             )
+            ->shouldBeCalled()
             ->willReturn($this->reverse($firstSegment));
 
         $commitApi
-            ->expects(self::at(3))
-            ->method('all')
-            ->with(
-                self::identicalTo($repository->owner()),
-                self::identicalTo($repository->name()),
-                $this->arrayHasKeyAndValue('sha', $firstCommitFromFirstSegment['sha'])
+            ->all(
+                Argument::is($repository->owner()),
+                Argument::is($repository->name()),
+                Argument::withEntry('sha', $firstCommitFromFirstSegment['sha'])
             )
+            ->shouldBeCalled()
             ->willReturn($this->reverse($secondSegment));
 
-        $commitRepository = new Repository\CommitRepository($commitApi);
+        $commitRepository = new Repository\CommitRepository($commitApi->reveal());
 
         $range = $commitRepository->items(
             $repository,

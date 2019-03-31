@@ -36,14 +36,14 @@ final class RepositoryResolverTest extends Framework\TestCase
 
     public function testResolveThrowsRuntimeExceptionIfUnableToDetermineRemoteUrls(): void
     {
-        $git = $this->createMock(GitInterface::class);
+        $git = $this->prophesize(GitInterface::class);
 
         $git
-            ->expects(self::once())
-            ->method('remoteUrls')
-            ->willThrowException(new Exception\RuntimeException());
+            ->remoteUrls()
+            ->shouldBeCalled()
+            ->willThrow(new Exception\RuntimeException());
 
-        $resolver = new RepositoryResolver($git);
+        $resolver = new RepositoryResolver($git->reveal());
 
         $this->expectException(Exception\RuntimeException::class);
         $this->expectExceptionMessage('Unable to resolve repository using git meta data.');
@@ -55,14 +55,14 @@ final class RepositoryResolverTest extends Framework\TestCase
     {
         $remoteUrls = [];
 
-        $git = $this->createMock(GitInterface::class);
+        $git = $this->prophesize(GitInterface::class);
 
         $git
-            ->expects(self::once())
-            ->method('remoteUrls')
+            ->remoteUrls()
+            ->shouldBeCalled()
             ->willReturn($remoteUrls);
 
-        $resolver = new RepositoryResolver($git);
+        $resolver = new RepositoryResolver($git->reveal());
 
         $this->expectException(Exception\RuntimeException::class);
         $this->expectExceptionMessage('Could not find any remote URLs.');
@@ -93,14 +93,14 @@ final class RepositoryResolverTest extends Framework\TestCase
             )
         );
 
-        $git = $this->createMock(GitInterface::class);
+        $git = $this->prophesize(GitInterface::class);
 
         $git
-            ->expects(self::once())
-            ->method('remoteUrls')
+            ->remoteUrls()
+            ->shouldBeCalled()
             ->willReturn($remoteUrls);
 
-        $resolver = new RepositoryResolver($git);
+        $resolver = new RepositoryResolver($git->reveal());
 
         $this->expectException(Exception\RuntimeException::class);
         $this->expectExceptionMessage('Could not find a valid remote URL.');
@@ -137,14 +137,14 @@ final class RepositoryResolverTest extends Framework\TestCase
 
         $remoteUrls[$remoteName] = $remoteUrl;
 
-        $git = $this->createMock(GitInterface::class);
+        $git = $this->prophesize(GitInterface::class);
 
         $git
-            ->expects(self::once())
-            ->method('remoteUrls')
+            ->remoteUrls()
+            ->shouldBeCalled()
             ->willReturn($remoteUrls);
 
-        $resolver = new RepositoryResolver($git);
+        $resolver = new RepositoryResolver($git->reveal());
 
         $repository = $resolver->resolve();
 
@@ -178,14 +178,14 @@ final class RepositoryResolverTest extends Framework\TestCase
         /** @var string[] $fromRemoteNames */
         $fromRemoteNames = $faker->unique()->words;
 
-        $git = $this->createMock(GitInterface::class);
+        $git = $this->prophesize(GitInterface::class);
 
         $git
-            ->expects(self::once())
-            ->method('remoteUrls')
+            ->remoteUrls()
+            ->shouldBeCalled()
             ->willReturn($remoteUrls);
 
-        $resolver = new RepositoryResolver($git);
+        $resolver = new RepositoryResolver($git->reveal());
 
         $this->expectException(Exception\RuntimeException::class);
         $this->expectExceptionMessage(\sprintf(
@@ -232,14 +232,14 @@ final class RepositoryResolverTest extends Framework\TestCase
 
         $remoteUrls[$remoteName] = $remoteUrl;
 
-        $git = $this->createMock(GitInterface::class);
+        $git = $this->prophesize(GitInterface::class);
 
         $git
-            ->expects(self::once())
-            ->method('remoteUrls')
+            ->remoteUrls()
+            ->shouldBeCalled()
             ->willReturn($remoteUrls);
 
-        $resolver = new RepositoryResolver($git);
+        $resolver = new RepositoryResolver($git->reveal());
 
         $repository = $resolver->resolve(...$fromRemoteNames);
 

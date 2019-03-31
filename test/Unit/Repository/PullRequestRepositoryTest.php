@@ -19,6 +19,7 @@ use Localheinz\GitHub\ChangeLog\Repository;
 use Localheinz\GitHub\ChangeLog\Resource;
 use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
+use Prophecy\Argument;
 
 /**
  * @internal
@@ -48,23 +49,22 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             $faker->slug()
         );
 
-        $api = $this->createMock(Api\PullRequest::class);
+        $api = $this->prophesize(Api\PullRequest::class);
 
         $expectedItem = $this->pullRequestItem();
 
         $api
-            ->expects(self::once())
-            ->method('show')
-            ->with(
-                self::identicalTo($repository->owner()),
-                self::identicalTo($repository->name()),
-                self::identicalTo((string) $expectedItem['number'])
+            ->show(
+                Argument::is($repository->owner()),
+                Argument::is($repository->name()),
+                Argument::is((string) $expectedItem['number'])
             )
+            ->shouldBeCalled()
             ->willReturn($expectedItem);
 
         $pullRequestRepository = new Repository\PullRequestRepository(
-            $api,
-            $this->createMock(Repository\CommitRepositoryInterface::class)
+            $api->reveal(),
+            $this->prophesize(Repository\CommitRepositoryInterface::class)->reveal()
         );
 
         $pullRequest = $pullRequestRepository->show(
@@ -92,21 +92,20 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             $faker->slug()
         );
 
-        $api = $this->createMock(Api\PullRequest::class);
+        $api = $this->prophesize(Api\PullRequest::class);
 
         $api
-            ->expects(self::once())
-            ->method('show')
-            ->with(
-                self::identicalTo($repository->owner()),
-                self::identicalTo($repository->name()),
-                self::identicalTo((string) $number)
+            ->show(
+                Argument::is($repository->owner()),
+                Argument::is($repository->name()),
+                Argument::is((string) $number)
             )
+            ->shouldBeCalled()
             ->willReturn('snafu');
 
         $pullRequestRepository = new Repository\PullRequestRepository(
-            $api,
-            $this->createMock(Repository\CommitRepositoryInterface::class)
+            $api->reveal(),
+            $this->prophesize(Repository\CommitRepositoryInterface::class)->reveal()
         );
 
         $this->expectException(Exception\PullRequestNotFound::class);
@@ -136,28 +135,27 @@ final class PullRequestRepositoryTest extends Framework\TestCase
 
         $startReference = $faker->sha1;
 
-        $commitRepository = $this->createMock(Repository\CommitRepositoryInterface::class);
+        $commitRepository = $this->prophesize(Repository\CommitRepositoryInterface::class);
 
-        $range = $this->createMock(Resource\RangeInterface::class);
+        $range = $this->prophesize(Resource\RangeInterface::class);
 
         $range
-            ->expects(self::any())
-            ->method('commits')
+            ->commits()
+            ->shouldBeCalled()
             ->willReturn([]);
 
         $commitRepository
-            ->expects(self::once())
-            ->method('items')
-            ->with(
-                self::identicalTo($repository),
-                self::identicalTo($startReference),
-                self::identicalTo(null)
+            ->items(
+                Argument::is($repository),
+                Argument::is($startReference),
+                Argument::is(null)
             )
-            ->willReturn($range);
+            ->shouldBeCalled()
+            ->willReturn($range->reveal());
 
         $pullRequestRepository = new Repository\PullRequestRepository(
-            $this->createMock(Api\PullRequest::class),
-            $commitRepository
+            $this->prophesize(Api\PullRequest::class)->reveal(),
+            $commitRepository->reveal()
         );
 
         $pullRequestRepository->items(
@@ -181,32 +179,31 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
-        $range = $this->createMock(Resource\RangeInterface::class);
+        $range = $this->prophesize(Resource\RangeInterface::class);
 
         $range
-            ->expects(self::any())
-            ->method('commits')
+            ->commits()
+            ->shouldBeCalled()
             ->willReturn([]);
 
         $range
-            ->expects(self::never())
-            ->method('withPullRequest');
+            ->withPullRequest()
+            ->shouldNotBeCalled();
 
-        $commitRepository = $this->createMock(Repository\CommitRepositoryInterface::class);
+        $commitRepository = $this->prophesize(Repository\CommitRepositoryInterface::class);
 
         $commitRepository
-            ->expects(self::once())
-            ->method('items')
-            ->with(
-                self::identicalTo($repository),
-                self::identicalTo($startReference),
-                self::identicalTo($endReference)
+            ->items(
+                Argument::is($repository),
+                Argument::is($startReference),
+                Argument::is($endReference)
             )
-            ->willReturn($range);
+            ->shouldBeCalled()
+            ->willReturn($range->reveal());
 
         $pullRequestRepository = new Repository\PullRequestRepository(
-            $this->createMock(Api\PullRequest::class),
-            $commitRepository
+            $this->prophesize(Api\PullRequest::class)->reveal(),
+            $commitRepository->reveal()
         );
 
         $pullRequestRepository->items(
@@ -232,39 +229,38 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
-        $commitRepository = $this->createMock(Repository\CommitRepositoryInterface::class);
+        $commitRepository = $this->prophesize(Repository\CommitRepositoryInterface::class);
 
         $commit = new Resource\Commit(
             $faker->sha1,
             'I am not a merge commit'
         );
 
-        $range = $this->createMock(Resource\RangeInterface::class);
+        $range = $this->prophesize(Resource\RangeInterface::class);
 
         $range
-            ->expects(self::any())
-            ->method('commits')
+            ->commits()
+            ->shouldBeCalled()
             ->willReturn([
                 $commit,
             ]);
 
         $range
-            ->expects(self::never())
-            ->method('withPullRequest');
+            ->withPullRequest()
+            ->shouldNotBeCalled();
 
         $commitRepository
-            ->expects(self::once())
-            ->method('items')
-            ->with(
-                self::identicalTo($repository),
-                self::identicalTo($startReference),
-                self::identicalTo($endReference)
+            ->items(
+                Argument::is($repository),
+                Argument::is($startReference),
+                Argument::is($endReference)
             )
-            ->willReturn($range);
+            ->shouldBeCalled()
+            ->willReturn($range->reveal());
 
         $pullRequestRepository = new Repository\PullRequestRepository(
-            $this->createMock(Api\PullRequest::class),
-            $commitRepository
+            $this->prophesize(Api\PullRequest::class)->reveal(),
+            $commitRepository->reveal()
         );
 
         $pullRequestRepository->items(
@@ -292,7 +288,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
-        $commitRepository = $this->createMock(Repository\CommitRepositoryInterface::class);
+        $commitRepository = $this->prophesize(Repository\CommitRepositoryInterface::class);
 
         $expectedItem = $this->pullRequestItem();
 
@@ -304,48 +300,45 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             )
         );
 
-        $mutatedRange = $this->createMock(Resource\RangeInterface::class);
+        $mutatedRange = $this->prophesize(Resource\RangeInterface::class);
 
-        $range = $this->createMock(Resource\RangeInterface::class);
+        $range = $this->prophesize(Resource\RangeInterface::class);
 
         $range
-            ->expects(self::any())
-            ->method('commits')
+            ->commits()
+            ->shouldBeCalled()
             ->willReturn([
                 $mergeCommit,
             ]);
 
         $range
-            ->expects(self::once())
-            ->method('withPullRequest')
-            ->with(self::isInstanceOf(Resource\PullRequestInterface::class))
-            ->willReturn($mutatedRange);
+            ->withPullRequest(Argument::type(Resource\PullRequestInterface::class))
+            ->shouldBeCalled()
+            ->willReturn($mutatedRange->reveal());
 
         $commitRepository
-            ->expects(self::once())
-            ->method('items')
-            ->with(
-                self::identicalTo($repository),
-                self::identicalTo($startReference),
-                self::identicalTo($endReference)
+            ->items(
+                Argument::is($repository),
+                Argument::is($startReference),
+                Argument::is($endReference)
             )
-            ->willReturn($range);
+            ->shouldBeCalled()
+            ->willReturn($range->reveal());
 
-        $api = $this->createMock(Api\PullRequest::class);
+        $api = $this->prophesize(Api\PullRequest::class);
 
         $api
-            ->expects(self::once())
-            ->method('show')
-            ->with(
-                self::identicalTo($repository->owner()),
-                self::identicalTo($repository->name()),
-                self::identicalTo((string) $expectedItem['number'])
+            ->show(
+                Argument::is($repository->owner()),
+                Argument::is($repository->name()),
+                Argument::is((string) $expectedItem['number'])
             )
+            ->shouldBeCalled()
             ->willReturn($expectedItem);
 
         $pullRequestRepository = new Repository\PullRequestRepository(
-            $api,
-            $commitRepository
+            $api->reveal(),
+            $commitRepository->reveal()
         );
 
         $actualRange = $pullRequestRepository->items(
@@ -354,7 +347,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             $endReference
         );
 
-        self::assertSame($mutatedRange, $actualRange);
+        self::assertSame($mutatedRange->reveal(), $actualRange);
     }
 
     /**
@@ -375,7 +368,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
         $startReference = $faker->sha1;
         $endReference = $faker->sha1;
 
-        $commitRepository = $this->createMock(Repository\CommitRepositoryInterface::class);
+        $commitRepository = $this->prophesize(Repository\CommitRepositoryInterface::class);
 
         $number = 9000;
 
@@ -387,44 +380,42 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             )
         );
 
-        $range = $this->createMock(Resource\RangeInterface::class);
+        $range = $this->prophesize(Resource\RangeInterface::class);
 
         $range
-            ->expects(self::any())
-            ->method('commits')
+            ->commits()
+            ->shouldBeCalled()
             ->willReturn([
                 $mergeCommit,
             ]);
 
         $range
-            ->expects(self::never())
-            ->method('withPullRequest');
+            ->withPullRequest()
+            ->shouldNotBeCalled();
 
         $commitRepository
-            ->expects(self::once())
-            ->method('items')
-            ->with(
-                self::identicalTo($repository),
-                self::identicalTo($startReference),
-                self::identicalTo($endReference)
+            ->items(
+                Argument::is($repository),
+                Argument::is($startReference),
+                Argument::is($endReference)
             )
-            ->willReturn($range);
+            ->shouldBeCalled()
+            ->willReturn($range->reveal());
 
-        $pullRequestApi = $this->createMock(Api\PullRequest::class);
+        $pullRequestApi = $this->prophesize(Api\PullRequest::class);
 
         $pullRequestApi
-            ->expects(self::once())
-            ->method('show')
-            ->with(
-                self::identicalTo($repository->owner()),
-                self::identicalTo($repository->name()),
-                self::identicalTo((string) $number)
+            ->show(
+                Argument::is($repository->owner()),
+                Argument::is($repository->name()),
+                Argument::is((string) $number)
             )
+            ->shouldBeCalled()
             ->willReturn(null);
 
         $pullRequestRepository = new Repository\PullRequestRepository(
-            $pullRequestApi,
-            $commitRepository
+            $pullRequestApi->reveal(),
+            $commitRepository->reveal()
         );
 
         $pullRequestRepository->items(
