@@ -1,9 +1,12 @@
 # CONTRIBUTING
 
+We are using [Travis CI](https://travis-ci.com) as a continuous integration system.
+
+For details, see [`.travis.yml`](../.travis.yml).
+
 ## Coding Standards
 
-This project has subscribed to [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md)
-and uses [`fabpot/php-cs-fixer`](https://github.com/FriendsOfPHP/PHP-CS-Fixer) to enforce coding standards.
+We are using [`friendsofphp/php-cs-fixer`](https://github.com/FriendsOfPHP/PHP-CS-Fixer) to enforce coding standards.
 
 Run
 
@@ -11,7 +14,7 @@ Run
 $ make cs
 ```
 
-to ensure your changes to not break the build.
+to automatically fix coding standard violations.
 
 ## Static Code Analysis
 
@@ -27,7 +30,7 @@ to run a static code analysis.
 
 ## Tests
 
-This project uses [`phpunit/phpunit`](https://github.com/sebastianbergmann/phpunit) to drive the development using tests.
+We are using [`phpunit/phpunit`](https://github.com/sebastianbergmann/phpunit) to drive the development.
 
 Run
 
@@ -35,4 +38,26 @@ Run
 $ make test
 ```
 
-to run the tests.
+to run all the tests.
+
+## Mutation Testing
+
+We are using [`infection/infection`](https://github.com/infection/infection) to ensure a minimum quality of the tests.
+
+Enable `xdebug` and run
+
+```
+$ make infection
+```
+
+to run mutation tests.
+
+## Extra lazy?
+
+Run
+
+```
+$ make
+```
+
+to enforce coding standards, perform a static code analysis, and run tests!

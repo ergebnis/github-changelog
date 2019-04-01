@@ -1,53 +1,53 @@
 {
-    "name": "localheinz/github-changelog",
-    "description": "Provides a console command that generates a changelog based on titles of pull requests merged between specified references.",
-    "homepage": "https://github.com/localheinz/github-changelog",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Andreas Möller",
-            "email": "am@localheinz.com"
-        }
-    ],
-    "require": {
-        "php": "^7.1",
-        "knplabs/github-api": "^2.5.0",
-        "php-http/guzzle6-adapter": "^1.1.1",
-        "symfony/cache": "^3.1.5 || ^4.0.0",
-        "symfony/console": "^3.3.6 || ^4.0.0",
-        "symfony/stopwatch": "^3.1.5 || ^4.0.0"
-    },
-    "require-dev": {
-        "infection/infection": "~0.11.5",
-        "jangregor/phpstan-prophecy": "~0.3.0",
-        "localheinz/composer-normalize": "^1.1.3",
-        "localheinz/php-cs-fixer-config": "~1.20.0",
-        "localheinz/test-util": "~0.7.0",
-        "phpstan/phpstan": "~0.11.5",
-        "phpstan/phpstan-deprecation-rules": "~0.11.0",
-        "phpstan/phpstan-phpunit": "~0.11.0",
-        "phpstan/phpstan-strict-rules": "~0.11.0",
-        "phpunit/phpunit": "^7.5.8"
-    },
-    "config": {
-        "preferred-install": "dist",
-        "sort-packages": true
-    },
-    "autoload": {
-        "psr-4": {
-            "Localheinz\\GitHub\\ChangeLog\\": "src"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Localheinz\\GitHub\\ChangeLog\\Test\\": "test"
-        }
-    },
-    "bin": [
-        "github-changelog"
-    ],
-    "support": {
-        "issues": "https://github.com/localheinz/github-changelog/issues",
-        "source": "https://github.com/localheinz/github-changelog"
+  "name": "localheinz/github-changelog",
+  "description": "Provides a console command that generates a changelog based on titles of pull requests merged between specified references.",
+  "homepage": "https://github.com/localheinz/github-changelog",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Andreas Möller",
+      "email": "am@localheinz.com"
     }
+  ],
+  "require": {
+    "php": "^7.1",
+    "knplabs/github-api": "^2.5.0",
+    "php-http/guzzle6-adapter": "^1.1.1",
+    "symfony/cache": "^3.1.5 || ^4.0.0",
+    "symfony/console": "^3.3.6 || ^4.0.0",
+    "symfony/stopwatch": "^3.1.5 || ^4.0.0"
+  },
+  "require-dev": {
+    "infection/infection": "~0.11.5",
+    "jangregor/phpstan-prophecy": "~0.3.0",
+    "localheinz/composer-normalize": "^1.1.3",
+    "localheinz/php-cs-fixer-config": "~1.20.0",
+    "localheinz/test-util": "~0.7.0",
+    "phpstan/phpstan": "~0.11.5",
+    "phpstan/phpstan-deprecation-rules": "~0.11.0",
+    "phpstan/phpstan-phpunit": "~0.11.0",
+    "phpstan/phpstan-strict-rules": "~0.11.0",
+    "phpunit/phpunit": "^7.5.8"
+  },
+  "config": {
+    "preferred-install": "dist",
+    "sort-packages": true
+  },
+  "autoload": {
+    "psr-4": {
+      "Localheinz\\GitHub\\ChangeLog\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Localheinz\\GitHub\\ChangeLog\\Test\\": "test"
+    }
+  },
+  "bin": [
+    "github-changelog"
+  ],
+  "support": {
+    "issues": "https://github.com/localheinz/github-changelog/issues",
+    "source": "https://github.com/localheinz/github-changelog"
+  }
 }

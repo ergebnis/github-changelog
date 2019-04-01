@@ -7,8 +7,9 @@ env:
 cache:
   directories:
     - $HOME/.composer/cache
-    - $HOME/.php-cs-fixer
+    - .build/php-cs-fixer
     - .build/phpstan
+    - .build/phpunit
 
 stages:
   - style
@@ -32,12 +33,12 @@ jobs:
         - composer install
 
       before_script:
-        - mkdir -p $HOME/.php-cs-fixer
+        - mkdir -p .build/php-cs-fixer
 
       script:
         - composer normalize --dry-run
         - vendor/bin/php-cs-fixer fix --config=.php_cs --diff --dry-run --verbose
-        -
+
     - stage: Stan
 
       php: 7.3
@@ -75,7 +76,8 @@ jobs:
       script:
         - vendor/bin/phpunit --configuration=test/AutoReview/phpunit.xml
         - if [[ "$WITH_COVERAGE" == "true" ]]; then xdebug-enable; fi
-        - if [[ "$WITH_COVERAGE" == "true" ]]; then vendor/bin/phpunit --configuration=test/Unit/phpunit.xml --coverage-clover=build/logs/clover.xml; else vendor/bin/phpunit --configuration=test/Unit/phpunit.xml; fi
+        - if [[ "$WITH_COVERAGE" == "true" ]]; then vendor/bin/phpunit --configuration=test/Unit/phpunit.xml --dump-xdebug-filter=.build/phpunit/xdebug-filter.php; fi
+        - if [[ "$WITH_COVERAGE" == "true" ]]; then vendor/bin/phpunit --configuration=test/Unit/phpunit.xml --coverage-clover=build/logs/clover.xml --prepend=.build/phpunit/xdebug-filter.php; else vendor/bin/phpunit --configuration=test/Unit/phpunit.xml; fi
         - if [[ "$WITH_COVERAGE" == "true" ]]; then xdebug-disable; fi
 
       after_success:
@@ -93,7 +95,7 @@ jobs:
 
     - stage: Infection
 
-      php: 7.1
+      php: 7.3
 
       before_install:
         - source .travis/xdebug.sh
@@ -109,7 +111,7 @@ jobs:
         - xdebug-enable
 
       script:
-        - vendor/bin/infection --min-covered-msi=88 --min-msi=87
+        - vendor/bin/infection --ignore-msi-with-no-mutations --min-covered-msi=88 --min-msi=87
 
 notifications:
   email: false
