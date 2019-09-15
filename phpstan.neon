@@ -2,13 +2,15 @@ includes:
 	- vendor/jangregor/phpstan-prophecy/src/extension.neon
 	- vendor/phpstan/phpstan-deprecation-rules/rules.neon
 	- vendor/phpstan/phpstan-strict-rules/rules.neon
-	- vendor/phpstan/phpstan/conf/config.level7.neon
+	- vendor/phpstan/phpstan/conf/bleedingEdge.neon
+	- vendor/phpstan/phpstan/conf/config.levelmax.neon
 
 parameters:
 	ignoreErrors:
 		-
 			message: '#Call to function is_array\(\) with array will always evaluate to true.#'
 			path: %currentWorkingDirectory%/src/Repository/PullRequestRepository.php
+	inferPrivatePropertyTypeFromConstructor: true
 	paths:
 		- src
 		- test
