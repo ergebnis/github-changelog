@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d877771fe70ab127a532511d1fc5e1c1",
+    "content-hash": "da14174b56ff468741ae19f34913624c",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -2938,16 +2938,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.2.1",
+            "version": "v4.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "5221f49a608808c1e4d436df32884cbc1b821ac0"
+                "reference": "97e59c7a16464196a8b9c77c47df68e4a39a45c4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/5221f49a608808c1e4d436df32884cbc1b821ac0",
-                "reference": "5221f49a608808c1e4d436df32884cbc1b821ac0",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/97e59c7a16464196a8b9c77c47df68e4a39a45c4",
+                "reference": "97e59c7a16464196a8b9c77c47df68e4a39a45c4",
                 "shasum": ""
             },
             "require": {
@@ -2955,7 +2955,7 @@
                 "php": ">=7.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^6.5 || ^7.0"
+                "phpunit/phpunit": "^6.5 || ^7.0 || ^8.0"
             },
             "bin": [
                 "bin/php-parse"
@@ -2985,7 +2985,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2019-02-16T20:54:15+00:00"
+            "time": "2019-09-01T07:51:21+00:00"
         },
         {
             "name": "ocramius/package-versions",
@@ -3692,22 +3692,22 @@
         },
         {
             "name": "phpstan/phpstan-deprecation-rules",
-            "version": "0.11",
+            "version": "0.11.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-deprecation-rules.git",
-                "reference": "449fee6223220b337760abca4444801ddcc8b38d"
+                "reference": "4991f7599646f97f7a2fc2b74ead018f2104ac8e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-deprecation-rules/zipball/449fee6223220b337760abca4444801ddcc8b38d",
-                "reference": "449fee6223220b337760abca4444801ddcc8b38d",
+                "url": "https://api.github.com/repos/phpstan/phpstan-deprecation-rules/zipball/4991f7599646f97f7a2fc2b74ead018f2104ac8e",
+                "reference": "4991f7599646f97f7a2fc2b74ead018f2104ac8e",
                 "shasum": ""
             },
             "require": {
                 "nikic/php-parser": "^4.0",
                 "php": "~7.1",
-                "phpstan/phpstan": "^0.11"
+                "phpstan/phpstan": "^0.11.4"
             },
             "require-dev": {
                 "consistence/coding-standard": "^3.0.1",
@@ -3718,10 +3718,15 @@
                 "phpunit/phpunit": "^7.0",
                 "slevomat/coding-standard": "^4.5.2"
             },
-            "type": "library",
+            "type": "phpstan-extension",
             "extra": {
                 "branch-alias": {
                     "dev-master": "0.11-dev"
+                },
+                "phpstan": {
+                    "includes": [
+                        "rules.neon"
+                    ]
                 }
             },
             "autoload": {
@@ -3734,7 +3739,7 @@
                 "MIT"
             ],
             "description": "PHPStan rules for detecting usage of deprecated classes, methods, properties, constants and traits.",
-            "time": "2018-12-05T18:04:16+00:00"
+            "time": "2019-05-19T19:55:34+00:00"
         },
         {
             "name": "phpstan/phpstan-strict-rules",
