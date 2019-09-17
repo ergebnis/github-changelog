@@ -57,7 +57,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             ->show(
                 Argument::is($repository->owner()),
                 Argument::is($repository->name()),
-                Argument::is((string) $expectedItem['number'])
+                Argument::is($expectedItem['number'])
             )
             ->shouldBeCalled()
             ->willReturn($expectedItem);
@@ -98,7 +98,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             ->show(
                 Argument::is($repository->owner()),
                 Argument::is($repository->name()),
-                Argument::is((string) $number)
+                Argument::is($number)
             )
             ->shouldBeCalled()
             ->willReturn('snafu');
@@ -331,7 +331,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             ->show(
                 Argument::is($repository->owner()),
                 Argument::is($repository->name()),
-                Argument::is((string) $expectedItem['number'])
+                Argument::is($expectedItem['number'])
             )
             ->shouldBeCalled()
             ->willReturn($expectedItem);
@@ -408,7 +408,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
             ->show(
                 Argument::is($repository->owner()),
                 Argument::is($repository->name()),
-                Argument::is((string) $number)
+                Argument::is($number)
             )
             ->shouldBeCalled()
             ->willReturn(null);
