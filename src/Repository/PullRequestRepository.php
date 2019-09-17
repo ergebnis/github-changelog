@@ -40,7 +40,7 @@ final class PullRequestRepository implements PullRequestRepositoryInterface
         $response = $this->api->show(
             $repository->owner(),
             $repository->name(),
-            (string) $number
+            $number
         );
 
         if (!\is_array($response)) {
