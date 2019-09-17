@@ -105,4 +105,4 @@ jobs:
         run: php7.3 $(which composer) install --no-interaction --no-progress --no-suggest
 
       - name: "Run mutation tests with infection/infection"
-        run: php7.3 vendor/bin/infection --ignore-msi-with-no-mutations --min-covered-msi=88 --min-msi=87
+        run: php7.3 vendor/bin/infection --ignore-msi-with-no-mutations --min-covered-msi=90 --min-msi=89
