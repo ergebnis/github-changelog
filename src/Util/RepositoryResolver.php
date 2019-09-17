@@ -41,6 +41,7 @@ final class RepositoryResolver implements RepositoryResolverInterface
         }
 
         if (0 < \count($fromRemoteNames)) {
+            /** @var string[] $remoteUrls */
             $remoteUrls = \array_replace(
                 \array_flip($fromRemoteNames),
                 \array_intersect_key(
