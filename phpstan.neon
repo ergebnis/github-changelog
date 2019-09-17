@@ -6,10 +6,6 @@ includes:
 	- vendor/phpstan/phpstan/conf/config.levelmax.neon
 
 parameters:
-	ignoreErrors:
-		-
-			message: '#Call to function is_array\(\) with array will always evaluate to true.#'
-			path: %currentWorkingDirectory%/src/Repository/PullRequestRepository.php
 	inferPrivatePropertyTypeFromConstructor: true
 	paths:
 		- src
