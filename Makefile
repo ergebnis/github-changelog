@@ -16,7 +16,7 @@ help: ## Displays this list of targets with descriptions
 
 infection: vendor ## Runs mutation tests with infection
 	mkdir -p .build/infection
-	vendor/bin/infection --ignore-msi-with-no-mutations --min-covered-msi=88 --min-msi=87
+	vendor/bin/infection --ignore-msi-with-no-mutations --min-covered-msi=90 --min-msi=89
 
 stan: vendor ## Runs a static analysis with phpstan
 	mkdir -p .build/phpstan
