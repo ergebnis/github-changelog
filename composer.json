@@ -15,7 +15,7 @@
     "php-http/guzzle6-adapter": "^1.1.1",
     "symfony/cache": "^4.3.4",
     "symfony/console": "^4.3.5",
-    "symfony/stopwatch": "^4.3.4"
+    "symfony/stopwatch": "^4.3.5"
   },
   "require-dev": {
     "infection/infection": "~0.13.6",

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3b6953359efb8c833f72ce320c2a61d1",
+    "content-hash": "933a859b0aa2b94894a97e2cc28db4cb",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -1400,7 +1400,7 @@
         },
         {
             "name": "symfony/stopwatch",
-            "version": "v4.3.4",
+            "version": "v4.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/stopwatch.git",
