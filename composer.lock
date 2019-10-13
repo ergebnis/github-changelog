@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "933a859b0aa2b94894a97e2cc28db4cb",
+    "content-hash": "2f32bb8f828ade0af07eb4c587df4e7e",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -960,16 +960,16 @@
         },
         {
             "name": "symfony/cache",
-            "version": "v4.3.4",
+            "version": "v4.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/cache.git",
-                "reference": "1d8f7fee990c586f275cde1a9fc883d6b1e2d43e"
+                "reference": "40c62600ebad1ed2defbf7d35523d918a73ab330"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/cache/zipball/1d8f7fee990c586f275cde1a9fc883d6b1e2d43e",
-                "reference": "1d8f7fee990c586f275cde1a9fc883d6b1e2d43e",
+                "url": "https://api.github.com/repos/symfony/cache/zipball/40c62600ebad1ed2defbf7d35523d918a73ab330",
+                "reference": "40c62600ebad1ed2defbf7d35523d918a73ab330",
                 "shasum": ""
             },
             "require": {
@@ -1034,20 +1034,20 @@
                 "caching",
                 "psr6"
             ],
-            "time": "2019-08-26T08:26:39+00:00"
+            "time": "2019-10-04T10:57:53+00:00"
         },
         {
             "name": "symfony/cache-contracts",
-            "version": "v1.1.5",
+            "version": "v1.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/cache-contracts.git",
-                "reference": "ec5524b669744b5f1dc9c66d3c2b091eb7e7f0db"
+                "reference": "af50d14ada9e4e82cfabfabdc502d144f89be0a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/cache-contracts/zipball/ec5524b669744b5f1dc9c66d3c2b091eb7e7f0db",
-                "reference": "ec5524b669744b5f1dc9c66d3c2b091eb7e7f0db",
+                "url": "https://api.github.com/repos/symfony/cache-contracts/zipball/af50d14ada9e4e82cfabfabdc502d144f89be0a1",
+                "reference": "af50d14ada9e4e82cfabfabdc502d144f89be0a1",
                 "shasum": ""
             },
             "require": {
@@ -1092,7 +1092,7 @@
                 "interoperability",
                 "standards"
             ],
-            "time": "2019-06-13T11:15:36+00:00"
+            "time": "2019-10-04T21:43:27+00:00"
         },
         {
             "name": "symfony/console",
@@ -1450,7 +1450,7 @@
         },
         {
             "name": "symfony/var-exporter",
-            "version": "v4.3.4",
+            "version": "v4.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-exporter.git",
