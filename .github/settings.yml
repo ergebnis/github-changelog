@@ -12,7 +12,6 @@ branches:
         contexts:
           -  "Coding Standards"
           -  "Static Code Analysis"
-          -  "Tests (php7.1)"
           -  "Tests (php7.2)"
           -  "Tests (php7.3)"
           -  "Code Coverage"
