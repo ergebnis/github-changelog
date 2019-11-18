@@ -35,5 +35,5 @@ interface PullRequestRepositoryInterface
      *
      * @return Resource\RangeInterface
      */
-    public function items(Resource\RepositoryInterface $repository, string $startReference, string $endReference = null): Resource\RangeInterface;
+    public function items(Resource\RepositoryInterface $repository, string $startReference, ?string $endReference = null): Resource\RangeInterface;
 }
