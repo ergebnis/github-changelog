@@ -29,7 +29,7 @@ final class PullRequestTest extends Framework\TestCase
 
     public function testImplementsPullRequestInterface(): void
     {
-        $this->assertClassImplementsInterface(Resource\PullRequestInterface::class, Resource\PullRequest::class);
+        self::assertClassImplementsInterface(Resource\PullRequestInterface::class, Resource\PullRequest::class);
     }
 
     /**
@@ -47,7 +47,7 @@ final class PullRequestTest extends Framework\TestCase
             $number
         ));
 
-        $faker = $this->faker();
+        $faker = self::faker();
 
         $title = $faker->sentence();
         $author = new Resource\User($faker->slug());
@@ -64,7 +64,7 @@ final class PullRequestTest extends Framework\TestCase
      */
     public function testConstructorSetsValues(): void
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         $number = $faker->numberBetween(1);
         $title = $faker->sentence();

@@ -32,7 +32,7 @@ final class CommitRepositoryTest extends Framework\TestCase
 
     public function testImplementsCommitRepositoryInterface(): void
     {
-        $this->assertClassImplementsInterface(Repository\CommitRepositoryInterface::class, Repository\CommitRepository::class);
+        self::assertClassImplementsInterface(Repository\CommitRepositoryInterface::class, Repository\CommitRepository::class);
     }
 
     /**
@@ -41,7 +41,7 @@ final class CommitRepositoryTest extends Framework\TestCase
      */
     public function testShowReturnsCommitEntityWithShaAndMessageOnSuccess(): void
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         $repository = Resource\Repository::fromOwnerAndName(
             $faker->slug(),
@@ -80,7 +80,7 @@ final class CommitRepositoryTest extends Framework\TestCase
      */
     public function testShowThrowsCommitNotFoundOnFailure(): void
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         $repository = Resource\Repository::fromOwnerAndName(
             $faker->slug(),
@@ -116,7 +116,7 @@ final class CommitRepositoryTest extends Framework\TestCase
      */
     public function testAllReturnsEmptyArrayOnFailure(): void
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         $repository = Resource\Repository::fromOwnerAndName(
             $faker->slug(),
@@ -153,7 +153,7 @@ final class CommitRepositoryTest extends Framework\TestCase
      */
     public function testAllSetsParamsPerPageTo250(): void
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         $repository = Resource\Repository::fromOwnerAndName(
             $faker->slug(),
@@ -189,7 +189,7 @@ final class CommitRepositoryTest extends Framework\TestCase
      */
     public function testAllStillAllowsSettingPerPage(): void
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         $repository = Resource\Repository::fromOwnerAndName(
             $faker->slug(),
@@ -227,7 +227,7 @@ final class CommitRepositoryTest extends Framework\TestCase
      */
     public function testAllReturnsRange(): void
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         $repository = Resource\Repository::fromOwnerAndName(
             $faker->slug(),
@@ -278,7 +278,7 @@ final class CommitRepositoryTest extends Framework\TestCase
      */
     public function testItemsDoesNotFetchCommitsIfStartAndEndReferencesAreTheSame(): void
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         $repository = Resource\Repository::fromOwnerAndName(
             $faker->slug(),
@@ -308,7 +308,7 @@ final class CommitRepositoryTest extends Framework\TestCase
      */
     public function testItemsDoesNotFetchCommitsIfStartCommitCouldNotBeFound(): void
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         $repository = Resource\Repository::fromOwnerAndName(
             $faker->slug(),
@@ -353,7 +353,7 @@ final class CommitRepositoryTest extends Framework\TestCase
      */
     public function testItemsDoesNotFetchCommitsIfEndCommitCouldNotBeFound(): void
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         $repository = Resource\Repository::fromOwnerAndName(
             $faker->slug(),
@@ -406,7 +406,7 @@ final class CommitRepositoryTest extends Framework\TestCase
      */
     public function testItemsFetchesCommitsUsingShaFromEndCommit(): void
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         $repository = Resource\Repository::fromOwnerAndName(
             $faker->slug(),
@@ -464,7 +464,7 @@ final class CommitRepositoryTest extends Framework\TestCase
      */
     public function testItemsFetchesCommitsIfEndReferenceIsNotGiven(): void
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         $repository = Resource\Repository::fromOwnerAndName(
             $faker->slug(),
@@ -509,7 +509,7 @@ final class CommitRepositoryTest extends Framework\TestCase
      */
     public function testItemsReturnsRangeOfCommitsFromEndToStartExcludingStart(): void
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         $repository = Resource\Repository::fromOwnerAndName(
             $faker->slug(),
@@ -605,7 +605,7 @@ final class CommitRepositoryTest extends Framework\TestCase
      */
     public function testItemsFetchesMoreCommitsIfEndIsNotContainedInFirstBatch(): void
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         $repository = Resource\Repository::fromOwnerAndName(
             $faker->slug(),
@@ -719,7 +719,7 @@ final class CommitRepositoryTest extends Framework\TestCase
 
     private function commitItem(?string $sha = null, ?string $message = null): array
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         return [
             'sha' => $sha ?: $faker->unique()->sha1,

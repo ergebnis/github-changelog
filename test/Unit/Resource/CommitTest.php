@@ -29,7 +29,7 @@ final class CommitTest extends Framework\TestCase
 
     public function testImplementsAuthorInterface(): void
     {
-        $this->assertClassImplementsInterface(Resource\CommitInterface::class, Resource\Commit::class);
+        self::assertClassImplementsInterface(Resource\CommitInterface::class, Resource\Commit::class);
     }
 
     /**
@@ -45,7 +45,7 @@ final class CommitTest extends Framework\TestCase
             $sha
         ));
 
-        $message = $this->faker()->sentence();
+        $message = self::faker()->sentence();
 
         new Resource\Commit(
             $sha,
@@ -55,7 +55,7 @@ final class CommitTest extends Framework\TestCase
 
     public function testConstructorSetsShaAndMessage(): void
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         $sha = $faker->sha1;
         $message = $faker->sentence();
@@ -71,7 +71,7 @@ final class CommitTest extends Framework\TestCase
 
     public function testEqualsReturnsFalseIfHashesAreDifferent(): void
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         $one = new Resource\Commit(
             $faker->unique()->sha1,
@@ -88,7 +88,7 @@ final class CommitTest extends Framework\TestCase
 
     public function testEqualsReturnsTrueIfHashesAreTheSame(): void
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         $sha = $faker->sha1;
 

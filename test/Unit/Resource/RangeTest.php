@@ -28,7 +28,7 @@ final class RangeTest extends Framework\TestCase
 
     public function testImplementsRangeInterface(): void
     {
-        $this->assertClassImplementsInterface(Resource\RangeInterface::class, Resource\Range::class);
+        self::assertClassImplementsInterface(Resource\RangeInterface::class, Resource\Range::class);
     }
 
     public function testDefaults(): void

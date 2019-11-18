@@ -29,7 +29,7 @@ final class RepositoryTest extends Framework\TestCase
 
     public function testImplementsRepositoryInterface(): void
     {
-        $this->assertClassImplementsInterface(Resource\RepositoryInterface::class, Resource\Repository::class);
+        self::assertClassImplementsInterface(Resource\RepositoryInterface::class, Resource\Repository::class);
     }
 
     /**
@@ -39,7 +39,7 @@ final class RepositoryTest extends Framework\TestCase
      */
     public function testFromOwnerAndNameRejectsInvalidOwner(string $owner): void
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         $name = $faker->slug();
 
@@ -62,7 +62,7 @@ final class RepositoryTest extends Framework\TestCase
      */
     public function testFromOwnerAndNameRejectsInvalidName(string $name): void
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         $owner = $faker->slug();
 
@@ -128,7 +128,7 @@ final class RepositoryTest extends Framework\TestCase
 
     public function testToStringReturnsStringRepresentation(): void
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         $owner = $faker->slug();
         $name = $faker->slug();

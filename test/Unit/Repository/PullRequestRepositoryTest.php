@@ -32,7 +32,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
 
     public function testImplementsPullRequestRepositoryInterface(): void
     {
-        $this->assertClassImplementsInterface(Repository\PullRequestRepositoryInterface::class, Repository\PullRequestRepository::class);
+        self::assertClassImplementsInterface(Repository\PullRequestRepositoryInterface::class, Repository\PullRequestRepository::class);
     }
 
     /**
@@ -42,7 +42,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
      */
     public function testShowReturnsPullRequestEntityWithNumberTitleAndAuthorOnSuccess(): void
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         $repository = Resource\Repository::fromOwnerAndName(
             $faker->slug(),
@@ -83,7 +83,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
      */
     public function testShowThrowsPullRequestNotFoundOnFailure(): void
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         $number = $faker->numberBetween(1);
 
@@ -126,7 +126,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
      */
     public function testItemsDoesNotRequireAnEndReference(): void
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         $repository = Resource\Repository::fromOwnerAndName(
             $faker->slug(),
@@ -169,7 +169,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
      */
     public function testItemsDoesNotTouchRangeIfNoCommitsWereFound(): void
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         $repository = Resource\Repository::fromOwnerAndName(
             $faker->slug(),
@@ -219,7 +219,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
      */
     public function testItemsDoesNotTouchRangeIfNoMergeCommitsWereFound(): void
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         $repository = Resource\Repository::fromOwnerAndName(
             $faker->slug(),
@@ -278,7 +278,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
      */
     public function testItemsFetchesPullRequestIfMergeCommitWasFound(): void
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         $repository = Resource\Repository::fromOwnerAndName(
             $faker->slug(),
@@ -358,7 +358,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
      */
     public function testItemsHandlesMergeCommitWherePullRequestWasNotFound(): void
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         $repository = Resource\Repository::fromOwnerAndName(
             $faker->slug(),
@@ -427,7 +427,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
 
     private function pullRequestItem(): array
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         return [
             'number' => $faker->unique()->numberBetween(1),
