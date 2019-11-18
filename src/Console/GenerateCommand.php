@@ -221,7 +221,7 @@ final class GenerateCommand extends Command
         return 0;
     }
 
-    private function range(string $startReference, string $endReference = null): string
+    private function range(string $startReference, ?string $endReference = null): string
     {
         if (null === $endReference) {
             return \sprintf(

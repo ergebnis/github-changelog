@@ -717,7 +717,7 @@ final class CommitRepositoryTest extends Framework\TestCase
         });
     }
 
-    private function commitItem(string $sha = null, string $message = null): array
+    private function commitItem(?string $sha = null, ?string $message = null): array
     {
         $faker = $this->faker();
 

@@ -29,7 +29,7 @@ final class CommitRepository implements CommitRepositoryInterface
         $this->api = $api;
     }
 
-    public function items(Resource\RepositoryInterface $repository, string $startReference, string $endReference = null): Resource\RangeInterface
+    public function items(Resource\RepositoryInterface $repository, string $startReference, ?string $endReference = null): Resource\RangeInterface
     {
         if ($startReference === $endReference) {
             return new Resource\Range();

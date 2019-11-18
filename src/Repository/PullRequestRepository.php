@@ -57,7 +57,7 @@ final class PullRequestRepository implements PullRequestRepositoryInterface
         );
     }
 
-    public function items(Resource\RepositoryInterface $repository, string $startReference, string $endReference = null): Resource\RangeInterface
+    public function items(Resource\RepositoryInterface $repository, string $startReference, ?string $endReference = null): Resource\RangeInterface
     {
         $range = $this->commitRepository->items(
             $repository,
