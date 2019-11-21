@@ -225,7 +225,7 @@ final class GenerateCommandTest extends Framework\TestCase
         ]);
 
         self::assertSame(1, $exitCode);
-        self::assertContains($expectedMessage, $tester->getDisplay());
+        self::assertStringContainsString($expectedMessage, $tester->getDisplay());
     }
 
     public function testExecuteFailsIfRepositoryCannotBeResolved(): void
@@ -255,7 +255,7 @@ final class GenerateCommandTest extends Framework\TestCase
         ]);
 
         self::assertSame(1, $exitCode);
-        self::assertContains($expectedMessage, $tester->getDisplay());
+        self::assertStringContainsString($expectedMessage, $tester->getDisplay());
     }
 
     /**
@@ -484,7 +484,7 @@ final class GenerateCommandTest extends Framework\TestCase
         ]);
 
         self::assertSame(0, $exitCode);
-        self::assertContains($expectedMessage, $tester->getDisplay());
+        self::assertStringContainsString($expectedMessage, $tester->getDisplay());
     }
 
     /**
@@ -575,7 +575,7 @@ final class GenerateCommandTest extends Framework\TestCase
         self::assertSame(0, $exitCode);
 
         foreach ($expectedMessages as $expectedMessage) {
-            self::assertContains($expectedMessage, $tester->getDisplay());
+            self::assertStringContainsString($expectedMessage, $tester->getDisplay());
         }
     }
 
@@ -642,7 +642,7 @@ final class GenerateCommandTest extends Framework\TestCase
         ]);
 
         self::assertSame(0, $exitCode);
-        self::assertContains($expectedMessage, $tester->getDisplay());
+        self::assertStringContainsString($expectedMessage, $tester->getDisplay());
     }
 
     /**
@@ -696,7 +696,7 @@ final class GenerateCommandTest extends Framework\TestCase
         ]);
 
         self::assertSame(1, $exitCode);
-        self::assertContains($expectedMessage, $tester->getDisplay());
+        self::assertStringContainsString($expectedMessage, $tester->getDisplay());
     }
 
     private function pullRequest(): Resource\PullRequestInterface
