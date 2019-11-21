@@ -25,11 +25,6 @@ final class SrcCodeTest extends Framework\TestCase
 {
     use Helper;
 
-    public function testSrcClassesAreAbstractOrFinal(): void
-    {
-        self::assertClassesAreAbstractOrFinal(__DIR__ . '/../../src');
-    }
-
     public function testSrcClassesHaveUnitTests(): void
     {
         self::assertClassesHaveTests(

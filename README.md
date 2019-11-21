@@ -1,6 +1,6 @@
 # github-changelog
 
-[![CI Status](https://github.com/localheinz/github-changelog/workflows/Continuous%20Integration/badge.svg)](https://github.com/localheinz/github-changelog/actions)
+[![Continuous Integration](https://github.com/localheinz/github-changelog/workflows/Continuous%20Integration/badge.svg)](https://github.com/localheinz/github-changelog/actions)
 [![Test Coverage](https://codecov.io/gh/localheinz/github-changelog/branch/master/graph/badge.svg)](https://codecov.io/gh/localheinz/github-changelog)
 [![Latest Stable Version](https://poser.pugx.org/localheinz/github-changelog/v/stable)](https://packagist.org/packages/localheinz/github-changelog)
 [![Total Downloads](https://poser.pugx.org/localheinz/github-changelog/downloads)](https://packagist.org/packages/localheinz/github-changelog)
@@ -162,6 +162,10 @@ Enjoy the changelog:
 ## Hints
 
 :bulb: You can use anything for a reference, e.g., a tag, a branch, a commit!
+
+## Changelog
+
+Please have a look at [`CHANGELOG.md`](CHANGELOG.md).
 
 ## Contributing
 
