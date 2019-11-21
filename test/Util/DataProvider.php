@@ -114,12 +114,22 @@ final class DataProvider
         }
 
         foreach ($this->validRepositoryOwners() as $key => $owner) {
+            $key = \sprintf(
+                'owner-%s',
+                $key
+            );
+
             yield $key => [
                 $owner,
             ];
         }
 
         foreach ($this->validRepositoryNames() as $key => $name) {
+            $key = \sprintf(
+                'repository-%s',
+                $key
+            );
+
             yield $key => [
                 $name,
             ];
