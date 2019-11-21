@@ -30,12 +30,12 @@ final class PullRequestNotFoundTest extends Framework\TestCase
 
     public function testExtendsRuntimeException(): void
     {
-        $this->assertClassExtends(\RuntimeException::class, PullRequestNotFound::class);
+        self::assertClassExtends(\RuntimeException::class, PullRequestNotFound::class);
     }
 
     public function testImplementsExceptionInterface(): void
     {
-        $this->assertClassImplementsInterface(ExceptionInterface::class, PullRequestNotFound::class);
+        self::assertClassImplementsInterface(ExceptionInterface::class, PullRequestNotFound::class);
     }
 
     /**
@@ -43,7 +43,7 @@ final class PullRequestNotFoundTest extends Framework\TestCase
      */
     public function testFromRepositoryAndNumberCreatesException(): void
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         $number = $faker->numberBetween(1);
 

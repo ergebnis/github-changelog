@@ -27,12 +27,12 @@ final class SrcCodeTest extends Framework\TestCase
 
     public function testSrcClassesAreAbstractOrFinal(): void
     {
-        $this->assertClassesAreAbstractOrFinal(__DIR__ . '/../../src');
+        self::assertClassesAreAbstractOrFinal(__DIR__ . '/../../src');
     }
 
     public function testSrcClassesHaveUnitTests(): void
     {
-        $this->assertClassesHaveTests(
+        self::assertClassesHaveTests(
             __DIR__ . '/../../src',
             'Localheinz\\GitHub\\ChangeLog\\',
             'Localheinz\\GitHub\\ChangeLog\\Test\\Unit\\'

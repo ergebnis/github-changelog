@@ -31,7 +31,7 @@ final class RepositoryResolverTest extends Framework\TestCase
 
     public function testImplementsRepositoryResolverInterface(): void
     {
-        $this->assertClassImplementsInterface(RepositoryResolverInterface::class, RepositoryResolver::class);
+        self::assertClassImplementsInterface(RepositoryResolverInterface::class, RepositoryResolver::class);
     }
 
     public function testResolveThrowsRuntimeExceptionIfUnableToDetermineRemoteUrls(): void
@@ -79,7 +79,7 @@ final class RepositoryResolverTest extends Framework\TestCase
      */
     public function testResolveThrowsRuntimeExceptionIfNoValidRemoteUrlsCouldBeFound(string $remoteUrl): void
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         /** @var string[] $remoteNames */
         $remoteNames = $faker->unique()->words;
@@ -113,7 +113,7 @@ final class RepositoryResolverTest extends Framework\TestCase
      */
     public function testResolveWithoutFromRemoteNamesReturnsRepositoryUsingFirstFoundValidRemoteUrl(): void
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         $owner = $faker->unique()->word;
         $name = $faker->unique()->word;
@@ -157,7 +157,7 @@ final class RepositoryResolverTest extends Framework\TestCase
      */
     public function testResolveWithFromRemoteNamesThrowsRuntimeExceptionIfNoValidRemoteUrlsCanBeConsidered(): void
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         /** @var string[] $remoteNames */
         $remoteNames = $faker->unique()->words;
@@ -201,7 +201,7 @@ final class RepositoryResolverTest extends Framework\TestCase
      */
     public function testResolveWithFromRemoteNamesReturnsRepositoryUsingFirstFoundValidRemoteUrlIfItCanBeConsidered(): void
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         $owner = $faker->unique()->word;
         $name = $faker->unique()->word;

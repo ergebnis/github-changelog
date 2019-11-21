@@ -29,11 +29,11 @@ final class RuntimeExceptionTest extends Framework\TestCase
 
     public function testExtendsRuntimeException(): void
     {
-        $this->assertClassExtends(\RuntimeException::class, RuntimeException::class);
+        self::assertClassExtends(\RuntimeException::class, RuntimeException::class);
     }
 
     public function testImplementsExceptionInterface(): void
     {
-        $this->assertClassImplementsInterface(ExceptionInterface::class, RuntimeException::class);
+        self::assertClassImplementsInterface(ExceptionInterface::class, RuntimeException::class);
     }
 }

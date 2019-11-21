@@ -54,7 +54,7 @@ final class GitTest extends Framework\TestCase
 
     public function testImplementsGitInterface(): void
     {
-        $this->assertClassImplementsInterface(GitInterface::class, Git::class);
+        self::assertClassImplementsInterface(GitInterface::class, Git::class);
     }
 
     public function testRemoteUrlsReturnsRemoteUrls(): void
@@ -69,7 +69,7 @@ final class GitTest extends Framework\TestCase
             self::markTestSkipped('Unable to determine existing git remotes.');
         }
 
-        $faker = $this->faker();
+        $faker = self::faker();
 
         while (3 > \count($this->remoteUrls)) {
             do {

@@ -30,12 +30,12 @@ final class ReferenceNotFoundTest extends Framework\TestCase
 
     public function testExtendsRuntimeException(): void
     {
-        $this->assertClassExtends(\RuntimeException::class, ReferenceNotFound::class);
+        self::assertClassExtends(\RuntimeException::class, ReferenceNotFound::class);
     }
 
     public function testImplementsExceptionInterface(): void
     {
-        $this->assertClassImplementsInterface(ExceptionInterface::class, ReferenceNotFound::class);
+        self::assertClassImplementsInterface(ExceptionInterface::class, ReferenceNotFound::class);
     }
 
     /**
@@ -43,7 +43,7 @@ final class ReferenceNotFoundTest extends Framework\TestCase
      */
     public function testFromRepositoryAndReferenceCreatesException(): void
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         $repository = Resource\Repository::fromOwnerAndName(
             $faker->slug(),

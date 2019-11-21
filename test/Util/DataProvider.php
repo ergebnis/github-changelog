@@ -146,7 +146,7 @@ final class DataProvider
 
     public function providerInvalidUrl(): \Generator
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         /** @var string[] $words */
         $words = $faker->words;
@@ -168,7 +168,7 @@ final class DataProvider
 
     public function providerInvalidSha(): \Generator
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         $values = [
             'md5' => $faker->md5,
@@ -187,7 +187,7 @@ final class DataProvider
     public function providerInvalidPullRequestNumber(): \Generator
     {
         $values = [
-            'int-negative' => -1 * $this->faker()->numberBetween(1),
+            'int-negative' => -1 * self::faker()->numberBetween(1),
             'int-zero' => 0,
         ];
 
@@ -253,7 +253,7 @@ final class DataProvider
      */
     private function invalidRepositoryOwners(): array
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         return [
             'blank' => '  ',
@@ -294,7 +294,7 @@ final class DataProvider
      */
     private function validRepositoryOwners(): array
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         /** @var string[] $words */
         $words = $faker->words();
@@ -330,7 +330,7 @@ final class DataProvider
         return [
             'blank' => '  ',
             'empty' => '',
-            'has-special-characters' => \implode('', $this->faker()->randomElements([
+            'has-special-characters' => \implode('', self::faker()->randomElements([
                 '/',
                 '\\',
                 ':',
@@ -348,7 +348,7 @@ final class DataProvider
      */
     private function validRepositoryNames(): array
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         /** @var string[] $words */
         $words = $faker->words;

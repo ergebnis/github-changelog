@@ -28,12 +28,12 @@ final class UserTest extends Framework\TestCase
 
     public function testImplementsAuthorInterface(): void
     {
-        $this->assertClassImplementsInterface(Resource\UserInterface::class, Resource\User::class);
+        self::assertClassImplementsInterface(Resource\UserInterface::class, Resource\User::class);
     }
 
     public function testConstructorSetsLogin(): void
     {
-        $login = $this->faker()->slug();
+        $login = self::faker()->slug();
 
         $user = new Resource\User($login);
 

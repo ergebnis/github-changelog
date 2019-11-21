@@ -29,11 +29,11 @@ final class InvalidArgumentExceptionTest extends Framework\TestCase
 
     public function testExtendsInvalidArgumentException(): void
     {
-        $this->assertClassExtends(\InvalidArgumentException::class, InvalidArgumentException::class);
+        self::assertClassExtends(\InvalidArgumentException::class, InvalidArgumentException::class);
     }
 
     public function testImplementsExceptionInterface(): void
     {
-        $this->assertClassImplementsInterface(ExceptionInterface::class, InvalidArgumentException::class);
+        self::assertClassImplementsInterface(ExceptionInterface::class, InvalidArgumentException::class);
     }
 }
