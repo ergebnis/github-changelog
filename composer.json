@@ -14,7 +14,7 @@
     "knplabs/github-api": "^2.12.1",
     "php-http/guzzle6-adapter": "^1.1.1",
     "symfony/cache": "^4.3.8",
-    "symfony/console": "^4.3.8",
+    "symfony/console": "^4.4.0",
     "symfony/stopwatch": "^4.3.8"
   },
   "require-dev": {
