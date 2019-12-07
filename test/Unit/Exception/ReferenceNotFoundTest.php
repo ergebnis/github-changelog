@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Localheinz\GitHub\ChangeLog\Test\Unit\Exception;
 
+use Ergebnis\Test\Util\Helper;
 use Localheinz\GitHub\ChangeLog\Exception\ExceptionInterface;
 use Localheinz\GitHub\ChangeLog\Exception\ReferenceNotFound;
 use Localheinz\GitHub\ChangeLog\Resource;
-use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
 
 /**

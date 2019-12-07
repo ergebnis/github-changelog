@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace Localheinz\GitHub\ChangeLog\Test\Unit\Console;
 
+use Ergebnis\Test\Util\Helper;
 use Github\Client;
 use Localheinz\GitHub\ChangeLog\Console;
 use Localheinz\GitHub\ChangeLog\Exception;
 use Localheinz\GitHub\ChangeLog\Repository;
 use Localheinz\GitHub\ChangeLog\Resource;
 use Localheinz\GitHub\ChangeLog\Util;
-use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
 use Prophecy\Argument;
 use Symfony\Component\Console\Input;
