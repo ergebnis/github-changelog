@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace Localheinz\GitHub\ChangeLog\Test\Unit\Util;
 
+use Ergebnis\Test\Util\Helper;
 use Localheinz\GitHub\ChangeLog\Exception;
 use Localheinz\GitHub\ChangeLog\Util\GitInterface;
 use Localheinz\GitHub\ChangeLog\Util\RepositoryResolver;
 use Localheinz\GitHub\ChangeLog\Util\RepositoryResolverInterface;
-use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
 
 /**

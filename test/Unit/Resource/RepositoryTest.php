@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Localheinz\GitHub\ChangeLog\Test\Unit\Resource;
 
+use Ergebnis\Test\Util\Helper;
 use Localheinz\GitHub\ChangeLog\Exception;
 use Localheinz\GitHub\ChangeLog\Resource;
-use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
 
 /**

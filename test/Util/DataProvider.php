@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Localheinz\GitHub\ChangeLog\Test\Util;
 
-use Localheinz\Test\Util\Helper;
+use Ergebnis\Test\Util\Helper;
 
 final class DataProvider
 {
