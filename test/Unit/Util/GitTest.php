@@ -8,20 +8,20 @@ declare(strict_types=1);
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  *
- * @see https://github.com/localheinz/github-changelog
+ * @see https://github.com/ergebnis/github-changelog
  */
 
-namespace Localheinz\GitHub\ChangeLog\Test\Unit\Util;
+namespace Ergebnis\GitHub\Changelog\Test\Unit\Util;
 
+use Ergebnis\GitHub\Changelog\Util\Git;
+use Ergebnis\GitHub\Changelog\Util\GitInterface;
 use Ergebnis\Test\Util\Helper;
-use Localheinz\GitHub\ChangeLog\Util\Git;
-use Localheinz\GitHub\ChangeLog\Util\GitInterface;
 use PHPUnit\Framework;
 
 /**
  * @internal
  *
- * @covers \Localheinz\GitHub\ChangeLog\Util\Git
+ * @covers \Ergebnis\GitHub\Changelog\Util\Git
  */
 final class GitTest extends Framework\TestCase
 {

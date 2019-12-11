@@ -1,9 +1,9 @@
 # github-changelog
 
-[![Continuous Integration](https://github.com/localheinz/github-changelog/workflows/Continuous%20Integration/badge.svg)](https://github.com/localheinz/github-changelog/actions)
-[![Test Coverage](https://codecov.io/gh/localheinz/github-changelog/branch/master/graph/badge.svg)](https://codecov.io/gh/localheinz/github-changelog)
-[![Latest Stable Version](https://poser.pugx.org/localheinz/github-changelog/v/stable)](https://packagist.org/packages/localheinz/github-changelog)
-[![Total Downloads](https://poser.pugx.org/localheinz/github-changelog/downloads)](https://packagist.org/packages/localheinz/github-changelog)
+[![Continuous Integration](https://github.com/ergebnis/github-changelog/workflows/Continuous%20Integration/badge.svg)](https://github.com/ergebnis/github-changelog/actions)
+[![Code Coverage](https://codecov.io/gh/ergebnis/github-changelog/branch/master/graph/badge.svg)](https://codecov.io/gh/ergebnis/github-changelog)
+[![Latest Stable Version](https://poser.pugx.org/ergebnis/github-changelog/v/stable)](https://packagist.org/packages/ergebnis/github-changelog)
+[![Total Downloads](https://poser.pugx.org/ergebnis/github-changelog/downloads)](https://packagist.org/packages/ergebnis/github-changelog)
 
 Provides a script that generates a changelog based on titles of pull requests merged between specified references.
 
@@ -50,13 +50,13 @@ All this tool does is this:
 Install globally:
 
 ```bash
-$ composer global require localheinz/github-changelog
+$ composer global require ergebnis/github-changelog
 ```
 
 Create your changelogs from within a Git repository:
 
 ```bash
-$ git clone git@github.com:localheinz/github-changelog.git
+$ git clone git@github.com:ergebnis/github-changelog.git
 $ cd github-changelog
 $ github-changelog generate 0.1.1 0.1.2
 ```
@@ -64,7 +64,7 @@ $ github-changelog generate 0.1.1 0.1.2
 Create your changelogs from anywhere, specifying the repository using the `--repository` option:
 
 ```bash
-$ github-changelog generate --repository localheinz/github-changelog 0.1.1 0.1.2
+$ github-changelog generate --repository ergebnis/github-changelog 0.1.1 0.1.2
 ```
 
 Enjoy the changelog:
@@ -79,13 +79,13 @@ Enjoy the changelog:
 Install locally:
 
 ```bash
-$ composer require --dev localheinz/github-changelog
+$ composer require --dev ergebnis/github-changelog
 ```
 
 Create your changelog from within in your project:
 
 ```bash
-$ vendor/bin/github-changelog generate localheinz/github-changelog ae63248 master
+$ vendor/bin/github-changelog generate ergebnis/github-changelog ae63248 master
 ```
 
 Enjoy the changelog:
@@ -106,7 +106,7 @@ Enjoy the changelog:
 Install locally:
 
 ```bash
-$ composer require localheinz/github-changelog
+$ composer require ergebnis/github-changelog
 ```
 
 Retrieve pull requests between references in your application:
@@ -118,8 +118,8 @@ require 'vendor/autoload.php';
 
 use Github\Client;
 use Github\HttpClient\CachedHttpClient;
-use Localheinz\GitHub\ChangeLog\Repository;
-use Localheinz\GitHub\ChangeLog\Resource;
+use Ergebnis\GitHub\ChangeLog\Repository;
+use Ergebnis\GitHub\ChangeLog\Resource;
 
 $client = new Client(new CachedHttpClient());
 $client->authenticate(
@@ -134,7 +134,7 @@ $pullRequestRepository = new Repository\PullRequestRepository(
 
 /* @var Resource\RangeInterface $range */
 $range = $repository->items(
-    Resource\Repository::fromString('localheinz/github-changelog'),
+    Resource\Repository::fromString('ergebnis/github-changelog'),
     '0.1.1',
     '0.1.2'
 );

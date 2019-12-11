@@ -8,18 +8,18 @@ declare(strict_types=1);
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  *
- * @see https://github.com/localheinz/github-changelog
+ * @see https://github.com/ergebnis/github-changelog
  */
 
-namespace Localheinz\GitHub\ChangeLog\Test\Unit\Console;
+namespace Ergebnis\GitHub\Changelog\Test\Unit\Console;
 
+use Ergebnis\GitHub\Changelog\Console;
+use Ergebnis\GitHub\Changelog\Exception;
+use Ergebnis\GitHub\Changelog\Repository;
+use Ergebnis\GitHub\Changelog\Resource;
+use Ergebnis\GitHub\Changelog\Util;
 use Ergebnis\Test\Util\Helper;
 use Github\Client;
-use Localheinz\GitHub\ChangeLog\Console;
-use Localheinz\GitHub\ChangeLog\Exception;
-use Localheinz\GitHub\ChangeLog\Repository;
-use Localheinz\GitHub\ChangeLog\Resource;
-use Localheinz\GitHub\ChangeLog\Util;
 use PHPUnit\Framework;
 use Prophecy\Argument;
 use Symfony\Component\Console\Input;
@@ -28,7 +28,7 @@ use Symfony\Component\Console\Tester\CommandTester;
 /**
  * @internal
  *
- * @covers \Localheinz\GitHub\ChangeLog\Console\GenerateCommand
+ * @covers \Ergebnis\GitHub\Changelog\Console\GenerateCommand
  */
 final class GenerateCommandTest extends Framework\TestCase
 {
@@ -57,7 +57,7 @@ final class GenerateCommandTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider \Localheinz\GitHub\ChangeLog\Test\Util\DataProvider::providerGenerateCommandArgument
+     * @dataProvider \Ergebnis\GitHub\Changelog\Test\Util\DataProvider::providerGenerateCommandArgument
      *
      * @param string $name
      * @param bool   $isRequired
@@ -104,7 +104,7 @@ final class GenerateCommandTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider \Localheinz\GitHub\ChangeLog\Test\Util\DataProvider::providerGenerateCommandOption
+     * @dataProvider \Ergebnis\GitHub\Changelog\Test\Util\DataProvider::providerGenerateCommandOption
      *
      * @param string $name
      * @param string $shortcut
@@ -133,7 +133,7 @@ final class GenerateCommandTest extends Framework\TestCase
     }
 
     /**
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Repository
      */
     public function testExecuteAuthenticatesIfTokenOptionIsGiven(): void
     {
@@ -197,7 +197,7 @@ final class GenerateCommandTest extends Framework\TestCase
     }
 
     /**
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Repository
      */
     public function testExecuteFailsIfRepositoryIsInvalid(): void
     {
@@ -259,7 +259,7 @@ final class GenerateCommandTest extends Framework\TestCase
     }
 
     /**
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Repository
      */
     public function testExecuteDelegatesToPullRequestRepositoryUsingRepositoryResolvedFromGitMetaData(): void
     {
@@ -319,7 +319,7 @@ final class GenerateCommandTest extends Framework\TestCase
     }
 
     /**
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Repository
      */
     public function testExecuteDelegatesToPullRequestRepositoryUsingRepositorySpecifiedInOptions(): void
     {
@@ -376,7 +376,7 @@ final class GenerateCommandTest extends Framework\TestCase
     }
 
     /**
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Repository
      */
     public function testExecuteRendersMessageIfNoPullRequestsWereFound(): void
     {
@@ -432,7 +432,7 @@ final class GenerateCommandTest extends Framework\TestCase
     }
 
     /**
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Repository
      */
     public function testExecuteRendersDifferentMessageIfNoPullRequestsWereFoundAndNoEndReferenceWasGiven(): void
     {
@@ -488,9 +488,9 @@ final class GenerateCommandTest extends Framework\TestCase
     }
 
     /**
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\PullRequest
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\User
+     * @uses \Ergebnis\GitHub\Changelog\Resource\PullRequest
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Repository
+     * @uses \Ergebnis\GitHub\Changelog\Resource\User
      */
     public function testExecuteRendersPullRequestsWithTemplate(): void
     {
@@ -580,9 +580,9 @@ final class GenerateCommandTest extends Framework\TestCase
     }
 
     /**
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\PullRequest
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\User
+     * @uses \Ergebnis\GitHub\Changelog\Resource\PullRequest
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Repository
+     * @uses \Ergebnis\GitHub\Changelog\Resource\User
      */
     public function testExecuteRendersDifferentMessageWhenNoEndReferenceWasGiven(): void
     {
@@ -646,7 +646,7 @@ final class GenerateCommandTest extends Framework\TestCase
     }
 
     /**
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Repository
      */
     public function testExecuteHandlesExceptionsThrownWhenFetchingPullRequests(): void
     {

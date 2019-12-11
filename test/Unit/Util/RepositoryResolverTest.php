@@ -8,22 +8,22 @@ declare(strict_types=1);
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  *
- * @see https://github.com/localheinz/github-changelog
+ * @see https://github.com/ergebnis/github-changelog
  */
 
-namespace Localheinz\GitHub\ChangeLog\Test\Unit\Util;
+namespace Ergebnis\GitHub\Changelog\Test\Unit\Util;
 
+use Ergebnis\GitHub\Changelog\Exception;
+use Ergebnis\GitHub\Changelog\Util\GitInterface;
+use Ergebnis\GitHub\Changelog\Util\RepositoryResolver;
+use Ergebnis\GitHub\Changelog\Util\RepositoryResolverInterface;
 use Ergebnis\Test\Util\Helper;
-use Localheinz\GitHub\ChangeLog\Exception;
-use Localheinz\GitHub\ChangeLog\Util\GitInterface;
-use Localheinz\GitHub\ChangeLog\Util\RepositoryResolver;
-use Localheinz\GitHub\ChangeLog\Util\RepositoryResolverInterface;
 use PHPUnit\Framework;
 
 /**
  * @internal
  *
- * @covers \Localheinz\GitHub\ChangeLog\Util\RepositoryResolver
+ * @covers \Ergebnis\GitHub\Changelog\Util\RepositoryResolver
  */
 final class RepositoryResolverTest extends Framework\TestCase
 {
@@ -71,9 +71,9 @@ final class RepositoryResolverTest extends Framework\TestCase
     }
 
     /**
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Repository
      *
-     * @dataProvider \Localheinz\GitHub\ChangeLog\Test\Util\DataProvider::providerInvalidRemoteUrl
+     * @dataProvider \Ergebnis\GitHub\Changelog\Test\Util\DataProvider::providerInvalidRemoteUrl
      *
      * @param string $remoteUrl
      */
@@ -109,7 +109,7 @@ final class RepositoryResolverTest extends Framework\TestCase
     }
 
     /**
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Repository
      */
     public function testResolveWithoutFromRemoteNamesReturnsRepositoryUsingFirstFoundValidRemoteUrl(): void
     {
@@ -153,7 +153,7 @@ final class RepositoryResolverTest extends Framework\TestCase
     }
 
     /**
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Repository
      */
     public function testResolveWithFromRemoteNamesThrowsRuntimeExceptionIfNoValidRemoteUrlsCanBeConsidered(): void
     {
@@ -197,7 +197,7 @@ final class RepositoryResolverTest extends Framework\TestCase
     }
 
     /**
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Repository
      */
     public function testResolveWithFromRemoteNamesReturnsRepositoryUsingFirstFoundValidRemoteUrlIfItCanBeConsidered(): void
     {

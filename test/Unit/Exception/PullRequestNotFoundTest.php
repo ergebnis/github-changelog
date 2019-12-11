@@ -8,21 +8,21 @@ declare(strict_types=1);
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  *
- * @see https://github.com/localheinz/github-changelog
+ * @see https://github.com/ergebnis/github-changelog
  */
 
-namespace Localheinz\GitHub\ChangeLog\Test\Unit\Exception;
+namespace Ergebnis\GitHub\Changelog\Test\Unit\Exception;
 
+use Ergebnis\GitHub\Changelog\Exception\ExceptionInterface;
+use Ergebnis\GitHub\Changelog\Exception\PullRequestNotFound;
+use Ergebnis\GitHub\Changelog\Resource;
 use Ergebnis\Test\Util\Helper;
-use Localheinz\GitHub\ChangeLog\Exception\ExceptionInterface;
-use Localheinz\GitHub\ChangeLog\Exception\PullRequestNotFound;
-use Localheinz\GitHub\ChangeLog\Resource;
 use PHPUnit\Framework;
 
 /**
  * @internal
  *
- * @covers \Localheinz\GitHub\ChangeLog\Exception\PullRequestNotFound
+ * @covers \Ergebnis\GitHub\Changelog\Exception\PullRequestNotFound
  */
 final class PullRequestNotFoundTest extends Framework\TestCase
 {
@@ -39,7 +39,7 @@ final class PullRequestNotFoundTest extends Framework\TestCase
     }
 
     /**
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Repository
      */
     public function testFromRepositoryAndNumberCreatesException(): void
     {
