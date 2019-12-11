@@ -3,9 +3,7 @@ it: coding-standards dependency-analysis static-code-analysis tests ## Runs the 
 
 .PHONY: code-coverage
 code-coverage: vendor ## Collects coverage from running unit tests with phpunit/phpunit
-	mkdir -p .build/phpunit
-	vendor/bin/phpunit --configuration=test/Unit/phpunit.xml --dump-xdebug-filter=.build/phpunit/xdebug-filter.php
-	vendor/bin/phpunit --configuration=test/Unit/phpunit.xml --coverage-text --prepend=.build/phpunit/xdebug-filter.php
+	vendor/bin/phpunit --configuration=test/Unit/phpunit.xml --coverage-text
 
 .PHONY: coding-standards
 coding-standards: vendor ## Fixes code style issues with friendsofphp/php-cs-fixer
@@ -14,7 +12,7 @@ coding-standards: vendor ## Fixes code style issues with friendsofphp/php-cs-fix
 
 .PHONY: dependency-analysis
 dependency-analysis: vendor ## Runs a dependency analysis with maglnet/composer-require-checker
-	docker run --interactive --rm --tty --workdir=/app --volume ${PWD}:/app localheinz/composer-require-checker-action:1.0.0
+	docker run --interactive --rm --tty --workdir=/app --volume ${PWD}:/app localheinz/composer-require-checker-action:1.1.1
 
 .PHONY: help
 help: ## Displays this list of targets with descriptions
@@ -26,16 +24,15 @@ mutation-tests: vendor ## Runs mutation tests with infection/infection
 	vendor/bin/infection --ignore-msi-with-no-mutations --min-covered-msi=90 --min-msi=88
 
 .PHONY: static-code-analysis
-static-code-analysis: vendor static-code-analysis-baseline ## Runs a static code analysis with phpstan/phpstan
+static-code-analysis: vendor ## Runs a static code analysis with phpstan/phpstan
 	mkdir -p .build/phpstan
 	vendor/bin/phpstan analyse --configuration=phpstan.neon
 
 .PHONY: static-code-analysis-baseline
 static-code-analysis-baseline: vendor ## Generates a baseline for static code analysis with phpstan/phpstan
 	mkdir -p .build/phpstan
-	sed -e '/phpstan-baseline\\.neon/ s/^/#/' phpstan.neon > phpstan-without-baseline.neon
-	vendor/bin/phpstan analyze --configuration phpstan-without-baseline.neon --error-format baselineNeon > phpstan-baseline.neon  || true
-	rm phpstan-without-baseline.neon
+	echo '' > phpstan-baseline.neon
+	vendor/bin/phpstan analyze --configuration=phpstan.neon --error-format=baselineNeon > phpstan-baseline.neon || true
 
 .PHONY: tests
 tests: vendor ## Runs auto-review, unit, and integration tests with phpunit/phpunit
