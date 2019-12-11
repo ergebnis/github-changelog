@@ -8,16 +8,16 @@ declare(strict_types=1);
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  *
- * @see https://github.com/localheinz/github-changelog
+ * @see https://github.com/ergebnis/github-changelog
  */
 
-namespace Localheinz\GitHub\ChangeLog\Console;
+namespace Ergebnis\GitHub\Changelog\Console;
 
+use Ergebnis\GitHub\Changelog\Exception;
+use Ergebnis\GitHub\Changelog\Repository;
+use Ergebnis\GitHub\Changelog\Resource;
+use Ergebnis\GitHub\Changelog\Util;
 use Github\Client;
-use Localheinz\GitHub\ChangeLog\Exception;
-use Localheinz\GitHub\ChangeLog\Repository;
-use Localheinz\GitHub\ChangeLog\Resource;
-use Localheinz\GitHub\ChangeLog\Util;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Input;
@@ -86,7 +86,7 @@ final class GenerateCommand extends Command
                 'repository',
                 'r',
                 Input\InputOption::VALUE_REQUIRED,
-                'The repository, e.g. "localheinz/github-changelog"'
+                'The repository, e.g. "ergebnis/github-changelog"'
             )
             ->addOption(
                 'template',

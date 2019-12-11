@@ -8,20 +8,20 @@ declare(strict_types=1);
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  *
- * @see https://github.com/localheinz/github-changelog
+ * @see https://github.com/ergebnis/github-changelog
  */
 
-namespace Localheinz\GitHub\ChangeLog\Test\Unit\Resource;
+namespace Ergebnis\GitHub\Changelog\Test\Unit\Resource;
 
+use Ergebnis\GitHub\Changelog\Exception;
+use Ergebnis\GitHub\Changelog\Resource;
 use Ergebnis\Test\Util\Helper;
-use Localheinz\GitHub\ChangeLog\Exception;
-use Localheinz\GitHub\ChangeLog\Resource;
 use PHPUnit\Framework;
 
 /**
  * @internal
  *
- * @covers \Localheinz\GitHub\ChangeLog\Resource\Commit
+ * @covers \Ergebnis\GitHub\Changelog\Resource\Commit
  */
 final class CommitTest extends Framework\TestCase
 {
@@ -33,7 +33,7 @@ final class CommitTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider \Localheinz\GitHub\ChangeLog\Test\Util\DataProvider::providerInvalidSha
+     * @dataProvider \Ergebnis\GitHub\Changelog\Test\Util\DataProvider::providerInvalidSha
      *
      * @param string $sha
      */

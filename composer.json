@@ -1,7 +1,7 @@
 {
-  "name": "localheinz/github-changelog",
+  "name": "ergebnis/github-changelog",
   "description": "Provides a console command that generates a changelog based on titles of pull requests merged between specified references.",
-  "homepage": "https://github.com/localheinz/github-changelog",
+  "homepage": "https://github.com/ergebnis/github-changelog",
   "license": "MIT",
   "authors": [
     {
@@ -16,6 +16,9 @@
     "symfony/cache": "^4.3.8",
     "symfony/console": "^4.3.8",
     "symfony/stopwatch": "^4.4.1"
+  },
+  "replace": {
+    "localheinz/github-changelog": "*"
   },
   "require-dev": {
     "ergebnis/php-cs-fixer-config": "~1.1.0",
@@ -36,19 +39,19 @@
   },
   "autoload": {
     "psr-4": {
-      "Localheinz\\GitHub\\ChangeLog\\": "src"
+      "Ergebnis\\GitHub\\Changelog\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Localheinz\\GitHub\\ChangeLog\\Test\\": "test"
+      "Ergebnis\\GitHub\\Changelog\\Test\\": "test"
     }
   },
   "bin": [
     "github-changelog"
   ],
   "support": {
-    "issues": "https://github.com/localheinz/github-changelog/issues",
-    "source": "https://github.com/localheinz/github-changelog"
+    "issues": "https://github.com/ergebnis/github-changelog/issues",
+    "source": "https://github.com/ergebnis/github-changelog"
   }
 }

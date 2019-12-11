@@ -8,23 +8,23 @@ declare(strict_types=1);
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  *
- * @see https://github.com/localheinz/github-changelog
+ * @see https://github.com/ergebnis/github-changelog
  */
 
-namespace Localheinz\GitHub\ChangeLog\Test\Unit\Repository;
+namespace Ergebnis\GitHub\Changelog\Test\Unit\Repository;
 
+use Ergebnis\GitHub\Changelog\Exception;
+use Ergebnis\GitHub\Changelog\Repository;
+use Ergebnis\GitHub\Changelog\Resource;
 use Ergebnis\Test\Util\Helper;
 use Github\Api;
-use Localheinz\GitHub\ChangeLog\Exception;
-use Localheinz\GitHub\ChangeLog\Repository;
-use Localheinz\GitHub\ChangeLog\Resource;
 use PHPUnit\Framework;
 use Prophecy\Argument;
 
 /**
  * @internal
  *
- * @covers \Localheinz\GitHub\ChangeLog\Repository\CommitRepository
+ * @covers \Ergebnis\GitHub\Changelog\Repository\CommitRepository
  */
 final class CommitRepositoryTest extends Framework\TestCase
 {
@@ -36,8 +36,8 @@ final class CommitRepositoryTest extends Framework\TestCase
     }
 
     /**
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Commit
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Commit
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Repository
      */
     public function testShowReturnsCommitEntityWithShaAndMessageOnSuccess(): void
     {
@@ -75,8 +75,8 @@ final class CommitRepositoryTest extends Framework\TestCase
     }
 
     /**
-     * @uses \Localheinz\GitHub\ChangeLog\Exception\ReferenceNotFound
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     * @uses \Ergebnis\GitHub\Changelog\Exception\ReferenceNotFound
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Repository
      */
     public function testShowThrowsCommitNotFoundOnFailure(): void
     {
@@ -111,8 +111,8 @@ final class CommitRepositoryTest extends Framework\TestCase
     }
 
     /**
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Range
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Range
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Repository
      */
     public function testAllReturnsEmptyArrayOnFailure(): void
     {
@@ -147,9 +147,9 @@ final class CommitRepositoryTest extends Framework\TestCase
     }
 
     /**
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Commit
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Range
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Commit
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Range
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Repository
      */
     public function testAllSetsParamsPerPageTo250(): void
     {
@@ -183,9 +183,9 @@ final class CommitRepositoryTest extends Framework\TestCase
     }
 
     /**
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Commit
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Range
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Commit
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Range
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Repository
      */
     public function testAllStillAllowsSettingPerPage(): void
     {
@@ -221,9 +221,9 @@ final class CommitRepositoryTest extends Framework\TestCase
     }
 
     /**
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Commit
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Range
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Commit
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Range
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Repository
      */
     public function testAllReturnsRange(): void
     {
@@ -273,8 +273,8 @@ final class CommitRepositoryTest extends Framework\TestCase
     }
 
     /**
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Range
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Range
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Repository
      */
     public function testItemsDoesNotFetchCommitsIfStartAndEndReferencesAreTheSame(): void
     {
@@ -302,9 +302,9 @@ final class CommitRepositoryTest extends Framework\TestCase
     }
 
     /**
-     * @uses \Localheinz\GitHub\ChangeLog\Exception\ReferenceNotFound
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Range
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     * @uses \Ergebnis\GitHub\Changelog\Exception\ReferenceNotFound
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Range
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Repository
      */
     public function testItemsDoesNotFetchCommitsIfStartCommitCouldNotBeFound(): void
     {
@@ -346,10 +346,10 @@ final class CommitRepositoryTest extends Framework\TestCase
     }
 
     /**
-     * @uses \Localheinz\GitHub\ChangeLog\Exception\ReferenceNotFound
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Commit
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Range
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     * @uses \Ergebnis\GitHub\Changelog\Exception\ReferenceNotFound
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Commit
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Range
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Repository
      */
     public function testItemsDoesNotFetchCommitsIfEndCommitCouldNotBeFound(): void
     {
@@ -400,9 +400,9 @@ final class CommitRepositoryTest extends Framework\TestCase
     }
 
     /**
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Commit
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Range
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Commit
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Range
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Repository
      */
     public function testItemsFetchesCommitsUsingShaFromEndCommit(): void
     {
@@ -458,9 +458,9 @@ final class CommitRepositoryTest extends Framework\TestCase
     }
 
     /**
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Commit
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Range
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Commit
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Range
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Repository
      */
     public function testItemsFetchesCommitsIfEndReferenceIsNotGiven(): void
     {
@@ -503,9 +503,9 @@ final class CommitRepositoryTest extends Framework\TestCase
     }
 
     /**
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Commit
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Range
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Commit
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Range
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Repository
      */
     public function testItemsReturnsRangeOfCommitsFromEndToStartExcludingStart(): void
     {
@@ -599,9 +599,9 @@ final class CommitRepositoryTest extends Framework\TestCase
     }
 
     /**
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Commit
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Range
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Commit
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Range
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Repository
      */
     public function testItemsFetchesMoreCommitsIfEndIsNotContainedInFirstBatch(): void
     {

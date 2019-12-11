@@ -8,20 +8,20 @@ declare(strict_types=1);
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  *
- * @see https://github.com/localheinz/github-changelog
+ * @see https://github.com/ergebnis/github-changelog
  */
 
-namespace Localheinz\GitHub\ChangeLog\Test\Unit\Exception;
+namespace Ergebnis\GitHub\Changelog\Test\Unit\Exception;
 
+use Ergebnis\GitHub\Changelog\Exception\ExceptionInterface;
+use Ergebnis\GitHub\Changelog\Exception\RuntimeException;
 use Ergebnis\Test\Util\Helper;
-use Localheinz\GitHub\ChangeLog\Exception\ExceptionInterface;
-use Localheinz\GitHub\ChangeLog\Exception\RuntimeException;
 use PHPUnit\Framework;
 
 /**
  * @internal
  *
- * @covers \Localheinz\GitHub\ChangeLog\Exception\RuntimeException
+ * @covers \Ergebnis\GitHub\Changelog\Exception\RuntimeException
  */
 final class RuntimeExceptionTest extends Framework\TestCase
 {

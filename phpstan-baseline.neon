@@ -3,72 +3,72 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Method Localheinz\\\\GitHub\\\\ChangeLog\\\\Console\\\\GenerateCommand\\:\\:range\\(\\) has parameter \\$endReference with a nullable type declaration\\.$#"
+			message: "#^Method Ergebnis\\\\GitHub\\\\Changelog\\\\Console\\\\GenerateCommand\\:\\:range\\(\\) has parameter \\$endReference with a nullable type declaration\\.$#"
 			count: 1
 			path: src/Console/GenerateCommand.php
 
 		-
-			message: "#^Method Localheinz\\\\GitHub\\\\ChangeLog\\\\Console\\\\GenerateCommand\\:\\:range\\(\\) has parameter \\$endReference with null as default value\\.$#"
+			message: "#^Method Ergebnis\\\\GitHub\\\\Changelog\\\\Console\\\\GenerateCommand\\:\\:range\\(\\) has parameter \\$endReference with null as default value\\.$#"
 			count: 1
 			path: src/Console/GenerateCommand.php
 
 		-
-			message: "#^Method Localheinz\\\\GitHub\\\\ChangeLog\\\\Repository\\\\CommitRepository\\:\\:items\\(\\) has parameter \\$endReference with a nullable type declaration\\.$#"
+			message: "#^Method Ergebnis\\\\GitHub\\\\Changelog\\\\Repository\\\\CommitRepository\\:\\:items\\(\\) has parameter \\$endReference with a nullable type declaration\\.$#"
 			count: 1
 			path: src/Repository/CommitRepository.php
 
 		-
-			message: "#^Method Localheinz\\\\GitHub\\\\ChangeLog\\\\Repository\\\\CommitRepository\\:\\:items\\(\\) has parameter \\$endReference with null as default value\\.$#"
+			message: "#^Method Ergebnis\\\\GitHub\\\\Changelog\\\\Repository\\\\CommitRepository\\:\\:items\\(\\) has parameter \\$endReference with null as default value\\.$#"
 			count: 1
 			path: src/Repository/CommitRepository.php
 
 		-
-			message: "#^Method Localheinz\\\\GitHub\\\\ChangeLog\\\\Repository\\\\CommitRepositoryInterface\\:\\:items\\(\\) has parameter \\$endReference with a nullable type declaration\\.$#"
+			message: "#^Method Ergebnis\\\\GitHub\\\\Changelog\\\\Repository\\\\CommitRepositoryInterface\\:\\:items\\(\\) has parameter \\$endReference with a nullable type declaration\\.$#"
 			count: 1
 			path: src/Repository/CommitRepositoryInterface.php
 
 		-
-			message: "#^Method Localheinz\\\\GitHub\\\\ChangeLog\\\\Repository\\\\CommitRepositoryInterface\\:\\:items\\(\\) has parameter \\$endReference with null as default value\\.$#"
+			message: "#^Method Ergebnis\\\\GitHub\\\\Changelog\\\\Repository\\\\CommitRepositoryInterface\\:\\:items\\(\\) has parameter \\$endReference with null as default value\\.$#"
 			count: 1
 			path: src/Repository/CommitRepositoryInterface.php
 
 		-
-			message: "#^Method Localheinz\\\\GitHub\\\\ChangeLog\\\\Repository\\\\PullRequestRepository\\:\\:items\\(\\) has parameter \\$endReference with a nullable type declaration\\.$#"
+			message: "#^Method Ergebnis\\\\GitHub\\\\Changelog\\\\Repository\\\\PullRequestRepository\\:\\:items\\(\\) has parameter \\$endReference with a nullable type declaration\\.$#"
 			count: 1
 			path: src/Repository/PullRequestRepository.php
 
 		-
-			message: "#^Method Localheinz\\\\GitHub\\\\ChangeLog\\\\Repository\\\\PullRequestRepository\\:\\:items\\(\\) has parameter \\$endReference with null as default value\\.$#"
+			message: "#^Method Ergebnis\\\\GitHub\\\\Changelog\\\\Repository\\\\PullRequestRepository\\:\\:items\\(\\) has parameter \\$endReference with null as default value\\.$#"
 			count: 1
 			path: src/Repository/PullRequestRepository.php
 
 		-
-			message: "#^Method Localheinz\\\\GitHub\\\\ChangeLog\\\\Repository\\\\PullRequestRepositoryInterface\\:\\:items\\(\\) has parameter \\$endReference with a nullable type declaration\\.$#"
+			message: "#^Method Ergebnis\\\\GitHub\\\\Changelog\\\\Repository\\\\PullRequestRepositoryInterface\\:\\:items\\(\\) has parameter \\$endReference with a nullable type declaration\\.$#"
 			count: 1
 			path: src/Repository/PullRequestRepositoryInterface.php
 
 		-
-			message: "#^Method Localheinz\\\\GitHub\\\\ChangeLog\\\\Repository\\\\PullRequestRepositoryInterface\\:\\:items\\(\\) has parameter \\$endReference with null as default value\\.$#"
+			message: "#^Method Ergebnis\\\\GitHub\\\\Changelog\\\\Repository\\\\PullRequestRepositoryInterface\\:\\:items\\(\\) has parameter \\$endReference with null as default value\\.$#"
 			count: 1
 			path: src/Repository/PullRequestRepositoryInterface.php
 
 		-
-			message: "#^Method Localheinz\\\\GitHub\\\\ChangeLog\\\\Test\\\\Unit\\\\Repository\\\\CommitRepositoryTest\\:\\:commitItem\\(\\) has parameter \\$message with a nullable type declaration\\.$#"
+			message: "#^Method Ergebnis\\\\GitHub\\\\Changelog\\\\Test\\\\Unit\\\\Repository\\\\CommitRepositoryTest\\:\\:commitItem\\(\\) has parameter \\$message with a nullable type declaration\\.$#"
 			count: 1
 			path: test/Unit/Repository/CommitRepositoryTest.php
 
 		-
-			message: "#^Method Localheinz\\\\GitHub\\\\ChangeLog\\\\Test\\\\Unit\\\\Repository\\\\CommitRepositoryTest\\:\\:commitItem\\(\\) has parameter \\$message with null as default value\\.$#"
+			message: "#^Method Ergebnis\\\\GitHub\\\\Changelog\\\\Test\\\\Unit\\\\Repository\\\\CommitRepositoryTest\\:\\:commitItem\\(\\) has parameter \\$message with null as default value\\.$#"
 			count: 1
 			path: test/Unit/Repository/CommitRepositoryTest.php
 
 		-
-			message: "#^Method Localheinz\\\\GitHub\\\\ChangeLog\\\\Test\\\\Unit\\\\Repository\\\\CommitRepositoryTest\\:\\:commitItem\\(\\) has parameter \\$sha with a nullable type declaration\\.$#"
+			message: "#^Method Ergebnis\\\\GitHub\\\\Changelog\\\\Test\\\\Unit\\\\Repository\\\\CommitRepositoryTest\\:\\:commitItem\\(\\) has parameter \\$sha with a nullable type declaration\\.$#"
 			count: 1
 			path: test/Unit/Repository/CommitRepositoryTest.php
 
 		-
-			message: "#^Method Localheinz\\\\GitHub\\\\ChangeLog\\\\Test\\\\Unit\\\\Repository\\\\CommitRepositoryTest\\:\\:commitItem\\(\\) has parameter \\$sha with null as default value\\.$#"
+			message: "#^Method Ergebnis\\\\GitHub\\\\Changelog\\\\Test\\\\Unit\\\\Repository\\\\CommitRepositoryTest\\:\\:commitItem\\(\\) has parameter \\$sha with null as default value\\.$#"
 			count: 1
 			path: test/Unit/Repository/CommitRepositoryTest.php
 

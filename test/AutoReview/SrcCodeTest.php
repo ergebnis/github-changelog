@@ -8,10 +8,10 @@ declare(strict_types=1);
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  *
- * @see https://github.com/localheinz/github-changelog
+ * @see https://github.com/ergebnis/github-changelog
  */
 
-namespace Localheinz\GitHub\ChangeLog\Test\AutoReview;
+namespace Ergebnis\GitHub\Changelog\Test\AutoReview;
 
 use Ergebnis\Test\Util\Helper;
 use PHPUnit\Framework;
@@ -29,8 +29,8 @@ final class SrcCodeTest extends Framework\TestCase
     {
         self::assertClassesHaveTests(
             __DIR__ . '/../../src',
-            'Localheinz\\GitHub\\ChangeLog\\',
-            'Localheinz\\GitHub\\ChangeLog\\Test\\Unit\\'
+            'Ergebnis\\GitHub\\Changelog\\',
+            'Ergebnis\\GitHub\\Changelog\\Test\\Unit\\'
         );
     }
 }

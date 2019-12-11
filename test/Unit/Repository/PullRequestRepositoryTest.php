@@ -8,23 +8,23 @@ declare(strict_types=1);
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  *
- * @see https://github.com/localheinz/github-changelog
+ * @see https://github.com/ergebnis/github-changelog
  */
 
-namespace Localheinz\GitHub\ChangeLog\Test\Unit\Repository;
+namespace Ergebnis\GitHub\Changelog\Test\Unit\Repository;
 
+use Ergebnis\GitHub\Changelog\Exception;
+use Ergebnis\GitHub\Changelog\Repository;
+use Ergebnis\GitHub\Changelog\Resource;
 use Ergebnis\Test\Util\Helper;
 use Github\Api;
-use Localheinz\GitHub\ChangeLog\Exception;
-use Localheinz\GitHub\ChangeLog\Repository;
-use Localheinz\GitHub\ChangeLog\Resource;
 use PHPUnit\Framework;
 use Prophecy\Argument;
 
 /**
  * @internal
  *
- * @covers \Localheinz\GitHub\ChangeLog\Repository\PullRequestRepository
+ * @covers \Ergebnis\GitHub\Changelog\Repository\PullRequestRepository
  */
 final class PullRequestRepositoryTest extends Framework\TestCase
 {
@@ -36,9 +36,9 @@ final class PullRequestRepositoryTest extends Framework\TestCase
     }
 
     /**
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\PullRequest
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\User
+     * @uses \Ergebnis\GitHub\Changelog\Resource\PullRequest
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Repository
+     * @uses \Ergebnis\GitHub\Changelog\Resource\User
      */
     public function testShowReturnsPullRequestEntityWithNumberTitleAndAuthorOnSuccess(): void
     {
@@ -78,8 +78,8 @@ final class PullRequestRepositoryTest extends Framework\TestCase
     }
 
     /**
-     * @uses \Localheinz\GitHub\ChangeLog\Exception\PullRequestNotFound
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     * @uses \Ergebnis\GitHub\Changelog\Exception\PullRequestNotFound
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Repository
      */
     public function testShowThrowsPullRequestNotFoundOnFailure(): void
     {
@@ -122,7 +122,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
     }
 
     /**
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Repository
      */
     public function testItemsDoesNotRequireAnEndReference(): void
     {
@@ -165,7 +165,7 @@ final class PullRequestRepositoryTest extends Framework\TestCase
     }
 
     /**
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Repository
      */
     public function testItemsDoesNotTouchRangeIfNoCommitsWereFound(): void
     {
@@ -214,8 +214,8 @@ final class PullRequestRepositoryTest extends Framework\TestCase
     }
 
     /**
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Commit
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Commit
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Repository
      */
     public function testItemsDoesNotTouchRangeIfNoMergeCommitsWereFound(): void
     {
@@ -271,10 +271,10 @@ final class PullRequestRepositoryTest extends Framework\TestCase
     }
 
     /**
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Commit
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\PullRequest
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\User
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Commit
+     * @uses \Ergebnis\GitHub\Changelog\Resource\PullRequest
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Repository
+     * @uses \Ergebnis\GitHub\Changelog\Resource\User
      */
     public function testItemsFetchesPullRequestIfMergeCommitWasFound(): void
     {
@@ -351,10 +351,10 @@ final class PullRequestRepositoryTest extends Framework\TestCase
     }
 
     /**
-     * @uses \Localheinz\GitHub\ChangeLog\Exception\PullRequestNotFound
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Commit
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\PullRequest
-     * @uses \Localheinz\GitHub\ChangeLog\Resource\Repository
+     * @uses \Ergebnis\GitHub\Changelog\Exception\PullRequestNotFound
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Commit
+     * @uses \Ergebnis\GitHub\Changelog\Resource\PullRequest
+     * @uses \Ergebnis\GitHub\Changelog\Resource\Repository
      */
     public function testItemsHandlesMergeCommitWherePullRequestWasNotFound(): void
     {

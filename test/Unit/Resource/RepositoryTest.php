@@ -8,20 +8,20 @@ declare(strict_types=1);
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  *
- * @see https://github.com/localheinz/github-changelog
+ * @see https://github.com/ergebnis/github-changelog
  */
 
-namespace Localheinz\GitHub\ChangeLog\Test\Unit\Resource;
+namespace Ergebnis\GitHub\Changelog\Test\Unit\Resource;
 
+use Ergebnis\GitHub\Changelog\Exception;
+use Ergebnis\GitHub\Changelog\Resource;
 use Ergebnis\Test\Util\Helper;
-use Localheinz\GitHub\ChangeLog\Exception;
-use Localheinz\GitHub\ChangeLog\Resource;
 use PHPUnit\Framework;
 
 /**
  * @internal
  *
- * @covers \Localheinz\GitHub\ChangeLog\Resource\Repository
+ * @covers \Ergebnis\GitHub\Changelog\Resource\Repository
  */
 final class RepositoryTest extends Framework\TestCase
 {
@@ -33,7 +33,7 @@ final class RepositoryTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider \Localheinz\GitHub\ChangeLog\Test\Util\DataProvider::providerInvalidRepositoryOwner
+     * @dataProvider \Ergebnis\GitHub\Changelog\Test\Util\DataProvider::providerInvalidRepositoryOwner
      *
      * @param string $owner
      */
@@ -56,7 +56,7 @@ final class RepositoryTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider \Localheinz\GitHub\ChangeLog\Test\Util\DataProvider::providerInvalidRepositoryName
+     * @dataProvider \Ergebnis\GitHub\Changelog\Test\Util\DataProvider::providerInvalidRepositoryName
      *
      * @param string $name
      */
@@ -79,7 +79,7 @@ final class RepositoryTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider \Localheinz\GitHub\ChangeLog\Test\Util\DataProvider::providerValidRepositoryOwnerAndName
+     * @dataProvider \Ergebnis\GitHub\Changelog\Test\Util\DataProvider::providerValidRepositoryOwnerAndName
      *
      * @param string $owner
      * @param string $name
@@ -96,7 +96,7 @@ final class RepositoryTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider \Localheinz\GitHub\ChangeLog\Test\Util\DataProvider::providerInvalidRemoteUrl
+     * @dataProvider \Ergebnis\GitHub\Changelog\Test\Util\DataProvider::providerInvalidRemoteUrl
      *
      * @param string $remoteUrl
      */
@@ -112,7 +112,7 @@ final class RepositoryTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider \Localheinz\GitHub\ChangeLog\Test\Util\DataProvider::providerValidRemoteUrlOwnerAndName
+     * @dataProvider \Ergebnis\GitHub\Changelog\Test\Util\DataProvider::providerValidRemoteUrlOwnerAndName
      *
      * @param string $remoteUrl
      * @param string $owner
@@ -148,7 +148,7 @@ final class RepositoryTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider \Localheinz\GitHub\ChangeLog\Test\Util\DataProvider::providerInvalidRepositoryString
+     * @dataProvider \Ergebnis\GitHub\Changelog\Test\Util\DataProvider::providerInvalidRepositoryString
      *
      * @param string $string
      */
@@ -164,7 +164,7 @@ final class RepositoryTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider \Localheinz\GitHub\ChangeLog\Test\Util\DataProvider::providerValidRepositoryOwnerAndName
+     * @dataProvider \Ergebnis\GitHub\Changelog\Test\Util\DataProvider::providerValidRepositoryOwnerAndName
      *
      * @param string $owner
      * @param string $name
