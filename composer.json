@@ -17,9 +17,6 @@
     "symfony/console": "^4.3.8",
     "symfony/stopwatch": "^4.4.1"
   },
-  "replace": {
-    "localheinz/github-changelog": "*"
-  },
   "require-dev": {
     "ergebnis/php-cs-fixer-config": "~1.1.0",
     "ergebnis/phpstan-rules": "~0.14.0",
