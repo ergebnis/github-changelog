@@ -6,7 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
-For a full diff see [`0.7.0...master`][0.7.0...master].
+For a full diff see [`0.7.1...master`][0.7.1...master].
+
+## [`0.7.1`][0.7.1]
+
+For a full diff see [`0.7.0...0.7.1`][0.7.0...0.7.1].
+
+### Fixed
+
+* Removed an inappropriate `replace` configuration from `composer.json` ([#339]), by [@localheinz]
 
 ## [`0.7.0`][0.7.0]
 
@@ -51,12 +59,15 @@ For a full diff see [`0.6.1...0.7.0`][0.6.1...0.7.0].
 * Dropped support for PHP 7.1 ([#314]), by [@localheinz]
 
 [0.7.0]: https://github.com/ergebnis/github-changelog/tag/0.7.0
+[0.7.1]: https://github.com/ergebnis/github-changelog/tag/0.7.0
 
 [0.6.1...0.7.0]: https://github.com/ergebnis/github-changelog/compare/0.6.1...0.7.0
-[0.7.0...master]: https://github.com/ergebnis/github-changelog/compare/0.7.0...master
+[0.7.0...0.7.1]: https://github.com/ergebnis/github-changelog/compare/0.7.0...0.7.1
+[0.7.1...master]: https://github.com/ergebnis/github-changelog/compare/0.7.1...master
 
 [#314]: https://github.com/ergebnis/github-changelog/pull/314
 [#336]: https://github.com/ergebnis/github-changelog/pull/336
+[#339]: https://github.com/ergebnis/github-changelog/pull/339
 
 [@ergebnis]: https://github.com/ergebnis
 [@localheinz]: https://github.com/localheinz
