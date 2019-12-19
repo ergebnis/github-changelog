@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "25724e198aecd7e5f1241aeb15b09745",
+    "content-hash": "4a9b14c4d9aa593d820dc15ad776a0ac",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -960,30 +960,31 @@
         },
         {
             "name": "symfony/cache",
-            "version": "v4.3.8",
+            "version": "v4.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/cache.git",
-                "reference": "83dca34362a0aba2b93aa1226dac6ef7cfea1262"
+                "reference": "de737c81ea95018d11a3ef908ad2ebf203741b96"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/cache/zipball/83dca34362a0aba2b93aa1226dac6ef7cfea1262",
-                "reference": "83dca34362a0aba2b93aa1226dac6ef7cfea1262",
+                "url": "https://api.github.com/repos/symfony/cache/zipball/de737c81ea95018d11a3ef908ad2ebf203741b96",
+                "reference": "de737c81ea95018d11a3ef908ad2ebf203741b96",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1.3",
                 "psr/cache": "~1.0",
                 "psr/log": "~1.0",
-                "symfony/cache-contracts": "^1.1",
-                "symfony/service-contracts": "^1.1",
-                "symfony/var-exporter": "^4.2"
+                "symfony/cache-contracts": "^1.1.7|^2",
+                "symfony/service-contracts": "^1.1|^2",
+                "symfony/var-exporter": "^4.2|^5.0"
             },
             "conflict": {
                 "doctrine/dbal": "<2.5",
                 "symfony/dependency-injection": "<3.4",
-                "symfony/var-dumper": "<3.4"
+                "symfony/http-kernel": "<4.4",
+                "symfony/var-dumper": "<4.4"
             },
             "provide": {
                 "psr/cache-implementation": "1.0",
@@ -996,14 +997,14 @@
                 "doctrine/dbal": "~2.5",
                 "predis/predis": "~1.1",
                 "psr/simple-cache": "^1.0",
-                "symfony/config": "~4.2",
-                "symfony/dependency-injection": "~3.4|~4.1",
-                "symfony/var-dumper": "^4.1.1"
+                "symfony/config": "^4.2|^5.0",
+                "symfony/dependency-injection": "^3.4|^4.1|^5.0",
+                "symfony/var-dumper": "^4.4|^5.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.3-dev"
+                    "dev-master": "4.4-dev"
                 }
             },
             "autoload": {
@@ -1034,7 +1035,7 @@
                 "caching",
                 "psr6"
             ],
-            "time": "2019-11-12T13:07:20+00:00"
+            "time": "2019-12-01T10:50:45+00:00"
         },
         {
             "name": "symfony/cache-contracts",
@@ -1451,28 +1452,28 @@
         },
         {
             "name": "symfony/var-exporter",
-            "version": "v4.3.8",
+            "version": "v4.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-exporter.git",
-                "reference": "097aa4c02954dabe9d508229be86213723973ac0"
+                "reference": "e566070effe60b8d16b99e958cdbd92aa2e470cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-exporter/zipball/097aa4c02954dabe9d508229be86213723973ac0",
-                "reference": "097aa4c02954dabe9d508229be86213723973ac0",
+                "url": "https://api.github.com/repos/symfony/var-exporter/zipball/e566070effe60b8d16b99e958cdbd92aa2e470cb",
+                "reference": "e566070effe60b8d16b99e958cdbd92aa2e470cb",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1.3"
             },
             "require-dev": {
-                "symfony/var-dumper": "^4.1.1"
+                "symfony/var-dumper": "^4.1.1|^5.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.3-dev"
+                    "dev-master": "4.4-dev"
                 }
             },
             "autoload": {
@@ -1507,7 +1508,7 @@
                 "instantiate",
                 "serialize"
             ],
-            "time": "2019-11-11T12:48:54+00:00"
+            "time": "2019-12-01T08:39:58+00:00"
         }
     ],
     "packages-dev": [
