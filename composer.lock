@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2b39114a01373e73136306add85516db",
+    "content-hash": "eec541a9974c83a2e2ab1e9ed99f065a",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -1172,7 +1172,7 @@
         },
         {
             "name": "symfony/options-resolver",
-            "version": "v4.4.1",
+            "version": "v4.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/options-resolver.git",
@@ -2146,33 +2146,33 @@
         },
         {
             "name": "ergebnis/php-cs-fixer-config",
-            "version": "1.1.1",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ergebnis/php-cs-fixer-config.git",
-                "reference": "4f679ed3963300a6aa1a2d1a0eecf77bf311fd74"
+                "reference": "cd964747d45e41509161828863e896a682563970"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ergebnis/php-cs-fixer-config/zipball/4f679ed3963300a6aa1a2d1a0eecf77bf311fd74",
-                "reference": "4f679ed3963300a6aa1a2d1a0eecf77bf311fd74",
+                "url": "https://api.github.com/repos/ergebnis/php-cs-fixer-config/zipball/cd964747d45e41509161828863e896a682563970",
+                "reference": "cd964747d45e41509161828863e896a682563970",
                 "shasum": ""
             },
             "require": {
                 "friendsofphp/php-cs-fixer": "~2.16.0",
-                "php": "^7.2"
+                "php": "^7.1"
             },
             "require-dev": {
-                "ergebnis/phpstan-rules": "~0.14.0",
-                "ergebnis/test-util": "~0.9.0",
-                "infection/infection": "~0.14.2",
+                "ergebnis/composer-normalize": "^1.3.1",
+                "ergebnis/phpstan-rules": "~0.13.0",
+                "ergebnis/test-util": "~0.9.1",
+                "infection/infection": "~0.13.6",
                 "jangregor/phpstan-prophecy": "~0.4.2",
-                "localheinz/composer-normalize": "^1.3.1",
                 "phpstan/extension-installer": "^1.0.3",
                 "phpstan/phpstan": "~0.11.19",
                 "phpstan/phpstan-deprecation-rules": "~0.11.2",
                 "phpstan/phpstan-strict-rules": "~0.11.1",
-                "phpunit/phpunit": "^8.4.3"
+                "phpunit/phpunit": "^7.5.18"
             },
             "type": "library",
             "autoload": {
@@ -2192,7 +2192,7 @@
             ],
             "description": "Provides a configuration factory and multiple rule sets for friendsofphp/php-cs-fixer.",
             "homepage": "https://github.com/ergebnis/php-cs-fixer-config",
-            "time": "2019-12-15T10:01:03+00:00"
+            "time": "2019-12-19T09:40:03+00:00"
         },
         {
             "name": "ergebnis/phpstan-rules",
@@ -5241,7 +5241,7 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v4.4.1",
+            "version": "v4.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
@@ -5369,7 +5369,7 @@
         },
         {
             "name": "symfony/filesystem",
-            "version": "v4.4.1",
+            "version": "v4.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
@@ -5419,7 +5419,7 @@
         },
         {
             "name": "symfony/finder",
-            "version": "v4.4.1",
+            "version": "v4.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
@@ -5640,16 +5640,16 @@
         },
         {
             "name": "symfony/process",
-            "version": "v4.4.1",
+            "version": "v4.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "51c0135ef3f44c5803b33dc60e96bf4f77752726"
+                "reference": "b84501ad50adb72a94fb460a5b5c91f693e99c9b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/51c0135ef3f44c5803b33dc60e96bf4f77752726",
-                "reference": "51c0135ef3f44c5803b33dc60e96bf4f77752726",
+                "url": "https://api.github.com/repos/symfony/process/zipball/b84501ad50adb72a94fb460a5b5c91f693e99c9b",
+                "reference": "b84501ad50adb72a94fb460a5b5c91f693e99c9b",
                 "shasum": ""
             },
             "require": {
@@ -5685,7 +5685,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2019-11-28T13:33:56+00:00"
+            "time": "2019-12-06T10:06:46+00:00"
         },
         {
             "name": "symfony/yaml",
