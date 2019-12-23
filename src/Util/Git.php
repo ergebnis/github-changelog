@@ -32,7 +32,7 @@ final class Git implements GitInterface
         /** @var string[] $remoteUrls */
         $remoteUrls = \array_combine(
             $remoteNames,
-            \array_map(static function (string $remoteName) {
+            \array_map(static function (string $remoteName): ?string {
                 \exec(
                     \sprintf(
                         'git remote get-url %s',
@@ -43,7 +43,7 @@ final class Git implements GitInterface
                 );
 
                 if (0 !== $returnValue || 0 === \count($remoteUrls)) {
-                    return;
+                    return null;
                 }
 
                 return \array_shift($remoteUrls);
