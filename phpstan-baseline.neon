@@ -1,5 +1,3 @@
-
-
 parameters:
 	ignoreErrors:
 		-
@@ -53,6 +51,16 @@ parameters:
 			path: src/Repository/PullRequestRepositoryInterface.php
 
 		-
+			message: "#^Closure has a nullable return type declaration\\.$#"
+			count: 1
+			path: src/Util/Git.php
+
+		-
+			message: "#^Closure has a nullable return type declaration\\.$#"
+			count: 1
+			path: src/Util/RepositoryResolver.php
+
+		-
 			message: "#^Method Ergebnis\\\\GitHub\\\\Changelog\\\\Test\\\\Unit\\\\Repository\\\\CommitRepositoryTest\\:\\:commitItem\\(\\) has parameter \\$message with a nullable type declaration\\.$#"
 			count: 1
 			path: test/Unit/Repository/CommitRepositoryTest.php
@@ -71,5 +79,4 @@ parameters:
 			message: "#^Method Ergebnis\\\\GitHub\\\\Changelog\\\\Test\\\\Unit\\\\Repository\\\\CommitRepositoryTest\\:\\:commitItem\\(\\) has parameter \\$sha with null as default value\\.$#"
 			count: 1
 			path: test/Unit/Repository/CommitRepositoryTest.php
-
 
