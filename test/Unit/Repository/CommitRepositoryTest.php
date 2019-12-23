@@ -721,10 +721,18 @@ final class CommitRepositoryTest extends Framework\TestCase
     {
         $faker = self::faker();
 
+        if (null === $sha) {
+            $sha = $faker->unique()->sha1;
+        }
+
+        if (null === $message) {
+            $message = $faker->unique()->sentence();
+        }
+
         return [
-            'sha' => $sha ?: $faker->unique()->sha1,
+            'sha' => $sha,
             'commit' => [
-                'message' => $message ?: $faker->unique()->sentence(),
+                'message' => $message,
             ],
         ];
     }
@@ -765,7 +773,7 @@ final class CommitRepositoryTest extends Framework\TestCase
      */
     private function arrayHasKeyAndValue(string $key, $value): Framework\Constraint\Callback
     {
-        return self::callback(static function ($array) use ($key, $value) {
+        return self::callback(static function ($array) use ($key, $value): bool {
             if (\is_array($array)
                 && \array_key_exists($key, $array)
                 && $value === $array[$key]
@@ -779,7 +787,7 @@ final class CommitRepositoryTest extends Framework\TestCase
 
     private function arrayNotHasKey(string $key): Framework\Constraint\Callback
     {
-        return self::callback(static function ($array) use ($key) {
+        return self::callback(static function ($array) use ($key): bool {
             if (\is_array($array)
                 && !\array_key_exists($key, $array)
             ) {

@@ -128,7 +128,7 @@ final class RepositoryResolverTest extends Framework\TestCase
         /** @var string[] $remoteUrls */
         $remoteUrls = \array_combine(
             $remoteNames,
-            \array_map(static function () use ($faker) {
+            \array_map(static function () use ($faker): string {
                 return $faker->sentence();
             }, $remoteNames)
         );
@@ -164,7 +164,7 @@ final class RepositoryResolverTest extends Framework\TestCase
 
         $remoteUrls = \array_combine(
             $remoteNames,
-            \array_map(function () use ($faker) {
+            \array_map(function () use ($faker): string {
                 $owner = $faker->unique()->word;
                 $name = $faker->unique()->word;
 
@@ -217,7 +217,7 @@ final class RepositoryResolverTest extends Framework\TestCase
         /** @var string[] $remoteUrls */
         $remoteUrls = \array_combine(
             $remoteNames,
-            \array_map(function () use ($faker) {
+            \array_map(function () use ($faker): string {
                 $owner = $faker->unique()->word;
                 $name = $faker->unique()->word;
 

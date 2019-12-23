@@ -166,7 +166,7 @@ final class GenerateCommandTest extends Framework\TestCase
 
         $pullRequestRepository
             ->items(
-                Argument::that(static function (Resource\Repository $repository) use ($owner, $name) {
+                Argument::that(static function (Resource\Repository $repository) use ($owner, $name): bool {
                     return $repository->owner() === $owner
                         && $repository->name() === $name;
                 }),
@@ -341,7 +341,7 @@ final class GenerateCommandTest extends Framework\TestCase
 
         $pullRequestRepository
             ->items(
-                Argument::that(static function (Resource\Repository $repository) use ($owner, $name) {
+                Argument::that(static function (Resource\Repository $repository) use ($owner, $name): bool {
                     return $repository->owner() === $owner
                         && $repository->name() === $name;
                 }),
@@ -400,7 +400,7 @@ final class GenerateCommandTest extends Framework\TestCase
 
         $pullRequestRepository
             ->items(
-                Argument::that(static function (Resource\Repository $repository) use ($owner, $name) {
+                Argument::that(static function (Resource\Repository $repository) use ($owner, $name): bool {
                     return $repository->owner() === $owner
                         && $repository->name() === $name;
                 }),
@@ -456,7 +456,7 @@ final class GenerateCommandTest extends Framework\TestCase
 
         $pullRequestRepository
             ->items(
-                Argument::that(static function (Resource\Repository $repository) use ($owner, $name) {
+                Argument::that(static function (Resource\Repository $repository) use ($owner, $name): bool {
                     return $repository->owner() === $owner
                         && $repository->name() === $name;
                 }),
@@ -544,7 +544,7 @@ final class GenerateCommandTest extends Framework\TestCase
 
         $pullRequestRepository
             ->items(
-                Argument::that(static function (Resource\Repository $repository) use ($owner, $name) {
+                Argument::that(static function (Resource\Repository $repository) use ($owner, $name): bool {
                     return $repository->owner() === $owner
                         && $repository->name() === $name;
                 }),
@@ -614,7 +614,7 @@ final class GenerateCommandTest extends Framework\TestCase
 
         $pullRequestRepository
             ->items(
-                Argument::that(static function (Resource\Repository $repository) use ($owner, $name) {
+                Argument::that(static function (Resource\Repository $repository) use ($owner, $name): bool {
                     return $repository->owner() === $owner
                         && $repository->name() === $name;
                 }),
@@ -663,7 +663,7 @@ final class GenerateCommandTest extends Framework\TestCase
 
         $pullRequestRepository
             ->items(
-                Argument::that(static function (Resource\Repository $repository) use ($owner, $name) {
+                Argument::that(static function (Resource\Repository $repository) use ($owner, $name): bool {
                     return $repository->owner() === $owner
                         && $repository->name() === $name;
                 }),
