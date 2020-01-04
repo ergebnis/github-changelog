@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="3.8.1@8e54e3aa060fc490d86d0e2abbf62750516d40fd">
+  <file src="src/Console/GenerateCommand.php">
+    <ImplicitToStringCast occurrences="1">
+      <code>$repository</code>
+    </ImplicitToStringCast>
+    <InvalidArgument occurrences="2">
+      <code>'upstream'</code>
+      <code>'origin'</code>
+    </InvalidArgument>
+  </file>
+  <file src="src/Exception/PullRequestNotFound.php">
+    <ImplicitToStringCast occurrences="1">
+      <code>$repository</code>
+    </ImplicitToStringCast>
+  </file>
+  <file src="src/Exception/ReferenceNotFound.php">
+    <ImplicitToStringCast occurrences="1">
+      <code>$repository</code>
+    </ImplicitToStringCast>
+  </file>
+  <file src="src/Repository/CommitRepository.php">
+    <MissingClosureParamType occurrences="1">
+      <code>$data</code>
+    </MissingClosureParamType>
+  </file>
+  <file src="src/Repository/PullRequestRepositoryInterface.php">
+    <InvalidDocblock occurrences="2">
+      <code>public function show(Resource\RepositoryInterface $repository, int $number): Resource\PullRequestInterface;</code>
+      <code>public function items(Resource\RepositoryInterface $repository, string $startReference, ?string $endReference = null): Resource\RangeInterface;</code>
+    </InvalidDocblock>
+  </file>
+  <file src="src/Util/RepositoryResolver.php">
+    <ImplementedParamTypeMismatch occurrences="1">
+      <code>$fromRemoteNames</code>
+    </ImplementedParamTypeMismatch>
+    <InvalidArgument occurrences="2">
+      <code>\array_flip($fromRemoteNames)</code>
+      <code>\array_flip($fromRemoteNames)</code>
+    </InvalidArgument>
+  </file>
+  <file src="src/Util/RepositoryResolverInterface.php">
+    <MismatchingDocblockParamType occurrences="1">
+      <code>string[]</code>
+    </MismatchingDocblockParamType>
+  </file>
+  <file src="test/Unit/Console/GenerateCommandTest.php">
+    <InvalidArgument occurrences="7"/>
+    <UndefinedMethod occurrences="2">
+      <code>testArgument</code>
+      <code>testOption</code>
+    </UndefinedMethod>
+  </file>
+  <file src="test/Unit/Exception/PullRequestNotFoundTest.php">
+    <ImplicitToStringCast occurrences="1">
+      <code>$repository</code>
+    </ImplicitToStringCast>
+  </file>
+  <file src="test/Unit/Exception/ReferenceNotFoundTest.php">
+    <ImplicitToStringCast occurrences="1">
+      <code>$repository</code>
+    </ImplicitToStringCast>
+  </file>
+  <file src="test/Unit/Repository/CommitRepositoryTest.php">
+    <MissingClosureParamType occurrences="4">
+      <code>$commit</code>
+      <code>$commit</code>
+      <code>$array</code>
+      <code>$array</code>
+    </MissingClosureParamType>
+  </file>
+  <file src="test/Unit/Repository/PullRequestRepositoryTest.php">
+    <ImplicitToStringCast occurrences="1">
+      <code>$repository</code>
+    </ImplicitToStringCast>
+  </file>
+  <file src="test/Unit/Resource/CommitTest.php">
+    <UndefinedMethod occurrences="1">
+      <code>testConstructorRejectsInvalidSha</code>
+    </UndefinedMethod>
+  </file>
+  <file src="test/Unit/Resource/PullRequestTest.php">
+    <UndefinedMethod occurrences="1">
+      <code>testConstructorRejectsInvalidNumber</code>
+    </UndefinedMethod>
+  </file>
+  <file src="test/Unit/Resource/RepositoryTest.php">
+    <UndefinedMethod occurrences="7">
+      <code>testFromOwnerAndNameRejectsInvalidOwner</code>
+      <code>testFromOwnerAndNameRejectsInvalidName</code>
+      <code>testFromOwnerAndNameReturnsRepository</code>
+      <code>testFromRemoteUrlRejectsInvalidRemoteUrl</code>
+      <code>testFromRemoteUrlReturnsRepository</code>
+      <code>testFromStringRejectsInvalidStrings</code>
+      <code>testFromStringReturnsRepository</code>
+    </UndefinedMethod>
+  </file>
+  <file src="test/Unit/Util/RepositoryResolverTest.php">
+    <InvalidArgument occurrences="1">
+      <code>$fromRemoteNames</code>
+    </InvalidArgument>
+    <TooManyArguments occurrences="3"/>
+    <UndefinedMethod occurrences="1">
+      <code>testResolveThrowsRuntimeExceptionIfNoValidRemoteUrlsCouldBeFound</code>
+    </UndefinedMethod>
+  </file>
+</files>

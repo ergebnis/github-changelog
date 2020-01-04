@@ -1,7 +1,11 @@
 # https://github.com/probot/settings
 
 branches:
-  - name: master
+  - name: "master"
+
+    # https://developer.github.com/v3/repos/branches/#remove-branch-protection
+    # https://developer.github.com/v3/repos/branches/#update-branch-protection
+
     protection:
       enforce_admins: false
       required_pull_request_reviews:
@@ -10,9 +14,9 @@ branches:
         required_approving_review_count: 1
       required_status_checks:
         contexts:
-          - "Coding Standards (7.2)"
-          - "Dependency Analysis (7.4)"
-          - "Static Code Analysis (7.4)"
+          - "Coding Standards (7.2, locked)"
+          - "Dependency Analysis (7.4, locked)"
+          - "Static Code Analysis (7.4, locked)"
           - "Tests (7.2, lowest)"
           - "Tests (7.2, locked)"
           - "Tests (7.2, highest)"
@@ -22,37 +26,52 @@ branches:
           - "Tests (7.4, lowest)"
           - "Tests (7.4, locked)"
           - "Tests (7.4, highest)"
-          - "Code Coverage (7.4)"
-          - "Mutation Tests (7.4)"
+          - "Code Coverage (7.4, locked)"
+          - "Mutation Tests (7.4, locked)"
           - "codecov/patch"
           - "codecov/project"
         strict: false
-      restrictions: null
+      restrictions:
+        apps:
+          - "dependabot-preview"
+        teams: []
+        users: []
+
+# https://developer.github.com/v3/issues/labels/#create-a-label
+# https://developer.github.com/v3/issues/labels/#update-a-label
 
 labels:
-  - name: bug
-    color: ee0701
+  - name: "bug"
+    color: "#ee0701"
+    description: ""
 
-  - name: dependency
-    color: 0366d6
+  - name: "dependency"
+    color: "#0366d6"
+    description: ""
 
-  - name: enhancement
-    color: 0e8a16
+  - name: "enhancement"
+    color: "#0e8a16"
+    description: ""
 
-  - name: question
-    color: cc317c
+  - name: "question"
+    color: "#cc317c"
+    description: ""
 
-  - name: security
-    color: ee0701
+  - name: "security"
+    color: "#ee0701"
+    description: ""
 
-  - name: stale
-    color: eeeeee
+  - name: "stale"
+    color: "#eeeeee"
+    description: ""
+
+# https://developer.github.com/v3/repos/#edit
 
 repository:
   allow_merge_commit: true
   allow_rebase_merge: false
   allow_squash_merge: false
-  default_branch: master
+  default_branch: "master"
   description: ":octocat: Provides a command line tool that generates a changelog based on titles of pull requests merged between specified references."
   has_downloads: true
   has_issues: true
@@ -61,3 +80,7 @@ repository:
   has_wiki: false
   name: github-changelog
   private: false
+
+  # https://developer.github.com/v3/repos/branches/#remove-branch-protection
+
+  topics: "github, changelog"
