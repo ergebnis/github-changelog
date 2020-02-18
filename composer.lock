@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4e4cb08617ed33afbef904126b584884",
+    "content-hash": "45b053fa25f203a73690940932211e03",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -5644,16 +5644,16 @@
         },
         {
             "name": "vimeo/psalm",
-            "version": "3.8.5",
+            "version": "3.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vimeo/psalm.git",
-                "reference": "e6ec5fa22a7b9e61670a24d07b3119aff80dcd89"
+                "reference": "9866b292a40bc0258b1483428ea2f19baa7aed51"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vimeo/psalm/zipball/e6ec5fa22a7b9e61670a24d07b3119aff80dcd89",
-                "reference": "e6ec5fa22a7b9e61670a24d07b3119aff80dcd89",
+                "url": "https://api.github.com/repos/vimeo/psalm/zipball/9866b292a40bc0258b1483428ea2f19baa7aed51",
+                "reference": "9866b292a40bc0258b1483428ea2f19baa7aed51",
                 "shasum": ""
             },
             "require": {
@@ -5684,10 +5684,10 @@
             "require-dev": {
                 "bamarni/composer-bin-plugin": "^1.2",
                 "ext-curl": "*",
-                "phpmyadmin/sql-parser": "^5.0",
+                "phpmyadmin/sql-parser": "5.1.0",
                 "phpspec/prophecy": ">=1.9.0",
                 "phpunit/phpunit": "^7.5.16 || ^8.0",
-                "psalm/plugin-phpunit": "^0.6",
+                "psalm/plugin-phpunit": "^0.9",
                 "slevomat/coding-standard": "^5.0",
                 "squizlabs/php_codesniffer": "^3.5",
                 "symfony/process": "^4.3"
@@ -5735,7 +5735,7 @@
                 "inspection",
                 "php"
             ],
-            "time": "2020-02-07T17:15:50+00:00"
+            "time": "2020-02-18T04:19:47+00:00"
         },
         {
             "name": "webmozart/assert",
