@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="3.8.1@8e54e3aa060fc490d86d0e2abbf62750516d40fd">
+<files psalm-version="3.10.1@eeed5ecccc10131397f0eb7ee6da810c0be3a7fc">
   <file src="src/Console/GenerateCommand.php">
     <ImplicitToStringCast occurrences="1">
       <code>$repository</code>
@@ -8,6 +8,10 @@
       <code>'upstream'</code>
       <code>'origin'</code>
     </InvalidArgument>
+    <MixedArgument occurrences="2">
+      <code>Helper::formatTime($event-&gt;getDuration() / 1000)</code>
+      <code>Helper::formatMemory($event-&gt;getMemory())</code>
+    </MixedArgument>
   </file>
   <file src="src/Exception/PullRequestNotFound.php">
     <ImplicitToStringCast occurrences="1">
@@ -23,12 +27,70 @@
     <MissingClosureParamType occurrences="1">
       <code>$data</code>
     </MissingClosureParamType>
+    <MixedArgument occurrences="4">
+      <code>$response['sha']</code>
+      <code>$response['commit']['message']</code>
+      <code>$data['sha']</code>
+      <code>$data['commit']['message']</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="3">
+      <code>$response['commit']['message']</code>
+      <code>$data['sha']</code>
+      <code>$data['commit']</code>
+    </MixedArrayAccess>
+    <MixedAssignment occurrences="3">
+      <code>$response</code>
+      <code>$response</code>
+      <code>$range</code>
+    </MixedAssignment>
+    <MixedInferredReturnType occurrences="1">
+      <code>Resource\RangeInterface</code>
+    </MixedInferredReturnType>
+    <MixedMethodCall occurrences="1">
+      <code>withCommit</code>
+    </MixedMethodCall>
+    <MixedReturnStatement occurrences="1">
+      <code>$range</code>
+    </MixedReturnStatement>
+  </file>
+  <file src="src/Repository/PullRequestRepository.php">
+    <MixedArgument occurrences="3">
+      <code>$response['user']['login']</code>
+      <code>$response['number']</code>
+      <code>$response['title']</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="1">
+      <code>$response['user']['login']</code>
+    </MixedArrayAccess>
+    <MixedAssignment occurrences="1">
+      <code>$range</code>
+    </MixedAssignment>
+    <MixedInferredReturnType occurrences="1">
+      <code>Resource\RangeInterface</code>
+    </MixedInferredReturnType>
+    <MixedMethodCall occurrences="1">
+      <code>withPullRequest</code>
+    </MixedMethodCall>
+    <MixedReturnStatement occurrences="1">
+      <code>$range</code>
+    </MixedReturnStatement>
   </file>
   <file src="src/Repository/PullRequestRepositoryInterface.php">
     <InvalidDocblock occurrences="2">
       <code>public function show(Resource\RepositoryInterface $repository, int $number): Resource\PullRequestInterface;</code>
       <code>public function items(Resource\RepositoryInterface $repository, string $startReference, ?string $endReference = null): Resource\RangeInterface;</code>
     </InvalidDocblock>
+  </file>
+  <file src="src/Util/Git.php">
+    <MixedArgumentTypeCoercion occurrences="1">
+      <code>$remoteNames</code>
+    </MixedArgumentTypeCoercion>
+    <MixedInferredReturnType occurrences="1">
+      <code>?string</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="1">
+      <code>\array_shift($remoteUrls)</code>
+    </MixedReturnStatement>
   </file>
   <file src="src/Util/RepositoryResolver.php">
     <ImplementedParamTypeMismatch occurrences="1">
@@ -46,10 +108,12 @@
   </file>
   <file src="test/Unit/Console/GenerateCommandTest.php">
     <InvalidArgument occurrences="7"/>
-    <UndefinedMethod occurrences="2">
-      <code>testArgument</code>
-      <code>testOption</code>
-    </UndefinedMethod>
+    <MixedArgument occurrences="1">
+      <code>$expectedMessage</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="1">
+      <code>$expectedMessage</code>
+    </MixedAssignment>
   </file>
   <file src="test/Unit/Exception/PullRequestNotFoundTest.php">
     <ImplicitToStringCast occurrences="1">
@@ -68,40 +132,69 @@
       <code>$array</code>
       <code>$array</code>
     </MissingClosureParamType>
+    <MixedArgument occurrences="3">
+      <code>$expectedItems</code>
+      <code>$expectedItems</code>
+      <code>$expectedItems</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="8">
+      <code>$expectedItem['commit']['message']</code>
+      <code>$expectedItem['sha']</code>
+      <code>$expectedItem['commit']</code>
+      <code>$expectedItem['sha']</code>
+      <code>$expectedItem['commit']</code>
+      <code>$firstCommitFromFirstSegment['sha']</code>
+      <code>$expectedItem['sha']</code>
+      <code>$expectedItem['commit']</code>
+    </MixedArrayAccess>
+    <MixedAssignment occurrences="4">
+      <code>$expectedItem</code>
+      <code>$expectedItem</code>
+      <code>$firstCommitFromFirstSegment</code>
+      <code>$expectedItem</code>
+    </MixedAssignment>
   </file>
   <file src="test/Unit/Repository/PullRequestRepositoryTest.php">
     <ImplicitToStringCast occurrences="1">
       <code>$repository</code>
     </ImplicitToStringCast>
-  </file>
-  <file src="test/Unit/Resource/CommitTest.php">
-    <UndefinedMethod occurrences="1">
-      <code>testConstructorRejectsInvalidSha</code>
-    </UndefinedMethod>
-  </file>
-  <file src="test/Unit/Resource/PullRequestTest.php">
-    <UndefinedMethod occurrences="1">
-      <code>testConstructorRejectsInvalidNumber</code>
-    </UndefinedMethod>
-  </file>
-  <file src="test/Unit/Resource/RepositoryTest.php">
-    <UndefinedMethod occurrences="7">
-      <code>testFromOwnerAndNameRejectsInvalidOwner</code>
-      <code>testFromOwnerAndNameRejectsInvalidName</code>
-      <code>testFromOwnerAndNameReturnsRepository</code>
-      <code>testFromRemoteUrlRejectsInvalidRemoteUrl</code>
-      <code>testFromRemoteUrlReturnsRepository</code>
-      <code>testFromStringRejectsInvalidStrings</code>
-      <code>testFromStringReturnsRepository</code>
-    </UndefinedMethod>
+    <MixedArgument occurrences="2">
+      <code>$expectedItem['number']</code>
+      <code>$expectedItem['number']</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="1">
+      <code>$expectedItem['user']['login']</code>
+    </MixedArrayAccess>
   </file>
   <file src="test/Unit/Util/RepositoryResolverTest.php">
     <InvalidArgument occurrences="1">
       <code>$fromRemoteNames</code>
     </InvalidArgument>
+    <MixedArgument occurrences="1">
+      <code>$fromRemoteNames</code>
+    </MixedArgument>
+    <MixedArrayOffset occurrences="2">
+      <code>$remoteUrls[$remoteName]</code>
+      <code>$remoteUrls[$remoteName]</code>
+    </MixedArrayOffset>
+    <MixedAssignment occurrences="2">
+      <code>$remoteName</code>
+      <code>$remoteName</code>
+    </MixedAssignment>
     <TooManyArguments occurrences="3"/>
-    <UndefinedMethod occurrences="1">
-      <code>testResolveThrowsRuntimeExceptionIfNoValidRemoteUrlsCouldBeFound</code>
-    </UndefinedMethod>
+  </file>
+  <file src="test/Util/DataProvider.php">
+    <MixedInferredReturnType occurrences="10">
+      <code>\Generator</code>
+      <code>\Generator</code>
+      <code>\Generator</code>
+      <code>\Generator</code>
+      <code>\Generator</code>
+      <code>\Generator</code>
+      <code>\Generator</code>
+      <code>\Generator</code>
+      <code>\Generator</code>
+      <code>\Generator</code>
+    </MixedInferredReturnType>
   </file>
 </files>
