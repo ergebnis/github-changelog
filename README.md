@@ -1,7 +1,9 @@
 # github-changelog
 
-[![Continuous Deployment](https://github.com/ergebnis/github-changelog/workflows/Continuous%20Deployment/badge.svg)](https://github.com/ergebnis/github-changelog/actions)
-[![Continuous Integration](https://github.com/ergebnis/github-changelog/workflows/Continuous%20Integration/badge.svg)](https://github.com/ergebnis/github-changelog/actions)
+[![Integrate](https://github.com/ergebnis/github-changelog/workflows/Integrate/badge.svg?branch=master)](https://github.com/ergebnis/github-changelog/actions)
+[![Prune](https://github.com/ergebnis/github-changelog/workflows/Prune/badge.svg?branch=master)](https://github.com/ergebnis/github-changelog/actions)
+[![Release](https://github.com/ergebnis/github-changelog/workflows/Release/badge.svg?branch=master)](https://github.com/ergebnis/github-changelog/actions)
+[![Renew](https://github.com/ergebnis/github-changelog/workflows/Renew/badge.svg?branch=master)](https://github.com/ergebnis/github-changelog/actions)
 
 [![Code Coverage](https://codecov.io/gh/ergebnis/github-changelog/branch/master/graph/badge.svg)](https://codecov.io/gh/ergebnis/github-changelog)
 [![Type Coverage](https://shepherd.dev/github/ergebnis/github-changelog/coverage.svg)](https://shepherd.dev/github/ergebnis/github-changelog)
@@ -181,4 +183,6 @@ Please have a look at [`CODE_OF_CONDUCT.md`](https://github.com/ergebnis/.github
 
 ## License
 
-This package is licensed using the [MIT License](LICENSE.md).
+This package is licensed using the MIT License.
+
+Please have a look at [`LICENSE.md`](LICENSE.md).
