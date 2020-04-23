@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "809968ccfdec47a0aaa885a05aa33573",
+    "content-hash": "a7d1a4e3e552517ff4e8e3cbe68c2dfa",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -1514,16 +1514,16 @@
     "packages-dev": [
         {
             "name": "amphp/amp",
-            "version": "v2.4.2",
+            "version": "v2.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/amp.git",
-                "reference": "feca077369a47263b22156b3c6389e55f3809f24"
+                "reference": "23ac95fc6d6973231763f5ed7d1309b39429b974"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/amp/zipball/feca077369a47263b22156b3c6389e55f3809f24",
-                "reference": "feca077369a47263b22156b3c6389e55f3809f24",
+                "url": "https://api.github.com/repos/amphp/amp/zipball/23ac95fc6d6973231763f5ed7d1309b39429b974",
+                "reference": "23ac95fc6d6973231763f5ed7d1309b39429b974",
                 "shasum": ""
             },
             "require": {
@@ -1536,7 +1536,7 @@
                 "jetbrains/phpstorm-stubs": "^2019.3",
                 "phpunit/phpunit": "^6.0.9 | ^7",
                 "react/promise": "^2",
-                "vimeo/psalm": "^3.9@dev"
+                "vimeo/psalm": "^3.11@dev"
             },
             "type": "library",
             "extra": {
@@ -1588,7 +1588,7 @@
                 "non-blocking",
                 "promise"
             ],
-            "time": "2020-04-04T15:05:26+00:00"
+            "time": "2020-04-19T15:54:21+00:00"
         },
         {
             "name": "amphp/byte-stream",
@@ -2979,16 +2979,16 @@
         },
         {
             "name": "netresearch/jsonmapper",
-            "version": "v2.0.0",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cweiske/jsonmapper.git",
-                "reference": "e245890383c3ed38b6d202ee373c23ccfebc0f54"
+                "reference": "e0f1e33a71587aca81be5cffbb9746510e1fe04e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cweiske/jsonmapper/zipball/e245890383c3ed38b6d202ee373c23ccfebc0f54",
-                "reference": "e245890383c3ed38b6d202ee373c23ccfebc0f54",
+                "url": "https://api.github.com/repos/cweiske/jsonmapper/zipball/e0f1e33a71587aca81be5cffbb9746510e1fe04e",
+                "reference": "e0f1e33a71587aca81be5cffbb9746510e1fe04e",
                 "shasum": ""
             },
             "require": {
@@ -3021,7 +3021,7 @@
                 }
             ],
             "description": "Map nested JSON structures onto PHP classes",
-            "time": "2020-03-04T17:23:33+00:00"
+            "time": "2020-04-16T18:48:43+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -5658,16 +5658,16 @@
         },
         {
             "name": "vimeo/psalm",
-            "version": "3.11.1",
+            "version": "3.11.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vimeo/psalm.git",
-                "reference": "8533b866ab1a46e5a69a4692ff57f10529dbfbeb"
+                "reference": "d470903722cfcbc1cd04744c5491d3e6d13ec3d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vimeo/psalm/zipball/8533b866ab1a46e5a69a4692ff57f10529dbfbeb",
-                "reference": "8533b866ab1a46e5a69a4692ff57f10529dbfbeb",
+                "url": "https://api.github.com/repos/vimeo/psalm/zipball/d470903722cfcbc1cd04744c5491d3e6d13ec3d9",
+                "reference": "d470903722cfcbc1cd04744c5491d3e6d13ec3d9",
                 "shasum": ""
             },
             "require": {
@@ -5752,7 +5752,7 @@
                 "inspection",
                 "php"
             ],
-            "time": "2020-04-13T02:19:49+00:00"
+            "time": "2020-04-13T12:47:11+00:00"
         },
         {
             "name": "webmozart/assert",
