@@ -11,7 +11,7 @@ declare(strict_types=1);
  * @see https://github.com/ergebnis/github-changelog
  */
 
-use Ergebnis\GitHub\ChangeLog;
+use Ergebnis\GitHub\Changelog;
 use Github\Api;
 use Github\Client;
 use Symfony\Component\Cache;
@@ -40,13 +40,13 @@ $client->addCache(new Cache\Adapter\FilesystemAdapter(
 
 $application = new Console\Application('github-changelog', '0.5.2');
 
-$application->add(new ChangeLog\Console\GenerateCommand(
+$application->add(new Changelog\Console\GenerateCommand(
     $client,
-    new ChangeLog\Repository\PullRequestRepository(
+    new Changelog\Repository\PullRequestRepository(
         new Api\PullRequest($client),
-        new ChangeLog\Repository\CommitRepository(new Api\Repository\Commits($client))
+        new Changelog\Repository\CommitRepository(new Api\Repository\Commits($client))
     ),
-    new ChangeLog\Util\RepositoryResolver(new ChangeLog\Util\Git())
+    new Changelog\Util\RepositoryResolver(new Changelog\Util\Git())
 ));
 
 $application->run();
