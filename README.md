@@ -124,8 +124,8 @@ require 'vendor/autoload.php';
 
 use Github\Client;
 use Github\HttpClient\CachedHttpClient;
-use Ergebnis\GitHub\ChangeLog\Repository;
-use Ergebnis\GitHub\ChangeLog\Resource;
+use Ergebnis\GitHub\Changelog\Repository;
+use Ergebnis\GitHub\Changelog\Resource;
 
 $client = new Client(new CachedHttpClient());
 $client->authenticate(
