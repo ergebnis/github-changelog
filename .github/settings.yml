@@ -1,7 +1,7 @@
 # https://github.com/probot/settings
 
 branches:
-  - name: "master"
+  - name: "main"
 
     # https://developer.github.com/v3/repos/branches/#remove-branch-protection
     # https://developer.github.com/v3/repos/branches/#update-branch-protection
@@ -80,7 +80,7 @@ repository:
   allow_rebase_merge: false
   allow_squash_merge: false
   archived: false
-  default_branch: "master"
+  default_branch: "main"
   delete_branch_on_merge: true
   description: ":octocat: Provides a command line tool that generates a changelog based on titles of pull requests merged between specified references."
   has_downloads: true
