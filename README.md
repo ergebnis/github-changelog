@@ -1,11 +1,11 @@
 # github-changelog
 
-[![Integrate](https://github.com/ergebnis/github-changelog/workflows/Integrate/badge.svg?branch=master)](https://github.com/ergebnis/github-changelog/actions)
-[![Prune](https://github.com/ergebnis/github-changelog/workflows/Prune/badge.svg?branch=master)](https://github.com/ergebnis/github-changelog/actions)
-[![Release](https://github.com/ergebnis/github-changelog/workflows/Release/badge.svg?branch=master)](https://github.com/ergebnis/github-changelog/actions)
-[![Renew](https://github.com/ergebnis/github-changelog/workflows/Renew/badge.svg?branch=master)](https://github.com/ergebnis/github-changelog/actions)
+[![Integrate](https://github.com/ergebnis/github-changelog/workflows/Integrate/badge.svg?branch=main)](https://github.com/ergebnis/github-changelog/actions)
+[![Prune](https://github.com/ergebnis/github-changelog/workflows/Prune/badge.svg?branch=main)](https://github.com/ergebnis/github-changelog/actions)
+[![Release](https://github.com/ergebnis/github-changelog/workflows/Release/badge.svg?branch=main)](https://github.com/ergebnis/github-changelog/actions)
+[![Renew](https://github.com/ergebnis/github-changelog/workflows/Renew/badge.svg?branch=main)](https://github.com/ergebnis/github-changelog/actions)
 
-[![Code Coverage](https://codecov.io/gh/ergebnis/github-changelog/branch/master/graph/badge.svg)](https://codecov.io/gh/ergebnis/github-changelog)
+[![Code Coverage](https://codecov.io/gh/ergebnis/github-changelog/branch/main/graph/badge.svg)](https://codecov.io/gh/ergebnis/github-changelog)
 [![Type Coverage](https://shepherd.dev/github/ergebnis/github-changelog/coverage.svg)](https://shepherd.dev/github/ergebnis/github-changelog)
 
 [![Latest Stable Version](https://poser.pugx.org/ergebnis/github-changelog/v/stable)](https://packagist.org/packages/ergebnis/github-changelog)
@@ -31,7 +31,7 @@ keeping a changelog as suggested at http://keepachangelog.com.
 | My process                                   | Will this tool work for me? |
 |----------------------------------------------|-----------------------------|
 | I need elaborate changelogs                  | No                          |
-| I push to `master`                           | No                          |
+| I push directly into the default branch      | No                          |
 | ![Rebase and merge][rebase-and-merge-button] | No                          |
 | ![Squash and merge][squash-and-merge-button] | No                          |
 | ![Merge pull request][merge-button]          | **Yes**                     |
@@ -91,7 +91,7 @@ $ composer require --dev ergebnis/github-changelog
 Create your changelog from within in your project:
 
 ```bash
-$ vendor/bin/github-changelog generate ergebnis/github-changelog ae63248 master
+$ vendor/bin/github-changelog generate ergebnis/github-changelog ae63248 main
 ```
 
 Enjoy the changelog:
@@ -179,7 +179,7 @@ Please have a look at [`CONTRIBUTING.md`](.github/CONTRIBUTING.md).
 
 ## Code of Conduct
 
-Please have a look at [`CODE_OF_CONDUCT.md`](https://github.com/ergebnis/.github/blob/master/CODE_OF_CONDUCT.md).
+Please have a look at [`CODE_OF_CONDUCT.md`](https://github.com/ergebnis/.github/blob/main/CODE_OF_CONDUCT.md).
 
 ## License
 
