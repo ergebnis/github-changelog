@@ -195,7 +195,7 @@ final class GenerateCommand extends Command
                     ],
                     [
                         $pullRequest->title(),
-                        $pullRequest->number(),
+                        (string) $pullRequest->number(),
                         $pullRequest->author()->login(),
                         $pullRequest->author()->htmlUrl(),
                     ],
