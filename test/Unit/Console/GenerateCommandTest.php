@@ -525,7 +525,7 @@ final class GenerateCommandTest extends Framework\TestCase
                 ],
                 [
                     $pullRequest->title(),
-                    $pullRequest->number(),
+                    (string) $pullRequest->number(),
                     $pullRequest->author()->login(),
                     $pullRequest->author()->htmlUrl(),
                 ],
