@@ -19,10 +19,10 @@
   },
   "require-dev": {
     "ergebnis/composer-normalize": "^2.5.1",
-    "ergebnis/license": "~1.0.0",
+    "ergebnis/license": "^1.0.0",
     "ergebnis/php-cs-fixer-config": "^2.1.2",
     "ergebnis/phpstan-rules": "~0.15.0",
-    "ergebnis/test-util": "~1.0.0",
+    "ergebnis/test-util": "^1.0.0",
     "infection/infection": "~0.15.3",
     "jangregor/phpstan-prophecy": "~0.8.0",
     "phpstan/extension-installer": "^1.0.4",
@@ -43,12 +43,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Ergebnis\\GitHub\\Changelog\\": "src"
+      "Ergebnis\\GitHub\\Changelog\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Ergebnis\\GitHub\\Changelog\\Test\\": "test"
+      "Ergebnis\\GitHub\\Changelog\\Test\\": "test/"
     }
   },
   "bin": [

@@ -29,7 +29,7 @@ keeping a changelog as suggested at http://keepachangelog.com.
 ## When will it work for me?
 
 | My process                                   | Will this tool work for me? |
-|----------------------------------------------|-----------------------------|
+|:---------------------------------------------|:----------------------------|
 | I need elaborate changelogs                  | No                          |
 | I push directly into the default branch      | No                          |
 | ![Rebase and merge][rebase-and-merge-button] | No                          |
@@ -179,10 +179,14 @@ Please have a look at [`CONTRIBUTING.md`](.github/CONTRIBUTING.md).
 
 ## Code of Conduct
 
-Please have a look at [`CODE_OF_CONDUCT.md`](https://github.com/ergebnis/.github/blob/main/CODE_OF_CONDUCT.md).
+Please have a look at [`CODE_OF_CONDUCT.md`](.github/CODE_OF_CONDUCT.md).
 
 ## License
 
 This package is licensed using the MIT License.
 
 Please have a look at [`LICENSE.md`](LICENSE.md).
+
+## Curious what I am building?
+
+:mailbox_with_mail: [Subscribe to my list](https://localheinz.com/projects/), and I will occasionally send you an email to let you know what I am working on.
