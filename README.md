@@ -55,13 +55,13 @@ All this tool does is this:
 
 Install globally:
 
-```bash
+```sh
 $ composer global require ergebnis/github-changelog
 ```
 
 Create your changelogs from within a Git repository:
 
-```bash
+```sh
 $ git clone git@github.com:ergebnis/github-changelog.git
 $ cd github-changelog
 $ github-changelog generate 0.1.1 0.1.2
@@ -69,7 +69,7 @@ $ github-changelog generate 0.1.1 0.1.2
 
 Create your changelogs from anywhere, specifying the repository using the `--repository` option:
 
-```bash
+```sh
 $ github-changelog generate --repository ergebnis/github-changelog 0.1.1 0.1.2
 ```
 
@@ -84,13 +84,13 @@ Enjoy the changelog:
 
 Install locally:
 
-```bash
+```sh
 $ composer require --dev ergebnis/github-changelog
 ```
 
 Create your changelog from within in your project:
 
-```bash
+```sh
 $ vendor/bin/github-changelog generate ergebnis/github-changelog ae63248 main
 ```
 
@@ -111,7 +111,7 @@ Enjoy the changelog:
 
 Install locally:
 
-```bash
+```sh
 $ composer require ergebnis/github-changelog
 ```
 
@@ -179,7 +179,7 @@ Please have a look at [`CONTRIBUTING.md`](.github/CONTRIBUTING.md).
 
 ## Code of Conduct
 
-Please have a look at [`CODE_OF_CONDUCT.md`](.github/CODE_OF_CONDUCT.md).
+Please have a look at [`CODE_OF_CONDUCT.md`](https://github.com/ergebnis/.github/blob/main/CODE_OF_CONDUCT.md).
 
 ## License
 
