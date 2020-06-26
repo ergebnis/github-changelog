@@ -20,6 +20,7 @@ use Ergebnis\Test\Util\Helper;
 use Github\Api;
 use PHPUnit\Framework;
 use Prophecy\Argument;
+use Prophecy\PhpUnit;
 
 /**
  * @internal
@@ -29,6 +30,7 @@ use Prophecy\Argument;
 final class CommitRepositoryTest extends Framework\TestCase
 {
     use Helper;
+    use PhpUnit\ProphecyTrait;
 
     public function testImplementsCommitRepositoryInterface(): void
     {
