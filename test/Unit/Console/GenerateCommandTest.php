@@ -428,7 +428,7 @@ final class GenerateCommandTest extends Framework\TestCase
         ]);
 
         self::assertSame(0, $exitCode);
-        self::assertRegExp('@' . $expectedMessage . '@', $tester->getDisplay());
+        self::assertMatchesRegularExpression('@' . $expectedMessage . '@', $tester->getDisplay());
     }
 
     /**
