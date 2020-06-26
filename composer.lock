@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "61a8c8bcdfe0ffdf68444c2bfbf99df1",
+    "content-hash": "2a0304907a1f26e5a87a27a707c8bcd1",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -85,7 +85,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "6.2-dev"
+                    "dev-master": "6.2-dev"
                 }
             },
             "autoload": {
@@ -143,7 +143,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.0-dev"
+                    "dev-master": "1.0-dev"
                 }
             },
             "autoload": {
@@ -198,7 +198,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.4-dev"
+                    "dev-master": "1.4-dev"
                 }
             },
             "autoload": {
@@ -294,6 +294,12 @@
                 "gist",
                 "github"
             ],
+            "funding": [
+                {
+                    "url": "https://github.com/acrobat",
+                    "type": "github"
+                }
+            ],
             "time": "2020-04-25T20:36:03+00:00"
         },
         {
@@ -324,7 +330,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.6-dev"
+                    "dev-master": "1.6-dev"
                 }
             },
             "autoload": {
@@ -385,7 +391,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.10.x-dev"
+                    "dev-master": "1.10.x-dev"
                 }
             },
             "autoload": {
@@ -447,7 +453,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.7-dev"
+                    "dev-master": "1.7-dev"
                 }
             },
             "autoload": {
@@ -508,7 +514,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.2-dev"
+                    "dev-master": "1.2-dev"
                 }
             },
             "autoload": {
@@ -564,7 +570,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.1-dev"
+                    "dev-master": "1.1-dev"
                 }
             },
             "autoload": {
@@ -636,7 +642,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.8-dev"
+                    "dev-master": "1.8-dev"
                 }
             },
             "autoload": {
@@ -687,7 +693,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.0-dev"
+                    "dev-master": "1.0-dev"
                 }
             },
             "autoload": {
@@ -737,7 +743,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.1-dev"
+                    "dev-master": "1.1-dev"
                 }
             },
             "autoload": {
@@ -786,7 +792,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.0.x-dev"
+                    "dev-master": "1.0.x-dev"
                 }
             },
             "autoload": {
@@ -832,7 +838,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.0.x-dev"
+                    "dev-master": "1.0.x-dev"
                 }
             },
             "autoload": {
@@ -881,7 +887,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.0.x-dev"
+                    "dev-master": "1.0.x-dev"
                 }
             },
             "autoload": {
@@ -931,7 +937,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.1.x-dev"
+                    "dev-master": "1.1.x-dev"
                 }
             },
             "autoload": {
@@ -1201,6 +1207,20 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
             "time": "2020-05-30T20:35:19+00:00"
         },
         {
@@ -1247,6 +1267,20 @@
             ],
             "description": "A generic function and convention to trigger deprecation notices",
             "homepage": "https://symfony.com",
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
             "time": "2020-05-27T08:34:37+00:00"
         },
         {
@@ -1453,6 +1487,20 @@
                 "portable",
                 "shim"
             ],
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
             "time": "2020-05-12T16:47:27+00:00"
         },
         {
@@ -1516,6 +1564,20 @@
                 "portable",
                 "shim"
             ],
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
             "time": "2020-05-12T16:14:59+00:00"
         },
         {
@@ -1575,6 +1637,20 @@
                 "portable",
                 "shim"
             ],
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
             "time": "2020-05-12T16:47:27+00:00"
         },
         {
@@ -1632,6 +1708,20 @@
                 "polyfill",
                 "portable",
                 "shim"
+            ],
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
             ],
             "time": "2020-05-12T16:47:27+00:00"
         },
@@ -1771,6 +1861,20 @@
                 "interoperability",
                 "standards"
             ],
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
             "time": "2020-05-20T17:43:50+00:00"
         },
         {
@@ -1821,6 +1925,20 @@
             ],
             "description": "Symfony Stopwatch Component",
             "homepage": "https://symfony.com",
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
             "time": "2020-05-20T17:43:50+00:00"
         },
         {
@@ -1891,6 +2009,20 @@
                 "unicode",
                 "utf-8",
                 "utf8"
+            ],
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
             ],
             "time": "2020-05-20T17:43:50+00:00"
         },
@@ -1989,7 +2121,7 @@
                 "php": ">=7"
             },
             "require-dev": {
-                "amphp/php-cs-fixer-config": "dev-main",
+                "amphp/php-cs-fixer-config": "dev-master",
                 "amphp/phpunit-util": "^1",
                 "ext-json": "*",
                 "jetbrains/phpstorm-stubs": "^2019.3",
@@ -2000,7 +2132,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "2.x-dev"
+                    "dev-master": "2.x-dev"
                 }
             },
             "autoload": {
@@ -2067,7 +2199,7 @@
                 "amphp/amp": "^2"
             },
             "require-dev": {
-                "amphp/php-cs-fixer-config": "dev-main",
+                "amphp/php-cs-fixer-config": "dev-master",
                 "amphp/phpunit-util": "^1",
                 "friendsofphp/php-cs-fixer": "^2.3",
                 "jetbrains/phpstorm-stubs": "^2019.3",
@@ -2077,7 +2209,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.x-dev"
+                    "dev-master": "1.x-dev"
                 }
             },
             "autoload": {
@@ -2137,7 +2269,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.x-dev"
+                    "dev-master": "1.x-dev"
                 }
             },
             "autoload": {
@@ -2216,6 +2348,20 @@
             "keywords": [
                 "Xdebug",
                 "performance"
+            ],
+            "funding": [
+                {
+                    "url": "https://packagist.com",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/composer",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/composer/composer",
+                    "type": "tidelift"
+                }
             ],
             "time": "2020-06-04T11:16:35+00:00"
         },
@@ -2317,7 +2463,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.2.x-dev"
+                    "dev-master": "1.2.x-dev"
                 }
             },
             "autoload": {
@@ -2537,6 +2683,24 @@
                 "normalizer",
                 "plugin"
             ],
+            "funding": [
+                {
+                    "url": "https://paypal.me/localheinz",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.amazon.de/hz/wishlist/ls/2NCHMSJ4BC1OW",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.buymeacoffee.com/localheinz",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/localheinz",
+                    "type": "github"
+                }
+            ],
             "time": "2020-05-01T12:02:09+00:00"
         },
         {
@@ -2596,6 +2760,24 @@
             "keywords": [
                 "json",
                 "normalizer"
+            ],
+            "funding": [
+                {
+                    "url": "https://paypal.me/localheinz",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.amazon.de/hz/wishlist/ls/2NCHMSJ4BC1OW",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.buymeacoffee.com/localheinz",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/localheinz",
+                    "type": "github"
+                }
             ],
             "time": "2020-04-19T12:30:41+00:00"
         },
@@ -2710,6 +2892,24 @@
             "homepage": "https://github.com/ergebnis/license",
             "keywords": [
                 "license"
+            ],
+            "funding": [
+                {
+                    "url": "https://paypal.me/localheinz",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.amazon.de/hz/wishlist/ls/2NCHMSJ4BC1OW",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.buymeacoffee.com/localheinz",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/localheinz",
+                    "type": "github"
+                }
             ],
             "time": "2020-05-04T17:36:52+00:00"
         },
@@ -2856,6 +3056,24 @@
                 "phpstan-extreme-rules",
                 "phpstan-rules"
             ],
+            "funding": [
+                {
+                    "url": "https://paypal.me/localheinz",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.amazon.de/hz/wishlist/ls/2NCHMSJ4BC1OW",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.buymeacoffee.com/localheinz",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/localheinz",
+                    "type": "github"
+                }
+            ],
             "time": "2020-05-10T18:39:28+00:00"
         },
         {
@@ -2915,6 +3133,20 @@
                 "faker",
                 "phpunit",
                 "test"
+            ],
+            "funding": [
+                {
+                    "url": "http://paypal.me/localheinz",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.buymeacoffee.com/localheinz",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/localheinz",
+                    "type": "github"
+                }
             ],
             "time": "2020-03-11T11:08:49+00:00"
         },
@@ -3095,6 +3327,12 @@
                 }
             ],
             "description": "A tool to automatically fix PHP code style",
+            "funding": [
+                {
+                    "url": "https://github.com/keradus",
+                    "type": "github"
+                }
+            ],
             "time": "2020-04-15T18:51:10+00:00"
         },
         {
@@ -3122,7 +3360,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.9-dev"
+                    "dev-master": "1.9-dev"
                 }
             },
             "autoload": {
@@ -3302,6 +3540,16 @@
                 }
             ],
             "description": "Provides a phpstan/phpstan extension for phpspec/prophecy",
+            "funding": [
+                {
+                    "url": "https://www.buymeacoffee.com/localheinz",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/localheinz",
+                    "type": "github"
+                }
+            ],
             "time": "2020-05-12T08:04:04+00:00"
         },
         {
@@ -3332,7 +3580,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "5.0.x-dev"
+                    "dev-master": "5.0.x-dev"
                 }
             },
             "autoload": {
@@ -3596,7 +3844,7 @@
             "extra": {
                 "class": "PackageVersions\\Installer",
                 "branch-alias": {
-                    "dev-main": "2.0.x-dev"
+                    "dev-master": "2.0.x-dev"
                 }
             },
             "autoload": {
@@ -3734,7 +3982,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.0.x-dev"
+                    "dev-master": "1.0.x-dev"
                 }
             },
             "autoload": {
@@ -3884,7 +4132,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "2.x-dev"
+                    "dev-master": "2.x-dev"
                 }
             },
             "autoload": {
@@ -3941,7 +4189,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "5.x-dev"
+                    "dev-master": "5.x-dev"
                 }
             },
             "autoload": {
@@ -3991,7 +4239,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.x-dev"
+                    "dev-master": "1.x-dev"
                 }
             },
             "autoload": {
@@ -4040,7 +4288,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.10.x-dev"
+                    "dev-master": "1.10.x-dev"
                 }
             },
             "autoload": {
@@ -4122,16 +4370,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "0.12.27",
+            "version": "0.12.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "2abbd3253e38a258137f647f4e5fdbcb13142c3e"
+                "reference": "776c8056b401e1b67f277b9e9fb334d1a274671d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/2abbd3253e38a258137f647f4e5fdbcb13142c3e",
-                "reference": "2abbd3253e38a258137f647f4e5fdbcb13142c3e",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/776c8056b401e1b67f277b9e9fb334d1a274671d",
+                "reference": "776c8056b401e1b67f277b9e9fb334d1a274671d",
                 "shasum": ""
             },
             "require": {
@@ -4174,7 +4422,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-06-08T21:28:12+00:00"
+            "time": "2020-06-24T20:55:29+00:00"
         },
         {
             "name": "phpstan/phpstan-deprecation-rules",
@@ -4207,7 +4455,7 @@
             "type": "phpstan-extension",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "0.12-dev"
+                    "dev-master": "0.12-dev"
                 },
                 "phpstan": {
                     "includes": [
@@ -4262,7 +4510,7 @@
             "type": "phpstan-extension",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "0.12-dev"
+                    "dev-master": "0.12-dev"
                 },
                 "phpstan": {
                     "includes": [
@@ -4314,7 +4562,7 @@
             "type": "phpstan-extension",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "0.12-dev"
+                    "dev-master": "0.12-dev"
                 },
                 "phpstan": {
                     "includes": [
@@ -4369,7 +4617,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "7.0-dev"
+                    "dev-master": "7.0-dev"
                 }
             },
             "autoload": {
@@ -4420,7 +4668,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "2.0.x-dev"
+                    "dev-master": "2.0.x-dev"
                 }
             },
             "autoload": {
@@ -4511,7 +4759,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "2.1-dev"
+                    "dev-master": "2.1-dev"
                 }
             },
             "autoload": {
@@ -4561,7 +4809,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "3.1-dev"
+                    "dev-master": "3.1-dev"
                 }
             },
             "autoload": {
@@ -4641,7 +4889,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "8.5-dev"
+                    "dev-master": "8.5-dev"
                 }
             },
             "autoload": {
@@ -4666,6 +4914,16 @@
                 "phpunit",
                 "testing",
                 "xunit"
+            ],
+            "funding": [
+                {
+                    "url": "https://phpunit.de/donate.html",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/sebastianbergmann",
+                    "type": "github"
+                }
             ],
             "time": "2020-05-22T13:51:52+00:00"
         },
@@ -4693,7 +4951,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "3.2.x-dev"
+                    "dev-master": "3.2.x-dev"
                 }
             },
             "autoload": {
@@ -4739,7 +4997,7 @@
                 "ocramius/package-versions": "^1.3",
                 "php": "^7.1.3",
                 "phpunit/phpunit": "^7.5 || ^8.0 || ^9.0",
-                "vimeo/psalm": "^3.6.2 || dev-main"
+                "vimeo/psalm": "^3.6.2 || dev-master"
             },
             "require-dev": {
                 "codeception/codeception": "^4.0.3",
@@ -4790,7 +5048,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.0.x-dev"
+                    "dev-master": "1.0.x-dev"
                 }
             },
             "autoload": {
@@ -4839,7 +5097,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.0.x-dev"
+                    "dev-master": "1.0.x-dev"
                 }
             },
             "autoload": {
@@ -4886,7 +5144,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "3.0-dev"
+                    "dev-master": "3.0-dev"
                 }
             },
             "autoload": {
@@ -4949,7 +5207,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "3.0-dev"
+                    "dev-master": "3.0-dev"
                 }
             },
             "autoload": {
@@ -5007,7 +5265,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "4.2-dev"
+                    "dev-master": "4.2-dev"
                 }
             },
             "autoload": {
@@ -5059,7 +5317,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "3.1.x-dev"
+                    "dev-master": "3.1.x-dev"
                 }
             },
             "autoload": {
@@ -5130,7 +5388,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "3.0-dev"
+                    "dev-master": "3.0-dev"
                 }
             },
             "autoload": {
@@ -5180,7 +5438,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "3.0.x-dev"
+                    "dev-master": "3.0.x-dev"
                 }
             },
             "autoload": {
@@ -5225,7 +5483,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.1-dev"
+                    "dev-master": "1.1-dev"
                 }
             },
             "autoload": {
@@ -5270,7 +5528,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "3.0.x-dev"
+                    "dev-master": "3.0.x-dev"
                 }
             },
             "autoload": {
@@ -5320,7 +5578,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "2.0-dev"
+                    "dev-master": "2.0-dev"
                 }
             },
             "autoload": {
@@ -5365,7 +5623,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.1-dev"
+                    "dev-master": "1.1-dev"
                 }
             },
             "autoload": {
@@ -5408,7 +5666,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "2.0.x-dev"
+                    "dev-master": "2.0.x-dev"
                 }
             },
             "autoload": {
@@ -6005,7 +6263,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "5.0-dev"
+                    "dev-master": "5.0-dev"
                 }
             },
             "autoload": {
@@ -6059,7 +6317,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "0.1-dev"
+                    "dev-master": "0.1-dev"
                 }
             },
             "autoload": {
@@ -6377,7 +6635,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "4.1-dev"
+                    "dev-master": "4.1-dev"
                 }
             },
             "autoload": {
@@ -6423,7 +6681,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "2.3-dev"
+                    "dev-master": "2.3-dev"
                 }
             },
             "autoload": {
