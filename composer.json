@@ -25,6 +25,7 @@
     "ergebnis/test-util": "^1.0.0",
     "infection/infection": "~0.15.3",
     "jangregor/phpstan-prophecy": "~0.8.0",
+    "phpspec/prophecy-phpunit": "^2.0.0",
     "phpstan/extension-installer": "^1.0.4",
     "phpstan/phpstan": "~0.12.31",
     "phpstan/phpstan-deprecation-rules": "~0.12.4",
