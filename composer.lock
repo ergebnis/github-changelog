@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "92111ac8fd525daadb6af5c6fdcb58c4",
+    "content-hash": "f2dd0b217df70c061aafc8865110033a",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -85,7 +85,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "6.2-dev"
+                    "dev-master": "6.2-dev"
                 }
             },
             "autoload": {
@@ -143,7 +143,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.0-dev"
+                    "dev-master": "1.0-dev"
                 }
             },
             "autoload": {
@@ -198,7 +198,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.4-dev"
+                    "dev-master": "1.4-dev"
                 }
             },
             "autoload": {
@@ -294,6 +294,12 @@
                 "gist",
                 "github"
             ],
+            "funding": [
+                {
+                    "url": "https://github.com/acrobat",
+                    "type": "github"
+                }
+            ],
             "time": "2020-04-25T20:36:03+00:00"
         },
         {
@@ -324,7 +330,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.6-dev"
+                    "dev-master": "1.6-dev"
                 }
             },
             "autoload": {
@@ -385,7 +391,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.10.x-dev"
+                    "dev-master": "1.10.x-dev"
                 }
             },
             "autoload": {
@@ -447,7 +453,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.7-dev"
+                    "dev-master": "1.7-dev"
                 }
             },
             "autoload": {
@@ -508,7 +514,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.2-dev"
+                    "dev-master": "1.2-dev"
                 }
             },
             "autoload": {
@@ -564,7 +570,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.1-dev"
+                    "dev-master": "1.1-dev"
                 }
             },
             "autoload": {
@@ -636,7 +642,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.8-dev"
+                    "dev-master": "1.8-dev"
                 }
             },
             "autoload": {
@@ -687,7 +693,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.0-dev"
+                    "dev-master": "1.0-dev"
                 }
             },
             "autoload": {
@@ -737,7 +743,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.1-dev"
+                    "dev-master": "1.1-dev"
                 }
             },
             "autoload": {
@@ -786,7 +792,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.0.x-dev"
+                    "dev-master": "1.0.x-dev"
                 }
             },
             "autoload": {
@@ -832,7 +838,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.0.x-dev"
+                    "dev-master": "1.0.x-dev"
                 }
             },
             "autoload": {
@@ -881,7 +887,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.0.x-dev"
+                    "dev-master": "1.0.x-dev"
                 }
             },
             "autoload": {
@@ -931,7 +937,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.1.x-dev"
+                    "dev-master": "1.1.x-dev"
                 }
             },
             "autoload": {
@@ -1261,6 +1267,20 @@
             ],
             "description": "A generic function and convention to trigger deprecation notices",
             "homepage": "https://symfony.com",
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
             "time": "2020-05-27T08:34:37+00:00"
         },
         {
@@ -1857,6 +1877,20 @@
                 "interoperability",
                 "standards"
             ],
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
             "time": "2020-05-20T17:43:50+00:00"
         },
         {
@@ -1907,6 +1941,20 @@
             ],
             "description": "Symfony Stopwatch Component",
             "homepage": "https://symfony.com",
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
             "time": "2020-05-20T17:43:50+00:00"
         },
         {
@@ -2089,7 +2137,7 @@
                 "php": ">=7"
             },
             "require-dev": {
-                "amphp/php-cs-fixer-config": "dev-main",
+                "amphp/php-cs-fixer-config": "dev-master",
                 "amphp/phpunit-util": "^1",
                 "ext-json": "*",
                 "jetbrains/phpstorm-stubs": "^2019.3",
@@ -2100,7 +2148,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "2.x-dev"
+                    "dev-master": "2.x-dev"
                 }
             },
             "autoload": {
@@ -2167,7 +2215,7 @@
                 "amphp/amp": "^2"
             },
             "require-dev": {
-                "amphp/php-cs-fixer-config": "dev-main",
+                "amphp/php-cs-fixer-config": "dev-master",
                 "amphp/phpunit-util": "^1",
                 "friendsofphp/php-cs-fixer": "^2.3",
                 "jetbrains/phpstorm-stubs": "^2019.3",
@@ -2177,7 +2225,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.x-dev"
+                    "dev-master": "1.x-dev"
                 }
             },
             "autoload": {
@@ -2237,7 +2285,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.x-dev"
+                    "dev-master": "1.x-dev"
                 }
             },
             "autoload": {
@@ -2316,6 +2364,20 @@
             "keywords": [
                 "Xdebug",
                 "performance"
+            ],
+            "funding": [
+                {
+                    "url": "https://packagist.com",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/composer",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/composer/composer",
+                    "type": "tidelift"
+                }
             ],
             "time": "2020-06-04T11:16:35+00:00"
         },
@@ -2651,6 +2713,24 @@
                 "normalizer",
                 "plugin"
             ],
+            "funding": [
+                {
+                    "url": "https://paypal.me/localheinz",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.amazon.de/hz/wishlist/ls/2NCHMSJ4BC1OW",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.buymeacoffee.com/localheinz",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/localheinz",
+                    "type": "github"
+                }
+            ],
             "time": "2020-05-01T12:02:09+00:00"
         },
         {
@@ -2710,6 +2790,24 @@
             "keywords": [
                 "json",
                 "normalizer"
+            ],
+            "funding": [
+                {
+                    "url": "https://paypal.me/localheinz",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.amazon.de/hz/wishlist/ls/2NCHMSJ4BC1OW",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.buymeacoffee.com/localheinz",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/localheinz",
+                    "type": "github"
+                }
             ],
             "time": "2020-04-19T12:30:41+00:00"
         },
@@ -2824,6 +2922,24 @@
             "homepage": "https://github.com/ergebnis/license",
             "keywords": [
                 "license"
+            ],
+            "funding": [
+                {
+                    "url": "https://paypal.me/localheinz",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.amazon.de/hz/wishlist/ls/2NCHMSJ4BC1OW",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.buymeacoffee.com/localheinz",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/localheinz",
+                    "type": "github"
+                }
             ],
             "time": "2020-05-04T17:36:52+00:00"
         },
@@ -2970,6 +3086,24 @@
                 "phpstan-extreme-rules",
                 "phpstan-rules"
             ],
+            "funding": [
+                {
+                    "url": "https://paypal.me/localheinz",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.amazon.de/hz/wishlist/ls/2NCHMSJ4BC1OW",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.buymeacoffee.com/localheinz",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/localheinz",
+                    "type": "github"
+                }
+            ],
             "time": "2020-05-10T18:39:28+00:00"
         },
         {
@@ -3029,6 +3163,20 @@
                 "faker",
                 "phpunit",
                 "test"
+            ],
+            "funding": [
+                {
+                    "url": "http://paypal.me/localheinz",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.buymeacoffee.com/localheinz",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/localheinz",
+                    "type": "github"
+                }
             ],
             "time": "2020-03-11T11:08:49+00:00"
         },
@@ -3209,6 +3357,12 @@
                 }
             ],
             "description": "A tool to automatically fix PHP code style",
+            "funding": [
+                {
+                    "url": "https://github.com/keradus",
+                    "type": "github"
+                }
+            ],
             "time": "2020-04-15T18:51:10+00:00"
         },
         {
@@ -3236,7 +3390,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.9-dev"
+                    "dev-master": "1.9-dev"
                 }
             },
             "autoload": {
@@ -3262,17 +3416,144 @@
             "time": "2019-12-12T13:22:17+00:00"
         },
         {
-            "name": "infection/infection",
-            "version": "0.15.3",
+            "name": "infection/abstract-testframework-adapter",
+            "version": "0.3.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/infection/infection.git",
-                "reference": "c3fc380317eb14d213e1e1962801ee9325129fb2"
+                "url": "https://github.com/infection/abstract-testframework-adapter.git",
+                "reference": "f3ec6fc4beb6377b72d8106f5ff329dffd51ca8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/infection/infection/zipball/c3fc380317eb14d213e1e1962801ee9325129fb2",
-                "reference": "c3fc380317eb14d213e1e1962801ee9325129fb2",
+                "url": "https://api.github.com/repos/infection/abstract-testframework-adapter/zipball/f3ec6fc4beb6377b72d8106f5ff329dffd51ca8a",
+                "reference": "f3ec6fc4beb6377b72d8106f5ff329dffd51ca8a",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Infection\\AbstractTestFramework\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Maks Rafalko",
+                    "email": "maks.rafalko@gmail.com"
+                }
+            ],
+            "description": "Abstract Test Framework Adapter for Infection",
+            "time": "2020-03-14T07:20:06+00:00"
+        },
+        {
+            "name": "infection/extension-installer",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/infection/extension-installer.git",
+                "reference": "ff30c0adffcdbc747c96adf92382ccbe271d0afd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/infection/extension-installer/zipball/ff30c0adffcdbc747c96adf92382ccbe271d0afd",
+                "reference": "ff30c0adffcdbc747c96adf92382ccbe271d0afd",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.1 || ^2.0"
+            },
+            "require-dev": {
+                "composer/composer": "^1.9",
+                "friendsofphp/php-cs-fixer": "^2.16",
+                "infection/infection": "^0.15.2",
+                "php-coveralls/php-coveralls": "^2.2",
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "^0.12.10",
+                "phpstan/phpstan-phpunit": "^0.12.6",
+                "phpstan/phpstan-strict-rules": "^0.12.2",
+                "phpstan/phpstan-webmozart-assert": "^0.12.2",
+                "phpunit/phpunit": "^8.5",
+                "vimeo/psalm": "^3.8"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Infection\\ExtensionInstaller\\Plugin"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Infection\\ExtensionInstaller\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Maks Rafalko",
+                    "email": "maks.rafalko@gmail.com"
+                }
+            ],
+            "description": "Infection Extension Installer",
+            "time": "2020-04-25T22:40:05+00:00"
+        },
+        {
+            "name": "infection/include-interceptor",
+            "version": "0.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/infection/include-interceptor.git",
+                "reference": "07d20c33a6c0624b8636adf25ddca7e9e19a5dc9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/infection/include-interceptor/zipball/07d20c33a6c0624b8636adf25ddca7e9e19a5dc9",
+                "reference": "07d20c33a6c0624b8636adf25ddca7e9e19a5dc9",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Infection\\StreamWrapper\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Maks Rafalko",
+                    "email": "maks.rafalko@gmail.com"
+                }
+            ],
+            "description": "Stream Wrapper: Include Interceptor. Allows to replace included (autoloaded) file with another one.",
+            "time": "2020-01-27T10:28:21+00:00"
+        },
+        {
+            "name": "infection/infection",
+            "version": "0.16.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/infection/infection.git",
+                "reference": "c1ef0b16b3e8d171f10ba8bfe8b6c93d482a68b4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/infection/infection/zipball/c1ef0b16b3e8d171f10ba8bfe8b6c93d482a68b4",
+                "reference": "c1ef0b16b3e8d171f10ba8bfe8b6c93d482a68b4",
                 "shasum": ""
             },
             "require": {
@@ -3280,18 +3561,21 @@
                 "ext-dom": "*",
                 "ext-json": "*",
                 "ext-libxml": "*",
+                "infection/abstract-testframework-adapter": "^0.3.0",
+                "infection/extension-installer": "^0.1.0",
+                "infection/include-interceptor": "^0.2.2",
                 "justinrainbow/json-schema": "^5.2",
                 "nikic/php-parser": "^4.2.2",
                 "ocramius/package-versions": "^1.2",
-                "php": "^7.2.9",
-                "pimple/pimple": "^3.2",
+                "ondram/ci-detector": "^3.3.0",
+                "php": "^7.3",
+                "sanmai/pipeline": "^3.1",
                 "sebastian/diff": "^3.0.2 || ^4.0",
                 "seld/jsonlint": "^1.7",
                 "symfony/console": "^3.4.29 || ^4.0 || ^5.0",
                 "symfony/filesystem": "^3.4.29 || ^4.0 || ^5.0",
                 "symfony/finder": "^3.4.29 || ^4.0 || ^5.0",
                 "symfony/process": "^3.4.29 || ^4.0 || ^5.0",
-                "symfony/yaml": "^3.4.29 || ^4.0 || ^5.0",
                 "thecodingmachine/safe": "^1.0",
                 "webmozart/assert": "^1.3",
                 "webmozart/path-util": "^2.3"
@@ -3300,9 +3584,16 @@
                 "symfony/console": "=4.1.5"
             },
             "require-dev": {
+                "ext-simplexml": "*",
                 "helmich/phpunit-json-assert": "^3.0",
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "^0.12.8",
+                "phpstan/phpstan-phpunit": "^0.12.6",
+                "phpstan/phpstan-webmozart-assert": "^0.12.2",
                 "phpunit/phpunit": "^8.2.5 <8.4",
-                "symfony/phpunit-bridge": "^4.3.4 || ^5.0"
+                "symfony/phpunit-bridge": "^4.3.4 || ^5.0",
+                "symfony/yaml": "^5.0",
+                "thecodingmachine/phpstan-safe-rule": "^1.0"
             },
             "bin": [
                 "bin/infection"
@@ -3356,7 +3647,7 @@
                 "testing",
                 "unit testing"
             ],
-            "time": "2020-02-16T19:33:49+00:00"
+            "time": "2020-06-25T15:14:51+00:00"
         },
         {
             "name": "jangregor/phpstan-prophecy",
@@ -3416,20 +3707,30 @@
                 }
             ],
             "description": "Provides a phpstan/phpstan extension for phpspec/prophecy",
+            "funding": [
+                {
+                    "url": "https://www.buymeacoffee.com/localheinz",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/localheinz",
+                    "type": "github"
+                }
+            ],
             "time": "2020-05-12T08:04:04+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
-            "version": "5.2.9",
+            "version": "5.2.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/justinrainbow/json-schema.git",
-                "reference": "44c6787311242a979fa15c704327c20e7221a0e4"
+                "reference": "2ba9c8c862ecd5510ed16c6340aa9f6eadb4f31b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/justinrainbow/json-schema/zipball/44c6787311242a979fa15c704327c20e7221a0e4",
-                "reference": "44c6787311242a979fa15c704327c20e7221a0e4",
+                "url": "https://api.github.com/repos/justinrainbow/json-schema/zipball/2ba9c8c862ecd5510ed16c6340aa9f6eadb4f31b",
+                "reference": "2ba9c8c862ecd5510ed16c6340aa9f6eadb4f31b",
                 "shasum": ""
             },
             "require": {
@@ -3446,7 +3747,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "5.0.x-dev"
+                    "dev-master": "5.0.x-dev"
                 }
             },
             "autoload": {
@@ -3482,7 +3783,7 @@
                 "json",
                 "schema"
             ],
-            "time": "2019-09-25T14:49:45+00:00"
+            "time": "2020-05-27T16:41:55+00:00"
         },
         {
             "name": "localheinz/diff",
@@ -3743,6 +4044,73 @@
             "time": "2020-06-22T14:15:44+00:00"
         },
         {
+            "name": "ondram/ci-detector",
+            "version": "3.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/OndraM/ci-detector.git",
+                "reference": "0babf1cb71984f652498c6327a47d0081cd1e01b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/OndraM/ci-detector/zipball/0babf1cb71984f652498c6327a47d0081cd1e01b",
+                "reference": "0babf1cb71984f652498c6327a47d0081cd1e01b",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1"
+            },
+            "require-dev": {
+                "ergebnis/composer-normalize": "^2.2",
+                "lmc/coding-standard": "^1.3 || ^2.0",
+                "php-coveralls/php-coveralls": "^2.2",
+                "php-parallel-lint/php-parallel-lint": "^1.1",
+                "phpstan/extension-installer": "^1.0.3",
+                "phpstan/phpstan": "^0.12.0",
+                "phpstan/phpstan-phpunit": "^0.12.1",
+                "phpunit/phpunit": "^7.1 || ^8.0 || ^9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "OndraM\\CiDetector\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ondřej Machulda",
+                    "email": "ondrej.machulda@gmail.com"
+                }
+            ],
+            "description": "Detect continuous integration environment and provide unified access to properties of current build",
+            "keywords": [
+                "CircleCI",
+                "Codeship",
+                "adapter",
+                "appveyor",
+                "aws",
+                "aws codebuild",
+                "bamboo",
+                "bitbucket",
+                "buddy",
+                "codebuild",
+                "continuous integration",
+                "continuousphp",
+                "drone",
+                "github",
+                "gitlab",
+                "interface",
+                "jenkins",
+                "teamcity",
+                "travis"
+            ],
+            "time": "2020-05-11T19:24:44+00:00"
+        },
+        {
             "name": "openlss/lib-array2xml",
             "version": "1.0.0",
             "source": {
@@ -3859,7 +4227,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.0.x-dev"
+                    "dev-master": "1.0.x-dev"
                 }
             },
             "autoload": {
@@ -4009,7 +4377,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "2.x-dev"
+                    "dev-master": "2.x-dev"
                 }
             },
             "autoload": {
@@ -4066,7 +4434,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "5.x-dev"
+                    "dev-master": "5.x-dev"
                 }
             },
             "autoload": {
@@ -4165,7 +4533,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.10.x-dev"
+                    "dev-master": "1.10.x-dev"
                 }
             },
             "autoload": {
@@ -4380,7 +4748,7 @@
             "type": "phpstan-extension",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "0.12-dev"
+                    "dev-master": "0.12-dev"
                 },
                 "phpstan": {
                     "includes": [
@@ -4435,7 +4803,7 @@
             "type": "phpstan-extension",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "0.12-dev"
+                    "dev-master": "0.12-dev"
                 },
                 "phpstan": {
                     "includes": [
@@ -4487,7 +4855,7 @@
             "type": "phpstan-extension",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "0.12-dev"
+                    "dev-master": "0.12-dev"
                 },
                 "phpstan": {
                     "includes": [
@@ -4956,56 +5324,6 @@
             "time": "2020-06-22T07:10:55+00:00"
         },
         {
-            "name": "pimple/pimple",
-            "version": "v3.2.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/silexphp/Pimple.git",
-                "reference": "9e403941ef9d65d20cba7d54e29fe906db42cf32"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/silexphp/Pimple/zipball/9e403941ef9d65d20cba7d54e29fe906db42cf32",
-                "reference": "9e403941ef9d65d20cba7d54e29fe906db42cf32",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0",
-                "psr/container": "^1.0"
-            },
-            "require-dev": {
-                "symfony/phpunit-bridge": "^3.2"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "3.2.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Pimple": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                }
-            ],
-            "description": "Pimple, a simple Dependency Injection Container",
-            "homepage": "http://pimple.sensiolabs.org",
-            "keywords": [
-                "container",
-                "dependency injection"
-            ],
-            "time": "2018-01-21T07:42:36+00:00"
-        },
-        {
             "name": "psalm/plugin-phpunit",
             "version": "0.10.1",
             "source": {
@@ -5025,7 +5343,7 @@
                 "ocramius/package-versions": "^1.3",
                 "php": "^7.1.3",
                 "phpunit/phpunit": "^7.5 || ^8.0 || ^9.0",
-                "vimeo/psalm": "^3.6.2 || dev-main"
+                "vimeo/psalm": "^3.6.2 || dev-master"
             },
             "require-dev": {
                 "codeception/codeception": "^4.0.3",
@@ -5076,7 +5394,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.0.x-dev"
+                    "dev-master": "1.0.x-dev"
                 }
             },
             "autoload": {
@@ -5101,6 +5419,62 @@
                 "psr-14"
             ],
             "time": "2019-01-08T18:20:26+00:00"
+        },
+        {
+            "name": "sanmai/pipeline",
+            "version": "v3.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sanmai/pipeline.git",
+                "reference": "12a7402b97d945587a6a8c291a0040369a83fcf6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sanmai/pipeline/zipball/12a7402b97d945587a6a8c291a0040369a83fcf6",
+                "reference": "12a7402b97d945587a6a8c291a0040369a83fcf6",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1"
+            },
+            "require-dev": {
+                "codacy/coverage": "^1.4",
+                "friendsofphp/php-cs-fixer": "^2.13",
+                "infection/infection": ">=0.10.5",
+                "league/pipeline": "^1.0 || ^0.3",
+                "mockery/mockery": "^1.0",
+                "phan/phan": "^1.1 || ^2.0",
+                "php-coveralls/php-coveralls": "^2.0",
+                "phpstan/phpstan": ">=0.10",
+                "phpunit/phpunit": "^7.4 || ^8.1",
+                "vimeo/psalm": "^2.0 || ^3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Pipeline\\": "src/"
+                },
+                "files": [
+                    "src/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Alexey Kopytko",
+                    "email": "alexey@kopytko.com"
+                }
+            ],
+            "description": "General-purpose collections pipeline",
+            "time": "2020-01-26T21:22:49+00:00"
         },
         {
             "name": "sebastian/code-unit",
@@ -5840,20 +6214,20 @@
         },
         {
             "name": "seld/jsonlint",
-            "version": "1.7.2",
+            "version": "1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/jsonlint.git",
-                "reference": "e2e5d290e4d2a4f0eb449f510071392e00e10d19"
+                "reference": "ff2aa5420bfbc296cf6a0bc785fa5b35736de7c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/jsonlint/zipball/e2e5d290e4d2a4f0eb449f510071392e00e10d19",
-                "reference": "e2e5d290e4d2a4f0eb449f510071392e00e10d19",
+                "url": "https://api.github.com/repos/Seldaek/jsonlint/zipball/ff2aa5420bfbc296cf6a0bc785fa5b35736de7c1",
+                "reference": "ff2aa5420bfbc296cf6a0bc785fa5b35736de7c1",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.3 || ^7.0"
+                "php": "^5.3 || ^7.0 || ^8.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.0"
@@ -5885,7 +6259,17 @@
                 "parser",
                 "validator"
             ],
-            "time": "2019-10-24T14:27:39+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/Seldaek",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/seld/jsonlint",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-04-30T19:05:18+00:00"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -6383,76 +6767,17 @@
             "time": "2020-05-30T20:35:19+00:00"
         },
         {
-            "name": "symfony/yaml",
-            "version": "v5.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/yaml.git",
-                "reference": "69b44e3b8f90949aee2eb3aa9b86ceeb01cbf62a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/69b44e3b8f90949aee2eb3aa9b86ceeb01cbf62a",
-                "reference": "69b44e3b8f90949aee2eb3aa9b86ceeb01cbf62a",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.2.5",
-                "symfony/polyfill-ctype": "~1.8"
-            },
-            "conflict": {
-                "symfony/console": "<4.4"
-            },
-            "require-dev": {
-                "symfony/console": "^4.4|^5.0"
-            },
-            "suggest": {
-                "symfony/console": "For validating YAML files using the lint command"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "5.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\Yaml\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony Yaml Component",
-            "homepage": "https://symfony.com",
-            "time": "2020-01-21T11:12:28+00:00"
-        },
-        {
             "name": "thecodingmachine/safe",
-            "version": "v1.0.3",
+            "version": "v1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thecodingmachine/safe.git",
-                "reference": "6662d0bef91fe5d44178cb2c38d51c5d16b65d23"
+                "reference": "85e21ee4c4118fd0cb85e9f2c778dfcb781acd1b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thecodingmachine/safe/zipball/6662d0bef91fe5d44178cb2c38d51c5d16b65d23",
-                "reference": "6662d0bef91fe5d44178cb2c38d51c5d16b65d23",
+                "url": "https://api.github.com/repos/thecodingmachine/safe/zipball/85e21ee4c4118fd0cb85e9f2c778dfcb781acd1b",
+                "reference": "85e21ee4c4118fd0cb85e9f2c778dfcb781acd1b",
                 "shasum": ""
             },
             "require": {
@@ -6466,7 +6791,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "0.1-dev"
+                    "dev-master": "0.1-dev"
                 }
             },
             "autoload": {
@@ -6536,6 +6861,7 @@
                     "generated/ps.php",
                     "generated/pspell.php",
                     "generated/readline.php",
+                    "generated/rpminfo.php",
                     "generated/rrd.php",
                     "generated/sem.php",
                     "generated/session.php",
@@ -6571,7 +6897,7 @@
                 "MIT"
             ],
             "description": "PHP core functions that throw exceptions instead of returning FALSE on error",
-            "time": "2020-01-20T08:44:36+00:00"
+            "time": "2020-06-11T08:39:56+00:00"
         },
         {
             "name": "theseer/tokenizer",
@@ -6785,7 +7111,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "4.1-dev"
+                    "dev-master": "4.1-dev"
                 }
             },
             "autoload": {
@@ -6831,7 +7157,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "2.3-dev"
+                    "dev-master": "2.3-dev"
                 }
             },
             "autoload": {
