@@ -10,7 +10,7 @@
     }
   ],
   "require": {
-    "php": "^7.3",
+    "php": "^7.4",
     "knplabs/github-api": "^2.14.0",
     "php-http/guzzle6-adapter": "^1.1.1",
     "symfony/cache": "^5.1.1",
@@ -36,7 +36,7 @@
   },
   "config": {
     "platform": {
-      "php": "7.3.17"
+      "php": "7.4.7"
     },
     "preferred-install": "dist",
     "sort-packages": true
