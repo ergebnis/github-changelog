@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 For a full diff see [`0.7.1...main`][0.7.1...main].
 
+### Changed
+
+* Dropped support for PHP 7.2 ([#504]), by [@localheinz]
+
 ## [`0.7.1`][0.7.1]
 
 For a full diff see [`0.7.0...0.7.1`][0.7.0...0.7.1].
@@ -68,6 +72,7 @@ For a full diff see [`0.6.1...0.7.0`][0.6.1...0.7.0].
 [#314]: https://github.com/ergebnis/github-changelog/pull/314
 [#336]: https://github.com/ergebnis/github-changelog/pull/336
 [#339]: https://github.com/ergebnis/github-changelog/pull/339
+[#504]: https://github.com/ergebnis/github-changelog/pull/504
 
 [@ergebnis]: https://github.com/ergebnis
 [@localheinz]: https://github.com/localheinz
