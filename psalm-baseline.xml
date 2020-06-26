@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="3.10.1@eeed5ecccc10131397f0eb7ee6da810c0be3a7fc">
+<files psalm-version="3.12.1@9b860214d58c48b5cbe99bdb17914d0eb723c9cd">
   <file src="src/Console/GenerateCommand.php">
     <ImplicitToStringCast occurrences="1">
       <code>$repository</code>
@@ -107,9 +107,50 @@
     </MismatchingDocblockParamType>
   </file>
   <file src="test/Unit/Console/GenerateCommandTest.php">
-    <InvalidArgument occurrences="7"/>
-    <MixedArgument occurrences="1">
+    <MixedArgument occurrences="43">
+      <code>$this-&gt;prophesize(Client::class)-&gt;reveal()</code>
+      <code>$this-&gt;prophesize(Repository\PullRequestRepositoryInterface::class)-&gt;reveal()</code>
+      <code>$this-&gt;prophesize(Util\RepositoryResolverInterface::class)-&gt;reveal()</code>
+      <code>$this-&gt;prophesize(Client::class)-&gt;reveal()</code>
+      <code>$this-&gt;prophesize(Repository\PullRequestRepositoryInterface::class)-&gt;reveal()</code>
+      <code>$this-&gt;prophesize(Util\RepositoryResolverInterface::class)-&gt;reveal()</code>
+      <code>$this-&gt;prophesize(Client::class)-&gt;reveal()</code>
+      <code>$this-&gt;prophesize(Repository\PullRequestRepositoryInterface::class)-&gt;reveal()</code>
+      <code>$this-&gt;prophesize(Util\RepositoryResolverInterface::class)-&gt;reveal()</code>
+      <code>$this-&gt;prophesize(Client::class)-&gt;reveal()</code>
+      <code>$this-&gt;prophesize(Repository\PullRequestRepositoryInterface::class)-&gt;reveal()</code>
+      <code>$this-&gt;prophesize(Util\RepositoryResolverInterface::class)-&gt;reveal()</code>
+      <code>$client-&gt;reveal()</code>
+      <code>$pullRequestRepository-&gt;reveal()</code>
+      <code>$this-&gt;prophesize(Util\RepositoryResolverInterface::class)-&gt;reveal()</code>
+      <code>$this-&gt;prophesize(Client::class)-&gt;reveal()</code>
+      <code>$this-&gt;prophesize(Repository\PullRequestRepositoryInterface::class)-&gt;reveal()</code>
+      <code>$this-&gt;prophesize(Util\RepositoryResolverInterface::class)-&gt;reveal()</code>
+      <code>$this-&gt;prophesize(Client::class)-&gt;reveal()</code>
+      <code>$this-&gt;prophesize(Repository\PullRequestRepositoryInterface::class)-&gt;reveal()</code>
+      <code>$repositoryResolver-&gt;reveal()</code>
+      <code>$this-&gt;prophesize(Client::class)-&gt;reveal()</code>
+      <code>$pullRequestRepository-&gt;reveal()</code>
+      <code>$repositoryResolver-&gt;reveal()</code>
+      <code>$this-&gt;prophesize(Client::class)-&gt;reveal()</code>
+      <code>$pullRequestRepository-&gt;reveal()</code>
+      <code>$repositoryResolver-&gt;reveal()</code>
+      <code>$this-&gt;prophesize(Client::class)-&gt;reveal()</code>
+      <code>$pullRequestRepository-&gt;reveal()</code>
+      <code>$this-&gt;prophesize(Util\RepositoryResolverInterface::class)-&gt;reveal()</code>
+      <code>$this-&gt;prophesize(Client::class)-&gt;reveal()</code>
+      <code>$pullRequestRepository-&gt;reveal()</code>
+      <code>$this-&gt;prophesize(Util\RepositoryResolverInterface::class)-&gt;reveal()</code>
+      <code>$this-&gt;prophesize(Client::class)-&gt;reveal()</code>
+      <code>$pullRequestRepository-&gt;reveal()</code>
+      <code>$this-&gt;prophesize(Util\RepositoryResolverInterface::class)-&gt;reveal()</code>
       <code>$expectedMessage</code>
+      <code>$this-&gt;prophesize(Client::class)-&gt;reveal()</code>
+      <code>$pullRequestRepository-&gt;reveal()</code>
+      <code>$this-&gt;prophesize(Util\RepositoryResolverInterface::class)-&gt;reveal()</code>
+      <code>$this-&gt;prophesize(Client::class)-&gt;reveal()</code>
+      <code>$pullRequestRepository-&gt;reveal()</code>
+      <code>$this-&gt;prophesize(Util\RepositoryResolverInterface::class)-&gt;reveal()</code>
     </MixedArgument>
     <MixedAssignment occurrences="1">
       <code>$expectedMessage</code>
@@ -132,9 +173,22 @@
       <code>$array</code>
       <code>$array</code>
     </MissingClosureParamType>
-    <MixedArgument occurrences="3">
+    <MixedArgument occurrences="16">
+      <code>$commitApi-&gt;reveal()</code>
+      <code>$api-&gt;reveal()</code>
+      <code>$commitApi-&gt;reveal()</code>
+      <code>$commitApi-&gt;reveal()</code>
+      <code>$commitApi-&gt;reveal()</code>
+      <code>$commitApi-&gt;reveal()</code>
       <code>$expectedItems</code>
+      <code>$this-&gt;prophesize(Api\Repository\Commits::class)-&gt;reveal()</code>
+      <code>$commitApi-&gt;reveal()</code>
+      <code>$commitApi-&gt;reveal()</code>
+      <code>$commitApi-&gt;reveal()</code>
+      <code>$commitApi-&gt;reveal()</code>
+      <code>$commitApi-&gt;reveal()</code>
       <code>$expectedItems</code>
+      <code>$commitApi-&gt;reveal()</code>
       <code>$expectedItems</code>
     </MixedArgument>
     <MixedArrayAccess occurrences="8">
@@ -158,19 +212,45 @@
     <ImplicitToStringCast occurrences="1">
       <code>$repository</code>
     </ImplicitToStringCast>
-    <MixedArgument occurrences="2">
+    <MixedArgument occurrences="16">
+      <code>$api-&gt;reveal()</code>
+      <code>$this-&gt;prophesize(Repository\CommitRepositoryInterface::class)-&gt;reveal()</code>
       <code>$expectedItem['number']</code>
+      <code>$api-&gt;reveal()</code>
+      <code>$this-&gt;prophesize(Repository\CommitRepositoryInterface::class)-&gt;reveal()</code>
+      <code>$this-&gt;prophesize(Api\PullRequest::class)-&gt;reveal()</code>
+      <code>$commitRepository-&gt;reveal()</code>
+      <code>$this-&gt;prophesize(Api\PullRequest::class)-&gt;reveal()</code>
+      <code>$commitRepository-&gt;reveal()</code>
+      <code>$this-&gt;prophesize(Api\PullRequest::class)-&gt;reveal()</code>
+      <code>$commitRepository-&gt;reveal()</code>
       <code>$expectedItem['number']</code>
+      <code>$api-&gt;reveal()</code>
+      <code>$commitRepository-&gt;reveal()</code>
+      <code>$pullRequestApi-&gt;reveal()</code>
+      <code>$commitRepository-&gt;reveal()</code>
     </MixedArgument>
     <MixedArrayAccess occurrences="1">
       <code>$expectedItem['user']['login']</code>
     </MixedArrayAccess>
   </file>
+  <file src="test/Unit/Resource/RangeTest.php">
+    <MixedArgument occurrences="2">
+      <code>$commit-&gt;reveal()</code>
+      <code>$pullRequest-&gt;reveal()</code>
+    </MixedArgument>
+  </file>
   <file src="test/Unit/Util/RepositoryResolverTest.php">
     <InvalidArgument occurrences="1">
       <code>$fromRemoteNames</code>
     </InvalidArgument>
-    <MixedArgument occurrences="1">
+    <MixedArgument occurrences="7">
+      <code>$git-&gt;reveal()</code>
+      <code>$git-&gt;reveal()</code>
+      <code>$git-&gt;reveal()</code>
+      <code>$git-&gt;reveal()</code>
+      <code>$git-&gt;reveal()</code>
+      <code>$git-&gt;reveal()</code>
       <code>$fromRemoteNames</code>
     </MixedArgument>
     <MixedArrayOffset occurrences="2">
