@@ -22,6 +22,7 @@ use Ergebnis\Test\Util\Helper;
 use Github\Client;
 use PHPUnit\Framework;
 use Prophecy\Argument;
+use Prophecy\PhpUnit;
 use Symfony\Component\Console\Input;
 use Symfony\Component\Console\Tester\CommandTester;
 
@@ -33,6 +34,7 @@ use Symfony\Component\Console\Tester\CommandTester;
 final class GenerateCommandTest extends Framework\TestCase
 {
     use Helper;
+    use PhpUnit\ProphecyTrait;
 
     public function testHasName(): void
     {
@@ -428,7 +430,7 @@ final class GenerateCommandTest extends Framework\TestCase
         ]);
 
         self::assertSame(0, $exitCode);
-        self::assertRegExp('@' . $expectedMessage . '@', $tester->getDisplay());
+        self::assertMatchesRegularExpression('@' . $expectedMessage . '@', $tester->getDisplay());
     }
 
     /**

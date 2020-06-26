@@ -16,6 +16,7 @@ namespace Ergebnis\GitHub\Changelog\Test\Unit\Resource;
 use Ergebnis\GitHub\Changelog\Resource;
 use Ergebnis\Test\Util\Helper;
 use PHPUnit\Framework;
+use Prophecy\PhpUnit;
 
 /**
  * @internal
@@ -25,6 +26,7 @@ use PHPUnit\Framework;
 final class RangeTest extends Framework\TestCase
 {
     use Helper;
+    use PhpUnit\ProphecyTrait;
 
     public function testImplementsRangeInterface(): void
     {

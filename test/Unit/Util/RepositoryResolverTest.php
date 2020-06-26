@@ -19,6 +19,7 @@ use Ergebnis\GitHub\Changelog\Util\RepositoryResolver;
 use Ergebnis\GitHub\Changelog\Util\RepositoryResolverInterface;
 use Ergebnis\Test\Util\Helper;
 use PHPUnit\Framework;
+use Prophecy\PhpUnit;
 
 /**
  * @internal
@@ -28,6 +29,7 @@ use PHPUnit\Framework;
 final class RepositoryResolverTest extends Framework\TestCase
 {
     use Helper;
+    use PhpUnit\ProphecyTrait;
 
     public function testImplementsRepositoryResolverInterface(): void
     {
