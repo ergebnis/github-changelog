@@ -9,8 +9,6 @@ on: # yamllint disable-line rule:truthy
       - "main"
 
 env:
-  MIN_COVERED_MSI: 90
-  MIN_MSI: 88
   PHP_EXTENSIONS: "mbstring"
 
 jobs:
@@ -371,7 +369,7 @@ jobs:
         run: "composer update --no-interaction --no-progress --no-suggest"
 
       - name: "Run mutation tests with pcov and infection/infection"
-        run: "vendor/bin/infection --ignore-msi-with-no-mutations --min-covered-msi=${{ env.MIN_COVERED_MSI }} --min-msi=${{ env.MIN_MSI }}"
+        run: "vendor/bin/infection --configuration=infection.json"
 
   merge:
     name: "Merge"
