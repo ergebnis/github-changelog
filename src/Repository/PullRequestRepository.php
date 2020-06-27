@@ -19,15 +19,9 @@ use Github\Api;
 
 final class PullRequestRepository implements PullRequestRepositoryInterface
 {
-    /**
-     * @var Api\PullRequest
-     */
-    private $api;
+    private Api\PullRequest $api;
 
-    /**
-     * @var CommitRepositoryInterface
-     */
-    private $commitRepository;
+    private CommitRepositoryInterface $commitRepository;
 
     public function __construct(Api\PullRequest $api, CommitRepositoryInterface $commitRepository)
     {

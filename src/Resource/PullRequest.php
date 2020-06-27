@@ -17,20 +17,11 @@ use Ergebnis\GitHub\Changelog\Exception;
 
 final class PullRequest implements PullRequestInterface
 {
-    /**
-     * @var int
-     */
-    private $number;
+    private int $number;
 
-    /**
-     * @var string
-     */
-    private $title;
+    private string $title;
 
-    /**
-     * @var UserInterface
-     */
-    private $author;
+    private UserInterface $author;
 
     /**
      * @param int           $number
