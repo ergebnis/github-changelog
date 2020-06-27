@@ -34,14 +34,15 @@ final class GenerateCommand extends Console\Command\Command
     public function __construct(
         Client $client,
         Repository\PullRequestRepositoryInterface $pullRequestRepository,
-        Util\RepositoryResolverInterface $repositoryResolver
+        Util\RepositoryResolverInterface $repositoryResolver,
+        Stopwatch\Stopwatch $stopwatch
     ) {
         parent::__construct();
 
         $this->client = $client;
         $this->pullRequestRepository = $pullRequestRepository;
         $this->repositoryResolver = $repositoryResolver;
-        $this->stopwatch = new Stopwatch\Stopwatch();
+        $this->stopwatch = $stopwatch;
     }
 
     protected function configure(): void
