@@ -18,15 +18,10 @@ use Ergebnis\GitHub\Changelog\Repository;
 use Ergebnis\GitHub\Changelog\Resource;
 use Ergebnis\GitHub\Changelog\Util;
 use Github\Client;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Helper\Helper;
-use Symfony\Component\Console\Input;
-use Symfony\Component\Console\Output;
-use Symfony\Component\Console\Style\SymfonyStyle;
-use Symfony\Component\Stopwatch\Stopwatch;
-use Symfony\Component\Stopwatch\StopwatchEvent;
+use Symfony\Component\Console;
+use Symfony\Component\Stopwatch;
 
-final class GenerateCommand extends Command
+final class GenerateCommand extends Console\Command\Command
 {
     private Client $client;
 
@@ -34,7 +29,7 @@ final class GenerateCommand extends Command
 
     private Util\RepositoryResolverInterface $repositoryResolver;
 
-    private Stopwatch $stopwatch;
+    private Stopwatch\Stopwatch $stopwatch;
 
     public function __construct(
         Client $client,
@@ -46,7 +41,7 @@ final class GenerateCommand extends Command
         $this->client = $client;
         $this->pullRequestRepository = $pullRequestRepository;
         $this->repositoryResolver = $repositoryResolver;
-        $this->stopwatch = new Stopwatch();
+        $this->stopwatch = new Stopwatch\Stopwatch();
     }
 
     protected function configure(): void
@@ -56,40 +51,40 @@ final class GenerateCommand extends Command
             ->setDescription('Generates a changelog from merged pull requests found between commit references')
             ->addArgument(
                 'start-reference',
-                Input\InputArgument::REQUIRED,
+                Console\Input\InputArgument::REQUIRED,
                 'The start reference, e.g. "1.0.0"'
             )
             ->addArgument(
                 'end-reference',
-                Input\InputArgument::OPTIONAL,
+                Console\Input\InputArgument::OPTIONAL,
                 'The end reference, e.g. "1.1.0"'
             )
             ->addOption(
                 'auth-token',
                 'a',
-                Input\InputOption::VALUE_REQUIRED,
+                Console\Input\InputOption::VALUE_REQUIRED,
                 'The GitHub token'
             )
             ->addOption(
                 'repository',
                 'r',
-                Input\InputOption::VALUE_REQUIRED,
+                Console\Input\InputOption::VALUE_REQUIRED,
                 'The repository, e.g. "ergebnis/github-changelog"'
             )
             ->addOption(
                 'template',
                 't',
-                Input\InputOption::VALUE_REQUIRED,
+                Console\Input\InputOption::VALUE_REQUIRED,
                 'The template to use for rendering a pull request',
                 '- %pullrequest.title% (#%pullrequest.number%), by @%pullrequest.author.login%'
             );
     }
 
-    protected function execute(Input\InputInterface $input, Output\OutputInterface $output): int
+    protected function execute(Console\Input\InputInterface $input, Console\Output\OutputInterface $output): int
     {
         $this->stopwatch->start('changelog');
 
-        $io = new SymfonyStyle(
+        $io = new Console\Style\SymfonyStyle(
             $input,
             $output
         );
@@ -225,12 +220,12 @@ final class GenerateCommand extends Command
         );
     }
 
-    private function formatStopwatchEvent(StopwatchEvent $event): string
+    private function formatStopwatchEvent(Stopwatch\StopwatchEvent $event): string
     {
         return \sprintf(
             'Time: %s, Memory: %s.',
-            Helper::formatTime($event->getDuration() / 1000),
-            Helper::formatMemory($event->getMemory())
+            Console\Helper\Helper::formatTime($event->getDuration() / 1000),
+            Console\Helper\Helper::formatMemory($event->getMemory())
         );
     }
 }

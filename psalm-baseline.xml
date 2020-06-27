@@ -9,8 +9,8 @@
       <code>'origin'</code>
     </InvalidArgument>
     <MixedArgument occurrences="2">
-      <code>Helper::formatTime($event-&gt;getDuration() / 1000)</code>
-      <code>Helper::formatMemory($event-&gt;getMemory())</code>
+      <code>Console\Helper\Helper::formatTime($event-&gt;getDuration() / 1000)</code>
+      <code>Console\Helper\Helper::formatMemory($event-&gt;getMemory())</code>
     </MixedArgument>
   </file>
   <file src="src/Exception/PullRequestNotFound.php">
