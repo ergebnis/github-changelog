@@ -80,3 +80,8 @@ parameters:
 			count: 1
 			path: test/Unit/Repository/CommitRepositoryTest.php
 
+		-
+			message: "#^Unreachable statement \\- code above always terminates\\.$#"
+			count: 1
+			path: test/Unit/Util/RepositoryResolverTest.php
+
