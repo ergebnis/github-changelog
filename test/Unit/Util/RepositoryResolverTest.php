@@ -159,6 +159,8 @@ final class RepositoryResolverTest extends Framework\TestCase
      */
     public function testResolveWithFromRemoteNamesThrowsRuntimeExceptionIfNoValidRemoteUrlsCanBeConsidered(): void
     {
+        self::markTestSkipped('Is flaky');
+
         $faker = self::faker();
 
         /** @var string[] $remoteNames */
