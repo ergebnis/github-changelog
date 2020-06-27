@@ -17,15 +17,9 @@ use Ergebnis\GitHub\Changelog\Exception;
 
 final class Commit implements CommitInterface
 {
-    /**
-     * @var string
-     */
-    private $sha;
+    private string $sha;
 
-    /**
-     * @var string
-     */
-    private $message;
+    private string $message;
 
     /**
      * @param string $sha

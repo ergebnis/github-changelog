@@ -28,25 +28,13 @@ use Symfony\Component\Stopwatch\StopwatchEvent;
 
 final class GenerateCommand extends Command
 {
-    /**
-     * @var Client
-     */
-    private $client;
+    private Client $client;
 
-    /**
-     * @var Repository\PullRequestRepositoryInterface
-     */
-    private $pullRequestRepository;
+    private Repository\PullRequestRepositoryInterface $pullRequestRepository;
 
-    /**
-     * @var Util\RepositoryResolverInterface
-     */
-    private $repositoryResolver;
+    private Util\RepositoryResolverInterface $repositoryResolver;
 
-    /**
-     * @var Stopwatch
-     */
-    private $stopwatch;
+    private Stopwatch $stopwatch;
 
     public function __construct(
         Client $client,

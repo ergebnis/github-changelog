@@ -19,10 +19,7 @@ use Github\Api;
 
 final class CommitRepository implements CommitRepositoryInterface
 {
-    /**
-     * @var Api\Repository\Commits
-     */
-    private $api;
+    private Api\Repository\Commits $api;
 
     public function __construct(Api\Repository\Commits $api)
     {

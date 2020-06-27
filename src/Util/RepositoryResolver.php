@@ -18,10 +18,7 @@ use Ergebnis\GitHub\Changelog\Resource;
 
 final class RepositoryResolver implements RepositoryResolverInterface
 {
-    /**
-     * @var GitInterface
-     */
-    private $git;
+    private GitInterface $git;
 
     public function __construct(GitInterface $git)
     {

@@ -18,12 +18,12 @@ final class Range implements RangeInterface
     /**
      * @var CommitInterface[]
      */
-    private $commits = [];
+    private array $commits = [];
 
     /**
      * @var PullRequestInterface[]
      */
-    private $pullRequests = [];
+    private array $pullRequests = [];
 
     public function commits(): array
     {

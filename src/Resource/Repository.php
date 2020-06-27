@@ -17,15 +17,9 @@ use Ergebnis\GitHub\Changelog\Exception;
 
 final class Repository implements RepositoryInterface
 {
-    /**
-     * @var string
-     */
-    private $owner;
+    private string $owner;
 
-    /**
-     * @var string
-     */
-    private $name;
+    private string $name;
 
     private function __construct(string $owner, string $name)
     {

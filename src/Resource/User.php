@@ -15,10 +15,7 @@ namespace Ergebnis\GitHub\Changelog\Resource;
 
 final class User implements UserInterface
 {
-    /**
-     * @var string
-     */
-    private $login;
+    private string $login;
 
     public function __construct(string $login)
     {
