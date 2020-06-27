@@ -25,6 +25,7 @@ use Prophecy\Argument;
 use Prophecy\PhpUnit;
 use Symfony\Component\Console\Input;
 use Symfony\Component\Console\Tester\CommandTester;
+use Symfony\Component\Stopwatch;
 
 /**
  * @internal
@@ -41,7 +42,8 @@ final class GenerateCommandTest extends Framework\TestCase
         $command = new Console\GenerateCommand(
             $this->prophesize(Client::class)->reveal(),
             $this->prophesize(Repository\PullRequestRepositoryInterface::class)->reveal(),
-            $this->prophesize(Util\RepositoryResolverInterface::class)->reveal()
+            $this->prophesize(Util\RepositoryResolverInterface::class)->reveal(),
+            new Stopwatch\Stopwatch()
         );
 
         self::assertSame('generate', $command->getName());
@@ -52,7 +54,8 @@ final class GenerateCommandTest extends Framework\TestCase
         $command = new Console\GenerateCommand(
             $this->prophesize(Client::class)->reveal(),
             $this->prophesize(Repository\PullRequestRepositoryInterface::class)->reveal(),
-            $this->prophesize(Util\RepositoryResolverInterface::class)->reveal()
+            $this->prophesize(Util\RepositoryResolverInterface::class)->reveal(),
+            new Stopwatch\Stopwatch()
         );
 
         self::assertSame('Generates a changelog from merged pull requests found between commit references', $command->getDescription());
@@ -70,7 +73,8 @@ final class GenerateCommandTest extends Framework\TestCase
         $command = new Console\GenerateCommand(
             $this->prophesize(Client::class)->reveal(),
             $this->prophesize(Repository\PullRequestRepositoryInterface::class)->reveal(),
-            $this->prophesize(Util\RepositoryResolverInterface::class)->reveal()
+            $this->prophesize(Util\RepositoryResolverInterface::class)->reveal(),
+            new Stopwatch\Stopwatch()
         );
 
         self::assertTrue($command->getDefinition()->hasArgument($name));
@@ -119,7 +123,8 @@ final class GenerateCommandTest extends Framework\TestCase
         $command = new Console\GenerateCommand(
             $this->prophesize(Client::class)->reveal(),
             $this->prophesize(Repository\PullRequestRepositoryInterface::class)->reveal(),
-            $this->prophesize(Util\RepositoryResolverInterface::class)->reveal()
+            $this->prophesize(Util\RepositoryResolverInterface::class)->reveal(),
+            new Stopwatch\Stopwatch()
         );
 
         self::assertTrue($command->getDefinition()->hasOption($name));
@@ -181,7 +186,8 @@ final class GenerateCommandTest extends Framework\TestCase
         $command = new Console\GenerateCommand(
             $client->reveal(),
             $pullRequestRepository->reveal(),
-            $this->prophesize(Util\RepositoryResolverInterface::class)->reveal()
+            $this->prophesize(Util\RepositoryResolverInterface::class)->reveal(),
+            new Stopwatch\Stopwatch()
         );
 
         $tester = new CommandTester($command);
@@ -216,7 +222,8 @@ final class GenerateCommandTest extends Framework\TestCase
         $command = new Console\GenerateCommand(
             $this->prophesize(Client::class)->reveal(),
             $this->prophesize(Repository\PullRequestRepositoryInterface::class)->reveal(),
-            $this->prophesize(Util\RepositoryResolverInterface::class)->reveal()
+            $this->prophesize(Util\RepositoryResolverInterface::class)->reveal(),
+            new Stopwatch\Stopwatch()
         );
 
         $tester = new CommandTester($command);
@@ -247,7 +254,8 @@ final class GenerateCommandTest extends Framework\TestCase
         $command = new Console\GenerateCommand(
             $this->prophesize(Client::class)->reveal(),
             $this->prophesize(Repository\PullRequestRepositoryInterface::class)->reveal(),
-            $repositoryResolver->reveal()
+            $repositoryResolver->reveal(),
+            new Stopwatch\Stopwatch()
         );
 
         $tester = new CommandTester($command);
@@ -309,7 +317,8 @@ final class GenerateCommandTest extends Framework\TestCase
         $command = new Console\GenerateCommand(
             $this->prophesize(Client::class)->reveal(),
             $pullRequestRepository->reveal(),
-            $repositoryResolver->reveal()
+            $repositoryResolver->reveal(),
+            new Stopwatch\Stopwatch()
         );
 
         $tester = new CommandTester($command);
@@ -362,7 +371,8 @@ final class GenerateCommandTest extends Framework\TestCase
         $command = new Console\GenerateCommand(
             $this->prophesize(Client::class)->reveal(),
             $pullRequestRepository->reveal(),
-            $repositoryResolver->reveal()
+            $repositoryResolver->reveal(),
+            new Stopwatch\Stopwatch()
         );
 
         $tester = new CommandTester($command);
@@ -415,7 +425,8 @@ final class GenerateCommandTest extends Framework\TestCase
         $command = new Console\GenerateCommand(
             $this->prophesize(Client::class)->reveal(),
             $pullRequestRepository->reveal(),
-            $this->prophesize(Util\RepositoryResolverInterface::class)->reveal()
+            $this->prophesize(Util\RepositoryResolverInterface::class)->reveal(),
+            new Stopwatch\Stopwatch()
         );
 
         $tester = new CommandTester($command);
@@ -471,7 +482,8 @@ final class GenerateCommandTest extends Framework\TestCase
         $command = new Console\GenerateCommand(
             $this->prophesize(Client::class)->reveal(),
             $pullRequestRepository->reveal(),
-            $this->prophesize(Util\RepositoryResolverInterface::class)->reveal()
+            $this->prophesize(Util\RepositoryResolverInterface::class)->reveal(),
+            new Stopwatch\Stopwatch()
         );
 
         $tester = new CommandTester($command);
@@ -559,7 +571,8 @@ final class GenerateCommandTest extends Framework\TestCase
         $command = new Console\GenerateCommand(
             $this->prophesize(Client::class)->reveal(),
             $pullRequestRepository->reveal(),
-            $this->prophesize(Util\RepositoryResolverInterface::class)->reveal()
+            $this->prophesize(Util\RepositoryResolverInterface::class)->reveal(),
+            new Stopwatch\Stopwatch()
         );
 
         $tester = new CommandTester($command);
@@ -629,7 +642,8 @@ final class GenerateCommandTest extends Framework\TestCase
         $command = new Console\GenerateCommand(
             $this->prophesize(Client::class)->reveal(),
             $pullRequestRepository->reveal(),
-            $this->prophesize(Util\RepositoryResolverInterface::class)->reveal()
+            $this->prophesize(Util\RepositoryResolverInterface::class)->reveal(),
+            new Stopwatch\Stopwatch()
         );
 
         $tester = new CommandTester($command);
@@ -683,7 +697,8 @@ final class GenerateCommandTest extends Framework\TestCase
         $command = new Console\GenerateCommand(
             $this->prophesize(Client::class)->reveal(),
             $pullRequestRepository->reveal(),
-            $this->prophesize(Util\RepositoryResolverInterface::class)->reveal()
+            $this->prophesize(Util\RepositoryResolverInterface::class)->reveal(),
+            new Stopwatch\Stopwatch()
         );
 
         $tester = new CommandTester($command);

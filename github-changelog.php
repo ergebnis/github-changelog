@@ -16,6 +16,7 @@ use Github\Api;
 use Github\Client;
 use Symfony\Component\Cache;
 use Symfony\Component\Console;
+use Symfony\Component\Stopwatch;
 
 $autoloaders = [
     __DIR__ . '/../../../vendor/autoload.php',
@@ -46,7 +47,8 @@ $application->add(new Changelog\Console\GenerateCommand(
         new Api\PullRequest($client),
         new Changelog\Repository\CommitRepository(new Api\Repository\Commits($client))
     ),
-    new Changelog\Util\RepositoryResolver(new Changelog\Util\Git())
+    new Changelog\Util\RepositoryResolver(new Changelog\Util\Git()),
+    new Stopwatch\Stopwatch()
 ));
 
 $application->run();
