@@ -33,7 +33,7 @@
     "phpstan/phpstan-strict-rules": "~0.12.4",
     "phpunit/phpunit": "^9.2.6",
     "psalm/plugin-phpunit": "~0.10.1",
-    "vimeo/psalm": "^3.13.1"
+    "vimeo/psalm": "^3.14.1"
   },
   "config": {
     "platform": {
