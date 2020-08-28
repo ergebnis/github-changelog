@@ -97,7 +97,7 @@ final class GenerateCommand extends Console\Command\Command
         if (\is_string($authToken)) {
             $this->client->authenticate(
                 $authToken,
-                Client::AUTH_HTTP_TOKEN
+                Client::AUTH_ACCESS_TOKEN
             );
         }
 
