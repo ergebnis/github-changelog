@@ -158,7 +158,7 @@ final class GenerateCommandTest extends Framework\TestCase
         $client
             ->authenticate(
                 Argument::is($authToken),
-                Argument::is(Client::AUTH_HTTP_TOKEN)
+                Argument::is(Client::AUTH_ACCESS_TOKEN)
             )
             ->shouldBeCalled();
 
