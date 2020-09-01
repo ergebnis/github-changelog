@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "241d0545695da8c4c56f54492ff5b546",
+    "content-hash": "51d092abe41f60a92ed6f76b225f5ea1",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -3467,22 +3467,24 @@
         },
         {
             "name": "infection/abstract-testframework-adapter",
-            "version": "0.3.0",
+            "version": "0.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/infection/abstract-testframework-adapter.git",
-                "reference": "f3ec6fc4beb6377b72d8106f5ff329dffd51ca8a"
+                "reference": "c52539339f28d6b67625ff24496289b3e6d66025"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/infection/abstract-testframework-adapter/zipball/f3ec6fc4beb6377b72d8106f5ff329dffd51ca8a",
-                "reference": "f3ec6fc4beb6377b72d8106f5ff329dffd51ca8a",
+                "url": "https://api.github.com/repos/infection/abstract-testframework-adapter/zipball/c52539339f28d6b67625ff24496289b3e6d66025",
+                "reference": "c52539339f28d6b67625ff24496289b3e6d66025",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.3"
+                "php": "^7.3 || ^8.0"
             },
             "require-dev": {
+                "ergebnis/composer-normalize": "^2.8",
+                "friendsofphp/php-cs-fixer": "^2.16",
                 "phpunit/phpunit": "^9.0"
             },
             "type": "library",
@@ -3502,7 +3504,7 @@
                 }
             ],
             "description": "Abstract Test Framework Adapter for Infection",
-            "time": "2020-03-14T07:20:06+00:00"
+            "time": "2020-08-30T13:50:12+00:00"
         },
         {
             "name": "infection/extension-installer",
@@ -3600,16 +3602,16 @@
         },
         {
             "name": "infection/infection",
-            "version": "0.17.3",
+            "version": "0.17.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/infection/infection.git",
-                "reference": "d3d77a7629d237e437d5bb66606f9493bdcf369e"
+                "reference": "a519360d69a5d396d7092852601fe21ad7b4c78e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/infection/infection/zipball/d3d77a7629d237e437d5bb66606f9493bdcf369e",
-                "reference": "d3d77a7629d237e437d5bb66606f9493bdcf369e",
+                "url": "https://api.github.com/repos/infection/infection/zipball/a519360d69a5d396d7092852601fe21ad7b4c78e",
+                "reference": "a519360d69a5d396d7092852601fe21ad7b4c78e",
                 "shasum": ""
             },
             "require": {
@@ -3638,6 +3640,7 @@
             },
             "conflict": {
                 "phpunit/php-code-coverage": ">9 <9.1.4",
+                "phpunit/phpunit": ">=9.3",
                 "symfony/console": "=4.1.5"
             },
             "require-dev": {
@@ -3704,7 +3707,7 @@
                 "testing",
                 "unit testing"
             ],
-            "time": "2020-08-25T06:36:58+00:00"
+            "time": "2020-08-31T19:49:53+00:00"
         },
         {
             "name": "jangregor/phpstan-prophecy",
@@ -4001,16 +4004,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.9.0",
+            "version": "v4.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "aaee038b912e567780949787d5fe1977be11a778"
+                "reference": "88e519766fc58bd46b8265561fb79b54e2e00b28"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/aaee038b912e567780949787d5fe1977be11a778",
-                "reference": "aaee038b912e567780949787d5fe1977be11a778",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/88e519766fc58bd46b8265561fb79b54e2e00b28",
+                "reference": "88e519766fc58bd46b8265561fb79b54e2e00b28",
                 "shasum": ""
             },
             "require": {
@@ -4049,7 +4052,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2020-08-18T19:48:01+00:00"
+            "time": "2020-08-30T16:15:20+00:00"
         },
         {
             "name": "ondram/ci-detector",
@@ -5432,16 +5435,16 @@
         },
         {
             "name": "sanmai/pipeline",
-            "version": "v5.0",
+            "version": "v5.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sanmai/pipeline.git",
-                "reference": "5c4f3c693915a77b194a6b7a90834c799e0713b7"
+                "reference": "a51d82ca3653f3d417230218a8fe3738cdd207cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sanmai/pipeline/zipball/5c4f3c693915a77b194a6b7a90834c799e0713b7",
-                "reference": "5c4f3c693915a77b194a6b7a90834c799e0713b7",
+                "url": "https://api.github.com/repos/sanmai/pipeline/zipball/a51d82ca3653f3d417230218a8fe3738cdd207cd",
+                "reference": "a51d82ca3653f3d417230218a8fe3738cdd207cd",
                 "shasum": ""
             },
             "require": {
@@ -5477,7 +5480,13 @@
                 }
             ],
             "description": "General-purpose collections pipeline",
-            "time": "2020-07-18T02:54:43+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/sanmai",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-08-27T13:29:50+00:00"
         },
         {
             "name": "sebastian/code-unit",
