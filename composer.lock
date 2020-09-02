@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a4af46f7240d766293222cef11b862e1",
+    "content-hash": "3c64403f4d5a47e00603b1c9de44f1c0",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -3635,16 +3635,16 @@
         },
         {
             "name": "infection/infection",
-            "version": "0.17.4",
+            "version": "0.17.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/infection/infection.git",
-                "reference": "a519360d69a5d396d7092852601fe21ad7b4c78e"
+                "reference": "14ff2578179588dfdc3cd05ceb8337cdedfdf5cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/infection/infection/zipball/a519360d69a5d396d7092852601fe21ad7b4c78e",
-                "reference": "a519360d69a5d396d7092852601fe21ad7b4c78e",
+                "url": "https://api.github.com/repos/infection/infection/zipball/14ff2578179588dfdc3cd05ceb8337cdedfdf5cc",
+                "reference": "14ff2578179588dfdc3cd05ceb8337cdedfdf5cc",
                 "shasum": ""
             },
             "require": {
@@ -3740,7 +3740,7 @@
                 "testing",
                 "unit testing"
             ],
-            "time": "2020-08-31T19:49:53+00:00"
+            "time": "2020-09-01T05:23:59+00:00"
         },
         {
             "name": "jangregor/phpstan-prophecy",
