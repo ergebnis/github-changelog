@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f769d6ff37dd292ed2eeab47ec1bd0fe",
+    "content-hash": "f87f17e55c7960272d35f632ae2cae08",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -1234,16 +1234,16 @@
         },
         {
             "name": "symfony/deprecation-contracts",
-            "version": "v2.1.3",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/deprecation-contracts.git",
-                "reference": "5e20b83385a77593259c9f8beb2c43cd03b2ac14"
+                "reference": "5fa56b4074d1ae755beb55617ddafe6f5d78f665"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/5e20b83385a77593259c9f8beb2c43cd03b2ac14",
-                "reference": "5e20b83385a77593259c9f8beb2c43cd03b2ac14",
+                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/5fa56b4074d1ae755beb55617ddafe6f5d78f665",
+                "reference": "5fa56b4074d1ae755beb55617ddafe6f5d78f665",
                 "shasum": ""
             },
             "require": {
@@ -1252,7 +1252,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.1-dev"
+                    "dev-master": "2.2-dev"
                 },
                 "thanks": {
                     "name": "symfony/contracts",
@@ -1294,20 +1294,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-06-06T08:49:21+00:00"
+            "time": "2020-09-07T11:33:47+00:00"
         },
         {
             "name": "symfony/options-resolver",
-            "version": "v5.1.4",
+            "version": "v5.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/options-resolver.git",
-                "reference": "9ff59517938f88d90b6e65311fef08faa640f681"
+                "reference": "4c7e155bf7d93ea4ba3824d5a14476694a5278dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/options-resolver/zipball/9ff59517938f88d90b6e65311fef08faa640f681",
-                "reference": "9ff59517938f88d90b6e65311fef08faa640f681",
+                "url": "https://api.github.com/repos/symfony/options-resolver/zipball/4c7e155bf7d93ea4ba3824d5a14476694a5278dd",
+                "reference": "4c7e155bf7d93ea4ba3824d5a14476694a5278dd",
                 "shasum": ""
             },
             "require": {
@@ -1364,7 +1364,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-07-12T12:58:00+00:00"
+            "time": "2020-09-27T03:44:28+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -3078,16 +3078,16 @@
         },
         {
             "name": "ergebnis/php-cs-fixer-config",
-            "version": "2.2.2",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ergebnis/php-cs-fixer-config.git",
-                "reference": "41f0fb497287797d54bd1f08c9287e33b743b4b9"
+                "reference": "0bcde3f7cd0c4f01f6135f80ddd9cadcbf341879"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ergebnis/php-cs-fixer-config/zipball/41f0fb497287797d54bd1f08c9287e33b743b4b9",
-                "reference": "41f0fb497287797d54bd1f08c9287e33b743b4b9",
+                "url": "https://api.github.com/repos/ergebnis/php-cs-fixer-config/zipball/0bcde3f7cd0c4f01f6135f80ddd9cadcbf341879",
+                "reference": "0bcde3f7cd0c4f01f6135f80ddd9cadcbf341879",
                 "shasum": ""
             },
             "require": {
@@ -3096,21 +3096,21 @@
                 "php": "^7.2"
             },
             "require-dev": {
-                "ergebnis/composer-normalize": "^2.7.1",
+                "ergebnis/composer-normalize": "^2.8.2",
                 "ergebnis/license": "^1.1.0",
                 "ergebnis/phpstan-rules": "~0.15.2",
-                "ergebnis/test-util": "^1.1.0",
+                "ergebnis/test-util": "^1.3.0",
                 "infection/infection": "~0.15.3",
                 "jangregor/phpstan-prophecy": "~0.8.0",
                 "phpstan/extension-installer": "^1.0.5",
-                "phpstan/phpstan": "~0.12.40",
+                "phpstan/phpstan": "~0.12.48",
                 "phpstan/phpstan-deprecation-rules": "~0.12.5",
                 "phpstan/phpstan-phpunit": "~0.12.16",
-                "phpstan/phpstan-strict-rules": "~0.12.4",
+                "phpstan/phpstan-strict-rules": "~0.12.5",
                 "phpunit/phpunit": "^8.5.8",
-                "psalm/plugin-phpunit": "~0.11.0",
+                "psalm/plugin-phpunit": "~0.12.2",
                 "symfony/filesystem": "^4.4.0",
-                "vimeo/psalm": "^3.14.2"
+                "vimeo/psalm": "^3.16"
             },
             "type": "library",
             "autoload": {
@@ -3136,7 +3136,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-08-30T13:02:21+00:00"
+            "time": "2020-10-08T18:03:06+00:00"
         },
         {
             "name": "ergebnis/phpstan-rules",
@@ -6331,16 +6331,16 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v5.1.4",
+            "version": "v5.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "94871fc0a69c3c5da57764187724cdce0755899c"
+                "reference": "d5de97d6af175a9e8131c546db054ca32842dd0f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/94871fc0a69c3c5da57764187724cdce0755899c",
-                "reference": "94871fc0a69c3c5da57764187724cdce0755899c",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/d5de97d6af175a9e8131c546db054ca32842dd0f",
+                "reference": "d5de97d6af175a9e8131c546db054ca32842dd0f",
                 "shasum": ""
             },
             "require": {
@@ -6360,6 +6360,7 @@
                 "psr/log": "~1.0",
                 "symfony/config": "^4.4|^5.0",
                 "symfony/dependency-injection": "^4.4|^5.0",
+                "symfony/error-handler": "^4.4|^5.0",
                 "symfony/expression-language": "^4.4|^5.0",
                 "symfony/http-foundation": "^4.4|^5.0",
                 "symfony/service-contracts": "^1.1|^2",
@@ -6413,20 +6414,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-08-13T14:19:42+00:00"
+            "time": "2020-09-18T14:27:32+00:00"
         },
         {
             "name": "symfony/event-dispatcher-contracts",
-            "version": "v2.1.3",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher-contracts.git",
-                "reference": "f6f613d74cfc5a623fc36294d3451eb7fa5a042b"
+                "reference": "0ba7d54483095a198fa51781bc608d17e84dffa2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher-contracts/zipball/f6f613d74cfc5a623fc36294d3451eb7fa5a042b",
-                "reference": "f6f613d74cfc5a623fc36294d3451eb7fa5a042b",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher-contracts/zipball/0ba7d54483095a198fa51781bc608d17e84dffa2",
+                "reference": "0ba7d54483095a198fa51781bc608d17e84dffa2",
                 "shasum": ""
             },
             "require": {
@@ -6439,7 +6440,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.1-dev"
+                    "dev-master": "2.2-dev"
                 },
                 "thanks": {
                     "name": "symfony/contracts",
@@ -6489,7 +6490,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-07-06T13:23:11+00:00"
+            "time": "2020-09-07T11:33:47+00:00"
         },
         {
             "name": "symfony/filesystem",
