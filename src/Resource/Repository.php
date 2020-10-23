@@ -37,12 +37,7 @@ final class Repository implements RepositoryInterface
     }
 
     /**
-     * @param string $owner
-     * @param string $name
-     *
      * @throws Exception\InvalidArgumentException
-     *
-     * @return self
      */
     public static function fromOwnerAndName(string $owner, string $name): self
     {
@@ -84,11 +79,7 @@ final class Repository implements RepositoryInterface
     }
 
     /**
-     * @param string $string
-     *
      * @throws Exception\InvalidArgumentException
-     *
-     * @return self
      */
     public static function fromString(string $string): self
     {

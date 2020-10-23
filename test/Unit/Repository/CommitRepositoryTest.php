@@ -739,11 +739,6 @@ final class CommitRepositoryTest extends Framework\TestCase
         ];
     }
 
-    /**
-     * @param int $count
-     *
-     * @return array
-     */
     private function commitItems(int $count): array
     {
         $items = [];
@@ -757,10 +752,6 @@ final class CommitRepositoryTest extends Framework\TestCase
 
     /**
      * The GitHub API returns commits in reverse order!
-     *
-     * @param array $commits
-     *
-     * @return array
      */
     private function reverse(array $commits): array
     {
@@ -768,10 +759,7 @@ final class CommitRepositoryTest extends Framework\TestCase
     }
 
     /**
-     * @param string $key
-     * @param mixed  $value
-     *
-     * @return Framework\Constraint\Callback
+     * @param mixed $value
      */
     private function arrayHasKeyAndValue(string $key, $value): Framework\Constraint\Callback
     {

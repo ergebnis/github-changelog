@@ -63,10 +63,6 @@ final class GenerateCommandTest extends Framework\TestCase
 
     /**
      * @dataProvider \Ergebnis\GitHub\Changelog\Test\Util\DataProvider::providerGenerateCommandArgument
-     *
-     * @param string $name
-     * @param bool   $isRequired
-     * @param string $description
      */
     public function testArgument(string $name, bool $isRequired, string $description): void
     {
@@ -112,11 +108,7 @@ final class GenerateCommandTest extends Framework\TestCase
     /**
      * @dataProvider \Ergebnis\GitHub\Changelog\Test\Util\DataProvider::providerGenerateCommandOption
      *
-     * @param string $name
-     * @param string $shortcut
-     * @param bool   $isValueRequired
-     * @param string $description
-     * @param mixed  $default
+     * @param mixed $default
      */
     public function testOption(string $name, string $shortcut, bool $isValueRequired, string $description, $default): void
     {
@@ -732,8 +724,6 @@ final class GenerateCommandTest extends Framework\TestCase
     }
 
     /**
-     * @param int $count
-     *
      * @return Resource\PullRequestInterface[]
      */
     private function pullRequests(int $count): array

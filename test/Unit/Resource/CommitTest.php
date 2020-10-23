@@ -34,8 +34,6 @@ final class CommitTest extends Framework\TestCase
 
     /**
      * @dataProvider \Ergebnis\GitHub\Changelog\Test\Util\DataProvider::providerInvalidSha
-     *
-     * @param string $sha
      */
     public function testConstructorRejectsInvalidSha(string $sha): void
     {
