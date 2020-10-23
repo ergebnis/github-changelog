@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b8dda100bfa1ab866c06320b9d708346",
+    "content-hash": "09d833f78ca7357dff47c8546f4b8368",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -5388,25 +5388,25 @@
         },
         {
             "name": "psalm/plugin-phpunit",
-            "version": "0.12.2",
+            "version": "0.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/psalm/psalm-plugin-phpunit.git",
-                "reference": "85ee5a080a5281e63085d933b30a06b1b1680758"
+                "reference": "e006914489f3e445f5cb786ea6f3df89ea30129b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/psalm/psalm-plugin-phpunit/zipball/85ee5a080a5281e63085d933b30a06b1b1680758",
-                "reference": "85ee5a080a5281e63085d933b30a06b1b1680758",
+                "url": "https://api.github.com/repos/psalm/psalm-plugin-phpunit/zipball/e006914489f3e445f5cb786ea6f3df89ea30129b",
+                "reference": "e006914489f3e445f5cb786ea6f3df89ea30129b",
                 "shasum": ""
             },
             "require": {
                 "composer/package-versions-deprecated": "^1.10",
                 "composer/semver": "^1.4 || ^2.0 || ^3.0",
                 "ext-simplexml": "*",
-                "php": "^7.1.3 || ^8.0",
+                "php": "^7.3 || ^8.0",
                 "phpunit/phpunit": "^7.5 || ^8.0 || ^9.0",
-                "vimeo/psalm": "^3.6.2 || dev-master || dev-4.x"
+                "vimeo/psalm": "dev-master || dev-4.x || ^4.0"
             },
             "require-dev": {
                 "codeception/codeception": "^4.0.3",
@@ -5436,7 +5436,7 @@
                 }
             ],
             "description": "Psalm plugin for PHPUnit",
-            "time": "2020-09-28T17:25:39+00:00"
+            "time": "2020-10-19T12:43:17+00:00"
         },
         {
             "name": "psr/event-dispatcher",
@@ -7021,16 +7021,16 @@
         },
         {
             "name": "vimeo/psalm",
-            "version": "3.18.2",
+            "version": "4.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vimeo/psalm.git",
-                "reference": "19aa905f7c3c7350569999a93c40ae91ae4e1626"
+                "reference": "b1e2e30026936ef8d5bf6a354d1c3959b6231f44"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vimeo/psalm/zipball/19aa905f7c3c7350569999a93c40ae91ae4e1626",
-                "reference": "19aa905f7c3c7350569999a93c40ae91ae4e1626",
+                "url": "https://api.github.com/repos/vimeo/psalm/zipball/b1e2e30026936ef8d5bf6a354d1c3959b6231f44",
+                "reference": "b1e2e30026936ef8d5bf6a354d1c3959b6231f44",
                 "shasum": ""
             },
             "require": {
@@ -7049,9 +7049,9 @@
                 "felixfbecker/advanced-json-rpc": "^3.0.3",
                 "felixfbecker/language-server-protocol": "^1.4",
                 "netresearch/jsonmapper": "^1.0 || ^2.0 || ^3.0",
-                "nikic/php-parser": "4.3.* || 4.4.* || 4.5.* || 4.6.* || ^4.8",
+                "nikic/php-parser": "^4.10.1",
                 "openlss/lib-array2xml": "^1.0",
-                "php": "^7.1.3|^8",
+                "php": "^7.3|^8",
                 "sebastian/diff": "^3.0 || ^4.0",
                 "symfony/console": "^3.4.17 || ^4.1.6 || ^5.0",
                 "webmozart/glob": "^4.1",
@@ -7065,11 +7065,11 @@
                 "bamarni/composer-bin-plugin": "^1.2",
                 "brianium/paratest": "^4.0.0",
                 "ext-curl": "*",
-                "phpdocumentor/reflection-docblock": "^4.3.4 || ^5",
+                "phpdocumentor/reflection-docblock": "^5",
                 "phpmyadmin/sql-parser": "5.1.0",
                 "phpspec/prophecy": ">=1.9.0",
-                "phpunit/phpunit": "^7.5.16 || ^8.5 || ^9.0",
-                "psalm/plugin-phpunit": "^0.11",
+                "phpunit/phpunit": "^9.0",
+                "psalm/plugin-phpunit": "^0.13",
                 "slevomat/coding-standard": "^5.0",
                 "squizlabs/php_codesniffer": "^3.5",
                 "symfony/process": "^4.3",
@@ -7088,7 +7088,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.x-dev",
+                    "dev-master": "4.x-dev",
+                    "dev-3.x": "3.x-dev",
                     "dev-2.x": "2.x-dev",
                     "dev-1.x": "1.x-dev"
                 }
@@ -7117,7 +7118,7 @@
                 "inspection",
                 "php"
             ],
-            "time": "2020-10-20T13:48:22+00:00"
+            "time": "2020-10-20T13:40:17+00:00"
         },
         {
             "name": "webmozart/assert",
