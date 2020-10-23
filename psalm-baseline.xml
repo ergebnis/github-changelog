@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="3.14.2@3538fe1955d47f6ee926c0769d71af6db08aa488">
+<files psalm-version="4.0.1@b1e2e30026936ef8d5bf6a354d1c3959b6231f44">
   <file src="src/Console/GenerateCommand.php">
     <ImplicitToStringCast occurrences="1">
       <code>$repository</code>
     </ImplicitToStringCast>
     <InvalidArgument occurrences="2">
-      <code>'upstream'</code>
       <code>'origin'</code>
+      <code>'upstream'</code>
     </InvalidArgument>
     <InvalidOperand occurrences="1">
       <code>$event-&gt;getDuration() / 1000</code>
     </InvalidOperand>
     <MixedArgument occurrences="2">
-      <code>Console\Helper\Helper::formatTime($event-&gt;getDuration() / 1000)</code>
       <code>Console\Helper\Helper::formatMemory($event-&gt;getMemory())</code>
+      <code>Console\Helper\Helper::formatTime($event-&gt;getDuration() / 1000)</code>
     </MixedArgument>
   </file>
   <file src="src/Exception/PullRequestNotFound.php">
@@ -31,19 +31,17 @@
       <code>$data</code>
     </MissingClosureParamType>
     <MixedArgument occurrences="4">
-      <code>$response['sha']</code>
-      <code>$response['commit']['message']</code>
-      <code>$data['sha']</code>
       <code>$data['commit']['message']</code>
+      <code>$data['sha']</code>
+      <code>$response['commit']['message']</code>
+      <code>$response['sha']</code>
     </MixedArgument>
     <MixedArrayAccess occurrences="3">
-      <code>$response['commit']['message']</code>
-      <code>$data['sha']</code>
       <code>$data['commit']</code>
+      <code>$data['sha']</code>
+      <code>$response['commit']['message']</code>
     </MixedArrayAccess>
-    <MixedAssignment occurrences="3">
-      <code>$response</code>
-      <code>$response</code>
+    <MixedAssignment occurrences="1">
       <code>$range</code>
     </MixedAssignment>
     <MixedInferredReturnType occurrences="1">
@@ -61,9 +59,9 @@
   </file>
   <file src="src/Repository/PullRequestRepository.php">
     <MixedArgument occurrences="3">
-      <code>$response['user']['login']</code>
       <code>$response['number']</code>
       <code>$response['title']</code>
+      <code>$response['user']['login']</code>
     </MixedArgument>
     <MixedArrayAccess occurrences="1">
       <code>$response['user']['login']</code>
@@ -83,8 +81,8 @@
   </file>
   <file src="src/Repository/PullRequestRepositoryInterface.php">
     <InvalidDocblock occurrences="2">
-      <code>public function show(Resource\RepositoryInterface $repository, int $number): Resource\PullRequestInterface;</code>
       <code>public function items(Resource\RepositoryInterface $repository, string $startReference, ?string $endReference = null): Resource\RangeInterface;</code>
+      <code>public function show(Resource\RepositoryInterface $repository, int $number): Resource\PullRequestInterface;</code>
     </InvalidDocblock>
   </file>
   <file src="src/Resource/Repository.php">
@@ -145,10 +143,10 @@
   </file>
   <file src="test/Unit/Repository/CommitRepositoryTest.php">
     <MissingClosureParamType occurrences="4">
-      <code>$commit</code>
-      <code>$commit</code>
       <code>$array</code>
       <code>$array</code>
+      <code>$commit</code>
+      <code>$commit</code>
     </MissingClosureParamType>
     <MixedArgument occurrences="3">
       <code>$expectedItems</code>
@@ -156,20 +154,20 @@
       <code>$expectedItems</code>
     </MixedArgument>
     <MixedArrayAccess occurrences="8">
+      <code>$expectedItem['commit']</code>
+      <code>$expectedItem['commit']</code>
+      <code>$expectedItem['commit']</code>
       <code>$expectedItem['commit']['message']</code>
       <code>$expectedItem['sha']</code>
-      <code>$expectedItem['commit']</code>
       <code>$expectedItem['sha']</code>
-      <code>$expectedItem['commit']</code>
+      <code>$expectedItem['sha']</code>
       <code>$firstCommitFromFirstSegment['sha']</code>
-      <code>$expectedItem['sha']</code>
-      <code>$expectedItem['commit']</code>
     </MixedArrayAccess>
     <MixedAssignment occurrences="4">
       <code>$expectedItem</code>
       <code>$expectedItem</code>
-      <code>$firstCommitFromFirstSegment</code>
       <code>$expectedItem</code>
+      <code>$firstCommitFromFirstSegment</code>
     </MixedAssignment>
   </file>
   <file src="test/Unit/Repository/PullRequestRepositoryTest.php">
