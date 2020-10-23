@@ -34,8 +34,6 @@ final class RepositoryTest extends Framework\TestCase
 
     /**
      * @dataProvider \Ergebnis\GitHub\Changelog\Test\Util\DataProvider::providerInvalidRepositoryOwner
-     *
-     * @param string $owner
      */
     public function testFromOwnerAndNameRejectsInvalidOwner(string $owner): void
     {
@@ -57,8 +55,6 @@ final class RepositoryTest extends Framework\TestCase
 
     /**
      * @dataProvider \Ergebnis\GitHub\Changelog\Test\Util\DataProvider::providerInvalidRepositoryName
-     *
-     * @param string $name
      */
     public function testFromOwnerAndNameRejectsInvalidName(string $name): void
     {
@@ -80,9 +76,6 @@ final class RepositoryTest extends Framework\TestCase
 
     /**
      * @dataProvider \Ergebnis\GitHub\Changelog\Test\Util\DataProvider::providerValidRepositoryOwnerAndName
-     *
-     * @param string $owner
-     * @param string $name
      */
     public function testFromOwnerAndNameReturnsRepository(string $owner, string $name): void
     {
@@ -97,8 +90,6 @@ final class RepositoryTest extends Framework\TestCase
 
     /**
      * @dataProvider \Ergebnis\GitHub\Changelog\Test\Util\DataProvider::providerInvalidRemoteUrl
-     *
-     * @param string $remoteUrl
      */
     public function testFromRemoteUrlRejectsInvalidRemoteUrl(string $remoteUrl): void
     {
@@ -113,10 +104,6 @@ final class RepositoryTest extends Framework\TestCase
 
     /**
      * @dataProvider \Ergebnis\GitHub\Changelog\Test\Util\DataProvider::providerValidRemoteUrlOwnerAndName
-     *
-     * @param string $remoteUrl
-     * @param string $owner
-     * @param string $name
      */
     public function testFromRemoteUrlReturnsRepository(string $remoteUrl, string $owner, string $name): void
     {
@@ -149,8 +136,6 @@ final class RepositoryTest extends Framework\TestCase
 
     /**
      * @dataProvider \Ergebnis\GitHub\Changelog\Test\Util\DataProvider::providerInvalidRepositoryString
-     *
-     * @param string $string
      */
     public function testFromStringRejectsInvalidStrings(string $string): void
     {
@@ -165,9 +150,6 @@ final class RepositoryTest extends Framework\TestCase
 
     /**
      * @dataProvider \Ergebnis\GitHub\Changelog\Test\Util\DataProvider::providerValidRepositoryOwnerAndName
-     *
-     * @param string $owner
-     * @param string $name
      */
     public function testFromStringReturnsRepository(string $owner, string $name): void
     {

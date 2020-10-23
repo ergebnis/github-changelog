@@ -20,20 +20,14 @@ interface PullRequestRepositoryInterface
 {
     /**
      * @param Resource\RepositoryInterface$repository
-     * @param int $number
      *
      * @throws Exception\PullRequestNotFound
-     *
-     * @return Resource\PullRequestInterface
      */
     public function show(Resource\RepositoryInterface $repository, int $number): Resource\PullRequestInterface;
 
     /**
      * @param Resource\RepositoryInterface$repository
-     * @param string      $startReference
-     * @param null|string $endReference
-     *
-     * @return Resource\RangeInterface
+     * @param ?string $endReference
      */
     public function items(Resource\RepositoryInterface $repository, string $startReference, ?string $endReference = null): Resource\RangeInterface;
 }

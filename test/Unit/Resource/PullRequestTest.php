@@ -36,8 +36,6 @@ final class PullRequestTest extends Framework\TestCase
      * @uses \Ergebnis\GitHub\Changelog\Resource\User
      *
      * @dataProvider \Ergebnis\GitHub\Changelog\Test\Util\DataProvider::providerInvalidPullRequestNumber
-     *
-     * @param int $number
      */
     public function testConstructorRejectsInvalidNumber(int $number): void
     {

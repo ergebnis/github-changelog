@@ -22,8 +22,6 @@ interface RepositoryResolverInterface
      * @param string[] ...$fromRemoteNames
      *
      * @throws Exception\RuntimeException
-     *
-     * @return Resource\RepositoryInterface
      */
     public function resolve(string ...$fromRemoteNames): Resource\RepositoryInterface;
 }

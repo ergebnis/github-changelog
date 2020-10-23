@@ -76,8 +76,6 @@ final class RepositoryResolverTest extends Framework\TestCase
      * @uses \Ergebnis\GitHub\Changelog\Resource\Repository
      *
      * @dataProvider \Ergebnis\GitHub\Changelog\Test\Util\DataProvider::providerInvalidRemoteUrl
-     *
-     * @param string $remoteUrl
      */
     public function testResolveThrowsRuntimeExceptionIfNoValidRemoteUrlsCouldBeFound(string $remoteUrl): void
     {

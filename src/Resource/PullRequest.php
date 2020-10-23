@@ -24,10 +24,6 @@ final class PullRequest implements PullRequestInterface
     private UserInterface $author;
 
     /**
-     * @param int           $number
-     * @param string        $title
-     * @param UserInterface $author
-     *
      * @throws Exception\InvalidArgumentException
      */
     public function __construct(int $number, string $title, UserInterface $author)

@@ -22,9 +22,6 @@ final class Commit implements CommitInterface
     private string $message;
 
     /**
-     * @param string $sha
-     * @param string $message
-     *
      * @throws Exception\InvalidArgumentException
      */
     public function __construct(string $sha, string $message)
