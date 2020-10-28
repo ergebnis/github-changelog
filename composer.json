@@ -23,7 +23,7 @@
     "ergebnis/php-cs-fixer-config": "^2.4.0",
     "ergebnis/phpstan-rules": "~0.15.2",
     "ergebnis/test-util": "^1.3.0",
-    "infection/infection": "~0.18",
+    "infection/infection": "~0.19",
     "jangregor/phpstan-prophecy": "~0.8.1",
     "phpspec/prophecy-phpunit": "^2.0.1",
     "phpstan/extension-installer": "^1.0.5",
