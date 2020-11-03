@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c0d91a5ac873a9922c991f171a1d9b5f",
+    "content-hash": "5120d5eac960cb3f4715bd8b04b21037",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -6931,16 +6931,16 @@
         },
         {
             "name": "vimeo/psalm",
-            "version": "4.1.0",
+            "version": "4.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vimeo/psalm.git",
-                "reference": "8929bde5354595dc61947b7e27cfe59db45e3bb0"
+                "reference": "16bfbd9224698bd738c665f33039fade2a1a3977"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vimeo/psalm/zipball/8929bde5354595dc61947b7e27cfe59db45e3bb0",
-                "reference": "8929bde5354595dc61947b7e27cfe59db45e3bb0",
+                "url": "https://api.github.com/repos/vimeo/psalm/zipball/16bfbd9224698bd738c665f33039fade2a1a3977",
+                "reference": "16bfbd9224698bd738c665f33039fade2a1a3977",
                 "shasum": ""
             },
             "require": {
@@ -7028,7 +7028,7 @@
                 "inspection",
                 "php"
             ],
-            "time": "2020-10-29T23:55:10+00:00"
+            "time": "2020-11-02T05:54:12+00:00"
         },
         {
             "name": "webmozart/assert",
