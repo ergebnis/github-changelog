@@ -11,7 +11,7 @@
   ],
   "require": {
     "php": "^7.4",
-    "knplabs/github-api": "^2.16.0",
+    "knplabs/github-api": "^2.17.0",
     "php-http/guzzle6-adapter": "^1.1.1",
     "symfony/cache": "^5.1.8",
     "symfony/console": "^5.1.8",
