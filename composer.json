@@ -15,7 +15,7 @@
     "php-http/guzzle6-adapter": "^1.1.1",
     "symfony/cache": "^5.1.9",
     "symfony/console": "^5.1.8",
-    "symfony/stopwatch": "^5.1.8"
+    "symfony/stopwatch": "^5.2.0"
   },
   "require-dev": {
     "ergebnis/composer-normalize": "^2.9.0",
