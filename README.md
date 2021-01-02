@@ -1,9 +1,9 @@
 # github-changelog
 
-[![Integrate](https://github.com/ergebnis/github-changelog/workflows/Integrate/badge.svg?branch=main)](https://github.com/ergebnis/github-changelog/actions)
-[![Prune](https://github.com/ergebnis/github-changelog/workflows/Prune/badge.svg?branch=main)](https://github.com/ergebnis/github-changelog/actions)
-[![Release](https://github.com/ergebnis/github-changelog/workflows/Release/badge.svg?branch=main)](https://github.com/ergebnis/github-changelog/actions)
-[![Renew](https://github.com/ergebnis/github-changelog/workflows/Renew/badge.svg?branch=main)](https://github.com/ergebnis/github-changelog/actions)
+[![Integrate](https://github.com/ergebnis/github-changelog/workflows/Integrate/badge.svg)](https://github.com/ergebnis/github-changelog/actions)
+[![Prune](https://github.com/ergebnis/github-changelog/workflows/Prune/badge.svg)](https://github.com/ergebnis/github-changelog/actions)
+[![Release](https://github.com/ergebnis/github-changelog/workflows/Release/badge.svg)](https://github.com/ergebnis/github-changelog/actions)
+[![Renew](https://github.com/ergebnis/github-changelog/workflows/Renew/badge.svg)](https://github.com/ergebnis/github-changelog/actions)
 
 [![Code Coverage](https://codecov.io/gh/ergebnis/github-changelog/branch/main/graph/badge.svg)](https://codecov.io/gh/ergebnis/github-changelog)
 [![Type Coverage](https://shepherd.dev/github/ergebnis/github-changelog/coverage.svg)](https://shepherd.dev/github/ergebnis/github-changelog)
