@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ae606bbb81e2902f97adbb3fdc04f911",
+    "content-hash": "60cf5b40d90b631a2d3bcfca310a9c91",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -4832,16 +4832,16 @@
         },
         {
             "name": "phpstan/phpstan-strict-rules",
-            "version": "0.12.8",
+            "version": "0.12.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-strict-rules.git",
-                "reference": "ee0009302ff5312ca6b92a7330a6b66da0c70f12"
+                "reference": "0705fefc7c9168529fd130e341428f5f10f4f01d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-strict-rules/zipball/ee0009302ff5312ca6b92a7330a6b66da0c70f12",
-                "reference": "ee0009302ff5312ca6b92a7330a6b66da0c70f12",
+                "url": "https://api.github.com/repos/phpstan/phpstan-strict-rules/zipball/0705fefc7c9168529fd130e341428f5f10f4f01d",
+                "reference": "0705fefc7c9168529fd130e341428f5f10f4f01d",
                 "shasum": ""
             },
             "require": {
@@ -4875,7 +4875,7 @@
                 "MIT"
             ],
             "description": "Extra strict and opinionated rules for PHPStan",
-            "time": "2021-01-11T13:36:23+00:00"
+            "time": "2021-01-13T08:50:28+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
