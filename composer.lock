@@ -3659,16 +3659,16 @@
         },
         {
             "name": "infection/infection",
-            "version": "0.21.2",
+            "version": "0.21.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/infection/infection.git",
-                "reference": "c7d3d6ee744e8520e44a4590ac4bb2419e813f1e"
+                "reference": "2ca5fd6ef8d291bf6577936bd8e25b5a2cf0cc09"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/infection/infection/zipball/c7d3d6ee744e8520e44a4590ac4bb2419e813f1e",
-                "reference": "c7d3d6ee744e8520e44a4590ac4bb2419e813f1e",
+                "url": "https://api.github.com/repos/infection/infection/zipball/2ca5fd6ef8d291bf6577936bd8e25b5a2cf0cc09",
+                "reference": "2ca5fd6ef8d291bf6577936bd8e25b5a2cf0cc09",
                 "shasum": ""
             },
             "require": {
@@ -3776,7 +3776,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2021-02-25T21:09:10+00:00"
+            "time": "2021-03-03T09:02:15+00:00"
         },
         {
             "name": "jangregor/phpstan-prophecy",
@@ -6508,16 +6508,16 @@
         },
         {
             "name": "symfony/filesystem",
-            "version": "v5.2.3",
+            "version": "v5.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "262d033b57c73e8b59cd6e68a45c528318b15038"
+                "reference": "710d364200997a5afde34d9fe57bd52f3cc1e108"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/262d033b57c73e8b59cd6e68a45c528318b15038",
-                "reference": "262d033b57c73e8b59cd6e68a45c528318b15038",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/710d364200997a5afde34d9fe57bd52f3cc1e108",
+                "reference": "710d364200997a5afde34d9fe57bd52f3cc1e108",
                 "shasum": ""
             },
             "require": {
@@ -6563,20 +6563,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-01-27T10:01:46+00:00"
+            "time": "2021-02-12T10:38:38+00:00"
         },
         {
             "name": "symfony/finder",
-            "version": "v5.2.3",
+            "version": "v5.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "4adc8d172d602008c204c2e16956f99257248e03"
+                "reference": "0d639a0943822626290d169965804f79400e6a04"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/finder/zipball/4adc8d172d602008c204c2e16956f99257248e03",
-                "reference": "4adc8d172d602008c204c2e16956f99257248e03",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/0d639a0943822626290d169965804f79400e6a04",
+                "reference": "0d639a0943822626290d169965804f79400e6a04",
                 "shasum": ""
             },
             "require": {
@@ -6621,7 +6621,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-01-28T22:06:19+00:00"
+            "time": "2021-02-15T18:55:04+00:00"
         },
         {
             "name": "symfony/polyfill-php70",
@@ -6763,7 +6763,7 @@
         },
         {
             "name": "symfony/process",
-            "version": "v5.2.3",
+            "version": "v5.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
