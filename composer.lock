@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d7be720c527f1f845331475edd9c186f",
+    "content-hash": "3681971f648db70996f18db64df231f2",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -2728,36 +2728,31 @@
         },
         {
             "name": "ergebnis/classy",
-            "version": "1.1.0",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ergebnis/classy.git",
-                "reference": "1479cf8af6a75b11586ab2b2a87482d090c99dfb"
+                "reference": "e3bac43b56273ac7c4d13c839185ce96871e7a87"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ergebnis/classy/zipball/1479cf8af6a75b11586ab2b2a87482d090c99dfb",
-                "reference": "1479cf8af6a75b11586ab2b2a87482d090c99dfb",
+                "url": "https://api.github.com/repos/ergebnis/classy/zipball/e3bac43b56273ac7c4d13c839185ce96871e7a87",
+                "reference": "e3bac43b56273ac7c4d13c839185ce96871e7a87",
                 "shasum": ""
             },
             "require": {
                 "ext-tokenizer": "*",
-                "php": "^7.2 || ^8.0"
+                "php": "^7.4 || ^8.0"
             },
             "require-dev": {
-                "ergebnis/composer-normalize": "^2.7.1",
-                "ergebnis/license": "^1.0.0",
-                "ergebnis/php-cs-fixer-config": "^2.2.1",
-                "ergebnis/phpstan-rules": "~0.15.2",
-                "ergebnis/test-util": "^1.0.0",
-                "infection/infection": "~0.15.3",
-                "phpstan/extension-installer": "^1.0.4",
-                "phpstan/phpstan": "~0.12.40",
-                "phpstan/phpstan-deprecation-rules": "~0.12.5",
-                "phpstan/phpstan-strict-rules": "~0.12.4",
-                "phpunit/phpunit": "^8.5.8",
-                "psalm/plugin-phpunit": "~0.11.0",
-                "vimeo/psalm": "^3.14.2",
+                "ergebnis/composer-normalize": "^2.22.0",
+                "ergebnis/license": "^1.1.0",
+                "ergebnis/php-cs-fixer-config": "^3.4.0",
+                "fakerphp/faker": "^1.17.0",
+                "infection/infection": "~0.25.5",
+                "phpunit/phpunit": "^9.5.11",
+                "psalm/plugin-phpunit": "~0.16.1",
+                "vimeo/psalm": "^4.16.1",
                 "zendframework/zend-file": "^2.8.3"
             },
             "type": "library",
@@ -2797,7 +2792,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-08-30T10:41:50+00:00"
+            "time": "2021-12-30T17:07:33+00:00"
         },
         {
             "name": "ergebnis/composer-normalize",
@@ -3214,37 +3209,37 @@
         },
         {
             "name": "ergebnis/test-util",
-            "version": "1.4.0",
+            "version": "1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ergebnis/test-util.git",
-                "reference": "825611c9b3c25514f17c64d7e7b522ca060b9e7a"
+                "reference": "2f4a9b0670535ab88d64bd77cb50c218e49e6823"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ergebnis/test-util/zipball/825611c9b3c25514f17c64d7e7b522ca060b9e7a",
-                "reference": "825611c9b3c25514f17c64d7e7b522ca060b9e7a",
+                "url": "https://api.github.com/repos/ergebnis/test-util/zipball/2f4a9b0670535ab88d64bd77cb50c218e49e6823",
+                "reference": "2f4a9b0670535ab88d64bd77cb50c218e49e6823",
                 "shasum": ""
             },
             "require": {
-                "ergebnis/classy": "^1.1.0",
-                "fakerphp/faker": "^1.11.0",
-                "php": "^7.2 || ^8.0"
+                "ergebnis/classy": "^1.3.0",
+                "fakerphp/faker": "^1.17.0",
+                "php": "^7.4 || ^8.0"
             },
             "require-dev": {
-                "ergebnis/composer-normalize": "^2.10.0",
-                "ergebnis/license": "^1.1.0",
-                "ergebnis/php-cs-fixer-config": "^2.5.2",
+                "ergebnis/composer-normalize": "^2.22.0",
+                "ergebnis/license": "^1.2.0",
+                "ergebnis/php-cs-fixer-config": "^3.4.0",
                 "ergebnis/phpstan-rules": "~0.15.3",
-                "infection/infection": "~0.15.3",
-                "phpstan/extension-installer": "^1.0.5",
-                "phpstan/phpstan": "~0.12.53",
-                "phpstan/phpstan-deprecation-rules": "~0.12.5",
-                "phpstan/phpstan-phpunit": "~0.12.16",
-                "phpstan/phpstan-strict-rules": "~0.12.5",
-                "phpunit/phpunit": "^8.5.8",
-                "psalm/plugin-phpunit": "~0.12.2",
-                "vimeo/psalm": "^3.18"
+                "infection/infection": "~0.25.5",
+                "phpstan/extension-installer": "^1.1.0",
+                "phpstan/phpstan": "~0.12.84",
+                "phpstan/phpstan-deprecation-rules": "~0.12.6",
+                "phpstan/phpstan-phpunit": "~0.12.22",
+                "phpstan/phpstan-strict-rules": "~0.12.11",
+                "phpunit/phpunit": "^9.5.11",
+                "psalm/plugin-phpunit": "~0.16.1",
+                "vimeo/psalm": "^4.17.0"
             },
             "type": "library",
             "extra": {
@@ -3282,24 +3277,27 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-11-17T17:57:47+00:00"
+            "abandoned": "ergebnis/data-provider",
+            "time": "2022-01-03T18:31:15+00:00"
         },
         {
             "name": "fakerphp/faker",
-            "version": "v1.11.0",
+            "version": "v1.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FakerPHP/Faker.git",
-                "reference": "f228dc5112bafc14c77d40a2acc0c48058e184b0"
+                "reference": "b85e9d44eae8c52cca7aa0939483611f7232b669"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FakerPHP/Faker/zipball/f228dc5112bafc14c77d40a2acc0c48058e184b0",
-                "reference": "f228dc5112bafc14c77d40a2acc0c48058e184b0",
+                "url": "https://api.github.com/repos/FakerPHP/Faker/zipball/b85e9d44eae8c52cca7aa0939483611f7232b669",
+                "reference": "b85e9d44eae8c52cca7aa0939483611f7232b669",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1 || ^8.0"
+                "php": "^7.1 || ^8.0",
+                "psr/container": "^1.0 || ^2.0",
+                "symfony/deprecation-contracts": "^2.2 || ^3.0"
             },
             "conflict": {
                 "fzaninotto/faker": "*"
@@ -3307,9 +3305,20 @@
             "require-dev": {
                 "bamarni/composer-bin-plugin": "^1.4.1",
                 "ext-intl": "*",
-                "phpunit/phpunit": "^7.5.20 || ^8.5.8 || ^9.4.2"
+                "symfony/phpunit-bridge": "^4.4 || ^5.2"
+            },
+            "suggest": {
+                "ext-curl": "Required by Faker\\Provider\\Image to download images.",
+                "ext-dom": "Required by Faker\\Provider\\HtmlLorem for generating random HTML.",
+                "ext-iconv": "Required by Faker\\Provider\\ru_RU\\Text::realText() for generating real Russian text.",
+                "ext-mbstring": "Required for multibyte Unicode string functionality."
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "v1.17-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Faker\\": "src/Faker/"
@@ -3330,7 +3339,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2020-11-15T20:27:00+00:00"
+            "time": "2021-12-05T17:14:47+00:00"
         },
         {
             "name": "felixfbecker/advanced-json-rpc",
@@ -7195,6 +7204,7 @@
                 }
             ],
             "description": "A robust cross-platform utility for normalizing, comparing and modifying file paths.",
+            "abandoned": "symfony/filesystem",
             "time": "2015-12-17T08:42:14+00:00"
         }
     ],
