@@ -73,7 +73,7 @@ repository:
   allow_merge_commit: true
   allow_rebase_merge: false
   allow_squash_merge: false
-  archived: false
+  archived: true
   default_branch: "main"
   delete_branch_on_merge: true
   description: ":octocat: Provides a command line tool that generates a changelog based on titles of pull requests merged between specified references."
